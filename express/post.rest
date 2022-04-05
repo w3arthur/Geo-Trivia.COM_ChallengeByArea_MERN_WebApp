@@ -1,0 +1,65 @@
+@hostname = http://localhost:3000
+#@ContentType = Content-Type: application/json
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzYmY5ZWE5M2NjYjU0NzVlYTM1ZGZhIiwiZW1haWwiOiJ3M2FydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE2NDgxNTc3MDUsImV4cCI6MTY0ODE1Nzc2MH0.7sTmsXtKkpN8Rfmh6F3JF9GschxotSB4w6raDfsF7d8
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI0MTAwMTA0ZjQyOTczYjQ0NmJiM2ZiIiwiZW1haWwiOiJ3M2FydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE2NDg0MzIwMjEsImV4cCI6MTY0ODUxODQyMX0.f-fHC1SvNaJ_91kSM0FS-jowk9Idy5UyD6PGlQkVpg0
+
+@token = Authorization: Bearer {{accessToken}}
+@refToken = authorization: {{refreshToken}}
+### Register User
+post {{hostname}}/api/users
+Content-Type: application/json
+
+{
+    "name": "arthur"
+    , "email": "w3arthur@gmail.com"
+    , "password": "123"
+    , "type": "admin"
+}
+
+### Get Flower List, with a token
+get {{hostname}}/api/flowers
+Content-Type: application/json
+{{token}}
+
+{
+    
+}
+
+### Post register a flower, with a token
+post {{hostname}}/api/flowers
+Content-Type: application/json
+{{token}}
+
+{
+    "name": "flower7",
+    "price": 38,
+    "type": "admin"
+}
+
+### Get Token
+post {{hostname}}/api/login
+Content-Type: application/json
+
+{
+    "email": "w3arthur@gmail.com",
+    "password": "123"
+}
+
+### Refresh Token
+patch {{hostname}}/api/login
+Content-Type: application/json
+{{refToken}}
+
+{
+
+}
+
+
+### SignOut / Refresh Token delete
+delete {{hostname}}/api/login
+Content-Type: application/json
+{{refToken}}
+
+{
+     
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{ background-color: #c5fcfc9f; text-align: center;}
+        .container{background-color:rgba(41, 158, 255, 0.452); display: inline-block;; width: 100%; text-align: center;}
+        .sub_container{  background-color:rgba(46, 172, 255, 0.281); display: inline-block; width: 800px; text-align: left;}
+        .grid_container{display: grid;grid-template-columns: 1fr 1fr;grid-template-rows: 1fr 1fr ; }
+    </style>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="./index.js"></script>
+</head><body> <h2>HTML Token data example</h2> <div class="container"><div class="sub_container"><div class="grid_container">
+    <div>
+        <h3>Register</h3>
+        <form>
+            <label for="register_name">Name</label><input id="register_name" type="text" value="arthur" /><br />
+            <label for="register_email">Email</label><input id="register_email" type="text" value="w@w.com" /><br />
+            <label for="register_password">Password</label><input id="register_password" type="text" value="123" /><br />
+            <label for="register_type">Type</label><input id="register_type" type="text" value="admin" /><br />
+            <button id="register_action" type="button">Register</button><br />
+        </form>
+        <form><textarea id="register_result" cols="30" rows="10"></textarea><br /></form>
+    </div>
+    <div>
+        <h3>Login</h3> 
+        <form>
+            <label for="login_email">Email</label><input id="login_email" type="text"value="w@w.com" /><br />
+            <label for="login_password">Password</label><input id="login_password" type="text"value="123" /><br />
+            <button id="login_action" type="button">Login</button><br />
+        </form>
+        <form><textarea id="login_result" cols="30" rows="10"></textarea><br /></form>
+    </div>
+    <div>
+        <h3>Refresh</h3>
+        <form>
+            <button id="refresh_action" type="button">Refresh Token</button>
+            <button id="logout_action" type="button">Logout</button>
+            <br />
+        </form>
+        <form><textarea id="refresh_result" cols="30" rows="10"></textarea><br /></form>
+    </div>
+    <div>
+        <h3>GetFlowers by Auth</h3>
+        <form><button id="get_action" type="button">GetFlowers</button><br /></form>
+        <form><textarea id="get_result" cols="30" rows="10"></textarea><br /></form>
+    </div>
+</div></div></div></body></html>
