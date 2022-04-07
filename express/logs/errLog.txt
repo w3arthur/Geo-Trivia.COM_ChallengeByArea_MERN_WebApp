@@ -61,3 +61,6 @@
 2022/04/07 02:46:21	e1546e93-3dbf-4b2c-9137-3516b97e7a60	SyntaxError: Unexpected token j in JSON at position 15
 2022/04/07 02:46:21	b40647b9-a88d-4476-bb06-df7edea36ec6	SyntaxError: Unexpected token j in JSON at position 15
 2022/04/07 02:46:21	67275453-515e-49cf-80a9-f7d55ca3485c	SyntaxError: Unexpected token j in JSON at position 15
+2022/04/07 10:38:56	de1d08d5-8a25-4b8a-b70d-477728c67741	Error: no logging, wrong request
+2022/04/07 10:38:56	1a745b9b-e589-40fb-a09b-90ab87b79ee4	Error: no logging, wrong request
+2022/04/07 10:42:05	2676bae8-01d1-448e-8643-87313ada4f00	Error: no logging, wrong request
