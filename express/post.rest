@@ -1,17 +1,36 @@
-@hostname = http://localhost:3000
+@hostname = http://localhost:3500
 #@ContentType = Content-Type: application/json
 @accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzYmY5ZWE5M2NjYjU0NzVlYTM1ZGZhIiwiZW1haWwiOiJ3M2FydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE2NDgxNTc3MDUsImV4cCI6MTY0ODE1Nzc2MH0.7sTmsXtKkpN8Rfmh6F3JF9GschxotSB4w6raDfsF7d8
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI0MTAwMTA0ZjQyOTczYjQ0NmJiM2ZiIiwiZW1haWwiOiJ3M2FydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE2NDg0MzIwMjEsImV4cCI6MTY0ODUxODQyMX0.f-fHC1SvNaJ_91kSM0FS-jowk9Idy5UyD6PGlQkVpg0
 
 @token = Authorization: Bearer {{accessToken}}
 @refToken = authorization: {{refreshToken}}
+
+
+
+
+
+### Logging
+post {{hostname}}/api/logging
+Content-Type: application/json
+
+{
+    "data": "567567"
+    , "number": "456345"
+}
+
+
+
+
+
+
 ### Register User
 post {{hostname}}/api/users
 Content-Type: application/json
 
 {
     "name": "arthur"
-    , "email": "w3arthur@gmail.com"
+    , "email": "w31arthur@gmail.com"
     , "password": "123"
     , "type": "admin"
 }
@@ -63,3 +82,5 @@ Content-Type: application/json
 {
      
 }
+
+
