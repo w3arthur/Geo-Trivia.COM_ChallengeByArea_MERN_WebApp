@@ -7,6 +7,8 @@ const debug1 = require('debug')('arthur');   //set DEBUG=arthur & nodemon .
 debug1('Hello World');  //npm run debug //set DEBUG=arthur & nodemon . //  chrome://inspect
 //  node --inspect index.js	> Attach    // https://www.youtube.com/watch?v=FMsNsSHhRC8&list=PL2uN9BViQt2yzYm8gUzXhOef8YHfPwLC_&index=2&ab_channel=HighVoiceComputing
 
+
+
 const express = require('express');
 const app = express();
 
@@ -17,15 +19,23 @@ app.use( require('cors')( require('./middlewares/accessAllowed.middleware').cors
 app.use( express.json() );
 app.use (express.urlencoded({ extended: false }) ); //
 app.use( require('cookie-parser')() );//middleware for cookies
+app.use( require('./middlewares/logger.middleware').errorHandler );
 app.use( require("./middlewares/logger.middleware").logger );
 //const { throws } = require('assert');
+
+
 
 //index page router
 app.use('/', express.static(path.join(__dirname, '/html')));
 app.set('views', path.join(__dirname, 'views'));
 app.route('/').get( async (req, res) => res.status(200).sendFile(path.join(__dirname, "html", "index.html")) );
 
+
+
+
 //routers
+app.use("/api/logging", require("./routers/logging.router") );
+
 app.use("/api/users", require("./routers/user.router") );
 app.use("/api/login", require("./routers/login.router") );
 app.use(require("./middlewares/verifyJWT.middleware"));    //Token require middleware
@@ -39,9 +49,13 @@ app.route('*')  //404
     else return res.type('txt').send("404 Not Found");
     });
 
-app.use(require('./middlewares/logger.middleware').errorHandler);
+
 app.use((req, res) => { return; }) //finalize return    //delete
 
 const port = process.env.PORT || localhostPort || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`) );
+
+
+
+
 

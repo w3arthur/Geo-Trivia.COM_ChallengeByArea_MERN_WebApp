@@ -39,3 +39,25 @@
 20220330	10:45:52	d26e58e8-aac6-4897-9039-643808bfa58b	Error: Not allowed by CORS
 20220330	10:46:05	f33ba66b-b7c2-4489-ab47-f07610ea6fce	Error: Not allowed by CORS
 20220330	19:42:26	a85a2843-2247-4f58-8749-e081575bb940	ReferenceError: req is not defined
+20220406	21:34:22	52672ba9-9571-44ef-a4b1-f297063a2c91	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:38:14	1a09dea2-9f89-4026-889f-71d3976a374e	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:39:07	c0d7b362-d44a-4829-8a80-42cad4e2e2be	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:40:56	85af0d6a-4e72-4fcd-9886-2a92a7b1b21e	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:41:03	7746fb8c-ec02-4fae-869c-2208f6e97f16	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:42:11	bafd82e2-4123-4ecb-a427-bb615d35c1f2	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:42:14	509497b6-4c6b-4b76-bf80-5311aa27f6c2	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:45:13	8857d807-e612-498f-b748-bc024de02b53	SyntaxError: Unexpected token @ in JSON at position 70
+20220406	21:45:34	af8782c8-a42b-409c-8c85-fb2643042507	SyntaxError: Unexpected token @ in JSON at position 72
+20220406	21:46:08	cd358e8e-e277-44f9-8af6-ebc4295e7be8	SyntaxError: Unexpected token @ in JSON at position 72
+20220407	00:24:53	87af4596-2e6e-4b77-9b45-05a3c190d04a	SyntaxError: Unexpected token j in JSON at position 18
+20220407	00:35:54	f2fc692c-dea5-4824-8b07-579897f6197f	TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'Socket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+2022/04/07 02:08:09	7d06f09e-6c66-4963-8ba8-15272274d61a	SyntaxError: Unexpected token a in JSON at position 15
+2022/04/07 02:09:54	8ebd3928-a78d-4133-a3d2-f285669547c9	SyntaxError: Unexpected token a in JSON at position 15
+2022/04/07 02:10:11	92ae5d52-fd65-454d-92e0-e15ee9896bfe	SyntaxError: Unexpected token a in JSON at position 15
+2022/04/07 02:26:54	4d798d7b-5961-4c75-af70-c252230de884	SyntaxError: Unexpected token a in JSON at position 15
+2022/04/07 02:46:21	e1546e93-3dbf-4b2c-9137-3516b97e7a60	SyntaxError: Unexpected token j in JSON at position 15
+2022/04/07 02:46:21	b40647b9-a88d-4476-bb06-df7edea36ec6	SyntaxError: Unexpected token j in JSON at position 15
+2022/04/07 02:46:21	67275453-515e-49cf-80a9-f7d55ca3485c	SyntaxError: Unexpected token j in JSON at position 15

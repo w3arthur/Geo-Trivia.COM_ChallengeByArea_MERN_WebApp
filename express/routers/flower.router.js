@@ -1,7 +1,7 @@
 const express = require("express");
 const flowerRouter = express.Router();
 const Joi = require("joi");
-const mongoose = require("../connection");
+const {mongoose, mongoose1} = require("../connection");
 
 flowerRouter.route('/')   //  localhost:3000/api/flowers
   .get(async (req, res) => {  //req.params/ req.query
@@ -19,7 +19,7 @@ flowerRouter.route('/')   //  localhost:3000/api/flowers
 module.exports = flowerRouter;
 
 //module and validator
-const FlowerModel = mongoose.model(
+const FlowerModel = mongoose1.model(
   "Flower"  //flowers
   , new mongoose.Schema({
     name: { type: String, trim: true, require: true, minlength: 4, maxlength: 50, unique: true, }

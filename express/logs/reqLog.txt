@@ -729,3 +729,104 @@
 20220330	20:35:57	ad0ba5c3-f8d8-4674-a074-38af5abc3558	PATCH	http://localhost:3000	/api/login
 20220330	20:35:59	d16d73e7-92bd-4387-b614-f4e4dab789d7	PATCH	http://localhost:3000	/api/login
 20220330	20:37:04	0578461b-3d2a-4cdf-8366-d859f343c273	PATCH	http://localhost:3000	/api/login
+20220406	21:36:36	bf25534a-b057-4276-9d85-de6da052a158	POST	undefined	/api/users
+20220406	21:37:04	3b839bea-eca9-4569-862c-69fb366b2f3d	POST	undefined	/api/users
+20220406	21:46:49	add8669a-3563-4fe1-860a-4e6a467dd2c3	POST	undefined	/api/logging
+20220407	00:22:55	5ebf8240-dbb8-4c1f-bef0-9f870b8f9e79	POST	undefined	/api/logging
+20220407	00:22:55	258ab14f-3eb1-4a30-ba78-1cf17124400e	POST	undefined	/api/logging
+20220407	00:23:30	7e2ca6cc-40a8-4f66-a8de-b530b1425786	POST	undefined	/api/logging
+20220407	00:23:55	3d6e5abe-e81d-4fff-b937-eb9dfcb7ccb0	POST	undefined	/api/logg3ing
+20220407	00:24:38	b5529423-3d0d-416b-bd98-b761b049cf1d	POST	undefined	/api/logg3ing
+20220407	00:24:40	fb4df7c5-53d4-445b-803b-05ea30aa1d62	POST	undefined	/api/logg3ing
+20220407	00:24:43	035fa410-815c-4270-9408-ea00993037b5	POST	undefined	/api/logging
+20220407	00:24:45	07c4fd4c-d163-4e25-96c2-d0351c598447	POST	undefined	/api/logging
+20220407	00:24:45	98032cee-c9a2-44a2-a9ff-d6334948568f	POST	undefined	/api/logging
+20220407	00:24:46	64f854f3-f61a-42e6-95e3-7dd268b69587	POST	undefined	/api/logging
+20220407	00:24:46	b73297f3-8688-48e6-89d3-c5524f8d596e	POST	undefined	/api/logging
+20220407	00:24:46	77d11d2d-9e20-4429-b1f4-c102ba736728	POST	undefined	/api/logging
+20220407	00:24:46	86cc45c0-d6d6-403e-b187-c962e688e48f	POST	undefined	/api/logging
+20220407	00:24:47	3a9efad9-3989-40e5-b7a8-e83d2ad23cf6	POST	undefined	/api/logging
+20220407	00:24:47	ecd7acc9-82b2-44cf-b103-ee497c86d899	POST	undefined	/api/logging
+20220407	00:27:07	306060e7-2734-47af-b3c7-80af209f5000	POST	undefined	/api/logging [object Object]
+20220407	00:30:58	d574691a-5de5-4d55-b524-450334788fd4	20220407	00:30:58 :: POST	undefined	/api/logging
+20220407	00:32:03	54b17238-1a32-4246-9716-e0a37afeeb61	20220407	00:32:03 :: POST	undefined	/api/logging
+20220407	00:32:58	557e51cb-ef7a-4c78-9cc4-cb7d29ac9046	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	0b4e9624-2de9-4fd4-9806-21d592bbf11f	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	777c3414-bd03-4321-8ebb-52253f3d03c4	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	bd86df38-3c67-4bed-a2c5-c4ae6b91fcf2	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	bf4affa6-9fe6-4924-9f6f-a6efd4eecb5a	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	ee886c2c-149a-4df0-8aab-c0fbe8c5df38	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	3ee9a0a6-9849-4688-b12f-ba0984e3a473	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	fe808f37-ef8b-4288-80a7-d90a8053afa2	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	34c2ef72-5e83-4113-baff-9610eaf04d8a	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	1eac7013-9c31-4599-a427-a1803eceeb3e	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:32:58	4f299588-270b-4b70-9447-868805fd4c32	20220407	00:32:58 1212:: POST	undefined	/api/logging
+20220407	00:34:07	411692ed-716a-446d-9dca-7ce5b0c4ea05	20220407	00:34:07 :: POST	undefined	/api/logging
+20220407	00:34:55	669d014d-7f3d-4d88-98e5-e31dd86f1369	20220407	00:34:55 :: POST	undefined	/api/logging
+20220407	00:35:21	b37b64cd-cb7e-4f2b-a152-325093136952	20220407	00:35:21 :: POST	undefined	/api/logging
+20220407	00:35:54	efa94dbb-fd87-42e3-ab57-df945c8f2df9	20220407	00:35:54 :: POST	undefined	/api/logging
+20220407	00:36:22	9bbdaeb6-f8bb-4d92-b3fa-994a168d7cb9	20220407	00:36:22 :: POST	undefined	/api/logging
+20220407	00:36:47	5cb150fc-b911-44e8-a620-4060d2dd3394	20220407	00:36:47 :: POST	undefined	/api/logging
+20220407	00:40:28	a7e119a9-4339-4a9c-9990-b59086d27327	20220407	00:40:28 :: POST	undefined	/api/logging
+2022/04/07 00:40:59	72587ce8-ff80-427a-840e-9899bde7d9d5	2022/04/07 00:40:59 :: POST	undefined	/api/logging
+20220407	00:41:54	189f7d02-4993-4a93-abd3-5fc36a4b976c	20220407	00:41:54 :: POST	undefined	/api/logging
+20220407	00:42:16	afcbd46f-140c-4d1b-ac47-09a7fe64b098	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:16	627e46f7-3bb8-4997-b763-0213ea7f07ec	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:16	d98c89d9-a651-435b-82ff-d8ebd57a22aa	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:16	ccab01f4-f5ec-467f-8501-cea588809e8b	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:16	bc9eea76-27d8-4941-9087-d37b04f89fd8	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:16	fe5af6da-bb63-483b-98b8-9d910656fd46	20220407	00:42:16 :: POST	undefined	/api/logging
+20220407	00:42:37	07728acd-f84f-41b2-8b88-33faca8379df	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	5db88c77-0e3d-4ece-8c87-bade2aa46eda	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	3cd9cec2-6bd3-40f5-9847-79364e074e45	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	b9aeb432-13d5-4025-9de9-48516b92c60c	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	cd6964c2-cd06-4d4e-9210-c2b536f953ac	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	08e04425-ea02-4e60-b848-9ecfd4152388	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	6058d47e-0bba-4bf0-b2cc-e05fc42e69a7	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	c8c78dc5-712b-4c7b-8024-ec22a6cd5897	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	13c0b756-2ae7-40fd-a419-d9731787a28c	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	2a65c050-7e28-4d6b-919c-3c713fd3ab91	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	abeb1327-7a21-4f20-8bf8-9344d5355c06	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:42:37	6481b2e8-193f-48c3-9919-efba2e80b06e	20220407	00:42:37 :: POST	undefined	/api/logging
+20220407	00:45:55	015451d9-de93-4ede-9e42-1760fd7bf542	20220407	00:45:55 :: POST	undefined	/api/logging
+20220407	00:46:15	8c784f86-e36b-4bdd-ba89-ad725e39e5ea	20220407	00:46:15 :: POST	undefined	/api/logging
+20220407	00:47:05	7e6c8a0b-7af7-470e-bc8a-08fd9c3c48f7	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	5ab0f51e-801c-43dd-aca1-3c74be5e75d5	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	5ecb7bb2-1b07-4f2f-836f-c1b52d43892e	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	cafd8400-b248-44e7-87e0-6258cd9520bb	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	16cb84ac-4428-4bb1-856e-6c35193dfa6a	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	7ccfcd86-1621-44aa-8957-7dcb0c940a0a	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	04655577-eec1-41d8-be34-1a669a01eb84	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	2414a7a1-9bd1-441b-a968-591f1e227a79	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:05	d439504f-0f0a-4aee-98bb-c09ba554277c	20220407	00:47:05 :: POST	undefined	/api/logging
+20220407	00:47:48	d47d2787-9aad-4fb5-84bd-bb74482ed0a7	20220407	00:47:48 :: POST	undefined	/api/logging
+20220407	00:57:14	6dfbcfad-22c9-4e95-a862-57ca56002dc8	20220407	00:57:14 :: POST	undefined	/api/logging
+20220407	00:57:40	64c472d0-f96f-4306-a4d1-3f4f6b647912	20220407	00:57:40 :: POST	undefined	/api/logging
+20220407	00:59:08	72c76406-94d1-4bde-b4f6-5d253e0d8284	20220407	00:59:08 :: POST	undefined	/api/logging
+20220407	01:01:13	bcfa2e0c-e383-47d0-af8a-48881bbba446	20220407	01:01:13 :: POST	undefined	/api/logging
+2022/04/07 01:02:03	ff66dfb8-c255-433e-89f4-5771cd65dc2f	2022/04/07 01:02:03 :: POST	undefined	/api/logging
+2022/04/07 01:46:28	c85c44ca-b75a-40d6-8146-763e18eee269	2022/04/07 01:46:28 :: POST	undefined	/api/logging
+2022/04/07 01:47:06	833c02a0-0129-4da0-ace4-cffcf6a052aa	2022/04/07 01:47:06 :: POST	undefined	/api/logging
+2022/04/07 01:48:05	a71cff2f-85ef-4805-9fcb-04b4e3250b50	2022/04/07 01:48:05 :: POST	undefined	/api/logging
+2022/04/07 01:48:23	63836ddb-8473-4c64-b3f5-db0e1b61b2e2	2022/04/07 01:48:23 :: POST	undefined	/api/logging
+2022/04/07 01:48:23	e8ad3e93-96f4-4bff-8226-f75a05deecfc	2022/04/07 01:48:23 :: POST	undefined	/api/logging
+2022/04/07 01:52:55	390d9263-5832-4d9f-93ab-1325f9d38133	2022/04/07 01:52:55 :: DELETE	undefined	/api/login
+2022/04/07 02:28:09	35732704-089d-460a-a6b5-0153b071ab89	2022/04/07 02:28:09 :: POST	undefined	/api/logging
+2022/04/07 02:28:09	3c7a40b9-6010-4d6c-a45a-d1445553fac3	2022/04/07 02:28:09 :: POST	undefined	/api/logging
+2022/04/07 02:30:02	3de8d034-4709-4825-a521-b60212a61466	2022/04/07 02:30:02 :: POST	undefined	/api/logging
+2022/04/07 02:38:59	2be3128b-bc28-4084-9d83-4b4fed1902fa	2022/04/07 02:38:59 :: POST	undefined	/api/logging
+2022/04/07 02:38:59	a0d0aeaa-95b4-43a7-b3e7-0b51001e7202	2022/04/07 02:38:59 :: POST	undefined	/api/logging
+2022/04/07 02:42:21	821ab36a-6765-4c3a-9128-2a10c83778b9	2022/04/07 02:42:21 :: POST	undefined	/api/logging
+2022/04/07 02:43:03	97a61d70-ad17-4df4-a560-1e451d2f679b	2022/04/07 02:43:03 :: POST	undefined	/api/logging
+2022/04/07 02:44:55	acc77617-83f2-4b95-92cb-6f221beab90c	2022/04/07 02:44:55 :: POST	undefined	/api/logging
+2022/04/07 02:46:21	5700da36-5c5c-46ff-a8e7-9d891d4449f4	2022/04/07 02:46:21 :: POST	undefined	/api/logging
+2022/04/07 02:46:21	e7fd8ff0-e135-468a-acd1-c6b38a8f6dd0	2022/04/07 02:46:21 :: POST	undefined	/api/logging
+2022/04/07 02:50:47	3f421f31-1605-45a5-beb3-350df465ef97	2022/04/07 02:50:47 :: POST	undefined	/api/logging
+2022/04/07 02:51:12	7a1648eb-1c33-4f85-a4c9-00435829a650	2022/04/07 02:51:12 :: POST	undefined	/api/logging
+2022/04/07 02:52:16	7479f4e8-ebde-4676-b761-8bdff84932f1	2022/04/07 02:52:16 :: POST	undefined	/api/logging
+2022/04/07 02:52:47	2573e985-6f5e-4838-8ff9-918b088492bc	2022/04/07 02:52:47 :: POST	undefined	/api/logging
+2022/04/07 02:56:46	49e43944-f407-469c-9851-df1e5434aecc	2022/04/07 02:56:46 :: POST	undefined	/api/logging
+2022/04/07 03:06:29	3951cfb5-238c-4b79-b9d6-b53588ceb042	2022/04/07 03:06:29 :: POST	undefined	/api/logging
+2022/04/07 03:06:49	8b6b98ce-09c4-49cc-ae44-ec99525d380e	2022/04/07 03:06:49 :: POST	undefined	/api/logging
+2022/04/07 03:07:18	8fcd87dc-8a97-4a94-8a08-c8b29af0c343	2022/04/07 03:07:18 :: POST	undefined	/api/logging
+2022/04/07 03:08:35	1d3b3699-7377-47d7-98c2-4949a67d0229	2022/04/07 03:08:35 :: POST	undefined	/api/logging

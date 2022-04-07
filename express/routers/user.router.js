@@ -2,7 +2,7 @@ const express = require("express");
 const userRouter = express.Router();
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const mongoose = require("../connection");
+const {mongoose, mongoose1} = require("../connection");
 
 userRouter.route('/') //  localhost:3000/api/users
   .post(userValidator, async (req, res) => { 
@@ -26,7 +26,7 @@ userRouter.route('/') //  localhost:3000/api/users
 module.exports = userRouter;
 
 //module and validator
-const UserModel = mongoose.model(
+const UserModel = mongoose1.model(
   "User"  //users
   , new mongoose.Schema({
     name: { require: true, type: String, trim: true,  minlength: 4, maxlength: 50, }
