@@ -3,11 +3,11 @@ const userRouter = express.Router();
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const {mongoose, mongoose1} = require("../connection");
-const error = require('../api/errorMessage.router');
+const {errorHandler, error, success, middlewareError} = require('../api/errorHandler.middleware');
 
 userRouter.route('/') //  localhost:3000/api/users
-  .post(userValidator, async (req, res, next) => { 
-    try{
+  .post(userValidator, async (req, res, next) => {
+    errorHandler(req, res, next)( async () => {
     //Add try/catch
       const {email} = req.body;
       let user = await UserModel.findOne({ email: email });
@@ -15,15 +15,16 @@ userRouter.route('/') //  localhost:3000/api/users
       let userRegister = req.body;
       userRegister.password = await bcrypt.hash(userRegister.password, 10)
       let result = await new UserModel(userRegister).save();
-      return res.status(200).send(result);
-     } catch(err){  return next(err); }  //error handler 
+      return success(req, res)(200, result);
+     });  //error handler 
   })
   .get(async (req, res, next) => { 
-    try{
+    console.log(':: user router get');
+    errorHandler(req, res, next)( async () => {
       let users = await UserModel.find();
       if (!users) throw error(400, 'no users');
-      return res.status(200).json(users);
-    } catch(err){  return next( err(req) ); }  //error handler
+      return success(req, res)(200, users);
+    });  //error handler 
   })
   ;
 
@@ -40,16 +41,15 @@ const UserModel = mongoose1.model(
   })
 );
 function userValidator(req, res, next){
-  try{
+  console.log(':: user validator middleware');
     const { error } = Joi.object({
       name: Joi.string().min(4).max(50).required()
       , email: Joi.string().email().required()
       , password: Joi.string()
       , type: Joi.string()
     }).validate(req.body);
-    if (error && error.details) throw error('400', error.details[0].message.toString());//.send(error.details[0].message);
+    if (error && error.details) return middlewareError(next)(400, 'validation user info error', error.details[0].message.toString()); //.send(error.details[0].message);
     next();
-  } catch(err){ return next( err(req) ); }  //error handler
 };
 
 module.exports.UserModel = UserModel;

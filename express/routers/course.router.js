@@ -1,14 +1,15 @@
 const express = require('express');
 const courseRouter = express.Router();
 const {mongoose, mongoose1} = require("../connection"); 
-const error = require('../api/errorMessage.router');
+const {errorHandler /*, error*/, success} = require('../api/errorHandler.middleware');
 
 courseRouter.route('/') //localhost:3000/api/courses
     .get(async function (req, res, next) {
-        try{
+        console.log(':: course router get');
+        errorHandler(req, res, next)( async () => {
             let courses = await Course.find();      //ASYNC!
-            return res.send(courses);
-        } catch(err){ return next( err(req) ); }  //error handler
+            return success(req, res)(200, courses);
+        });  //error handler 
     })
     ;
 module.exports = courseRouter;

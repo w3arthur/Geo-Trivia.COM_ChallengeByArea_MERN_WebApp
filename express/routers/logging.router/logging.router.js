@@ -1,23 +1,17 @@
-const { nextDay } = require('date-fns');
+//const { nextDay } = require('date-fns');
 const express = require('express');
 const loggingRouter = express.Router();
 const {mongoose, mongooseLogging} = require("../../connection"); 
-const error = require('../../api/errorMessage.router');
-const logging = require('../../middlewares/logger.middleware').logger;
+const {errorHandler, error, success} = require('../../api/errorHandler.middleware');
 
 loggingRouter.route('/') //  localhost:3000/api/logging
     .post( async (req, res, next) => {
-      // errorHandling ( (next, req) => {  } );
-      try{
-
+      errorHandler(req, res, next)( async () => {
         const {data, number} = req.body;
-        if (! req.body) throw error(400, 'no logging 2body, wrong request');
-        // throw error(400, 'no logging, wrong request');
+        if (! req.body) throw error(400, 'no logging body, wrong request');
         await new LoggingModel({ data, number }).save();
-        return res.status(200).send('logging sent');
-
-      } catch(err){ return next( err(req) ); //error handler
-      } finally { logging() }
+        return success(req, res)(200, 'logging sent');
+      });  //error handler 
   } );
 
 

@@ -15,14 +15,20 @@ post {{hostname}}/api/logging
 Content-Type: application/json
 
 {
-    "data": "567567"
+    "data": "gfhgfhfg"
     , "number": "456345"
 }
 
 
 
 
+### get Users
+get {{hostname}}/api/users
+Content-Type: application/json
 
+{
+
+}
 
 ### Register User
 post {{hostname}}/api/users

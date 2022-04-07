@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const allowedOrigins = [
     process.env.ACCESS_LOCALHOST_1
     , process.env.ACCESS_LOCALHOST_2
@@ -7,6 +8,7 @@ const allowedOrigins = [
     , process.env.ACCESS_SITE_2
     , process.env.ACCESS_SITE_3
 ];
+
 const accessAllowed = (req, res, next) => {
     if (allowedOrigins.includes( req.headers.origin )) res.header('Access-Control-Allow-Credentials', true);
     next();

@@ -64,3 +64,32 @@
 2022/04/07 10:38:56	de1d08d5-8a25-4b8a-b70d-477728c67741	Error: no logging, wrong request
 2022/04/07 10:38:56	1a745b9b-e589-40fb-a09b-90ab87b79ee4	Error: no logging, wrong request
 2022/04/07 10:42:05	2676bae8-01d1-448e-8643-87313ada4f00	Error: no logging, wrong request
+2022/04/07 12:38:30	ce9c5659-4c25-4678-864b-6077a4dbd442	undefined: undefined
+2022/04/07 12:40:39	f8a2e417-c5a7-4880-881a-c724aba40cc1	undefined: undefined
+2022/04/07 12:41:45	30993bb2-29b1-483f-ada7-ea617d8c4721	undefined: undefined
+2022/04/07 12:42:01	7d1a5c00-f931-4db1-b99f-9e4c1e61023a	undefined: undefined
+2022/04/07 12:42:14	e8fc82f2-7649-4c32-b5c6-e39485a55996	undefined: undefined
+2022/04/07 12:42:26	d236c975-ea35-4d25-b5ec-39cc44db0cb3	undefined: undefined
+2022/04/07 17:08:37	b2a1f43e-78ef-4474-94d9-1c68fd1b3a8b	Error: user already exist!
+2022/04/07 17:32:39	a4f508a3-b298-44fc-82e5-5167d2175f45	Error: user already exist!
+2022/04/07 17:34:10	e7cdc9fd-ef4b-42c9-9482-cd6ee3561165	Error: user already exist!
+2022/04/07 21:15:43	7a992f0b-3b2d-48ec-a119-0912e97930eb	Error: user already exist!
+2022/04/07 21:33:02	6e84c539-0bb6-4a56-b9b1-2121068732ef	SyntaxError: Error, Server Mistake issue!, Unexpected token g in JSON at position 15
+2022/04/07 21:33:02	4661597c-70f9-4344-9677-d495d5f66561	SyntaxError: Error, Server Mistake issue!, Unexpected token g in JSON at position 15
+2022/04/07 21:34:38	a19770e8-3da8-4afc-8b09-acb47f50839e	SyntaxError: Error, Server Mistake issue!, Unexpected token g in JSON at position 15
+2022/04/07 21:36:31	d624fff9-fd81-45ad-a225-1af0472b587f	SyntaxError: Unexpected token g in JSON at position 15
+2022/04/07 21:38:28	c573ed4d-435a-4726-a4b3-b307425e9a14	SyntaxError: Unexpected token g in JSON at position 15
+2022/04/07 21:45:35	aae97cc1-96b2-4e8e-9245-dd3e16ea4fde	Error: user already exist!
+2022/04/07 21:45:35	ca9d135d-53c8-478a-a243-fd2cfc6989fa	Error: [object Object]
+2022/04/07 21:51:34	9f7663d3-756b-4062-adc2-aabaf6145adb	Error: [object Object]
+2022/04/07 21:52:16	65913b38-ace5-4a35-a23c-0b04bab86bf4	Error: [object Object]
+2022/04/07 21:53:03	ff80d0c5-b82c-41a7-8210-2ac1807d23ee	Error: [object Object]
+2022/04/07 21:53:20	3a18147f-7073-4786-9047-2b451846584c	Error: [object Object]
+2022/04/07 21:53:44	ccb3bf31-414d-451d-9b63-5792ef663a18	Error: [object Object]
+2022/04/07 21:54:11	848c3a84-243f-4739-862b-28dbacc6b37a	Error: [object Object]
+2022/04/07 22:04:15	27836716-7f2c-4ed8-a4fe-b6a71706df71	Error: [object Object]
+2022/04/07 22:04:15	9f95d1ba-00ce-4935-8a5b-ef0aeeb48f9a	Error: [object Object]
+2022/04/07 22:04:15	9d8b3a5c-8e1d-4dd3-89d2-176f6fbef8e3	Error: [object Object]
+2022/04/07 22:04:15	ef9df3b7-5e27-4fa6-8006-e85d4e2a47bd	Error: Refresh Token missing.
+2022/04/07 22:04:15	fd1c50d9-8042-4a85-bf23-f4984b3ad9da	Error: [object Object]
+2022/04/07 22:39:00	bfdc3def-d1d1-4aa5-8f7e-e9442b64caf6	Error: Refresh Token missing.
