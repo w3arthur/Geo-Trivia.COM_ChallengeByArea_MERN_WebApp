@@ -13,7 +13,7 @@ const accessTokenTimeOut = process.env.ACCESS_TOKEN_TIMEOUT;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 const refreshTokenTimeOut = process.env.REFRESH_TOKEN_TIMEOUT;
 const cookieName= process.env.REFRESH_TOKEN_COOKIE_NAME;
-const cookieTimeout = 24 * 60 * 60 * 1000;  //1day
+const cookieTimeout = Number( process.env.REFRESH_TOKEN_COOKIE_TIMEOUT );
 
 function generateAccessToken(user) { return jwt.sign( user, accessTokenSecret, { expiresIn: accessTokenTimeOut } ); }
 const cookieSettings = { httpOnly: true, sameSite: 'None', secure: true, maxAge: cookieTimeout }; 
