@@ -1029,3 +1029,9 @@
 2022/04/08 11:28:30	105486b9-a3a3-4df8-a7af-bfbe1eec78cb	2022/04/08 11:28:30 :: PATCH	http://localhost:3500	/api/login
 2022/04/08 11:28:30	540a607a-88ed-4373-bc17-00915fbf3c2b	2022/04/08 11:28:30 :: GET	undefined	/api/flowers
 2022/04/08 11:31:07	42a6759d-2316-4946-9d91-0a6e9201530c	2022/04/08 11:31:07 :: POST	http://localhost:3500	/api/login
+2022/04/08 13:29:40	5bf1398e-7115-4bb8-87a5-3be0ff00b95a	2022/04/08 13:29:40 :: POST	http://localhost:3500	/api/login
+2022/04/08 13:29:40	09854e4d-98d0-465e-8307-f061000058f8	2022/04/08 13:29:40 :: GET	undefined	/api/flowers
+2022/04/08 13:30:27	4d78d88c-ba7a-4472-a8de-ef018c691254	2022/04/08 13:30:27 :: POST	http://localhost:3500	/api/login
+2022/04/08 13:30:27	e19fcb82-7e10-4559-bb84-3aa43e642826	2022/04/08 13:30:27 :: PATCH	http://localhost:3500	/api/login
+2022/04/08 13:30:27	809c43f5-a29e-4401-91b1-c3b0e9951cb9	2022/04/08 13:30:27 :: GET	undefined	/api/flowers
+2022/04/08 13:30:27	f616c174-fd51-4ddc-8995-ab101e69f0db	2022/04/08 13:30:27 :: DELETE	http://localhost:3500	/api/login

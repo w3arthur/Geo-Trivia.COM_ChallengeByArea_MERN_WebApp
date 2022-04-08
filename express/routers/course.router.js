@@ -1,7 +1,7 @@
 const express = require('express');
 const courseRouter = express.Router();
 const {mongoose, mongoose1} = require("../connection"); 
-const {errorHandler /*, error*/, success} = require('../api/errorHandler.middleware');
+const {errorHandler /*, error*/, success} = require('../middlewares/errorHandler.middleware');
 const { Success } = require('../classes');
 
 courseRouter.route('/') //localhost:3000/api/courses

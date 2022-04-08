@@ -4,7 +4,7 @@ require('dotenv').config();
 const jwt = require("jsonwebtoken");
 
 const { UserModel } = require("../routers/user.router");
-const { middlewareError } = require('../api/errorHandler.middleware');
+const { middlewareError } = require('./errorHandler.middleware');
 const { MiddlewareError } = require('../classes');
 
 module.exports = function (req, res, next) {

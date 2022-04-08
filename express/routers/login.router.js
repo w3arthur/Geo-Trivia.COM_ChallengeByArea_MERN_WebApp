@@ -20,7 +20,7 @@ const cookieSettings = { httpOnly: true, sameSite: 'None', secure: true, maxAge:
 
 let refreshToken_List = [];  //set it to database
 
-const {errorHandler, error, success, middlewareError} = require('../api/errorHandler.middleware');
+const {errorHandler, error, success, middlewareError} = require('../middlewares/errorHandler.middleware');
 const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
 loginRouter.route('/') //  /api/login

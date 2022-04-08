@@ -3,7 +3,7 @@ const userRouter = express.Router();
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const {mongoose, mongoose1} = require("../connection");
-const {errorHandler, error, success, middlewareError} = require('../api/errorHandler.middleware');
+const {errorHandler, error, success, middlewareError} = require('../middlewares/errorHandler.middleware');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
 userRouter.route('/') //  localhost:3000/api/users
@@ -53,7 +53,6 @@ function userValidator(req, res, next){
     if (error && error.details) return middlewareError(next)( 
       new MiddlewareError(400, 'validation user info error', error.details[0].message.toString()) 
       ); //.send(error.details[0].message);
-    console.log(':: user validator middleware finish');
     next();
 };
 

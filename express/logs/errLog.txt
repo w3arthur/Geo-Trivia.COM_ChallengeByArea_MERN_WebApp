@@ -108,3 +108,5 @@
 2022/04/08 12:18:39	308a7e5e-2772-4090-addc-83c99f89f1b4	Error: [object Object]
 2022/04/08 12:19:07	2898d57a-82a5-4a7d-b64d-5fe40a08af4d	Error: [object Object]
 2022/04/08 12:19:07	2fa8d77b-76e7-4824-93f7-fed717d6cb7a	Error: [object Object]
+2022/04/08 13:30:27	04728ce1-2cbb-40e9-8c28-a8c3ccacbd79	Error: Refresh Token not stored.
+2022/04/08 13:31:37	584f7a48-c102-4884-992f-8aa23d7311d6	Error: user already exist!

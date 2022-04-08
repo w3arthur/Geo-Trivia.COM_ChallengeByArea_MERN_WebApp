@@ -2,7 +2,7 @@
 const express = require('express');
 const errorRouter = express.Router();
 const {mongoose, mongooseLogging} = require("../../connection"); 
-const {errorHandler, error, success} = require('../../api/errorHandler.middleware');
+const {errorHandler, error, success} = require('../../middlewares/errorHandler.middleware');
 const { Success, ErrorHandler } = require('../../classes');
 
 errorRouter.route('/') //  localhost:3000/api/logging

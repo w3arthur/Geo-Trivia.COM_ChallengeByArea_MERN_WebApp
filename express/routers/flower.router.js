@@ -2,7 +2,7 @@ const express = require("express");
 const flowerRouter = express.Router();
 const Joi = require("joi");
 const {mongoose, mongoose1} = require("../connection");
-const {errorHandler, error, success, middlewareError} = require('../api/errorHandler.middleware');
+const {errorHandler, error, success, middlewareError} = require('../middlewares/errorHandler.middleware');
 const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
 flowerRouter.route('/')   //  localhost:3000/api/flowers

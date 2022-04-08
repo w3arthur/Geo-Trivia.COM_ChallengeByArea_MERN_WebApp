@@ -1,4 +1,4 @@
-const logging = require('./loggingFunctions');
+const logging = require('../api/loggingFunctions');
 const { MiddlewareError } = require('../classes')
 //Global variables:
 // error.status
@@ -8,8 +8,7 @@ const { MiddlewareError } = require('../classes')
 // req.resultMessage
 
 //routers error
-const errorHandler =  (req, res, next) => {
-    // errorHandling ( (next, req) => {  } );
+const errorHandler = (req, res, next) => {
         return async (externalFunction) => {
             try{
                 await externalFunction()
@@ -39,6 +38,7 @@ const error = (errorHandler_Class) => {
 };
 
 const success = (req, res) => {
+    //console.log('::Error Handler ::Success');
     return (success_Class) => {
         const {status, result} = success_Class;
         req.resultStatus = status;
