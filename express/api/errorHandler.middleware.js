@@ -1,5 +1,5 @@
 const logging = require('./loggingFunctions');
-
+const { MiddlewareError } = require('../classes')
 //Global variables:
 // error.status
 // req.body.isError
@@ -21,21 +21,26 @@ const errorHandler =  (req, res, next) => {
 
 //routers error message for logging
 const middlewareError = (next) => {
-   return (status, title, message) =>{ return next( new Error( JSON.stringify( {status: status , title: title, message: message} ) ) )};
+    console.log('::Error Handler ::Middleware Error');
+    return (middleWareError_Class) =>{
+    const {status, title, message} = middleWareError_Class
+    return next( new Error( JSON.stringify( new MiddlewareError(status, title, message)) ) )};
 };
 
 //routers error message for logging
-const error = (status, message) => {
-    const error = new Error(message);
-    error.status = status;
+const error = (errorHandler_Class) => {
+    console.log('::Error Handler ::Error');
+    const error = new Error(errorHandler_Class.message);
+    error.status = errorHandler_Class.status;
     return (req) => {
-        //req.body.isError = true; 
+        req.body.isError = true; 
         return error;
     }      
 };
 
 const success = (req, res) => {
-    return (status, result = undefined) => {
+    return (success_Class) => {
+        const {status, result} = success_Class;
         req.resultStatus = status;
         if(result === undefined) return res.sendStatus(status)
         try{ req.resultJson = JSON.parse(JSON.stringify(result)); }

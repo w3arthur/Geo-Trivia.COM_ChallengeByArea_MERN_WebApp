@@ -93,3 +93,18 @@
 2022/04/07 22:04:15	ef9df3b7-5e27-4fa6-8006-e85d4e2a47bd	Error: Refresh Token missing.
 2022/04/07 22:04:15	fd1c50d9-8042-4a85-bf23-f4984b3ad9da	Error: [object Object]
 2022/04/07 22:39:00	bfdc3def-d1d1-4aa5-8f7e-e9442b64caf6	Error: Refresh Token missing.
+2022/04/08 11:28:30	ec2e814d-0d04-45a2-8ee7-e7aa12251c6e	Error: 
+2022/04/08 11:28:30	66684fe8-0e3f-4576-abbc-8f3bf41fbf48	TypeError: middlewareError is not a constructor
+2022/04/08 11:31:07	77b661e8-127e-482a-a267-51d8e73fa999	TypeError: middlewareError is not a constructor
+2022/04/08 11:33:51	5afb6208-fcfd-48f8-baa1-ec4df8b4dbfb	TypeError: middlewareError is not a constructor
+2022/04/08 11:37:51	3cf1efb3-51e0-4d4a-8002-e6e97bea8573	TypeError: middlewareError is not a constructor
+2022/04/08 11:37:51	981a64b2-7d8b-4ad4-ab04-55016c3f3a48	Error: user already exist!
+2022/04/08 11:37:51	d3614184-72d9-4cac-baaa-c9854a240d52	TypeError: middlewareError is not a constructor
+2022/04/08 11:40:39	2949b425-0425-4de3-946b-296641f8c51c	TypeError: middlewareError is not a constructor
+2022/04/08 11:56:00	6fe549c0-9c54-4d4f-8112-4ade7009b0e8	Error: user already exist!
+2022/04/08 11:57:19	d30e276b-d1aa-4ecd-ac22-42dcc196cdca	Error: user already exist!
+2022/04/08 12:12:31	58c23cbb-99eb-4c7f-9ff7-b59cf2a5b42a	Error: [object Object]
+2022/04/08 12:17:09	b98e1953-4198-44f2-8031-acb2d2193799	Error: [object Object]
+2022/04/08 12:18:39	308a7e5e-2772-4090-addc-83c99f89f1b4	Error: [object Object]
+2022/04/08 12:19:07	2898d57a-82a5-4a7d-b64d-5fe40a08af4d	Error: [object Object]
+2022/04/08 12:19:07	2fa8d77b-76e7-4824-93f7-fed717d6cb7a	Error: [object Object]

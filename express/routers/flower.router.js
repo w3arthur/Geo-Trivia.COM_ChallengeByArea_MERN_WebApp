@@ -3,13 +3,14 @@ const flowerRouter = express.Router();
 const Joi = require("joi");
 const {mongoose, mongoose1} = require("../connection");
 const {errorHandler, error, success, middlewareError} = require('../api/errorHandler.middleware');
+const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
 flowerRouter.route('/')   //  localhost:3000/api/flowers
   .get(async (req, res, next) => {  //req.params/ req.query
     console.log(':: flower router get');
     errorHandler(req, res, next)( async () => {
       let result = await FlowerModel.find({type: req.user.type});
-      return success(req, res)(200, result);
+      return success(req, res)( new Success(200, result) );
     });  //error handler 
   })
   .post( flowerValidator,  async (req, res, next) => { //,auth
@@ -17,9 +18,9 @@ flowerRouter.route('/')   //  localhost:3000/api/flowers
       errorHandler(req, res, next)( async () => {
         const {name, price, color, image, type} = req.body;
         const flower = await FlowerModel.findOne({ name: name });
-        if (flower !== null)  throw error(400, 'flower already exist!');
+        if (flower !== null)  throw error(new ErrorHandler(400, 'flower already exist!'));
         const result = await new FlowerModel({ name, price, color, image, type }).save();
-        return success(req, res)(200, result);
+        return success(req, res)( new Success(200, result) );
       });  //error handler 
   })
   ;
@@ -47,7 +48,7 @@ function flowerValidator (req, res, next) {
         , type: Joi.string()
       }).validate(req.body);
     //error message for middleWhere
-    if (error && error.details) return middlewareError(next)(400, 'validation flower info error', error.details[0].message.toString()); //.json(error.details[0].message);  //Error Message
+    if (error && error.details) return middlewareError(next)( new MiddlewareError(400, 'validation flower info error', error.details[0].message.toString()) ); //.json(error.details[0].message);  //Error Message
     next();
 
 };

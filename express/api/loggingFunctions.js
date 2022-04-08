@@ -18,6 +18,7 @@ const logEvents = async (message, logName) => {
 
 const logger = async (req, res, next) => {
     try{
+        //classes global (req. ) used from: MiddlewareError, ErrorHandler
         req.url = req.globalUrl || req.url ||req.path;    //fixing url path issue
         let body = req.body; if (req.body.password){ body = JSON.parse(JSON.stringify(req.body)); delete body.password; }
         logEvents(`${dateTime} :: ${req.method}\t${req.headers.origin}\t${req.url}`, 'reqLog.txt');
@@ -38,21 +39,23 @@ const globalErrorHandler = async (err, req, res, next) => {
 
 const errorHandler = async (err, req, res, next) => {
     try{ err.message = JSON.parse(err.message); }catch(e){}
-    logEvents(`${err.name}: ${err.message}`, 'errLog.txt');
+    logEvents(`${err.message?.status || err.name}: ${err.message?.message || err.message}`, 'errLog.txt');
     console.error(':: Error Handler! ' + err.status + ' ' + err.message); 
     let body = req.body; if (req.body?.password){ body = JSON.parse(JSON.stringify(req.body)); delete body.password; }
     await new NodeJSErrorModel({
-        title: err?.message?.title, localTime: dateTime, user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
-          , status: err?.message?.status || err.status || 500, errorName: err?.name, errorMessage: err?.message?.info || err?.message
+        title: err.message?.title, localTime: dateTime, user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
+        , status: err.message?.status || err.status || 500, errorName: err.name, errorMessage: err.message?.message || err.message
     }).save();
     return res.status(err?.message?.status || err.status || 500).send( err.message?.message || err.message );
 }
 
 module.exports = { logger, logEvents, errorHandler, globalErrorHandler };
 
-const {mongoose, mongooseLogging} = require("../connection"); 
 
 //module and validator
+
+const {mongoose, mongooseLogging} = require("../connection"); 
+
 const NodeJSLoggingModel = mongooseLogging.model( 
     "NodeJs_Logging"  //nodejs_loggings
     , basedLoggingSchema({ resultStatus: { type: Number }, resultMessage: { type: String } , resultJson: { type: Object } }) 
