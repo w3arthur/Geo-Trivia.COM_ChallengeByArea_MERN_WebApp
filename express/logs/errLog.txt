@@ -110,3 +110,15 @@
 2022/04/08 12:19:07	2fa8d77b-76e7-4824-93f7-fed717d6cb7a	Error: [object Object]
 2022/04/08 13:30:27	04728ce1-2cbb-40e9-8c28-a8c3ccacbd79	Error: Refresh Token not stored.
 2022/04/08 13:31:37	584f7a48-c102-4884-992f-8aa23d7311d6	Error: user already exist!
+2022/04/08 17:19:26	b5e7532d-8e30-4f58-bb63-83ed0c84768a	Error: Refresh Token missing.
+2022/04/08 17:19:26	ad2ca88e-92bf-48af-b803-21a25d546580	Error: Refresh Token missing.
+2022/04/08 17:19:26	53ba579c-8519-4994-b56d-be8b6409addc	Error: Refresh Token missing.
+2022/04/08 17:19:26	b208ebed-c57e-4c5d-bc1d-d28b8ec0ace6	Error: Refresh Token missing.
+2022/04/08 20:23:02	15c259a4-a145-4191-9c6a-d44623d463a9	400: "email" is not allowed to be empty
+2022/04/08 20:49:03	779c9586-c444-4e46-9491-dc826d2ded73	undefined: "email" is not allowed to be empty
+2022/04/08 20:56:14	632c9787-57b8-4cee-86a3-fb6a7ef40d4d	Error: user already exist!
+2022/04/08 22:51:20	3fb44956-d4cd-4e9d-a1c1-d19fded39a5e	TypeError: success is not a function
+2022/04/08 23:14:08	59327da0-35c0-42e2-97e7-002025866c83	Error: 
+2022/04/08 23:14:20	5fe3dbe1-0996-418f-ac64-aa65d33b9325	undefined: user already exist!
+2022/04/08 23:15:36	8d27fc47-9a39-4617-9fea-412799729088	undefined: user already exist!
+2022/04/08 23:57:54	ab9e04bc-a816-4c27-8bdb-3477d73bfe6d	undefined: user already exist!

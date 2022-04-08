@@ -1,7 +1,7 @@
 const express = require('express');
 const courseRouter = express.Router();
 const {mongoose, mongoose1} = require("../connection"); 
-const {errorHandler /*, error*/, success} = require('../middlewares/errorHandler.middleware');
+const { errorHandler } = require('../middlewares');
 const { Success } = require('../classes');
 
 courseRouter.route('/') //localhost:3000/api/courses
@@ -9,7 +9,7 @@ courseRouter.route('/') //localhost:3000/api/courses
         console.log(':: course router get');
         errorHandler(req, res, next)( async () => {
             let courses = await Course.find();      //ASYNC!
-            return success(req, res)(new Success(200, courses) );
+            return new Success(200, courses);
         });  //error handler 
     })
     ;

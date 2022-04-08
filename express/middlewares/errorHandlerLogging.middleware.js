@@ -1,19 +1,38 @@
-const { format } = require('date-fns');
-const { v4: uuid } = require('uuid');
-const fs = require('fs');
-const fsPromises = require('fs').promises;
-const path = require('path');
-//const error = require('../api/errorMessage.router');
-const dateTime = `${format(new Date(), 'yyyy/MM/dd HH:mm:ss')}`;
-const logsPath = path.join(__dirname, '..', 'logs');
 
-const logEvents = async (message, logName) => {
-    try {
-        const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
-        if (!fs.existsSync( logsPath ))  await fsPromises.mkdir( logsPath );
-        await fsPromises.appendFile(path.join(logsPath, logName), logItem);
-    } catch (err) { console.log('file error' + err); }
-}
+const {logEvents, dateTime} = require('../api').logEvent;
+
+
+const { ErrorHandler } = require('../classes')
+    //Global variables:
+    // error.status
+    // req.body.isError
+    // req.resultStatus
+    // req.resultJson
+    // req.resultMessage
+//routers error
+const errorHandler = (req, res, next) => {
+    return async (externalFunction) => {
+        try{ 
+            const success = await externalFunction();
+
+            if(typeof(await success) === 'object'){
+                const {status, result} = success;
+                req.resultStatus = status;
+                if(result === undefined) return res.sendStatus(status)
+                try{ req.resultJson = JSON.parse(JSON.stringify(result)); }
+                catch(e){ req.resultMessage = result; return res.status(status).send(result); }     
+                return res.status(status).json(result);
+            }
+            throw new ErrorHandler(500, 'Success message failed!');
+        } catch(err){
+            console.log('...errored');
+            req.body.isError = true;
+            return next(err); // error handler
+        } finally { if(!req.body.isError) {console.log('...logged'); return logger(req, res, next);} }
+    }
+};
+
+
 
 const logger = async (req, res, next) => {
     try{
@@ -29,15 +48,14 @@ const logger = async (req, res, next) => {
     } catch(err){  return; }  //error handler
 }
 
-const globalErrorHandler = async (err, req, res, next) => {
+const globalErrorMainHandler = async (err, req, res, next) => {
     console.log(':: Global Error Handler!');
     err.status = 500;
     err.message = 'Error, Server Mistake issue!, ' + err.message;
-    return errorHandler(err, req, res, next);
+    return errorMainHandler(err, req, res, next);
 }
 
-const errorHandler = async (err, req, res, next) => {
-    try{ err.message = JSON.parse(err.message); }catch(e){}
+const errorMainHandler = async (err, req, res, next) => {
     logEvents(`${err.message?.status || err.name}: ${err.message?.message || err.message}`, 'errLog.txt');
     console.error(':: Error Handler! ' + err.status + ' ' + err.message); 
     let body = req.body; if (req.body?.password){ body = JSON.parse(JSON.stringify(req.body)); delete body.password; }
@@ -48,7 +66,7 @@ const errorHandler = async (err, req, res, next) => {
     return res.status(err?.message?.status || err.status || 500).send( err.message?.message || err.message );
 }
 
-module.exports = { logger, logEvents, errorHandler, globalErrorHandler };
+module.exports = { errorHandler, logger, errorMainHandler, globalErrorMainHandler };
 
 
 //module and validator

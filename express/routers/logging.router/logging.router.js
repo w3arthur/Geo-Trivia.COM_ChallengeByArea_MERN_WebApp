@@ -2,7 +2,7 @@
 const express = require('express');
 const loggingRouter = express.Router();
 const {mongoose, mongooseLogging} = require("../../connection"); 
-const {errorHandler, error, success} = require('../../middlewares/errorHandler.middleware');
+const { errorHandler } = require('../../middlewares');
 const { Success, ErrorHandler } = require('../../classes');
 
 loggingRouter.route('/') //  localhost:3000/api/logging
@@ -10,9 +10,9 @@ loggingRouter.route('/') //  localhost:3000/api/logging
       errorHandler(req, res, next)( async () => {
         console.log(':: login router post');
         const {data, number} = req.body;
-        if (! req.body) throw error( new ErrorHandler(400, 'no logging body, wrong request') );
+        if (! req.body) throw new ErrorHandler(400, 'no logging body, wrong request');
         await new LoggingModel({ data, number }).save();
-        return success(req, res)( new Success(200, 'logging sent') );
+        return new Success(200, 'logging sent');
       });  //error handler 
   } );
 
