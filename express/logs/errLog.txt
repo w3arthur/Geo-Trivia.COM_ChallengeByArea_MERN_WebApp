@@ -122,3 +122,49 @@
 2022/04/08 23:14:20	5fe3dbe1-0996-418f-ac64-aa65d33b9325	undefined: user already exist!
 2022/04/08 23:15:36	8d27fc47-9a39-4617-9fea-412799729088	undefined: user already exist!
 2022/04/08 23:57:54	ab9e04bc-a816-4c27-8bdb-3477d73bfe6d	undefined: user already exist!
+2022/04/10 01:48:08	dfd9cd59-999f-4687-8515-4f41d9428b71	undefined: "name" length must be at least 4 characters long
+2022/04/10 01:48:08	c73ca1b4-58d1-4f09-b3e8-9a8b3018c7c1	Error: data and salt arguments required
+2022/04/10 01:48:08	b482b9d9-e743-4ce6-bf0d-97a61dae388b	undefined: Refresh Token missing.
+2022/04/10 01:48:08	613ea112-8e17-4ea4-8c74-75df36da5874	undefined: Success message failed!
+2022/04/10 01:48:08	de9e2f04-e2ea-4bea-9d80-2eea2280146a	undefined: Success message failed!
+2022/04/10 01:48:08	6d0b3c3a-482b-4e6f-a0b5-fff48a13f78a	undefined: Success message failed!
+2022/04/10 01:48:08	326b820c-38bc-42b2-960b-e3977ebfd403	undefined: Success message failed!
+2022/04/10 01:48:08	1a10ad6d-10fd-41fc-ae37-0d3959f0dfd7	undefined: Success message failed!
+2022/04/10 01:48:08	35645d00-56e4-4dc1-9b0b-279926dbf6e4	undefined: Success message failed!
+2022/04/10 01:48:08	a261468a-2d68-41b8-b0c1-5f580c7df006	undefined: Success message failed!
+2022/04/10 01:48:08	e47cf8db-c9fc-45d7-9416-152c95bff706	undefined: Success message failed!
+2022/04/10 01:48:08	d06758b3-fe31-4153-897d-8bc8895aa420	undefined: Success message failed!
+2022/04/10 01:48:08	dcee16e5-a8b6-45e2-b678-673faa9f037f	undefined: Success message failed!
+2022/04/10 01:48:08	f2794047-0a31-4751-94a4-cdc9e70ca6c7	undefined: Success message failed!
+2022/04/10 01:48:08	a6973efb-e0b0-44d9-bc29-b42daa1e76db	undefined: Success message failed!
+2022/04/10 01:48:08	b4717080-a1bf-4ceb-9f9c-d94056a4eeb1	undefined: Success message failed!
+2022/04/10 01:48:08	a480136f-6605-4d75-896a-2270ca69d668	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	536fbb78-0445-4b2c-8b73-b834c0aa94d6	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	241869d6-7aa7-49c6-80fe-3e480cae0bde	undefined: "email" must be a valid email
+2022/04/10 01:48:08	3f937f78-c92c-4461-91ec-3a8084fa8c73	undefined: "email" must be a valid email
+2022/04/10 01:48:08	ec682f37-8ae9-4eeb-8342-51118fbcbaf6	undefined: "email" must be a valid email
+2022/04/10 01:48:08	bd9a7186-4d2a-4b77-b56a-b5e93eb8d77f	undefined: Success message failed!
+2022/04/10 01:48:08	f4484e07-b01b-4127-bce9-4b2613b6eb3f	undefined: Success message failed!
+2022/04/10 01:48:08	d8be442d-467f-417b-8d1f-d1f6655e08f8	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	d1400bfd-905e-45d8-9a33-488ea19bc3c3	undefined: Success message failed!
+2022/04/10 01:48:08	9c516344-194e-4d01-8c2d-6338d9fd961d	undefined: Success message failed!
+2022/04/10 01:48:08	9775b899-8887-483b-af0f-81b3871b3420	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	e8d20186-fd24-4c9c-85be-329c5005b39a	undefined: Success message failed!
+2022/04/10 01:48:08	cc8b7a45-a8d8-4077-8c2b-143d9ce55a6f	undefined: Success message failed!
+2022/04/10 01:48:08	79f2903c-5f75-4b92-ba6b-ae00f3f323b4	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	a9d9d50f-1eb5-404c-a761-02301b8a9249	undefined: Success message failed!
+2022/04/10 01:48:08	3d306297-d283-4678-a7cc-0cfd90405d6a	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	bfe0288b-812d-466c-ad15-0dbb941823d9	undefined: Success message failed!
+2022/04/10 01:48:08	1f244aa5-ea78-49b9-9fad-a4419fb622df	undefined: Success message failed!
+2022/04/10 01:48:08	20d92520-c64d-48c1-9034-ca5d55c0cc1d	undefined: Success message failed!
+2022/04/10 01:48:08	ad63fe52-85da-4cf6-bd2e-38e09455275d	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	2fc7b5ab-d989-4b28-9c83-2f82d51c3b98	undefined: Success message failed!
+2022/04/10 01:48:08	3345bc9c-471d-4f1f-b1c0-91eb066a6a74	undefined: Success message failed!
+2022/04/10 01:48:08	39fd0e10-1fc1-4675-86c8-97a0b51b37cb	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	d0950531-7cdd-47a2-89fd-6c0b862c2886	undefined: Success message failed!
+2022/04/10 01:48:08	e7c5b1bd-695c-4d15-95e7-5c77b0c9e6ba	undefined: Success message failed!
+2022/04/10 01:48:08	b6548cdd-6e06-4c4f-8eb5-b7d43501de79	undefined: Success message failed!
+2022/04/10 01:48:08	2f17c412-59c0-4a5f-86df-b45585372079	undefined: Success message failed!
+2022/04/10 01:48:08	a6fd0ae6-bccd-4170-8396-090fae714f1b	undefined: Success message failed!
+2022/04/10 01:48:08	1148a4f2-7a42-499c-94f5-619105f15120	undefined: Success message failed!
+2022/04/10 01:48:08	1a469455-a7e7-4f0e-98a4-4cbf942daf31	undefined: Success message failed!

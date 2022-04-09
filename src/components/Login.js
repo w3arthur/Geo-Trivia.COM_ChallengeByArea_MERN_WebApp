@@ -5,7 +5,7 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import {useAuth} from '../context';
-import {Axios, Async} from '../api';
+import {databaseRequest, DatabaseRequest, loginApi, tokenRenewApi} from '../api';
 import {User} from '../classes';
 
 
@@ -16,29 +16,21 @@ export default function Login() {
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
 
-  function goFrom(){
-    navigate(from, { replace: true });
-  }
+  function goFrom(){ navigate(from, { replace: true });  }
 
   const userRef = React.useRef('fghfghhfg');
   const passwordRef = React.useRef();
   const errRef = React.useRef();
   const [errMsg, setErrMsg] = React.useState('');
 
-
-
   React.useEffect(() => {
     checkAccessToken(auth, setAuth, goFrom, setErrMsg);
-
     console.log('auth' ,auth);
     userRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     userRef.current.focus(); 
-    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ ] );
-
-
 
   return (
       <Container component="main" maxWidth="xs">
@@ -66,43 +58,35 @@ export default function Login() {
 }
 
 const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
+  
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  console.log({ email: data.get('email'), password: data.get('password'), });
-
-  Async( async() => {
-    try{
-      const result = await Axios('POST', '/api/login', {email: data.get('email'), password: data.get('password')}, {});
-      if(await result) {
-        result.role = [result.type];
-        delete result.type; //?
-        const role = 2001; //?[admin]
-        setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
-        console.log('auth', auth);
-        goFrom();// return;
-      } 
-      
-      console.log('resultLogin ',result);
-    }catch(error){ setErrMsg(error || 'no server connection');}
-  });
-
+  console.log( { email: data.get('email'), password: data.get('password'), } );
+  new DatabaseRequest( () => loginApi( {email: data.get('email'), password: data.get('password')} ) )
+    .GoodResult( (result) => {
+      result.role = [result.type];
+      delete result.type; //?
+      const role = 2001; //?[admin]
+      setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
+      console.log('auth', auth);
+      goFrom();
+      } )
+    .BadResult( (error) => { setErrMsg(error); } )
+    .Build();
 };
 
 function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
-    Async( async() => {
-      const result = await Axios('PATCH', '/api/login', {}, {});
-      if(await result.error) return;
-      else if(await result) {
-        result.role = [result.type];
-        delete result.type; //to delete
-        const role = 2001;  //to delete
-        if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
-        setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
-        console.log('auth', auth);
-        goFrom();
-    } else setErrMsg('no server connection');
-    console.log('resultLogin ',result);
-  });
+  new DatabaseRequest( () => tokenRenewApi() )
+    .GoodResult( (result) => {
+      result.role = [result.type];
+      delete result.type; //to delete
+      const role = 2001;  //to delete
+      if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
+      setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
+      console.log('auth', auth);
+      goFrom();
+      } )
+    .Build();
 }
 
 const Copyright = props =>  (

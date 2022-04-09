@@ -5,7 +5,7 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import {useAuth} from '../context';
-import {Axios, Async, userRegisterApi} from '../api';
+import {databaseRequest, DatabaseRequest, userRegisterApi} from '../api';
 import {User} from '../classes';
 
 export default function Register() {
@@ -64,20 +64,17 @@ const handleSubmit = (event, setErrMsg, setAuth, goFrom) => {
     , undefined
   );
   user.password =  data.get('password');
-
-  Async( async() =>{
-    try{
-      const result = await userRegisterApi(user);
-      if(await result) {
+  new DatabaseRequest( () => userRegisterApi(user) )
+    .GoodResult( (result) => {
         result.role = [result.type];
         delete result.type;
         result.password = data.get('password');
         setAuth(result);
         goFrom();
-      } else setErrMsg('no server connection');
-      console.log('result ',await result);  //to delete
-    }catch(error){setErrMsg(error);}
-  } );
+      } )
+    .BadResult( (error) => { setErrMsg(error); } )
+    .Build();
+
 };
 
 const Copyright = props => (

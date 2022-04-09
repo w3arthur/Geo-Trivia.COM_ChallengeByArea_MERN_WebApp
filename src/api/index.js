@@ -1,3 +1,3 @@
-import {Async, Axios, userRegisterApi} from './axios';
+import {Async, Axios, databaseRequest, DatabaseRequest, userRegisterApi, loginApi, tokenRenewApi} from './axios';
 
-export {Async, Axios, userRegisterApi};
+export {Async, Axios, databaseRequest, DatabaseRequest, userRegisterApi, loginApi, tokenRenewApi};
