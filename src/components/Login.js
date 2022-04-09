@@ -3,10 +3,11 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, 
   Checkbox, Link as MuiLink, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import useAuth from '../context/AuthProvider';
-import {Axios, Async} from '../api/axios';
+import {useAuth} from '../context';
+import {Axios, Async} from '../api';
+import {User} from '../classes';
+
 
 export default function Login() {
   const { auth, setAuth } = useAuth();
@@ -34,15 +35,16 @@ export default function Login() {
     passwordRef.current.value = auth.password || '';
     userRef.current.focus(); 
     
-  }, [] );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ ] );
+
 
 
   return (
-    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}> <LockOutlinedIcon /> </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}> <LockOutlinedIcon /> </Avatar>
           <Typography component="h1" variant="h5"> Sign in </Typography>
           <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goFrom, setAuth, auth )} noValidate sx={{ mt: 1 }}>
             <TextField inputRef={userRef} margin="normal" required fullWidth id="email" label="Email Address"
@@ -60,7 +62,6 @@ export default function Login() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
   );
 }
 
@@ -68,17 +69,15 @@ const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });
-  //if true!
-  //setAuth({name: 'dfgdfg', email: 'dsfsdf' , roles: [2001]  })
-  //goFrom();
 
   Async( async() => {
     try{
       const result = await Axios('POST', '/api/login', {email: data.get('email'), password: data.get('password')}, {});
       if(await result) {
         result.role = [result.type];
-        delete result.type;
-        setAuth({name: result.name, email: result.email , roles: [2001], accessToken: result.accessToken }) //set roll
+        delete result.type; //?
+        const role = 2001; //?[admin]
+        setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
         console.log('auth', auth);
         goFrom();// return;
       } 
@@ -95,9 +94,10 @@ function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
       if(await result.error) return;
       else if(await result) {
         result.role = [result.type];
-        delete result.type;
+        delete result.type; //to delete
+        const role = 2001;  //to delete
         if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
-        setAuth({name: result.name, email: result.email , roles: [2001], accessToken: result.accessToken }) //set roll
+        setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
         console.log('auth', auth);
         goFrom();
     } else setErrMsg('no server connection');

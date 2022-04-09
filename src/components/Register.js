@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { /*Link,*/ useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, 
   Checkbox, Link as MuiLink, Grid, Box, Typography, Container} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
-import useAuth from '../context/AuthProvider';
-import {Axios, Async} from '../api/axios';
+import {useAuth} from '../context';
+import {Axios, Async, userRegisterApi} from '../api';
+import {User} from '../classes';
 
 export default function Register() {
   const errRef = React.useRef(' ');
@@ -18,22 +17,20 @@ export default function Register() {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   if (from === '/register' || from === 'register') from = '/login'
-  const navigation = useNavigate()
 
+  const navigation = useNavigate()
  
-function goFrom(){
-  navigation(from, { replace: true });
-}
+  function goFrom(){ navigation(from, { replace: true }); }
   
   useEffect(() => {
-    errRef.current.ch ='aaaaaa34349';
+    errRef.current.ch ='';
   },[]);
+  
   return (
-    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }} >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}> <LockOutlinedIcon /> </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}> <LockOutlinedIcon /> </Avatar>
           <Typography component="h1" variant="h5"> Sign up </Typography>
           <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, goFrom)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -52,7 +49,6 @@ function goFrom(){
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
   );
 }
 
@@ -61,15 +57,17 @@ const handleSubmit = (event, setErrMsg, setAuth, goFrom) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });
-  const user= {
-    name: data.get('firstName') + ' ' + data.get('lastName')
-    , email: data.get('email')
-    , password: data.get('password')
-    , type: 'admin'
-  };
+  const user = new User( 
+    data.get('firstName') + ' ' + data.get('lastName')
+    , data.get('email')
+    , undefined
+    , undefined
+  );
+  user.password =  data.get('password');
+
   Async( async() =>{
     try{
-      const result = await Axios('POST', '/api/users', user, {});
+      const result = await userRegisterApi(user);
       if(await result) {
         result.role = [result.type];
         delete result.type;
@@ -77,7 +75,7 @@ const handleSubmit = (event, setErrMsg, setAuth, goFrom) => {
         setAuth(result);
         goFrom();
       } else setErrMsg('no server connection');
-      console.log('result ',result);
+      console.log('result ',await result);  //to delete
     }catch(error){setErrMsg(error);}
   } );
 };

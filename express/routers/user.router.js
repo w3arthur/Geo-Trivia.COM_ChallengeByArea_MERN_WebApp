@@ -11,11 +11,12 @@ userRouter.route('/') //  localhost:3000/api/users
     console.log(':: user router post');
     errorHandler(req, res, next)( async () => {
     //Add try/catch
-      const {email} = req.body;
+      const {name, email} = req.body;
       let user = await UserModel.findOne({ email: email });
       if (user !== null) throw new ErrorHandler(452, 'user already exist!');
-      let userRegister = req.body;
+      let userRegister = {name, email};
       userRegister.password = await bcrypt.hash(userRegister.password, 10)
+      userRegister.type = 2001; //admin
       let result = await new UserModel(userRegister).save();
       return new Success(200, result);
      });  //error handler 

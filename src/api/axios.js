@@ -27,7 +27,9 @@ export async function Axios(method, additionUrl, data, additionHeader){
         throw error.response?.data;
     }
 }
- 
+
+export const userRegisterApi = (user) => Axios('POST', '/api/users', user, {});
+
 export function Async(callback){
     (async() => { callback(); })();
 }
