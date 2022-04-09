@@ -50,7 +50,7 @@ export default function DataGridExample() {
             </Box>
             <br />
             <Typography marginBottom={1} variant="h2" component="h2">Typography Text</Typography>
-            <div style={{ height: 400, width: "100%", minWidth: 600 }}>
+            <div style={{ height: 400, width: "100%"/*, minWidth: 600*/ }}>
             <DataGrid rows={ data } columns={columns}
             pagination rowsPerPageOptions={[5, 10, 20]}  //!!
             checkboxSelection //disableSelectionOnClick !!
