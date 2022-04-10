@@ -1,2 +1,3 @@
 import User from './User.class';
-export {User};
+import Logging from './Logging.class';
+export {User, Logging};

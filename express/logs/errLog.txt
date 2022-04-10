@@ -168,3 +168,20 @@
 2022/04/10 01:48:08	a6fd0ae6-bccd-4170-8396-090fae714f1b	undefined: Success message failed!
 2022/04/10 01:48:08	1148a4f2-7a42-499c-94f5-619105f15120	undefined: Success message failed!
 2022/04/10 01:48:08	1a469455-a7e7-4f0e-98a4-4cbf942daf31	undefined: Success message failed!
+2022/04/10 01:48:08	8bb7df1a-c7b6-4b12-b19e-8ce7053380e3	undefined: Success message failed!
+2022/04/10 01:48:08	3c8717a8-e773-40af-a606-50e6372acafb	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	c32ee7e7-c935-4808-8fcb-3739f1c0376f	undefined: "email" is not allowed to be empty
+2022/04/10 01:48:08	e8068468-ddd5-40e1-aea7-f3c3eec268fa	undefined: "email" is not allowed to be empty
+2022/04/10 14:15:04	63e9cb48-e94f-4dfa-83be-760ac5d4b603	undefined: Refresh Token not stored.
+2022/04/10 14:15:04	4c5d0c22-4edb-4f56-af90-fb0b47472f57	undefined: "email" is not allowed to be empty
+2022/04/10 14:15:04	b401732e-24bd-48ba-b9a3-c1af26eafa8d	undefined: Success message failed!
+2022/04/10 14:15:04	e257b08d-7bd2-4d7c-b624-5950bca8b6a8	undefined: "password" is not allowed to be empty
+2022/04/10 14:15:04	e20e64b2-7339-43aa-94a0-d5d0c1476412	undefined: Success message failed!
+2022/04/10 14:24:09	c9012eb0-66cf-4238-98f6-8550b64bf54a	undefined: Refresh Token not stored.
+2022/04/10 14:24:09	e6a76ec4-9e33-45fa-9a9c-27b5ea5315cb	undefined: Success message failed!
+2022/04/10 14:24:09	60be259d-3b1c-4eef-adc8-54369ee6329c	undefined: "email" must be a valid email
+2022/04/10 14:24:09	d2e958a3-3961-4339-931b-a8103d55be03	undefined: "email" must be a valid email
+2022/04/10 14:24:09	76d6ad28-5bcf-43a9-97c2-10259a31e1b9	undefined: "email" must be a valid email
+2022/04/10 14:24:09	7a9ae5f2-d0d1-4571-a0a0-7b53719b9d89	undefined: Success message failed!
+2022/04/10 14:24:09	01d813db-e157-4e73-b9b8-6e3ba9c6233b	undefined: "password" is not allowed to be empty
+2022/04/10 14:28:21	c596241e-ed54-4b75-9cf5-7b4c095d4d9a	undefined: Refresh Token not stored.

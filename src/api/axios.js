@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {Logging} from '../classes';
 
 const axiosFunction = axios.create({
     baseURL: 'http://localhost:3500'
@@ -11,18 +12,20 @@ export const userRegisterApi = (user) => Axios('POST', '/api/users', user, {});
 export const loginApi = (user) => Axios('POST', '/api/login', user, {});
 export const tokenRenewApi = () => Axios('PATCH', '/api/login', {}, {});    //require cookie
 export const tokenDestroyApi = () => Axios('DELETE', '/api/login', {}, {});    //require cookie
-
+const loggingLog = (log) => axiosLogging ('title', '/log/logging', log);
+const errorLog = (log) => axiosLogging ('title', '/log/error', log);
 
 export async function Axios(method, additionUrl, data, additionHeader){
     try{
         let response = await axiosFunction({
-                method: method
-                , url: additionUrl
-                , data: JSON.stringify(data)
-                , headers: additionHeader
-            });
+            method: method
+            , url: additionUrl
+            , data: JSON.stringify(data)
+            , headers: additionHeader
+        });
         console.log(':: ajax success');
         console.log(response);
+        loggingLog( new Logging({}, data, response ).SentDetails(method, additionUrl, additionHeader) );
         return await response.data;
     }catch(error){
         console.log(':: ajax error');
@@ -30,22 +33,17 @@ export async function Axios(method, additionUrl, data, additionHeader){
         // console.log('status', error.response?.status);  //status 452
         // console.log('headers', error.response?.headers);  //{content-length: '32', content-type: 'application/json; charset=utf-8'}
         if(!error.response?.data) throw (()=>'no server connection')() ;
+        errorLog( new Logging({}, data, error ).SentDetails(method, additionUrl, additionHeader) );
         throw error.response?.data;
     }
 }
 
 async function axiosLogging (title, additionUrl, data) {
-    try{
-        
-        await axiosFunction({
-                method: 'post'
-                , url: additionUrl
-                , data: JSON.stringify(data)
-            });
+    try{ 
+        await axiosFunction({ method: 'post' , url: additionUrl , data: JSON.stringify(data) });
         console.log(':: ajax logging :: ' + title);
     }catch(e){ }
 }
-
 
 export function Async(callback){ (async() => { callback(); })(); }
 

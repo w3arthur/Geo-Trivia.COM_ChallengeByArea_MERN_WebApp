@@ -1,21 +1,25 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\express\\api\\errorHandler.middleware.js"
-        },
-        {
-            "type": "node-terminal",
-            "name": "Run Script: start",
-            "request": "launch",
-            "command": "npm run start",
-            "cwd": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "chrome",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "debug-start",
+      "postDebugTask": "debug-stop",
+      "url": "http://localhost:3000",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**",
+        "bootstrap"
+      ]
+    }
+  ]
 }

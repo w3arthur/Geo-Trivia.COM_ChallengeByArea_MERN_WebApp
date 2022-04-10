@@ -17,9 +17,6 @@ export default function Layout ({children}) { return (
 
 
 
-
-
-
 function MuiStyle(props){
   const theme = createTheme({
     palette: {

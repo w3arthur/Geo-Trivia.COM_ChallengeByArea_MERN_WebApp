@@ -28,8 +28,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.route('/').get( async (req, res) => res.status(200).sendFile(path.join(__dirname, "html", "index.html")) );
 
 //routers
-app.use( (req, res, next)=>{req.globalUrl = req.url ;next();} );//fix global url path
-app.use("/api/logging", routers.loggingRouter );
+app.use( (req, res, next) => { req.globalUrl = req.url ; next(); } );//fix global url path
+app.use("/log", routers.logRouter );
 app.use("/api/users", routers.userRouter );
 app.use("/api/login", routers.loginRouter );
 app.use(middlewares.verifyJWT);   //403 //Token require middleware
