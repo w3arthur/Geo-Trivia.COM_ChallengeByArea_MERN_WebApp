@@ -5,8 +5,8 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import {useAuth} from '../context';
-import {databaseRequest, DatabaseRequest, userRegisterApi} from '../api';
-import {User} from '../classes';
+import {userRegisterApi} from '../api';
+import {DatabaseRequest, User} from '../classes';
 
 export default function Register() {
   const errRef = React.useRef(' ');

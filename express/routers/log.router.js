@@ -37,6 +37,7 @@ const LoggingModel = mongooseLogging.model(
     , data: { type: Object }
     , response: { type: Object }
     , details:  { type: Object }
+    , toDelete: { type: Boolean, default: false}
   }, { timestamps: true, })
 );
 
@@ -47,5 +48,6 @@ const ErrorModel = mongooseLogging.model(
     , data: { type: Object }
     , response: { type: Object }
     , details:  { type: Object }
+    , toDelete: { type: Boolean, default: false}
   }, { timestamps: true, })
 );

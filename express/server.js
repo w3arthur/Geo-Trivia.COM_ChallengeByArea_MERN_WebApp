@@ -18,17 +18,20 @@ const middlewares = require('./middlewares');
 app.use( middlewares.accessAllowed );
 app.use( require('cors')( middlewares.corsOptions ) ); 
 app.use( express.json() );
-app.use (express.urlencoded({ extended: false }) ); //
+app.use( express.urlencoded({ extended: false }) ); //
 app.use( require('cookie-parser')() );  //middleware for cookies
 app.use( middlewares.globalErrorMainHandler );  //errorHandler for authorization token, validation and global system issues
 
 //index page router
 app.use('/', express.static(path.join(__dirname, '/html')));
+
 app.set('views', path.join(__dirname, 'views'));
+
 app.route('/').get( async (req, res) => res.status(200).sendFile(path.join(__dirname, "html", "index.html")) );
 
 //routers
 app.use( (req, res, next) => { req.globalUrl = req.url ; next(); } );//fix global url path
+
 app.use("/log", routers.logRouter );
 app.use("/api/users", routers.userRouter );
 app.use("/api/login", routers.loginRouter );
