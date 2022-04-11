@@ -1,3 +1,4 @@
 import User from './User.class';
 import Logging from './Logging.class';
-export {User, Logging};
+import DatabaseRequest from './DatabaseRequest.class'
+export {DatabaseRequest, User, Logging};

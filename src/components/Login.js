@@ -5,8 +5,8 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel,
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import {useAuth} from '../context';
-import {databaseRequest, DatabaseRequest, loginApi, tokenRenewApi} from '../api';
-import {User} from '../classes';
+import {loginApi, tokenRenewApi} from '../api';
+import {DatabaseRequest, User} from '../classes';
 
 
 export default function Login() {
@@ -62,10 +62,10 @@ const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log( { email: data.get('email'), password: data.get('password'), } );
+
   new DatabaseRequest( () => loginApi( {email: data.get('email'), password: data.get('password')} ) )
     .GoodResult( (result) => {
-      result.role = [result.type];
-      delete result.type; //?
+
       const role = 2001; //?[admin]
       setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
       console.log('auth', auth);
@@ -73,6 +73,7 @@ const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
       } )
     .BadResult( (error) => { setErrMsg(error); } )
     .Build();
+    
 };
 
 function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
