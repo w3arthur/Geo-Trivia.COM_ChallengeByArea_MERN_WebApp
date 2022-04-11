@@ -25,8 +25,9 @@ const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
 loginRouter.route('/') //  /api/login
   .post( validateUser, async (req, res, next) => {
-    console.log(':: login router post');
+   // console.log(':: login router post');
     errorHandler(req, res, next)( async () => {
+
       let email = req.body.email;
       let user = await UserModel.findOne({ email: email });
       if (user === null) throw new ErrorHandler(400, 'user or password is not correct!');
@@ -36,6 +37,7 @@ loginRouter.route('/') //  /api/login
       refreshToken_List.push({user_id: user._id.toHexString(), token: refreshToken});
       res.cookie(cookieName, refreshToken, cookieSettings); //change
       return new Success(200, { email: user.email, accessToken: accessToken, refreshToken: refreshToken });  //
+
      });  //error handler
   })
   .patch( (req, res, next) => {
