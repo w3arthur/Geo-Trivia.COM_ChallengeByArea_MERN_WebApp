@@ -7,6 +7,9 @@ import {DataGridExample, GlobalLayout, Login, Register, RequireAuth} from './com
 
 import LocationReduxExample from './components/LocationReduxExample/LocationReduxExample';
 
+import { useTranslation } from 'react-i18next';
+
+import LanguageFlags from './components/LanguageFlags'
 
 const {User, Editor, Admin}  = {  //ROLES
   User: 2001
@@ -15,8 +18,12 @@ const {User, Editor, Admin}  = {  //ROLES
 }
 
 
-export default function App() { return (<div className="App">
-  <BrowserRouter> <AuthProvider>
+export default function App() { 
+  
+  const { t } = useTranslation();
+
+  return (<div className="App">
+  <BrowserRouter> <AuthProvider> <LanguageFlags />
 
     <Routes>
       <Route path="/" element={<GlobalLayout> <PageLinks /> </GlobalLayout>}>

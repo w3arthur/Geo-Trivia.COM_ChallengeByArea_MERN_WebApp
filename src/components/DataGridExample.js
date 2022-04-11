@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button, TextField, Grid, Box } from '@mui/material';
 import * as Icon  from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
+import { useTranslation } from 'react-i18next';
 
 //import {MuiSty
 const columns = [
@@ -21,6 +22,8 @@ const columns = [
 export default function DataGridExample() {
     const [data, setData] = React.useState();
 
+    const { t } = useTranslation();  //MultyLanguage
+
     const loadData = async() => {
         console.log('Start Load Fetch');
         const url="https://fakestoreapi.com/products";
@@ -36,20 +39,20 @@ export default function DataGridExample() {
     React.useEffect(() => { loadData(); },[]
   );
   return (<>
-    <Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid item md={2} sx={{ display: { xs: 'none', md: 'block' }}}>
-                Left Grid <br/>
-                (Will hide on small screen) <br/>
+                {t('Left Grid')}   <br/>
+                {t('hide')} <br/>
         </Grid>
         <Grid item xs={12} md={8}> <Box sx={{ alignItems: 'center'}}>
             <Box sx={{ display: 'flex', }}>
             <Button href="#"  endIcon={<Icon.AcUnit />} variant="contained" color="primary" sx={{maxHeight: 30,fontSize: 9, marginTop:1}}  size="md" >
-                    Button
+                    {t('Button')}
             </Button>
             <TextField  focused  label="Input"  size="small" sx={{ marginLeft: 5}} fullWidth   />
             </Box>
             <br />
-            <Typography marginBottom={1} variant="h2" component="h2">Typography Text</Typography>
+            <Typography marginBottom={1} variant="h2" component="h2">{t('Typography Text')}</Typography>
             <div style={{ height: 400, width: "100%"/*, minWidth: 600*/ }}>
             <DataGrid rows={ data } columns={columns}
             pagination rowsPerPageOptions={[5, 10, 20]}  //!!
@@ -59,7 +62,7 @@ export default function DataGridExample() {
 
         </Box> </Grid>
         <Grid item  md={2}>
-            Right Grid
+            {t('Right Grid')}
         </Grid>
     </Grid>            
   </>);
