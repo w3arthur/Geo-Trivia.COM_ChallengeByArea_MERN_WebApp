@@ -9,7 +9,7 @@ import LocationReduxExample from './components/LocationReduxExample/LocationRedu
 
 import { useTranslation } from 'react-i18next';
 
-import LanguageFlags from './components/LanguageFlags'
+import LanguageFlags from './components/Multilanguage/LanguageFlags'
 
 const {User, Editor, Admin}  = {  //ROLES
   User: 2001

@@ -5,7 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import cookies from 'js-cookie';
 import LanguageIcon from '@mui/icons-material/Language';
-import '../flags.css';
+import './flags.css';
 import { useTranslation } from "react-i18next";
 import i18next from 'i18next';
 import classNames from 'classnames';
