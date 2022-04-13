@@ -1,43 +1,54 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link, useNavigate  } from 'react-router-dom';  // useParams,
+import React from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom"; // useParams,
 
-import { AuthProvider } from './context';
+import { AuthProvider } from "./context";
 
-import {DataGridExample, GlobalLayout, Login, Register, RequireAuth} from './components';
+import {
+  DataGridExample,
+  GlobalLayout,
+  Login,
+  Register,
+  RequireAuth,
+} from "./components";
 
-import LocationReduxExample from './components/LocationReduxExample/LocationReduxExample';
+import LocationReduxExample from "./components/LocationReduxExample/LocationReduxExample";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import LanguageFlags from './components/Multilanguage/LanguageFlags';
+import LanguageFlags from "./components/Multilanguage/LanguageFlags";
 
-import HeaderContent from './components/Header/header';
-import { FrontPage } from './components/Pages/FrontPage';
-import Registration from './components/Pages/RegistrationPage';
-import Location from './components/Pages/Location';
+import HeaderContent from "./components/Header/header";
+import { FrontPage } from "./components/Pages/FrontPage";
+import Registration from "./components/Pages/RegistrationPage";
+import Location from "./components/Pages/LocationPage";
 
-const {User, Editor, Admin}  = {  //ROLES
-  User: 2001
-  , Editor: 1984
-  , Admin: 5150
-}
+const { User, Editor, Admin } = {
+  //ROLES
+  User: 2001,
+  Editor: 1984,
+  Admin: 5150,
+};
 
-
-export default function App() { 
-  
+export default function App() {
   const { t } = useTranslation();
 
-  return (<div className="App">
-    <HeaderContent />   
+  return (
+    <div className="App">
+      <HeaderContent />
       <Routes>
         <Route path="/" element={<FrontPage />} />
-        <Route path="/Registration" element={<Registration />} />  
-        <Route path="/Location" element={<Location />} />                  
-      </Routes> 
+        <Route path="/Registration" element={<Registration />} />
+        <Route path="/Location" element={<Location />} />
+      </Routes>
 
-
-    {/* <BrowserRouter> */}
-  {/*  <AuthProvider> 
+      {/* <BrowserRouter> */}
+      {/*  <AuthProvider> 
 
     <Routes>
       <Route path="/" element={<GlobalLayout> <PageLinks /> </GlobalLayout>}>
@@ -75,17 +86,16 @@ export default function App() {
         <Route path="reduxFetch/*" element={<><ReduxFetch /></>} />
         <Route path="ReduxFetchFun/*" element={<><ReduxFetchFun /></>} />
         */}
-      
-        {/* <Route path="unauthorized/*" element={<> <br /> [-PageError403-] (Error 403 Unauthorized) <BackwardLink /> <br /></>} />
+
+      {/* <Route path="unauthorized/*" element={<> <br /> [-PageError403-] (Error 403 Unauthorized) <BackwardLink /> <br /></>} />
         <Route path="*" element={<><br /> [-PageError404-] (Error 404 Page not found) <BackwardLink /> <br /></>} />
       </Route> */}
-    {/* </Routes> */}
-  {/* </AuthProvider>  */}
-  {/* </BrowserRouter>  */}
-</div>); }
-
-
-
+      {/* </Routes> */}
+      {/* </AuthProvider>  */}
+      {/* </BrowserRouter>  */}
+    </div>
+  );
+}
 
 // const BackwardLink = () => {
 //   const navigate = useNavigate();
@@ -97,7 +107,7 @@ export default function App() {
 //     Public:{' '}
 //     <Link to="/login">Login</Link>{' | '}
 //     <Link to="/register">Register</Link>{' | '}
-    
+
 //     Private Page:{' '}
 //     <Link to="/editor">Editors Page (after login will not auth 403)</Link>{' | '}
 //     <Link to="/admin">Admin Page (after login)</Link>{' | '}
@@ -110,7 +120,6 @@ export default function App() {
 
 //     <Link to="./Mui">Mui</Link>{' | '}
 
-    
 //     <Link to="./Redux2">ReduxReference2</Link>{' | '}
 //     <Link to="./ReduxFetch">ReduxFetch</Link>{' | '}
 //     <Link to="./ReduxFetchFun">ReduxFetchFun</Link>{' | '}

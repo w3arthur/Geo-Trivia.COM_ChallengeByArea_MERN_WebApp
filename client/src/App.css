@@ -38,6 +38,8 @@ padding:25px 100px 25px 0}
 
 .right_side {padding: 25px 0 25px 100px}
 
+.map {flex-basis:calc(100%/3 - 50px)!important; margin:25px}
+
 .label+.css-1480iag-MuiInputBase-root-MuiInput-root {margin-bottom:16px}
 
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {border-color:#FFA800!important;border-radius:15px!important}
