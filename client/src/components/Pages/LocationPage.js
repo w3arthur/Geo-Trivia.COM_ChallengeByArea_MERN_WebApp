@@ -10,13 +10,13 @@ export default function Location() {
         {t("Location")}
       </Typography>
       <Paper className="map" elevation={3}>
-        <h2>Choose from map</h2>
+        <h2>{t('Choose from map')}</h2>
       </Paper>
       <Paper className="map" elevation={3}>
-        <h2>Choose from list</h2>
+        <h2>{t('Choose from list')}</h2>
       </Paper>
       <Paper className="map" elevation={3}>
-        <h2>Choose yours</h2>
+        <h2>{t('Choose yours')}</h2>
       </Paper>
     </div>
   );
