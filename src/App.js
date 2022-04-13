@@ -9,7 +9,12 @@ import LocationReduxExample from './components/LocationReduxExample/LocationRedu
 
 import { useTranslation } from 'react-i18next';
 
-import LanguageFlags from './components/Multilanguage/LanguageFlags'
+import LanguageFlags from './components/Multilanguage/LanguageFlags';
+
+import HeaderContent from './components/Header/header';
+import { FrontPage } from './components/Pages/FrontPage';
+import Registration from './components/Pages/RegistrationPage';
+import Location from './components/Pages/Location';
 
 const {User, Editor, Admin}  = {  //ROLES
   User: 2001
@@ -23,7 +28,16 @@ export default function App() {
   const { t } = useTranslation();
 
   return (<div className="App">
-  <BrowserRouter> <AuthProvider> <LanguageFlags />
+    <HeaderContent />   
+      <Routes>
+        <Route path="/" element={<FrontPage />} />
+        <Route path="/Registration" element={<Registration />} />  
+        <Route path="/Location" element={<Location />} />                  
+      </Routes> 
+
+
+    {/* <BrowserRouter> */}
+  {/*  <AuthProvider> 
 
     <Routes>
       <Route path="/" element={<GlobalLayout> <PageLinks /> </GlobalLayout>}>
@@ -62,43 +76,44 @@ export default function App() {
         <Route path="ReduxFetchFun/*" element={<><ReduxFetchFun /></>} />
         */}
       
-        <Route path="unauthorized/*" element={<> <br /> [-PageError403-] (Error 403 Unauthorized) <BackwardLink /> <br /></>} />
+        {/* <Route path="unauthorized/*" element={<> <br /> [-PageError403-] (Error 403 Unauthorized) <BackwardLink /> <br /></>} />
         <Route path="*" element={<><br /> [-PageError404-] (Error 404 Page not found) <BackwardLink /> <br /></>} />
-      </Route>
-    </Routes>
-  </AuthProvider> </BrowserRouter>
+      </Route> */}
+    {/* </Routes> */}
+  {/* </AuthProvider>  */}
+  {/* </BrowserRouter>  */}
 </div>); }
 
 
 
 
-const BackwardLink = () => {
-  const navigate = useNavigate();
-  return (<button onClick={() => navigate(-1)} >Go Back</button>)
-}
+// const BackwardLink = () => {
+//   const navigate = useNavigate();
+//   return (<button onClick={() => navigate(-1)} >Go Back</button>)
+// }
 
-const PageLinks = () => { return (<section>
-    Page Links<br />
-    Public:{' '}
-    <Link to="/login">Login</Link>{' | '}
-    <Link to="/register">Register</Link>{' | '}
+// const PageLinks = () => { return (<section>
+//     Page Links<br />
+//     Public:{' '}
+//     <Link to="/login">Login</Link>{' | '}
+//     <Link to="/register">Register</Link>{' | '}
     
-    Private Page:{' '}
-    <Link to="/editor">Editors Page (after login will not auth 403)</Link>{' | '}
-    <Link to="/admin">Admin Page (after login)</Link>{' | '}
-    <br />
-    Public:{' '}
-    <Link to="/">index</Link>{' | '}
-    <Link to="./DataGridExample">DataGridExample</Link>{' | '}
-    <Link to="./LocationReduxExample">LocationReduxExample</Link>{' | '}
-    <Link to="./PageA">PageA</Link>{' | '}
+//     Private Page:{' '}
+//     <Link to="/editor">Editors Page (after login will not auth 403)</Link>{' | '}
+//     <Link to="/admin">Admin Page (after login)</Link>{' | '}
+//     <br />
+//     Public:{' '}
+//     <Link to="/">index</Link>{' | '}
+//     <Link to="./DataGridExample">DataGridExample</Link>{' | '}
+//     <Link to="./LocationReduxExample">LocationReduxExample</Link>{' | '}
+//     <Link to="./PageA">PageA</Link>{' | '}
 
-    <Link to="./Mui">Mui</Link>{' | '}
+//     <Link to="./Mui">Mui</Link>{' | '}
 
     
-    <Link to="./Redux2">ReduxReference2</Link>{' | '}
-    <Link to="./ReduxFetch">ReduxFetch</Link>{' | '}
-    <Link to="./ReduxFetchFun">ReduxFetchFun</Link>{' | '}
+//     <Link to="./Redux2">ReduxReference2</Link>{' | '}
+//     <Link to="./ReduxFetch">ReduxFetch</Link>{' | '}
+//     <Link to="./ReduxFetchFun">ReduxFetchFun</Link>{' | '}
 
-    <Link to="/Error">Error</Link>
-</section>)}
+//     <Link to="/Error">Error</Link>
+// </section>)}
