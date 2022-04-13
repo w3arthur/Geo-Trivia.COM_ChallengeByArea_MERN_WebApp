@@ -4,9 +4,12 @@ import { Box, Button, Typography, TextField } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useTranslation } from "react-i18next";
+import Pop_reg from "../Popup/Pop_reg";
+import { useState } from "react";
 
 export default function Registration() {
   const { t } = useTranslation();
+  const [modalActive, setModalActive] = useState(false);
   return (
     <Box className="main">
       <Typography variant="h1" sx={{ fontWeight: "bold" }}>
@@ -27,7 +30,7 @@ export default function Registration() {
           className="reg_input"
         />
 
-        <Link className="button" to="/">
+        <Link className="button" to="/Location">
           Login
         </Link>
       </div>
@@ -47,10 +50,10 @@ export default function Registration() {
         >
           Google
         </Button>
-        <Link className="button" to="/">
+        <div className="button" onClick={() => setModalActive(true)} to="/">
           Registration
-        </Link>
-        <span></span>
+        </div>
+        <Pop_reg active={modalActive} setActive={setModalActive} />
       </div>
     </Box>
   );

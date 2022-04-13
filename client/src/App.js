@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom"; // useParams,
+import { Routes, Route } from "react-router-dom"; // useParams,
 
 import { AuthProvider } from "./context";
 
@@ -22,6 +16,9 @@ import LocationReduxExample from "./components/LocationReduxExample/LocationRedu
 import { useTranslation } from "react-i18next";
 
 import LanguageFlags from "./components/Multilanguage/LanguageFlags";
+
+// import Popup from "reactjs-popup";
+// import "reactjs-popup/dist/index.css";
 
 import HeaderContent from "./components/Header/header";
 import { FrontPage } from "./components/Pages/FrontPage";
