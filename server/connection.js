@@ -1,6 +1,8 @@
 require('dotenv').config();
 const mongoDBConnectionString = process.env.MONGO_DB_CONNECTION_STRING;
 const mongoDBLoggingConnectionString = process.env.MONGO_DB_CONNECTION_LOGGING_STRING;
+const schema_version = process.env.MONGO_DB_SCHEMA_VERSION;
+const schemaVersion = {type: Number, default: Number(schema_version)};
 
 const mongoose = require("mongoose");
 
@@ -16,4 +18,4 @@ const mongoose1 = makeNewConnection(mongoDBConnectionString);
 
 const mongooseLogging = makeNewConnection(mongoDBLoggingConnectionString);
 
-module.exports = {mongoose, mongoose1, mongooseLogging};
+module.exports = {mongoose, mongoose1, mongooseLogging, schemaVersion };

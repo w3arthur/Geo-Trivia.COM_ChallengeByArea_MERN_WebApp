@@ -1,11 +1,12 @@
 //const { nextDay } = require('date-fns');
 const express = require('express');
 const logRouter = express.Router();
-const {mongoose, mongooseLogging} = require("../connection"); 
 const { errorHandler } = require('../middlewares');
 const { Success, ErrorHandler } = require('../classes');
 
-logRouter.route('/logging') //  localhost:3000/log/logging
+const { LoggingModel, ErrorModel } = require('../modules');
+
+logRouter.route('/logging') //  localhost:3500/log/logging
   .post( async (req, res, next) => {
     errorHandler(req, res, next)( async () => {
       console.log(':: login router post');
@@ -26,28 +27,4 @@ logRouter.route('/error') //  localhost:3000/log/error
     });  //error handler 
 } );
 
-
 module.exports = logRouter;
-
-//module and validator
-const LoggingModel = mongooseLogging.model(
-  "React_Logging"  //react_loggings
-  , new mongoose.Schema({
-    user: { type: Object }
-    , data: { type: Object }
-    , response: { type: Object }
-    , details:  { type: Object }
-    , toDelete: { type: Boolean, default: false}
-  }, { timestamps: true, })
-);
-
-const ErrorModel = mongooseLogging.model(
-  "React_Error"  //react_errors
-  , new mongoose.Schema({
-    user: { type: Object }
-    , data: { type: Object }
-    , response: { type: Object }
-    , details:  { type: Object }
-    , toDelete: { type: Boolean, default: false}
-  }, { timestamps: true, })
-);

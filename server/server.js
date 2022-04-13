@@ -3,10 +3,6 @@ const localhostPort = process.env.LOCALHOST_PORT;
 if (process.env.NODE_ENV !== "production") {
 }
 
-const debug1 = require("debug")("arthur"); //set DEBUG=arthur & nodemon .
-debug1("Hello World"); //npm run debug //set DEBUG=arthur & nodemon . //  chrome://inspect
-//  node --inspect index.js	> Attach    // https://www.youtube.com/watch?v=FMsNsSHhRC8&list=PL2uN9BViQt2yzYm8gUzXhOef8YHfPwLC_&index=2&ab_channel=HighVoiceComputing
-
 const express = require("express");
 const app = express();
 
@@ -42,8 +38,7 @@ app.use((req, res, next) => {
 app.use("/log", routers.logRouter);
 app.use("/api/users", routers.userRouter);
 app.use("/api/login", routers.loginRouter);
-app.use(middlewares.verifyJWT); //403 //Token require middleware
-app.use("/api/courses", routers.courseRouter);
+//app.use(middlewares.verifyJWT); //403 //Token require middleware
 app.use("/api/flowers", routers.flowerRouter);
 
 app.use(middlewares.errorMainHandler); //errorHandler for authorization token, validation and global system issues

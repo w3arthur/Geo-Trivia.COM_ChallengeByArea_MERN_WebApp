@@ -1,9 +1,9 @@
 require('dotenv').config();
+//const Login =  require('./../../client/src/components/Login');
 //if (process.env.NODE_ENV !== 'production'){  }
 
 const express = require("express");
 const loginRouter = express.Router();
-const { UserModel } = require("./user.router");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -23,11 +23,13 @@ let refreshToken_List = [];  //set it to database
 const { errorHandler } = require('../middlewares');
 const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
+const  UserModel  = require('../modules/user.module');
+const validateUser = require('../middlewares/validatorUser.middlewawre')
+
 loginRouter.route('/') //  /api/login
   .post( validateUser, async (req, res, next) => {
    // console.log(':: login router post');
     errorHandler(req, res, next)( async () => {
-
       let email = req.body.email;
       let user = await UserModel.findOne({ email: email });
       if (user === null) throw new ErrorHandler(400, 'user or password is not correct!');
@@ -69,13 +71,4 @@ loginRouter.route('/') //  /api/login
   ;
 module.exports = loginRouter;
 
-function validateUser(req, res, next) {
-  console.log(':: login validator middleware');
-    const { error } =  Joi.object({
-      email: Joi.string().email().required()
-      , password: Joi.string().required()
-      }).validate(req.body);
-    if (error && error.details) 
-      return next( new MiddlewareError(400, 'validation user login info error', error.details[0].message.toString()) );
-    next();
-}
+

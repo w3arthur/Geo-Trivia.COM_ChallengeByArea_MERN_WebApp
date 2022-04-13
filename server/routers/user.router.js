@@ -1,23 +1,26 @@
 const express = require("express");
 const userRouter = express.Router();
-const Joi = require("joi");
-const bcrypt = require("bcrypt");
-const {mongoose, mongoose1} = require("../connection");
+
 const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
+const validatorUser = require('../middlewares/validatorUser.middlewawre');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
-userRouter.route('/') //  localhost:3000/api/users
-  .post(userValidator, async (req, res, next) => {
+const { UserModel } = require('../modules');
+
+const bcrypt = require("bcrypt");
+
+userRouter.route('/') //  localhost:3500/api/users
+  .post(async (req, res, next) => {
     console.log(':: user router post');
     errorHandler(req, res, next)( async () => {
 
     //Add try/catch
-      const {name, email} = req.body;
+      const {name, email, password} = req.body;
       let user = await UserModel.findOne({ email: email });
       if (user !== null) throw new ErrorHandler(452, 'user already exist!');
-      let userRegister = {name, email};
+      let userRegister = {name, email, password};
       userRegister.password = await bcrypt.hash(userRegister.password, 10);
-      userRegister.type = 2001; //admin
+      userRegister.role = 2001; //admin //to delete
       let result = await new UserModel(userRegister).save();
       
       return new Success(200, result);
@@ -35,27 +38,3 @@ userRouter.route('/') //  localhost:3000/api/users
   ;
 
 module.exports = userRouter;
-
-//module and validator
-const UserModel = mongoose1.model(
-  "User"  //users
-  , new mongoose.Schema({
-    name: { require: true, type: String, trim: true,  minlength: 4, maxlength: 50, }
-    , email: { unique: true, require: true, type: String, trim: true,  }
-    , password: { type: String, trim: true, }
-    , type: { type: String, trim: true, }
-  })
-);
-function userValidator(req, res, next){
-  console.log(':: user validator middleware');
-    const { error } = Joi.object({
-      name: Joi.string().min(4).max(50).required()
-      , email: Joi.string().email().required()
-      , password: Joi.string()
-      , type: Joi.string()
-    }).validate(req.body);
-    if (error && error.details) return next( new MiddlewareError(400, 'validation user info error', error.details[0].message.toString())  ); //.send(error.details[0].message);
-    next();
-};
-
-module.exports.UserModel = UserModel;
