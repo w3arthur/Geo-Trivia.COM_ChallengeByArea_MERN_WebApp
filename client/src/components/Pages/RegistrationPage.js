@@ -18,20 +18,20 @@ export default function Registration() {
       <div className="left_side">
         <TextField
           id="standard-basic"
-          label="Email"
+          label={t('Email')}
           variant="outlined"
           className="reg_input"
           sx={{ mb: 2 }}
         />
         <TextField
           id="standard-basic"
-          label="Password"
+          label={t('Password')}
           variant="outlined"
           className="reg_input"
         />
 
         <Link className="button" to="/Location">
-          Login
+          {t('Login')}
         </Link>
       </div>
       <div className="right_side">
@@ -41,17 +41,17 @@ export default function Registration() {
           endIcon={<FacebookIcon />}
           sx={{ mb: 2 }}
         >
-          Facebook
+          Facebook&nbsp;&nbsp;
         </Button>
         <Button
           className="sn_button"
           variant="contained"
           endIcon={<GoogleIcon />}
         >
-          Google
+          Google&nbsp;&nbsp;
         </Button>
         <div className="button" onClick={() => setModalActive(true)} to="/">
-          Registration
+          {t('Registration')}
         </div>
         <Pop_reg active={modalActive} setActive={setModalActive} />
       </div>

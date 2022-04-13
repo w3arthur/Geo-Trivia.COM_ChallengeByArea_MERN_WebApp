@@ -36,9 +36,9 @@ h1 {
 }
 
 .left_side {    
-padding:25px 100px 25px 0}
+padding:25px 100px 25px 25px}
 
-.right_side {padding: 25px 0 25px 100px}
+.right_side {padding: 25px 25px 25px 100px}
 
 .map {flex-basis:calc(100%/3 - 50px)!important; margin:25px}
 
