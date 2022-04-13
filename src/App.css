@@ -1,4 +1,23 @@
 .App {
   text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'IBM Plex Sans Hebrew', sans-serif;
+  color: #666
 }
 
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px 0;
+}
+
+.button {
+  display: inline-block;
+    font-size: 25px;
+    background-color: #FFA800;
+    color: #FFFFFF;
+    padding: 10px 50px;
+    border-radius: 15px;
+    margin: 25px 0;
+    text-decoration: none;
+}
