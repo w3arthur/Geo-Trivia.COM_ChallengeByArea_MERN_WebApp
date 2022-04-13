@@ -10,7 +10,7 @@
   margin: 0 auto;
   padding: 35px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -27,6 +27,8 @@
     margin: 25px auto;
     text-decoration: none;
 }
+
+.central_text {flex-basis: 100%!important;}
 
 h1 {
   font-size:36px!important;

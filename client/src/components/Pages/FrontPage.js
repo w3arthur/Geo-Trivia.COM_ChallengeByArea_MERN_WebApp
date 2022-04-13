@@ -12,13 +12,15 @@ export function FrontPage() {
       <Typography variant="h1" sx={{ fontWeight: "bold" }}>
         {t("Trivia")}
       </Typography>
-      <Typography
-        variant="h6"
-        sx={{ maxWidth: "800px", ml: "200px", mt: "15px" }}
-        paragraph
-      >
-        {t("About Game")}
-      </Typography>
+      <div className="central_text">
+        <Typography
+          variant="h6"
+          sx={{ maxWidth: "800px", my: "15px", mx: "auto" }}
+          paragraph
+        >
+          {t("About Game")}
+        </Typography>
+      </div>
       <bh />
       <Link className="button" to="/Registration">
         {t("Start to Play")}
