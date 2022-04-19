@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run client",
-    "client": "cd client && npm starts",
-    "server": "cd server && nodemon server.js",
+"client": "cd client && npm start",
+    "server": "cd server && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +18,9 @@
   "bugs": {
     "url": "https://gitlab.com/triviaTeam/trivial/issues"
   },
-  "homepage": "https://gitlab.com/triviaTeam/trivial#readme"
+  "homepage": "https://gitlab.com/triviaTeam/trivial#readme",
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "nodemon": "^2.0.15"
+  }
 }

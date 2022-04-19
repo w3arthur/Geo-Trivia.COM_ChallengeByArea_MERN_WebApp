@@ -3,7 +3,7 @@ const expertRouter = express.Router();
 
 const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
-const  { ExpertModel }  = require('../modules');
+const  { ExpertModel }  = require('../models');
 
 
 expertRouter.route('/:email')   //  localhost:3500/api/expert/:x

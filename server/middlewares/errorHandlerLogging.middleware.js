@@ -1,6 +1,7 @@
 
 const {logEvents, dateTime} = require('../api').logEvent;
 
+const {NodeJSLoggingModel, NodeJSErrorModel} = require('../models/nodeJsLogging.model');
 
 const { ErrorHandler } = require('../classes')
     //Global variables:
@@ -42,7 +43,7 @@ const logger = async (req, res, next) => {
         logEvents(`${dateTime} :: ${req.method}\t${req.headers.origin}\t${req.url}`, 'reqLog.txt');
         console.log(`${dateTime} :: ${req.method} ${req.url} `);
         await new NodeJSLoggingModel({ 
-            localTime: dateTime, user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
+           user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
             , resultStatus: req.resultStatus || 200, resultMessage: req.resultMessage || '', resultJson: req.resultJson || {}
         }).save();
     } catch(err){  return; }  //error handler
@@ -60,41 +61,11 @@ const errorMainHandler = async (err, req, res, next) => {
     console.error(':: Error Handler! ' + err.status + ' ' + err.message); 
     let body = req.body; if (req.body?.password){ body = JSON.parse(JSON.stringify(req.body)); delete body.password; }
     await new NodeJSErrorModel({
-        title: err.message?.title, localTime: dateTime, user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
+        title: err.message?.title, user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
         , status: err.message?.status || err.status || 500, errorName: err.name, errorMessage: err.message?.message || err.message
     }).save();
     return res.status(err?.message?.status || err.status || 500).send( err.message?.message || err.message );
 }
 
 module.exports = { errorHandler, logger, errorMainHandler, globalErrorMainHandler };
-
-
-//module and validator
-
-const {mongoose, mongooseLogging} = require("../connection"); 
-
-const NodeJSLoggingModel = mongooseLogging.model( 
-    "NodeJs_Logging"  //nodejs_loggings
-    , basedLoggingSchema({ resultStatus: { type: Number }, resultMessage: { type: String } , resultJson: { type: Object } }) 
-);
-
-const NodeJSErrorModel = mongooseLogging.model( 
-    "NodeJs_Error" //nodejs_errors
-    , basedLoggingSchema({ status: { type: Number }, errorName: { type: String } , errorMessage: { type: String } })
-);
-
-function basedLoggingSchema (additionalObjects){
-    return new mongoose.Schema({
-    ...additionalObjects
-    , title: { type: String }
-    , localTime: { type: String }
-    , method: { type: String }
-    , user: {type: Object}
-    , url: { type: String }
-    , body: { type: Object }
-    , headers: { type: Object }
-    , toDelete: { type: Boolean, default: false}
-    , params: {type: Object}
-  }, { timestamps: true, })
-}
 

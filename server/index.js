@@ -1,81 +1,44 @@
-//Arhur
-require("dotenv").config();    
+require("dotenv").config();
 const localhostPort = process.env.LOCALHOST_PORT;
-if (process.env.NODE_ENV !== "production") {
-}
+
+//app.use( require('helmet')() );
+const express = require("express");
+const app = express();
+const path = require("path");
+//app.use(middlewares.accessAllowed); 
+//app.use(require("cors")(middlewares.corsOptions));
+app.use(require("cookie-parser")());
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+const middlewares = require("./middlewares");
+app.use(middlewares.globalErrorMainHandler);
+app.use((req, res, next) => { req.globalUrl = req.url; next(); }); //fix global url path
+
+const routers = require("./routers");
+
+
+
+//Arthur
+const public_folder = 'public_folder';
+app.use("/", express.static(path.join(__dirname, public_folder)));  //global folder
+app.route("/") .get(async (req, res) => res.status(200).sendFile(path.join(__dirname, public_folder, "index.html")) );
+app.route("/login").get(async (req, res) => res.status(200).sendFile(path.join(__dirname, public_folder, "login.html")) );
+///app.use("/api/user", routers.userRouter);
+//app.use("/api/login", routers.loginRouter);
+app.use("/log", routers.logRouter);
+//app.use(middlewares.verifyJWT); //403 //Token require middleware
+app.use("/api/area", routers.areaRouter);
+app.use("/api/question", routers.questionRouter);
+app.use("/api/playingTeam", routers.playingTeamRouter);
 
 
 
 //Elias
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-app.use(cors());
-const auth = require("./routers/auth.router");
-app.use("/api/auth", auth);
-app.use(cors());
-app.use(express.json());
-
-const PORT = process.env.PORT || localhostPort || 3500;
-
-const path = require("path");
-const routers = require("./routers");
-const middlewares = require("./middlewares");
-
-app.use(middlewares.accessAllowed);
-app.use(require("cors")(middlewares.corsOptions));
-
-app.use(express.urlencoded({ extended: false })); //
-app.use(require("cookie-parser")()); //middleware for cookies
-app.use(middlewares.globalErrorMainHandler); //errorHandler for authorization token, validation and global system issues
-//index page router
-app.use("/", express.static(path.join(__dirname, "/html")));
-
-app.set("views", path.join(__dirname, "views"));
-
-app
-  .route("/")
-  .get(async (req, res) =>
-    res.status(200).sendFile(path.join(__dirname, "html", "index.html"))
-  );
-
-//routers
-app.use((req, res, next) => {
-  req.globalUrl = req.url;
-  next();
-}); //fix global url path
-
-app.use("/log", routers.logRouter);
-app.use("/api/users", routers.userRouter);
-app.use("/api/login", routers.loginRouter);
-
-app.use(middlewares.errorMainHandler); //errorHandler for authorization token, validation and global system issues
-
-app
-  .route("*") //404
-  .all((req, res) => {
-    res.status(404);
-    if (req.accepts("html"))
-      return res.sendFile(path.join(__dirname, "html", "404.html"));
-    else if (req.accepts("json")) return res.json({ error: "404 Not Found" });
-    else return res.type("txt").send("404 Not Found");
-  });
+app.use("/api/auth", routers.authRouter);
 
 
-mongoose
-  .connect(
-    "mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
-  )
-  .then(() => {
-    console.log("connect to db");
-  })
-  .catch((err) => {
-    console.log("could not connect to mongo", err);
-  });
 
-
-app.listen(PORT, () => {
-  console.log(`server is working on ${PORT}`);
-});
-
+app.route("*").all((req, res) => res.status(404) );
+app.use(middlewares.errorMainHandler); //errorHandler
+const port = process.env.PORT || localhostPort || 3005; //3500
+app.listen(port, () => console.log(`Listening on port ${port}`));

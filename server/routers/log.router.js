@@ -4,7 +4,7 @@ const logRouter = express.Router();
 const { errorHandler } = require('../middlewares');
 const { Success, ErrorHandler } = require('../classes');
 
-const { LoggingModel, ErrorModel } = require('../modules');
+const { LoggingModel, ErrorModel } = require('../models');
 
 logRouter.route('/logging') //  localhost:3500/log/logging
   .post( async (req, res, next) => {

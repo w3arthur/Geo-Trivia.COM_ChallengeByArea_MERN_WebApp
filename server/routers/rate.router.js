@@ -5,16 +5,13 @@ const {mongoose, mongoose1, schemaVersion} = require("../connection");
 const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
-const { RateModel } = require('../modules');
+//const { RateModel } = require('../models');
 
-rateRouter.route('/')   //  localhost:3500/api/question/:x
+rateRouter.route('/')   //  localhost:3500/api/... ?
   .post(async (req, res, next) => {  //req.params/ req.query
     console.log(':: rate router post');
     errorHandler(req, res, next)( async () => {
-      //const {...} = req.body;
-      /*const result = await new RateModel({ ... }).save();
-      //post an email!
-      return new Success(200, result);*/
+
     });  //error handler 
   });
 
