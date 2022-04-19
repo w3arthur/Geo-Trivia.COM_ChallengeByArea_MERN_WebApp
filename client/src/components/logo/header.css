@@ -1,0 +1,16 @@
+.logo {
+    background-image: url(./logo.jpg);
+    height: 40vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;    
+    background-position: center center;
+    border-radius: 5px;
+    margin: 4px 4px
+}
+
+@media only screen and (max-device-width: 600px)
+ {
+        .logo {
+            background-size: cover;
+        }
+ }

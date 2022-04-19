@@ -5,8 +5,8 @@ import { TextField } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from "react";
-import { useHttp } from "../hooks/http.hook";
-import { useMessage } from '../hooks/message.hook';
+import { useHttp } from "../../hooks/http.hook";
+import { useMessage } from '../../hooks/message.hook';
 
 const Pop_reg = ({ active, setActive }) => {
   const message = useMessage()
