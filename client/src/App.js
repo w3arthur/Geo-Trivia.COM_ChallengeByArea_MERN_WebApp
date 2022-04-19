@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom"; // useParams,
+import { Routes, Route, useRoutes } from "react-router-dom"; // useParams,
 
 import { AuthProvider } from "./context";
 
@@ -24,6 +24,8 @@ import HeaderContent from "./components/Header/header";
 import { FrontPage } from "./components/Pages/FrontPage";
 import Registration from "./components/Pages/RegistrationPage";
 import Location from "./components/Pages/LocationPage";
+// import { useAuth } from "./components/hooks/auth.hook";
+// import { AuthContext } from './context/AuthContext';
 
 const { User, Editor, Admin } = {
   //ROLES
@@ -35,14 +37,20 @@ const { User, Editor, Admin } = {
 export default function App() {
   const { t } = useTranslation();
 
+  // const { token, login, logout, userId } = useAuth()
+  // const isAuthenticated = !!token
+  // const routes = useRoutes(isAuthenticated)
+
   return (
     <div className="App">
       <HeaderContent />
+      {/* <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}> */}
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Location" element={<Location />} />
       </Routes>
+      {/* </AuthContext.Provider> */}
 
       {/* <BrowserRouter> */}
       {/*  <AuthProvider> 
