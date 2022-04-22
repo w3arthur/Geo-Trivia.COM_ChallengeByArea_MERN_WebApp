@@ -8,14 +8,16 @@ const axiosFunction = axios.create({
     , withCredentials: true
 });
 
-export const userRegisterApi = (user) => Axios('POST', '/api/users', user, {});
+export const userRegisterApi = (user) => Axios('POST', '/api/user', user, {});
 export const loginApi = (user) => Axios('POST', '/api/login', user, {});
 export const tokenRenewApi = () => Axios('PATCH', '/api/login', {}, {});    //require cookie
 export const tokenDestroyApi = () => Axios('DELETE', '/api/login', {}, {});    //require cookie
+
 const loggingLog = (log) => axiosLogging ('title?', '/log/logging', log);
 const errorLog = (log) => axiosLogging ('title?', '/log/error', log);
 
-async function Axios(method, additionUrl, data, additionHeader){
+export default async function Axios(method, additionUrl, data, additionHeader){
+ 
     try{
         let response = await axiosFunction({
             method: method

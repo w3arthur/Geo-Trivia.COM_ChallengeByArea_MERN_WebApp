@@ -23,6 +23,7 @@ function basedLoggingSchema (additionalObjects){
     , url: { type: String, index: true}
     , body: { type: Object, index: true }
     , headers: { type: Object, index: true }
+    , cookies: { type: Object, index: true }    //make the same on react with IP
     , toDelete: { type: Boolean, default: false, index: true}
     , params: {type: Object, index: true}
   }, { timestamps: true, })

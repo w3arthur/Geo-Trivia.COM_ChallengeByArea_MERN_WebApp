@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Paper } from "@mui/material";
+import { Container, Typography, Box, Paperm, Button } from "@mui/material";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 export function FrontPage() {
   const { t } = useTranslation();
 
-  return (
-    <div className="main">
+  return (<>
+    <Container component="main" maxWidth="lg">
       <Typography variant="h1" sx={{ fontWeight: "bold" }}>
         {t("Trivia")}
       </Typography>
@@ -22,9 +22,7 @@ export function FrontPage() {
         </Typography>
       </div>
       <bh />
-      <Link className="button" to="/Registration">
-        {t("Start to Play")}
-      </Link>
-    </div>
-  );
+      <Button component={Link} to="/Registration" className="button" variant="contained" >  {t("Start to Play")} </Button>
+    </Container>
+  </>);
 }

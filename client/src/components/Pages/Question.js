@@ -9,15 +9,17 @@ export default function Question(){
         <QuestionValue>When Tel Aviv established?</QuestionValue>
 
         <Grid container>
-        
-            <Answer number="1" onClick={() => {}}>  1990 fg fdhdf hdhfh dfh df df hdhdfhdfhdfh dhdhdfhdhh </Answer>
-
-            <Answer number="2" onClick={() => {}}>  1850 </Answer>
-
-            <Answer number="3" onClick={() => {}}>   1750  </Answer>
-
-            <Answer number="4" onClick={() => {}}>  1950 </Answer>
-
+            
+                <Answer number="1" onClick={() => {}}>  1990 fg fdhdf hdhfh dfh df df hdhdfhdfhdfh dhdhdfhdhh </Answer>
+            
+           
+                <Answer number="2" onClick={() => {}}>  1850 </Answer>
+            
+            
+                <Answer number="3" onClick={() => {}}>   1750  </Answer>
+            
+                <Answer number="4" onClick={() => {}}>  1950 </Answer>
+            
         </Grid>
 
         <Grid sx={{mt:5, textAlign: 'center', width: '100%'}}>
@@ -32,34 +34,33 @@ export default function Question(){
     </>);
 }
 
-function Submit(props){
-    return(<>
-        <Button variant="contained" size="large" sx={{minHeight: 50, fontSize: 25}}>{props.children}</Button>
-    </>);
+function Submit({key, children ,...props}){
+    return(
+        <Button key={key} {...props} variant="contained" sx={{minHeight: 50, fontSize: 25}}>{children}</Button>
+        );
 }
 
-function Helper(props){
-    return(<>
-        <Button onClick={props.onClick} variant="outlined" color="primary" size="large" sx={{m: 2,minHeight: 50, fontSize: 25}}>{props.children}</Button>
-    </>);
+function Helper({key, onClick, children, ...props}){
+    return(
+        <Button {...props} onClick={onClick} variant="outlined" sx={{m: 2, minHeight: 50, fontSize: 25}}>{children}</Button>
+        );
 }
 
 
-function QuestionValue(props){
-    return(<>
+function QuestionValue({ children, ...props}){
+    return(
         <Box style={{  minHeight:'20vh', width: '100%', display: 'flex'}}>
-            <Typography variant="h4" > {props.children} </Typography>
+            <Typography {...props} variant="h4" > {children} </Typography>
         </Box>
-    </>);
+        );
 }
 
-function Answer(props){
-    return(<>
-        <Grid md={6} xs={12} sx={{p: 2}} container >
-        
-                <Chip onClick={props.onClick} 
-                    avatar={<Avatar onClick={props.onClick}><Typography component="div" className="answerNumber">{props.number}</Typography></Avatar>} 
-                    label={<Typography variant="h5" component="div" className="answerValue" >{props.children}</Typography>} /> 
+function Answer({ md, xs ,onClick, children, number ,...props}){
+    return(
+        <Grid item md={6} xs={12} sx={{p: 2}}  >
+                <Chip {...props} className="answer" onClick={onClick} 
+                    avatar={<Avatar sx={{bottom: "50%", left: "top"}}><Typography component="div" className="answerNumber">{number}</Typography></Avatar>} 
+                    label={<Typography variant="h5" component="div" className="answerValue" >{children}</Typography>} /> 
         </Grid>
-    </>);
+        );
 }

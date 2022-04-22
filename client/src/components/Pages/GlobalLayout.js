@@ -19,14 +19,22 @@ function MuiStyle({children}){
   const mainColorLight = `#FCE9D9FF`;
   const mainColorLighter = `#FFFBF5`;
   const mainColorDark = `#E39602`;
-  	
-  const fontSize = 24;
-  const fontSizeBig = 29;
-  const fontSizeBigger = 31;
+  const mainColorText1 = `#edb200`;
+  const mainColorText2 = `#e0b002`;
+  const mainColorText3 = `#8c6e00`;
+  const purple = `#6c059c`;
+
+  const fontSize = '24pt';
+  const fontSizeBig = '29pt';
+  const fontSizeBigger = '32pt';
+  const fontSizeBiggest = '42pt';
+  const fontSizeBiggest2 = '36pt';
   const white = `#ffffff`;
   const shadow = `#888888`;
   const shadowLight = `#CCCCCC`;
+
   const theme = createTheme({
+
     breakpoints: {
       values: { xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536, },//set for media next (by value!)
       },
@@ -35,7 +43,7 @@ function MuiStyle({children}){
         main: `${mainColor}`
       },
       secondary:{
-        main: colors.blue[400]
+        main: `${purple}`
       }
 /*
       , error:{
@@ -50,11 +58,13 @@ function MuiStyle({children}){
 */
     }
     , typography: {
-      h2: { fontSize: fontSize }      
-      , h3: { fontSize: fontSize }
-      , h4: { fontSize: fontSizeBigger, margin:'auto', textAlign: 'center' }
-      , h5: { fontSize: fontSizeBig, margin:'auto', textAlign: 'center' }
-      , body2: { color: colors.deepPurple[500] }
+      h1: { fontSize: fontSizeBigger, margin:'auto', textAlign: 'center', fontWeight: 'bold', textShadow: `-1px 1px ${shadow}`  }
+      , h2: { fontSize:fontSizeBiggest , margin:'auto', textAlign: 'center', fontWeight: 'bold', textShadow: `-1px 1px ${shadow}`   }      
+      , h3: { fontSize: fontSizeBigger , margin:'auto', textAlign: 'center', fontWeight: 'bold'}
+      , h4: { fontSize: fontSize, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
+      , h5: { fontSize: fontSizeBig, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
+      , body1: { fontSize: fontSize, }
+      , body2: { fontSize: fontSize,  color: colors.deepPurple[500] }
     }
     
 , components: {
@@ -94,8 +104,8 @@ function MuiStyle({children}){
       , MuiAvatar:{
         styleOverrides: {
           root:{
-            width: '44px  !important' , height: '44px !important' 
-            , bottom: "50%", left: "top"
+            width: '44px  !important' , height: '44px !important'
+            , zIndex: 1
             , backgroundColor: white
             , border: `5px solid ${mainColor}`
             , '.answerNumber': {fontSize: fontSize} //set className!
@@ -107,23 +117,33 @@ function MuiStyle({children}){
       }
       , MuiPaper: {
         styleOverrides: {
-          root: {
+          root: { 
             border: `3px solid ${shadowLight}  ! important`
-            , "&:hover ":{
+            , "&:hover.select":{
               cursor: 'pointer'
               , backgroundColor: `${mainColorLighter} ! important`
               , border: `3px solid ${mainColor}  ! important`
               }
-            , '&:active': {
+            , '&:active.select': {
               boxShadow: 'none'
               }
-            , '&:focus, &:active': {
+            , '&:focus.select, &:active.select': {
                 backgroundColor: `${white} ! important`
                 , border: `3px solid ${mainColor}  ! important`
               }
           }
         }
       }
+      , MuiDialog:{
+            defaultProps: {
+                PaperProps: {
+                  sx: {
+                      border: `3px solid ${mainColor}  ! important`
+                  }
+                }
+            }
+        }
+      
       , MuiGrid: {
         styleOverrides: {
           root: {
@@ -131,19 +151,34 @@ function MuiStyle({children}){
           }
         }
       }
+
       , MuiButton: {
         styleOverrides: {
           root: { 
-            "&:hover.MuiButton-containedPrimary":{backgroundColor: mainColorDark }
+            "&:hover.MuiButton-containedPrimary":{backgroundColor: mainColorDark },
+            marginTop: 20
+            , marginBottom: 2
+            , fontSize: 20
             } 
           }
+          , defaultProps:{ size: 'large'  }
+
         }
       
       , MuiTextField: {
         styleOverrides: {
-          root: { backgroundColor: white, input: {color: '#ff0000'} }  //decide if change the text inside the field
+          root: { 
+            backgroundColor: white
+            , input: {
+                color: `${mainColorText3}`
+              , fontSize: 25
+            }
+             , marginTop: 14
+             , marginBottom: 14
+            }  //decide if change the text inside the field
           }
         }
+
       , MuiCheckbox: {
         defaultProps:{ color: 'primary', }
         , root: {  }

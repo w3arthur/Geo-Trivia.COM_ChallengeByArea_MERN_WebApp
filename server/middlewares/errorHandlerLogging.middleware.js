@@ -42,8 +42,10 @@ const logger = async (req, res, next) => {
         let body = req.body; if (req.body.password){ body = JSON.parse(JSON.stringify(req.body)); delete body.password; }
         logEvents(`${dateTime} :: ${req.method}\t${req.headers.origin}\t${req.url}`, 'reqLog.txt');
         console.log(`${dateTime} :: ${req.method} ${req.url} `);
+
+        
         await new NodeJSLoggingModel({ 
-           user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, params: req.params
+           user: req.user, method: req.method, url: req.url || req.path, body: body, headers: req.headers, cookies: req.cookies, params: req.params
             , resultStatus: req.resultStatus || 200, resultMessage: req.resultMessage || '', resultJson: req.resultJson || {}
         }).save();
     } catch(err){  return; }  //error handler

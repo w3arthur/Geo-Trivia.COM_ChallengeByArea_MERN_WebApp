@@ -14,7 +14,7 @@ const UserSchema =  new mongoose.Schema({
   , language: { type: String, enum: languageArray, trim: true, default: 'english', index: true }
   , location: {
     type: { type: String , enum: ['Point'] , default: 'Point' }
-    , coordinates: { type: [Number] }
+    , coordinates: { type: [Number], default: [0, 0] }
   }
   , currentQuestion: { type: Number, default: -1, index: true }
   , answeredQuestions: { type: Number, index: true }

@@ -14,18 +14,18 @@ export default function LanguageFlags() {
 
        const languages = [
         {
-          code: 'en',
+          code: 'english',
           country_code: 'us',
           name: 'English'
         },        
         {
-          code: 'he',
+          code: 'hebrew',
           country_code: 'il',
           name: 'עברית',
           dir: 'rtl'
         },  
         {
-          code: 'ru',
+          code: 'russian',
           country_code: 'ru',
           name: 'Русский'
         },        

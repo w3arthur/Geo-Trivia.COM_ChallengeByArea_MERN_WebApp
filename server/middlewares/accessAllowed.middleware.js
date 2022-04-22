@@ -1,13 +1,28 @@
 require('dotenv').config();
+let allowedOrigins;
 
-const allowedOrigins = [
+
+if (process.env.NODE_ENV !== 'production'){ 
+
+allowedOrigins = [
     process.env.ACCESS_LOCALHOST_1
     , process.env.ACCESS_LOCALHOST_2
     , process.env.ACCESS_LOCALHOST_3
+    , process.env.ACCESS_LOCALHOST_4
     , process.env.ACCESS_SITE_1
     , process.env.ACCESS_SITE_2
     , process.env.ACCESS_SITE_3
 ];
+
+ } else {
+     allowedOrigins = [
+        process.env.ACCESS_SITE_1
+        , process.env.ACCESS_SITE_2
+        , process.env.ACCESS_SITE_3
+    ];
+ }
+console.log('allowedOrigins');
+console.log(allowedOrigins);
 
 const accessAllowed = (req, res, next) => {
     if (allowedOrigins.includes( req.headers.origin )) res.header('Access-Control-Allow-Credentials', true);

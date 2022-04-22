@@ -1,9 +1,6 @@
 import React from "react";
 import { Routes, Route, useRoutes } from "react-router-dom"; // useParams,
-
-//Arthur
-import { AuthProvider } from "./context";
-
+//Arthur Development
 import { GlobalLayout, Question, RequireAuth, } from "./components";
 import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
 import DataGridExample from "./z_development/DataGridExample";
@@ -15,16 +12,15 @@ import { useTranslation } from "react-i18next";
 // import "reactjs-popup/dist/index.css";
 import HeaderContent from "./components/logo/header";
 import { FrontPage } from "./components/pages/FrontPage";
-import Registration from "./components/pages/RegistrationPage";
+import LoginPage from "./components/pages/LoginPage";
 import Location from "./components/pages/LocationPage";
 // import { useAuth } from "./components/hooks/auth.hook";
 // import { AuthContext } from './context/AuthContext';
 
-const { User, Editor, Admin } = { User: 2000, Editor: 1984, Admin: 5150, };
+const { User, Editor, Admin } = { User: 1000, Editor: 1984, Admin: 5150, };
 
 export default function App() {
   const { t } = useTranslation();
-
   // const { token, login, logout, userId } = useAuth()
   // const isAuthenticated = !!token
   // const routes = useRoutes(isAuthenticated)
@@ -38,7 +34,7 @@ export default function App() {
 
             <Route path="/" element={<GlobalLayout />}>
               <Route index element={<FrontPage />} />
-              <Route path="/Registration" element={<Registration />} />
+              <Route path="/Registration" element={<LoginPage />} />
               <Route path="/Location" element={<Location />} />
         {/* Arthur Development! */}
               <Route path="/Location" element={<Location />} />

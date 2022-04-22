@@ -59,8 +59,7 @@ export default function GeoLocation(){
     },[])
 
 return <>
-    
-    {/*initialViewState */}
+
     <ReactMapGL ref={mapRef} initialViewState={viewport.current} doubleClickZoom={ true }  scrollZoom = { true }
     mapStyle="mapbox://styles/mapbox/streets-v9" style={{width: 600, height: 400}}
     >

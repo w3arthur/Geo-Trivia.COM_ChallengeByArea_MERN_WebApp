@@ -8,8 +8,6 @@
 
 
 
-
-
 ### Logging
 post {{hostname}}/api/logging
 Content-Type: application/json
@@ -18,8 +16,6 @@ Content-Type: application/json
     "data": "gfhgfhfg"
     , "number": "456345"
 }
-
-
 
 
 ### get Users
@@ -31,7 +27,7 @@ Content-Type: application/json
 }
 
 ### Register User
-post {{hostname}}/api/users
+post {{hostname}}/api/user
 Content-Type: application/json
 
 {
@@ -41,34 +37,17 @@ Content-Type: application/json
     , "type": "admin"
 }
 
-### Get Flower List, with a token
-get {{hostname}}/api/flowers
-Content-Type: application/json
-{{token}}
 
-{
-    
-}
 
-### Post register a flower, with a token
-post {{hostname}}/api/flowers
-Content-Type: application/json
-{{token}}
-
-{
-    "name": "flower7",
-    "price": 38,
-    "type": "admin"
-}
-
-### Get Token
+### Get Token / Login
 post {{hostname}}/api/login
 Content-Type: application/json
 
 {
-    "email": "w3arthur@gmail.com",
+    "email": "w31arthur@gmail.com",
     "password": "123"
 }
+
 
 ### Refresh Token
 patch {{hostname}}/api/login
@@ -88,5 +67,3 @@ Content-Type: application/json
 {
      
 }
-
-
