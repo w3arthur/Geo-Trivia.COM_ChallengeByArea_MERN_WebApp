@@ -16,7 +16,7 @@ const errorHandler = (req, res, next) => {
         try{ 
             const success = await externalFunction();
 
-            if(typeof(await success) === 'object'){
+            if(typeof(success) === 'object'){
                 const {status, result} = success;
                 req.resultStatus = status;
                 if(result === undefined) return res.sendStatus(status)
