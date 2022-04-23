@@ -1,11 +1,11 @@
 import React from "react";
-import LanguageFlags from "../multilanguage/LanguageFlags";
+import LanguageFlags from "./multilanguage/LanguageFlags";
 import { useTranslation } from 'react-i18next';
-import './header.css';
+import '../Styles/logo.css';
 
 import { Outlet } from "react-router-dom";
 
-export default function HeaderContent () {
+export default function Logo () {
 
  const { t } = useTranslation();
 

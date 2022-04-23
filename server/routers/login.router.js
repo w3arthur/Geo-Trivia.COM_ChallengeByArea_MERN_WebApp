@@ -25,7 +25,7 @@ const  UserModel  = require('../models/user.model');
 const validateUser = require('../middlewares/validatorUser.middlewawre')
 
 loginRouter.route('/') //  /api/login
-.post( validateUser, async (req, res, next) => {
+.post( async (req, res, next) => {
   // console.log(':: login router post');
   errorHandler(req, res, next)( async () => {
     console.log('fgdfgdfgdfgddgfdfg')

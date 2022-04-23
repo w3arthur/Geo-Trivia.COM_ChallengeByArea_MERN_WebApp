@@ -2,28 +2,19 @@ import React, {useRef, useEffect, useState} from "react";
 import { Grid, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import monkeyLeft from '../images/monkeyLeft.png';
-import monkeyRight from '../images/monkeyRight.png';
-import globe from '../images/globe.png';
+import monkeyLeft from '../Images/monkeyLeft.png';
+import monkeyRight from '../Images/monkeyRight.png';
+import globe from '../Images/globe.png';
 
-import PopUp from '../../popup/PopUp';
+import { PopUp, Map } from '../Components';
+import { Axios,  } from '../Api';
+import { DatabaseRequest } from '../Classes';
 
-import Map from './Map'
-
-import {Axios, loginApi, tokenRenewApi} from '../../../api';
-import {DatabaseRequest, User} from '../../../classes';
-
-const geoData = 
-   [
-    { _id:"11", location:{ coordinates: [35.3248, 32.7115] }, country: "Israel", area:  "Nof Haglil" }
-    , { _id:"22", location:{ coordinates: [34.9896, 32.7940] }, country: "Israel", area:  "Haifa" }
-  ]
-;
-
+//fake example for database error handler
+const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ];
 
 export default function Location() {
   const { t } = useTranslation();
-
 
   const geoDataRef = useRef(geoData)
 
@@ -32,16 +23,16 @@ export default function Location() {
 
       new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
     .GoodResult( (result) => {
-      //alert(result)
-     // goFrom();
+      console.log('areas', result)
+      geoDataRef.current = result;
       } )
     .BadResult( (error) => {
-       //alert(error); 
+       console.log(error); 
       } )
     .Build();
   }, [])
 
-  const [coordinates, setCoordinates] = useState( [35.3106392, 32.6943036] ); //starting points
+  const [coordinates, setCoordinates] = useState( [ ] ); //starting points
   const [mapSelectedCountry, setMapSelectedCountry] = useState( null );
   const [mapYourCoordinates, setMapYourCoordinates] = useState( null );
 
@@ -90,7 +81,6 @@ export default function Location() {
   </>);
 }
 
-
 function Selection(props){
   const {leftMonkey, leftBottomMonkey, rightMonkey} = props;
   const additionStyle = leftMonkey? ({marginLeft: 'auto', marginTop: '30vh'}) 
@@ -118,7 +108,6 @@ function Selection(props){
             <img alt="monkeyRight" src={monkeyRight} style={styleImage} />
         </SelectionImageGrid>
       ) : (<></>)}
-      
   </>);
 }
 

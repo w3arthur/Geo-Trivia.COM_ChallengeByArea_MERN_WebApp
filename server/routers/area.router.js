@@ -17,11 +17,11 @@ areaRouter.route('/')   //  localhost:3500/api/area/
   .post(async (req, res, next) => {
     console.log(':: area router post');
     errorHandler(req, res, next)( async () => {
-      const {coordinates, country, description} = req.body;
+      const {coordinates, country,  area} = req.body;
       
       const location = { coordinates };
-      console.log('fgfgf')
-      data = {location, country, description };
+
+      data = {location, country, area };
       
       const result = await AreaModel( data ).save()
       if(!result) throw new Error();  //to fix

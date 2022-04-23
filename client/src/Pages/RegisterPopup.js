@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import { Link,  useNavigate, useLocation  } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
 
 import PropTypes from 'prop-types'; //?
 import { Avatar, Typography, TextField, Button, Box, CssBaseline } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import {useAuth} from '../../context';
-import {userRegisterApi} from '../../api';
-import {DatabaseRequest, User} from '../../classes';
-import PopUp from '../popup/PopUp';
+import { useAuth } from '../Context';
+import { userRegisterApi } from '../Api';
+import { DatabaseRequest, User } from '../Classes';
+import { PopUp } from '../Components'
 
 export default function ResterPopUp({open, handleClose}){
   const { t } = useTranslation()
@@ -27,7 +25,7 @@ export default function ResterPopUp({open, handleClose}){
   let from = location.state?.from?.pathname || "/";
   if (from === '/register' || from === 'register') from = '/login'
 
-  const navigation = useNavigate()
+  const navigation = useNavigate(); //not required.
   function goFrom(){ navigation(from, { replace: true }); }
 
   useEffect(
@@ -45,7 +43,7 @@ export default function ResterPopUp({open, handleClose}){
             <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'}}> <Icons.LockOutlined /> </Avatar>
             <Typography component="h1" variant="h5"> Sign up </Typography>
 
-            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, goFrom)} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, goFrom, handleClose)} sx={{ mt: 3 }}>
               <TextField label="Name" autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
               
               <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>
@@ -73,7 +71,7 @@ export default function ResterPopUp({open, handleClose}){
   );
 };
 
-const handleSubmit = (event, setErrMsg, setAuth, goFrom) => {
+const handleSubmit = (event, setErrMsg, setAuth, goFrom, handleClose) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });
@@ -85,15 +83,15 @@ const handleSubmit = (event, setErrMsg, setAuth, goFrom) => {
   );
   user.password =  data.get('password');
   new DatabaseRequest( () => userRegisterApi(user) )
-    .GoodResult( (result) => {
-        alert('ok');
-        result.role = [result.type];
-        delete result.type;
-        result.password = data.get('password');
-        setAuth(result);
-        goFrom();
+    .GoodResult( async (result) => {
+        const resultClone = JSON.parse(JSON.stringify(result));
+       
+        resultClone.password = data.get('password');
+        setAuth(resultClone);
+        handleClose();
+        //goFrom();
       } )
-    .BadResult( (error) => {alert('fail'); setErrMsg(error); } )
+    .BadResult( (error) => { setErrMsg(error); } )
     .Build();
 };
 

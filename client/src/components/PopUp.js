@@ -1,11 +1,9 @@
 import React from "react";
 
-
 import PropTypes from 'prop-types';
 import { Button, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import * as Icons from '@mui/icons-material';
-
 
 export default function PopUp({open, handleClose, title, children, handleSubmit, submitText}) {
   return (

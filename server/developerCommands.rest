@@ -21,6 +21,16 @@ Content-Type: application/json
     , "area": "Nof Hagalil"
 }
 
+### POST Area
+post {{hostname}}/api/area
+Content-Type: application/json
+
+{
+    "coordinates": [34.7915, 31.2530]
+    , "country": "Israel"
+    , "area": "Be'er Sheva"
+}
+
 ### Get Areas
 get {{hostname}}/api/area
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Logging from '../classes/Logging.class';
+import Logging from '../Classes/Logging.class';
 
 const axiosFunction = axios.create({
     baseURL: 'http://localhost:3500'

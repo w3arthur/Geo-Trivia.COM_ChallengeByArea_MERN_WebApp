@@ -1,3 +1,4 @@
+
 import React, {useRef, useState, useEffect} from "react";
 import { useTranslation } from "react-i18next";
 //import GoogleLogin from "react-google-login";
@@ -9,9 +10,9 @@ import * as Icons from "@mui/icons-material/";  //Facebook, Google
 
 import RegisterPopup from "./RegisterPopup";
 
-import {useAuth} from '../../context';
-import {Axios, loginApi, tokenRenewApi} from '../../api';
-import {DatabaseRequest, User} from '../../classes';
+import { useAuth } from '../Context';
+import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
+import { DatabaseRequest } from '../Classes';
 
 export default function Registration() {
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ useEffect(() => {
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     emailRef.current.focus(); 
-  }, [] );
+  }, [handleClose] );
 
   return (<>
     
@@ -90,15 +91,15 @@ useEffect(() => {
     </>);
 }
 
-
-
 const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log( { email: data.get('email'), password: data.get('password'), } );
   new DatabaseRequest( () => loginApi( {email: data.get('email'), password: data.get('password')} ) )
     .GoodResult( (result) => {
-      setAuth( new User(result.name, result.email, result.role, result.accessToken) ) //set roll
+      const resultClone = JSON.parse(JSON.stringify(result));
+      delete resultClone.password;
+      setAuth( resultClone ) //set roll
       console.log('auth', auth);
       goFrom();
       } )
@@ -108,17 +109,16 @@ const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
 };
 
 function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
-  new DatabaseRequest( () => tokenRenewApi() )
-    .GoodResult( (result) => {
-      result.role = [result.type];
-      delete result.type; //to delete
-      const role = 2001;  //to delete
-      if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
-      setAuth( new User(result.name, result.email, [role], result.accessToken) ) //set roll
-      console.log('auth', auth);
-      goFrom();
-      } )
-    .Build();
+  // not available on POC version!
+  // new DatabaseRequest( () => tokenRenewApi() )
+  //   .GoodResult( (result) => {
+  //     if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
+  //     const resultClone = JSON.parse(JSON.stringify(result));
+  //     delete resultClone.password;
+  //     setAuth( resultClone );
+  //     goFrom();
+  //     } )
+  //   .Build();
 }
 
 

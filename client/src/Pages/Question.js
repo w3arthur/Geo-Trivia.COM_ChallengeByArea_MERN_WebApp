@@ -1,10 +1,7 @@
 import React, {} from 'react';
 import {Box, Grid, Typography, Button,  Chip, Avatar } from "@mui/material";
 
-
 export default function Question(){
-
-
     return(<>
         <QuestionValue>When Tel Aviv established?</QuestionValue>
 
@@ -12,9 +9,7 @@ export default function Question(){
             
                 <Answer number="1" onClick={() => {}}>  1990 fg fdhdf hdhfh dfh df df hdhdfhdfhdfh dhdhdfhdhh </Answer>
             
-           
                 <Answer number="2" onClick={() => {}}>  1850 </Answer>
-            
             
                 <Answer number="3" onClick={() => {}}>   1750  </Answer>
             

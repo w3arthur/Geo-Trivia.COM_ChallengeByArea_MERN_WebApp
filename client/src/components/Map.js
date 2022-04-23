@@ -2,9 +2,9 @@ import React, {useRef, useEffect, useState} from "react";
 import { Grid, Card, Chip , Paper, Link, Box, Button, Typography, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import mapboxgl from 'mapbox-gl';
 import ReactMapGL, { Marker, Popup/*, flyto*/ } from "react-map-gl";
-import markerImage from '../images/marker.png';
 
-import {getCoords} from '../../../api'
+import markerImage from '../Images/marker.png';
+import {getCoords} from '../Api'
 
 mapboxgl.accessToken = "pk.eyJ1IjoibGVnb3BhcnQiLCJhIjoiY2wxeG55d3QwMDRqMTNjbHB6bTlraGo3cCJ9.-FqKk-KjHlpmJ54YSpN5Dg";
 
@@ -19,16 +19,26 @@ export default function Map({geoData, show, height, settings}){
 
     function setAreaSelectedCountry(point){ setMapSelectedCountry( null ); setMapSelectedCountry( point ); setCoordinates( point.location?.coordinates ); setMapYourCoordinates(null); moveTo(point.location?.coordinates); }
 
-    const viewport = useRef({ latitude:  coordinates[1] || 0 , longitude:  coordinates[0] || 0 , zoom: zoom });
+
+    useEffect(()=>{ 
+        if(!coordinates || !coordinates[0]) {
+            //setMapSelectedCountry( null ); 
+            setMapSelectedCountry( geoData[0] );
+            setCoordinates( geoData[0].location?.coordinates ); 
+            setMapYourCoordinates(null); 
+             
+            
+             } //starter sellect
+        //else setTimeout( () =>  moveTo(coordinates)) ;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+         }, []) //onload set poit
+
+    const viewport = useRef({ latitude:  coordinates[1] || geoData[0].location?.coordinates[1] || 0 , longitude:  coordinates[0] || geoData[0].location?.coordinates[0] || 0 , zoom: zoom });
 
     const mapRef = useRef(null);
     const moveTo = (coordinates) => { mapRef.current.easeTo({ center: coordinates /*[,]*/ , zoom: zoom , duration: 500 }); }
 
-    useEffect(()=>{ 
-        if(!coordinates || !coordinates[0]) setMapSelectedCountry(geoData[0]);  //starter sellect
-        else setTimeout( () =>  moveTo(coordinates)) ;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-         }, []) //onload set poit
+
 
 
     const [select, setSelect] = React.useState('');
