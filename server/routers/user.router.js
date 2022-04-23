@@ -11,7 +11,7 @@ const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { UserModel } = require('../models');
 
 userRouter.route('/') //  localhost:3500/api/user
-.post(async (req, res, next) => {
+.post( validatorUser,async (req, res, next) => {
   console.log(':: user router post');
   errorHandler(req, res, next)( async () => {
 

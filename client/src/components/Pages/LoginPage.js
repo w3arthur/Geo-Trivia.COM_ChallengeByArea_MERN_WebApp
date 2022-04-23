@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from "react";
 import { useTranslation } from "react-i18next";
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+//import GoogleLogin from "react-google-login";
+//import FacebookLogin from "react-facebook-login";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CssBaseline, Box, Button, Typography, TextField, Avatar, Grid, Container } from "@mui/material";
@@ -73,11 +73,12 @@ useEffect(() => {
           <Grid item xs={12} md={6} sx={{mt: 20, mb: {xs: 5, md: 30}, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Box component="div" sx={{width: '90%'}}>
               {/*edit button under box*/}
+              {/*
             <FacebookLogin appId="691605551987315" autoLoad={false} callback={responseFacebook} />
 
             <GoogleLogin  clientId="602070662525-cg5up3456lcbdngu7nhji2j6inpi8t1b.apps.googleusercontent.com"
               buttonText="Google" onSuccess={responseSuccessGoogle} onFailure={responseErrorGoogle} cookiePolicy={"single_host_origin"} />
-          
+           */}
             <Button fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
 
             <RegisterPopup open={openPopUp} handleClose={handleClose} aria-labelledby="customized-dialog-title" />

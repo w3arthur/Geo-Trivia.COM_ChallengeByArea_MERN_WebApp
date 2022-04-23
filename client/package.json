@@ -1,5 +1,5 @@
 {
-  "name": "geo-trivia-client",
+  "name": "trivial2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
+    "flag-icon": "^2.5.0",
     "flag-icon-css": "^4.1.7",
     "i18next": "^21.6.15",
     "i18next-browser-languagedetector": "^6.1.4",
@@ -23,11 +24,8 @@
     "js-cookie": "^3.0.1",
     "mapbox-gl": "^2.8.1",
     "maplibre-gl": "^2.1.9",
-    "prop-types": "^15.8.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-facebook-login": "^4.1.1",
-    "react-google-login": "^5.2.2",
     "react-i18next": "^11.16.7",
     "react-map-gl": "^7.0.10",
     "react-popup": "^0.11.0",

@@ -6,12 +6,40 @@ import monkeyLeft from '../images/monkeyLeft.png';
 import monkeyRight from '../images/monkeyRight.png';
 import globe from '../images/globe.png';
 
-import PopUP from '../../popup/PopUp';
+import PopUp from '../../popup/PopUp';
 
 import Map from './Map'
 
+import {Axios, loginApi, tokenRenewApi} from '../../../api';
+import {DatabaseRequest, User} from '../../../classes';
+
+const geoData = 
+   [
+    { _id:"11", location:{ coordinates: [35.3248, 32.7115] }, country: "Israel", area:  "Nof Haglil" }
+    , { _id:"22", location:{ coordinates: [34.9896, 32.7940] }, country: "Israel", area:  "Haifa" }
+  ]
+;
+
+
 export default function Location() {
   const { t } = useTranslation();
+
+
+  const geoDataRef = useRef(geoData)
+
+  useEffect(() => {
+    console.log(geoDataRef.current)
+
+      new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
+    .GoodResult( (result) => {
+      //alert(result)
+     // goFrom();
+      } )
+    .BadResult( (error) => {
+       //alert(error); 
+      } )
+    .Build();
+  }, [])
 
   const [coordinates, setCoordinates] = useState( [35.3106392, 32.6943036] ); //starting points
   const [mapSelectedCountry, setMapSelectedCountry] = useState( null );
@@ -44,24 +72,20 @@ export default function Location() {
 
     </Grid>
 
-<PopUP open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ }} submitText="Set Area">
-  <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
-</PopUP>
+{/* Location From List */}
+<PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} show='list' settings={settings} height='45vh' />
+</PopUp>
 
 {/* Location From Map */}
-<PopUP open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ }} submitText="Set Area">
-      <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
-      <button type="button" onClick={e => { e.preventDefault();
-         ( () => { setCoordinates([88, 88])
-           })() }}>
-            ******
-      </button>
-</PopUP>
+<PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} settings={settings} height='50vh'/>
+</PopUp>
 
     {/* Your Location GPS */}
-<PopUP open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ }} submitText="Set Area">
-    <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
-</PopUP>
+<PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='45vh' />
+</PopUp>
 
   </>);
 }

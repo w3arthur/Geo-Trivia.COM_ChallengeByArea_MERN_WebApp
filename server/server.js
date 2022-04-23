@@ -6,10 +6,13 @@ const localhostPort = process.env.LOCALHOST_PORT;
 //app.use( require('helmet')() );
 const express = require("express");
 const app = express();
+
+
 const middlewares = require("./middlewares");
 const path = require("path");
-app.use(middlewares.accessAllowed); 
-app.use(require("cors")(middlewares.corsOptions));
+app.use(middlewares.accessAllowed);
+app.use(require("cors")(middlewares.corsOptions)); //
+
 app.use(require("cookie-parser")());
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
@@ -36,5 +39,5 @@ app.use("/api/playingTeam", routers.playingTeamRouter);
 
 app.route("*").all((req, res) => res.status(404) );
 app.use(middlewares.errorMainHandler); //errorHandler
-const port = process.env.PORT || localhostPort || 3005; //3500
+const port = process.env.PORT || localhostPort || 3500; //3500
 app.listen(port, () => console.log(`Listening on port ${port}`));

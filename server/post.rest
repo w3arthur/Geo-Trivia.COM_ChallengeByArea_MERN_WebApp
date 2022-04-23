@@ -19,7 +19,7 @@ Content-Type: application/json
 
 
 ### get Users
-get {{hostname}}/api/users
+get {{hostname}}/api/user
 Content-Type: application/json
 
 {

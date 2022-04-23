@@ -29,6 +29,10 @@ function MuiStyle({children}){
   const fontSizeBigger = '32pt';
   const fontSizeBiggest = '42pt';
   const fontSizeBiggest2 = '36pt';
+  const fontSizeSmall = '18pt';
+  const fontSizeSmaller = '14pt';
+
+
   const white = `#ffffff`;
   const shadow = `#888888`;
   const shadowLight = `#CCCCCC`;
@@ -63,7 +67,7 @@ function MuiStyle({children}){
       , h3: { fontSize: fontSizeBigger , margin:'auto', textAlign: 'center', fontWeight: 'bold'}
       , h4: { fontSize: fontSize, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
       , h5: { fontSize: fontSizeBig, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
-      , body1: { fontSize: fontSize, }
+      , map: { fontSize: fontSizeSmaller,  }
       , body2: { fontSize: fontSize,  color: colors.deepPurple[500] }
     }
     
@@ -156,8 +160,8 @@ function MuiStyle({children}){
         styleOverrides: {
           root: { 
             "&:hover.MuiButton-containedPrimary":{backgroundColor: mainColorDark },
-            marginTop: 20
-            , marginBottom: 2
+
+            marginBottom: 8
             , fontSize: 20
             } 
           }
@@ -176,6 +180,9 @@ function MuiStyle({children}){
              , marginTop: 14
              , marginBottom: 14
             }  //decide if change the text inside the field
+          }
+          , map : {
+            
           }
         }
 

@@ -5,6 +5,10 @@
   color: #666
 }
 
+.mapboxgl-popup-close-button{ /*fixing map, x hidden*/
+  visibility: hidden;
+}
+
 .main {
   margin: 0 auto;
   padding: 35px 0;

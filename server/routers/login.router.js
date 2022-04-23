@@ -28,6 +28,7 @@ loginRouter.route('/') //  /api/login
 .post( validateUser, async (req, res, next) => {
   // console.log(':: login router post');
   errorHandler(req, res, next)( async () => {
+    console.log('fgdfgdfgdfgddgfdfg')
     let email = req.body.email;
     let user = await UserModel.findOne({ email: email });
     if (user === null) throw new ErrorHandler(400, 'user or password is not correct!');
