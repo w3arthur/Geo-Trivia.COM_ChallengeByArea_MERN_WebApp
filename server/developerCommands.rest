@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "coordinates": [{{lat}},{{long}}]
     , "country": "Israel"
-    , "description": "Nof Hagalil"
+    , "area": "Nof Hagalil"
 }
 
 ### Get Areas

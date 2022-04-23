@@ -52,7 +52,7 @@ useEffect(() => {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'  }}> <Icons.LockOutlined /> </Avatar>
 
           <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goFrom, setAuth, auth ) } noValidate sx={{ mt: 1 }}>
-
+            
             <TextField  autoFocus id="email" autoComplete="email" name="email" inputRef={emailRef}
               label={t("Email")} margin="normal" fullWidth required />
 

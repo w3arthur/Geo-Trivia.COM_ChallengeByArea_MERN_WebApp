@@ -57,9 +57,9 @@ function QuestionValue({ children, ...props}){
 
 function Answer({ md, xs ,onClick, children, number ,...props}){
     return(
-        <Grid item md={6} xs={12} sx={{p: 2}}  >
-                <Chip {...props} className="answer" onClick={onClick} 
-                    avatar={<Avatar sx={{bottom: "50%", left: "top"}}><Typography component="div" className="answerNumber">{number}</Typography></Avatar>} 
+        <Grid item container md={6} xs={12} sx={{p: 2}}  >
+                <Chip {...props} sx={{}} className="answer" onClick={onClick} 
+                    avatar={<Avatar sx={{ bottom: "50%", left: "top" }}><Typography component="div" className="answerNumber">{number}</Typography></Avatar>} 
                     label={<Typography variant="h5" component="div" className="answerValue" >{children}</Typography>} /> 
         </Grid>
         );

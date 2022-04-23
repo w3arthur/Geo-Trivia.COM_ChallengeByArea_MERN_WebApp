@@ -14,18 +14,20 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import markerImage from './images/marker.png';
 mapboxgl.accessToken = "pk.eyJ1IjoibGVnb3BhcnQiLCJhIjoiY2wxeG55d3QwMDRqMTNjbHB6bTlraGo3cCJ9.-FqKk-KjHlpmJ54YSpN5Dg";
 
-const geoData = { "type": "FeatureCollection",
-  "features": [
-    { "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [35.3106392, 32.6943036] },
-      "properties": { "id":"01", "name": "Nof Haglil", "details": "" }
-    },
-  ]
-};
 
 
 export default function Location() {
   const { t } = useTranslation();
+
+  const [coordinates, setCoordinates] = useState( [35.3106392, 32.6943036] ); //starting points
+  const [mapSelectedCountry, setMapSelectedCountry] = useState( null );
+  const [mapYourCoordinates, setMapYourCoordinates] = useState( null );
+
+  const settings = {
+    coordinates, setCoordinates
+    , mapSelectedCountry, setMapSelectedCountry
+    , mapYourCoordinates, setMapYourCoordinates
+  }
 
   const [openFromListPopup, setOpenFromListPopup] = useState(false);
   const [openFromMapPopup, setOpenFromMapPopup] = useState(false);
@@ -49,9 +51,26 @@ export default function Location() {
     </Grid>
 
 
-    <FromListPopup open={openFromListPopup} handleClose={handleClose} aria-labelledby="customized-dialog-title" />
-    <FromMapPopup open={openFromMapPopup} handleClose={handleClose} aria-labelledby="customized-dialog-title" />
-    <YourLocationPopup open={openYourLocationPopup} handleClose={handleClose} aria-labelledby="customized-dialog-title" />
+
+<PopUP open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ }} submitText="Set Area">
+  <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
+</PopUP>
+
+{/* Location From Map */}
+<PopUP open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ }} submitText="Set Area">
+      <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
+      <button type="button" onClick={e => { e.preventDefault();
+         ( () => { setCoordinates([88, 88])
+           })() }}>
+            ******
+      </button>
+</PopUP>
+
+
+    {/* Your Location GPS */}
+<PopUP open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ }} submitText="Set Area">
+    <Map settings={settings} height='45vh' getCoordinates={coordinates} setCoordinates={setCoordinates} />
+</PopUP>
 
   </>);
 }
@@ -65,117 +84,6 @@ const getCoords = async () => {  //gps
     }
     return await userCoord().catch( (err) => { console.error(err); throw new Error();} ); //.than
 };
-
-function FromListPopup({open, handleClose}){
-  return(<PopUP open={open} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ }} submitText="Register">
-  </PopUP>)
-}
-
-
-
-
-
-
-function FromMapPopup({open, handleClose}){
-      const viewport = useRef({
-        latitude: 32.6943036,
-        longitude: 35.3106392,
-        zoom: 13
-    });
-
-    const mapRef = useRef(null);
-
-    const moveTo = (coordinates) => {
-            mapRef.current.easeTo({
-            center: coordinates, //[,]
-            zoom: 13,
-            duration: 500
-        });  
-    }
-
-    const [selectedPark, setSelectedPark] = useState(null);
-    const [yourErea, setYourErea] = useState(null);
-
-    useEffect(() => { (async() => { //on esc pres
-        const listener = e => { if (e.key === "Escape") { setSelectedPark(null); } };
-        window.addEventListener("keydown", listener);
-        return () => { window.removeEventListener("keydown", listener); };
-    })() });
-
-    useEffect(()=>{ //onload set poit
-        setSelectedPark(geoData.features[0]);
-    },[])
-  return(<PopUP open={open} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ }} submitText="Register">
-
-
-
-
-
-    <ReactMapGL ref={mapRef} initialViewState={viewport.current} doubleClickZoom={ true }  scrollZoom = { true }
-    mapStyle="mapbox://styles/mapbox/streets-v9" style={{width: 600, height: 400}}
-    >
-        {geoData.features.map(park => (
-          <Marker key={park.properties.id} latitude={park.geometry.coordinates[1]} longitude={park.geometry.coordinates[0]}>
-            <button className="marker-btn" onClick={e => {e.preventDefault();setSelectedPark(park);setYourErea(null); moveTo(park.geometry.coordinates); }}  style={{width:25,height:25}} >
-              <img src={markerImage} alt="x" style={{width:'100%',height:'100%'}} />
-            </button>
-          </Marker>
-        ))}
-
-        {selectedPark  ? (
-          <Popup zoom={13} latitude={selectedPark.geometry.coordinates[1]} longitude={selectedPark.geometry.coordinates[0]} onClose={() => { setSelectedPark(null); }} >
-            <div>
-              <h2>{selectedPark.properties.name}</h2>
-              <p>{selectedPark.properties.details}</p>
-            </div>
-          </Popup>
-        ) : null}
-
-        {yourErea && yourErea!==null ?  (
-                <Popup latitude={yourErea[1]} longitude={yourErea[0]} onClose={() => { setYourErea(null); }} >
-                    <div> <p>{yourErea[1]+', '}<br />{yourErea[0]}</p> </div>
-                </Popup>
-        )  : null}
-    </ReactMapGL>
-
-    <div> Selected: { selectedPark? selectedPark?.properties?.id+' '+selectedPark?.properties?.name+' '+JSON.stringify(selectedPark?.geometry?.coordinates) : JSON.stringify(yourErea) } </div>
-
-    <div>
-        <select  onChange={(e) => { if(e.target?.value) {
-                        const point = geoData.features?.find((x) => x.properties?.id === e.target.value);
-                        setSelectedPark( point ); setYourErea(null); moveTo(point.geometry.coordinates);              
-        } }} >
-            <option > select area</option>
-            {geoData.features?.map((data) => (<option key={data.properties?.id} value={data.properties?.id}  >{data.properties?.name}</option>) )}
-        </select>
-        
-      <button type="button" onClick={e => { e.preventDefault(); 
-          (async() => {
-            const area = await getCoords();
-            setYourErea(area); setSelectedPark(null); moveTo(area);
-          })()
-        }}>
-            Your area
-        </button>
-    </div>
-
-
-
-
-  </PopUP>)
-}
-
-
-
-
-
-
-function YourLocationPopup({open, handleClose}){
-  return(<PopUP open={open} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ }} submitText="Register">
-
-  </PopUP>)
-}
-
 
 
 
@@ -235,3 +143,111 @@ function SelectionValue({onClick, children, sx ,...props}){
   </>);
 }
 
+
+
+const geoData = 
+   [
+    { id:"11", coordinates: [35.3248, 32.7115], country: "Israel", area:  "Nof Haglil" }
+    , { id:"22", coordinates: [34.9896, 32.7940], country: "Israel", area:  "Haifa" }
+  ]
+;
+
+
+
+function Map({height, settings}){
+
+  const  {
+    coordinates, setCoordinates
+    , mapSelectedCountry, setMapSelectedCountry
+    , mapYourCoordinates, setMapYourCoordinates
+  } = settings;
+
+
+      const zoom = 6;
+      const viewport = useRef({
+        latitude:  coordinates[1] || 0
+        , longitude:  coordinates[0] || 0
+        , zoom: zoom
+      });
+ 
+    const mapRef = useRef(null);
+    const moveTo = (coordinates) => {
+            mapRef.current.easeTo({
+            center: coordinates, //[,]
+            zoom: zoom,
+            duration: 500
+        });
+    }
+
+    useEffect(() => { (() => { //on esc pres
+        const listener = e => { if (e.key === "Escape") { setMapSelectedCountry(null); } };
+        window.addEventListener("keydown", listener);
+        return () => { window.removeEventListener("keydown", listener); };
+    })() });
+
+
+    React.useEffect(()=>{ 
+      console.log('coordinates', coordinates);
+      console.log('mapYourCoordinates', mapYourCoordinates);
+      console.log('mapSelectedCountry' ,mapSelectedCountry);
+
+      
+      if(!coordinates || !coordinates[0]) setMapSelectedCountry(geoData[0]);  //starter sellect
+      else(setTimeout( () =>  moveTo(coordinates)) )
+
+      // else if(mapSelectedCountry){
+      //   if(coordinates && (!mapYourCoordinates && !mapSelectedCountry)) {setMapYourCoordinates(coordinates); moveTo(coordinates)}
+      // }
+      
+        },[]) //onload set poit
+
+    return (<>
+
+    <ReactMapGL ref={mapRef} initialViewState={viewport.current} doubleClickZoom={ true }  scrollZoom = { true } mapStyle="mapbox://styles/mapbox/streets-v9" style={{width: '100%', height: height}} >
+        {geoData.map( (data) => (
+          <Marker key={data.id} latitude={data.coordinates[1]} longitude={data.coordinates[0]}>
+            <Box className="marker-btn" onClick={ (e) => {e.preventDefault();
+            
+            setMapSelectedCountry(null);
+            setTimeout( () => {
+                  setMapSelectedCountry(data);setCoordinates(data.coordinates);setMapYourCoordinates(null); moveTo(data.coordinates);
+                }, 100) }}  sx={{width:45,height:45}} > <img src={markerImage} alt="x" style={{width:'100%',height:'100%'}} /> </Box>
+               
+          
+
+          </Marker>
+        ))}
+
+        {mapSelectedCountry  ? (
+          <Popup  latitude={mapSelectedCountry.coordinates[1]} longitude={mapSelectedCountry.coordinates[0]} onClose={(e) => {   }}>
+            <div><h2  >{mapSelectedCountry.area}</h2><p></p></div>
+          </Popup>
+        ) : null }
+
+        {mapYourCoordinates && mapYourCoordinates !== null ?  (
+                <Popup latitude={mapYourCoordinates[1]} longitude={mapYourCoordinates[0]} onClose={(e) => {  }} >
+                    <div><h2   > You Here? </h2><p></p></div>
+                </Popup>
+        )  : null}
+    </ReactMapGL>
+
+    <div> Selected: { mapSelectedCountry? mapSelectedCountry?.id+' '+mapSelectedCountry?.area+' '+JSON.stringify(mapSelectedCountry?.coordinates) : JSON.stringify(mapYourCoordinates) } </div>
+
+    <div>
+        <select  onChange={(e) => { if(e.target?.value) { 
+          const point = geoData?.find((x) => x.id === e.target.value);
+          
+          
+           setMapSelectedCountry( point ); setCoordinates( point.coordinates ); setMapYourCoordinates(null); moveTo(point.coordinates); } }} >
+
+            <option > select area</option>
+            {geoData?.map((data) => (<option key={data?.id} value={data?.id}  >{data?.area}</option>) )}
+        </select>
+        
+      <button type="button" onClick={e => { e.preventDefault(); (async() => { const area = await getCoords();
+        setMapYourCoordinates(area); setCoordinates( area ); setMapSelectedCountry(null); moveTo(area); })() }}>
+            Your area
+      </button>
+    </div>
+    </>);
+}
