@@ -1,7 +1,13 @@
+
 import  Axios, {
     userRegisterApi
     , loginApi
     , tokenRenewApi
 } from './axios';
 
-export {Axios, userRegisterApi, loginApi, tokenRenewApi};
+import getCoords from './getCoords';
+
+export {
+    Axios, userRegisterApi, loginApi, tokenRenewApi
+    , getCoords
+};

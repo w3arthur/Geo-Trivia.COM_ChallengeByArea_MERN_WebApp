@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import HeaderContent from "./components/logo/header";
 import { FrontPage } from "./components/pages/FrontPage";
 import LoginPage from "./components/pages/LoginPage";
-import Location from "./components/pages/LocationPage";
+import Location from "./components/pages/LocationPage/LocationPage";
 // import { useAuth } from "./components/hooks/auth.hook";
 // import { AuthContext } from './context/AuthContext';
 
@@ -35,7 +35,6 @@ export default function App() {
             <Route path="/" element={<GlobalLayout />}>
               <Route index element={<FrontPage />} />
               <Route path="/Registration" element={<LoginPage />} />
-              <Route path="/Location" element={<Location />} />
         {/* Arthur Development! */}
               <Route path="/Location" element={<Location />} />
               <Route path="/Question" element={<Question />} />
