@@ -8,9 +8,12 @@ import * as Icons from '@mui/icons-material';
 export default function PopUp({open, handleClose, title, children, handleSubmit, submitText}) {
   return (
     <div>
-      <BootstrapDialog  fullWidth={true}  open={open} onClose={handleClose} aria-labelledby="customized-dialog-title" >
+      <BootstrapDialog 
+      
+      PaperProps = {{sx:  {minHeight : '300px'}}}
+       fullWidth={true}  open={open} onClose={handleClose} aria-labelledby="customized-dialog-title" >
         <PopUpTitle onClose={handleClose}> {title} </PopUpTitle>
-        <DialogContent dividers> {children} </DialogContent>
+        <DialogContent   dividers> {children} </DialogContent>
         <DialogActions> <Button autoFocus onClick={handleSubmit}> {submitText} </Button> </DialogActions>
       </BootstrapDialog>
     </div>

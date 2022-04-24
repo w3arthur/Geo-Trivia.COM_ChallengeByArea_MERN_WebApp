@@ -9,7 +9,7 @@ import {getCoords} from '../Api'
 mapboxgl.accessToken = "pk.eyJ1IjoibGVnb3BhcnQiLCJhIjoiY2wxeG55d3QwMDRqMTNjbHB6bTlraGo3cCJ9.-FqKk-KjHlpmJ54YSpN5Dg";
 
 
-export default function Map({geoData, show, height, settings}){
+export default function Map({geoData, show, height, minHeight, settings}){
     const  { coordinates, setCoordinates , mapSelectedCountry, setMapSelectedCountry , mapYourCoordinates, setMapYourCoordinates }
         = settings;
 
@@ -64,7 +64,7 @@ return (<>
             </Button> )
         : (<></>) }
 </Box>
-<ReactMapGL ref={mapRef} initialViewState={viewport.current} doubleClickZoom={ true }  scrollZoom = { true } mapStyle="mapbox://styles/mapbox/streets-v9" style={{width: '100%', height: height}} >
+<ReactMapGL ref={mapRef} initialViewState={viewport.current} doubleClickZoom={ true }  scrollZoom = { true } mapStyle="mapbox://styles/mapbox/streets-v9" style={{width: '100%', height: height, minHeight: minHeight}} >
     {geoData.map( (data) => (
         <Marker key={data._id} latitude={data.location?.coordinates[1]} longitude={data.location?.coordinates[0]}>
             <Box onClick={ (e) => { e.preventDefault(); setTimeout( () => { setAreaSelectedCountry(data) }, 100) }}  sx={{width:45,height:45, cursor: 'pointer'}} > <img src={markerImage} alt="x" style={{width:'100%',height:'100%'}} /> </Box>

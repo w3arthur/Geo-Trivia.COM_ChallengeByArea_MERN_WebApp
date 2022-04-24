@@ -9,27 +9,27 @@ import globe from '../Images/globe.png';
 import { PopUp, Map } from '../Components';
 import { Axios,  } from '../Api';
 import { DatabaseRequest } from '../Classes';
+import { useAuth } from '../Context';
+
+
+import { useGoTo } from '../Hooks';
 
 //fake example for database error handler
 const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ];
 
+
 export default function Location() {
   const { t } = useTranslation();
+  
+  const goTo = useGoTo();
+  const { auth , setAuth } = useAuth();
 
   const geoDataRef = useRef(geoData)
 
   useEffect(() => {
-    console.log(geoDataRef.current)
+    
+    getAllAreas(geoDataRef);
 
-      new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
-    .GoodResult( (result) => {
-      console.log('areas', result)
-      geoDataRef.current = result;
-      } )
-    .BadResult( (error) => {
-       console.log(error); 
-      } )
-    .Build();
   }, [])
 
   const [coordinates, setCoordinates] = useState( [ ] ); //starting points
@@ -64,18 +64,18 @@ export default function Location() {
     </Grid>
 
 {/* Location From List */}
-<PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} show='list' settings={settings} height='45vh' />
+<PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, /*setErrMsg*/) }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} show='list' settings={settings} height='55vh' minHeight='200px' />
 </PopUp>
 
 {/* Location From Map */}
-<PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} settings={settings} height='50vh'/>
+<PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo ,auth , setAuth, coordinates, /*setErrMsg*/) }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
 </PopUp>
 
     {/* Your Location GPS */}
-<PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='45vh' />
+<PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, /*setErrMsg*/) }} submitText="Set Area">
+  <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
 </PopUp>
 
   </>);
@@ -110,6 +110,38 @@ function Selection(props){
       ) : (<></>)}
   </>);
 }
+
+const getAllAreas = (geoDataRef, errorHandler) => {
+
+      new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
+    .GoodResult( (result) => {
+      console.log('areas', result)
+      geoDataRef.current = result;
+      } )
+    .BadResult( (error) => {
+       alert(error); 
+      } )
+    .Build();
+
+}
+
+const handleSetArea = (goTo, auth , setAuth, coordinates, setErrMsg) => {
+  //event.preventDefault();
+
+  // language will send with the cookie
+  const user = auth._id;
+  const data =  { user , coordinates};
+alert(JSON.stringify(auth))
+  new DatabaseRequest( () => Axios('PUT', '/api/user', data, {}) )
+    .GoodResult( (result) => {
+      //setAuth(result);
+      if(result) goTo("/");
+      } )
+    .BadResult( (error) => { alert(error); } )
+    .Build();  
+};
+
+
 
 function SelectionImageGrid(props){
   return(<>

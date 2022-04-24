@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 //import GoogleLogin from "react-google-login";
 //import FacebookLogin from "react-facebook-login";
 
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CssBaseline, Box, Button, Typography, TextField, Avatar, Grid, Container } from "@mui/material";
 import * as Icons from "@mui/icons-material/";  //Facebook, Google
 
@@ -13,16 +12,19 @@ import RegisterPopup from "./RegisterPopup";
 import { useAuth } from '../Context';
 import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
 import { DatabaseRequest } from '../Classes';
+import { useGoTo } from '../Hooks'
+
 
 export default function Registration() {
   const { t } = useTranslation();
 
   //Arthur
   const { auth, setAuth } = useAuth();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  const navigate = useNavigate();
-  function goFrom(){ navigate(from, { replace: true });  }
+  //const location = useLocation();
+  //const from = location.state?.from?.pathname || "/";
+
+  const goTo = useGoTo();
+
 
   const emailRef = useRef( null );
   const passwordRef = useRef( null );
@@ -33,13 +35,13 @@ export default function Registration() {
   const [handleClose, handleClickOpen] = [() => { setOpenPopUp(false); }, () => { setOpenPopUp(true); }];
 
 
-useEffect(() => {
-    checkAccessToken(auth, setAuth, goFrom, setErrMsg);
+  useEffect(() => {
+    checkAccessToken(auth, setAuth, goTo, setErrMsg);
     console.log('auth' ,auth);
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     emailRef.current.focus(); 
-  }, [handleClose] );
+    }, [handleClose] );
 
   return (<>
     
@@ -52,7 +54,7 @@ useEffect(() => {
           <CssBaseline />
           <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'  }}> <Icons.LockOutlined /> </Avatar>
 
-          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goFrom, setAuth, auth ) } noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth ) } noValidate sx={{ mt: 1 }}>
             
             <TextField  autoFocus id="email" autoComplete="email" name="email" inputRef={emailRef}
               label={t("Email")} margin="normal" fullWidth required />
@@ -91,7 +93,7 @@ useEffect(() => {
     </>);
 }
 
-const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
+const handleSubmit = (event, setErrMsg, goTo, setAuth, auth) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log( { email: data.get('email'), password: data.get('password'), } );
@@ -101,11 +103,10 @@ const handleSubmit = (event, setErrMsg, goFrom, setAuth, auth) => {
       delete resultClone.password;
       setAuth( resultClone ) //set roll
       console.log('auth', auth);
-      goFrom();
+      goTo("/Location");
       } )
     .BadResult( (error) => { setErrMsg(error); } )
-    .Build();
-    
+    .Build();  
 };
 
 function checkAccessToken(auth, setAuth, goFrom, setErrMsg){

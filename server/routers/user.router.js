@@ -31,7 +31,7 @@ userRouter.route('/') //  localhost:3500/api/user
 })
 
 
-.put(async (req, res, next) => { 
+.put(async (req, res, next) => { //set area for an user
   console.log(':: user router put');
   errorHandler(req, res, next)( async () => {
   const {user : userId, coordinates} = req.body;
@@ -41,6 +41,8 @@ userRouter.route('/') //  localhost:3500/api/user
 
     const user = await UserModel.findOne({_id: userId});
     if (!user) throw new ErrorHandler(400, 'no user');
+
+    if (coordinates[0] === 0 && coordinates[1] === 0) throw new ErrorHandler(400, 'no coordinates set');
 
     const data= {};
     data.language = language;
