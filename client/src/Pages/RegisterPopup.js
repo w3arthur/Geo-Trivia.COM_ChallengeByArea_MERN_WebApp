@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link,  useNavigate, useLocation  } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
-
-import PropTypes from 'prop-types'; //?
 import { Avatar, Typography, TextField, Button, Box, CssBaseline } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
@@ -10,6 +6,9 @@ import { useAuth } from '../Context';
 import { userRegisterApi } from '../Api';
 import { DatabaseRequest, User } from '../Classes';
 import { PopUp } from '../Components'
+import { useTranslation } from '../Hooks'
+
+//import PropTypes from 'prop-types'; 
 
 export default function ResterPopUp({open, handleClose}){
   const { t } = useTranslation()
@@ -20,13 +19,6 @@ export default function ResterPopUp({open, handleClose}){
   const registerButtonRef = useRef( null );
 
   const { setAuth } = useAuth();
-
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
-  if (from === '/register' || from === 'register') from = '/login'
-
-  const navigation = useNavigate(); //not required.
-  function goFrom(){ navigation(from, { replace: true }); }
 
   useEffect(
     () => {
@@ -43,7 +35,7 @@ export default function ResterPopUp({open, handleClose}){
             <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'}}> <Icons.LockOutlined /> </Avatar>
             <Typography component="h1" variant="h5"> Sign up </Typography>
 
-            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, goFrom, handleClose)} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose)} sx={{ mt: 3 }}>
               <TextField label="Name" autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
               
               <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>
@@ -71,7 +63,7 @@ export default function ResterPopUp({open, handleClose}){
   );
 };
 
-const handleSubmit = (event, setErrMsg, setAuth, goFrom, handleClose) => {
+const handleSubmit = (event, setErrMsg, setAuth, handleClose) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });

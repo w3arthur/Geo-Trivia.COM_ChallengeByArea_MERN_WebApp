@@ -1,30 +1,21 @@
-
 import React, {useRef, useState, useEffect} from "react";
-import { useTranslation } from "react-i18next";
-//import GoogleLogin from "react-google-login";
-//import FacebookLogin from "react-facebook-login";
-
 import { CssBaseline, Box, Button, Typography, TextField, Avatar, Grid, Container } from "@mui/material";
 import * as Icons from "@mui/icons-material/";  //Facebook, Google
-
-import RegisterPopup from "./RegisterPopup";
 
 import { useAuth } from '../Context';
 import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
 import { DatabaseRequest } from '../Classes';
-import { useGoTo } from '../Hooks'
+import { useGoTo , useTranslation } from '../Hooks'
 
+import RegisterPopup from "./RegisterPopup";
+//import GoogleLogin from "react-google-login";
+//import FacebookLogin from "react-facebook-login";
 
 export default function Registration() {
   const { t } = useTranslation();
 
-  //Arthur
   const { auth, setAuth } = useAuth();
-  //const location = useLocation();
-  //const from = location.state?.from?.pathname || "/";
-
   const goTo = useGoTo();
-
 
   const emailRef = useRef( null );
   const passwordRef = useRef( null );

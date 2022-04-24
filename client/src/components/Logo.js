@@ -1,6 +1,6 @@
 import React from "react";
 import LanguageFlags from "./multilanguage/LanguageFlags";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "../Hooks"
 import '../Styles/logo.css';
 
 import { Outlet } from "react-router-dom";

@@ -1,8 +1,7 @@
 import React from "react";
 import { Container, Typography, Box, Paperm, Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
+import { useTranslation } from "../Hooks";
+import { Link } from "../Components";
 export default function HomePage() {
   const { t } = useTranslation();
 
@@ -21,7 +20,7 @@ export default function HomePage() {
         </Typography>
       </div>
       <bh />
-      <Button component={Link} to="/Registration" className="button" variant="contained" >  {t("Start to Play")} </Button>
+      <Button component={Link} to="/Login" className="button" variant="contained" >  {t("Start to Play")} </Button>
     </Container>
   </>);
 }
