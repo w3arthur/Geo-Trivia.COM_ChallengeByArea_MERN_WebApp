@@ -1,22 +1,16 @@
 import React, {useRef, useEffect, useState} from "react";
 import { Grid, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
-
-import monkeyLeft from '../Images/monkeyLeft.png';
-import monkeyRight from '../Images/monkeyRight.png';
-import globe from '../Images/globe.png';
 
 import { PopUp, Map } from '../Components';
 import { Axios,  } from '../Api';
 import { DatabaseRequest } from '../Classes';
 import { useAuth } from '../Context';
+import { useGoTo, useTranslation } from '../Hooks';
+import { monkeyLeft, monkeyRight, globe } from '../Images'
 
-
-import { useGoTo } from '../Hooks';
 
 //fake example for database error handler
 const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ];
-
 
 export default function Location() {
   const { t } = useTranslation();
@@ -26,42 +20,34 @@ export default function Location() {
 
   const geoDataRef = useRef(geoData)
 
-  useEffect(() => {
-    
-    getAllAreas(geoDataRef);
-
-  }, [])
+  useEffect(() => { getAllAreas(geoDataRef); }, [])
 
   const [coordinates, setCoordinates] = useState( [ ] ); //starting points
   const [mapSelectedCountry, setMapSelectedCountry] = useState( null );
   const [mapYourCoordinates, setMapYourCoordinates] = useState( null );
-
-  const settings = {
-    coordinates, setCoordinates
-    , mapSelectedCountry, setMapSelectedCountry
-    , mapYourCoordinates, setMapYourCoordinates
-  }
+  const settings = { coordinates, setCoordinates , mapSelectedCountry, setMapSelectedCountry , mapYourCoordinates, setMapYourCoordinates }
 
   const [openFromListPopup, setOpenFromListPopup] = useState(false);
   const [openFromMapPopup, setOpenFromMapPopup] = useState(false);
   const [openYourLocationPopup, setOpenYourLocationPopup] = useState(false);
 
-  const handleClose = () => { setOpenFromListPopup(false); setOpenFromMapPopup(false); setOpenYourLocationPopup(false); };
+  
   const handleClick_openFromListPopup = () => { setOpenFromListPopup(true); };
   const handleClick_openFromMapPopup = () => { setOpenFromMapPopup(true); };
   const handleClick_yourLocationPopup = () => { setOpenYourLocationPopup(true); };
+  const handleClose = () => { setOpenFromListPopup(false); setOpenFromMapPopup(false); setOpenYourLocationPopup(false); };
 
-  return (<>
-    <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location")} </Typography>
-    <Grid container>
+return (<>
+<Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location")} </Typography>
+<Grid container>
 
-      <Selection onClick={handleClick_openFromListPopup} leftMonkey>Choose Location <br /> from list</Selection>
+  <Selection onClick={handleClick_openFromListPopup} leftMonkey>Choose Location <br /> from list</Selection>
 
-      <Selection onClick={handleClick_openFromMapPopup} rightMonkey>Choose Location <br /> from map</Selection>
+  <Selection onClick={handleClick_openFromMapPopup} rightMonkey>Choose Location <br /> from map</Selection>
 
-      <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>Your <br /> Location</Selection>
+  <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>Your <br /> Location</Selection>
 
-    </Grid>
+</Grid>
 
 {/* Location From List */}
 <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, /*setErrMsg*/) }} submitText="Set Area">
@@ -78,7 +64,7 @@ export default function Location() {
   <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
 </PopUp>
 
-  </>);
+</>);
 }
 
 function Selection(props){
@@ -95,18 +81,18 @@ function Selection(props){
       </Grid>
 
       {leftMonkey || leftBottomMonkey  ? 
-      <SelectionImageGrid onClick={props.onClick}>
+      <SelectionMonkeyImageGrid onClick={props.onClick}>
         <img alt="monkeyLeft" src={monkeyLeft} style={styleImage}/>
-      </SelectionImageGrid> : null}
+      </SelectionMonkeyImageGrid> : null}
 
       <Grid item xs={8} sx={{p:1 ,height: '100%' ,display: { xs: 'block', sm: 'none' }}}>
         <SelectionValue onClick={props.onClick}>{props.children}</SelectionValue>
       </Grid>
 
       {rightMonkey ? (
-        <SelectionImageGrid onClick={props.onClick}>
+        <SelectionMonkeyImageGrid onClick={props.onClick}>
             <img alt="monkeyRight" src={monkeyRight} style={styleImage} />
-        </SelectionImageGrid>
+        </SelectionMonkeyImageGrid>
       ) : (<></>)}
   </>);
 }
@@ -143,13 +129,7 @@ alert(JSON.stringify(auth))
 
 
 
-function SelectionImageGrid(props){
-  return(<>
-    <Grid item onClick={props.onClick} xs={4} sx={{height: '100%',display: { xs: 'block', sm: 'none' }}}>
-      {props.children}
-    </Grid>
-  </>);
-}
+
 
 function SelectionValue({onClick, children, sx ,...props}){
   return(<>
@@ -160,3 +140,10 @@ function SelectionValue({onClick, children, sx ,...props}){
   </>);
 }
 
+function SelectionMonkeyImageGrid(props){
+  return(<>
+    <Grid item onClick={props.onClick} xs={4} sx={{height: '100%',display: { xs: 'block', sm: 'none' }}}>
+      {props.children}
+    </Grid>
+  </>);
+}
