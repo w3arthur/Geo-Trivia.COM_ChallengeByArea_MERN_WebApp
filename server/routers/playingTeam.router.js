@@ -2,6 +2,9 @@ require("dotenv").config();
 const radiosPointDiameter = process.env.POINT_DIAMETER;
 const requiredQuestionsQuantity = process.env.QUESTIONS_QUANTITY;
 
+
+
+
 const express = require("express");
 const playingTeamRouter = express.Router();
 
@@ -9,6 +12,8 @@ const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware'
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
 const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../models');
+
+const  sendEmail  = require('../api/sendEmail');
 
 
 playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
@@ -58,9 +63,6 @@ playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
 
       }
     }
-      
-  
-
     return new Success(200, updatedPlayingTeam);
 
   });
@@ -89,36 +91,6 @@ playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
   });
 });
 
-
-playingTeamRouter.route('/player')  //  localhost:3500/api/playingTeam/accept
-.patch(async (req, res, next) => {
-  console.log(':: playing team router patch a player');
-  errorHandler(req, res, next)( async () => {
-
-
-    //find team and player
-    const {playingTeam: playingTeamId, player: playerId} = req.body;
-    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
-    if(!playingTeam) throw new Error();
-    const player = await UserModel.findById(playerId);
-    if(!player) throw new Error();
-    const playerClone = JSON.parse(JSON.stringify( player ));
-    playerClone.password = '';
-    playerClone.accepted = true;
-    playerClone.answers =  playingTeam.answersModel ;
-
-    if(playingTeam.players.some((x) =>  x._id?.toString() === playerId)) throw new Error();
-    const playerCount = playingTeam.players.length + 1;
-
-    const data = {$push:{players: playerClone}, playerCount};
-    
-    const result = await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
-
-    if (!result) throw new Error();
-
-    return new Success(200, result);
-  });
-});
 
 
 
@@ -178,7 +150,47 @@ playingTeamRouter.route('/')
 
       return new Success(200, result);
   });  //error handler 
-});
+})
+.patch(async (req, res, next) => {
+  console.log(':: playing team router patch a player');
+  errorHandler(req, res, next)( async () => {
+    //find team and player
+    const { playingTeamId, playerEmail} = req.body;
+    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+    if(!playingTeam) throw new Error();
+    const player = await UserModel.findOne({email: playerEmail});
+    if(!player) throw new Error();
+    const playerClone = JSON.parse(JSON.stringify( player ));
+    playerClone.password = '';
+    playerClone.accepted = false;
+    playerClone.answers =  playingTeam.answersModel ;
+
+
+
+
+
+
+    if(!playingTeam.players.some((x) =>  x.email?.toString() === playerEmail))
+    {
+    const playerCount = playingTeam.players.length + 1;
+
+    const data = {$push:{players: playerClone}, playerCount};
+    
+    await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
+
+    await sendEmail(playingTeamId, playerEmail);
+
+    }
+
+    const result = await PlayingTeamModel.findById(playingTeamId);
+    if (!result) throw new Error();
+
+    return new Success(200, result);
+  });
+})
+
+
+
 
 
 playingTeamRouter.route('/:playingTeamId') 
@@ -198,7 +210,33 @@ playingTeamRouter.route('/:playingTeamId')
       return new Success(200, playingTeam);
   });
 })
+.delete(async (req, res, next) => {
+  console.log(':: playing team router delete a player');
+  errorHandler(req, res, next)( async () => {
+    const { playingTeamId } = req.params;
+    const { playerId } = req.query;
 
+
+    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+    if(!playingTeam || !playerId) throw new Error();
+
+   // if( playingTeam.players?.filter((x) => x._id === playerId).length === 0) throw new Error();
+
+      const filter = {_id: playingTeamId, };
+      const data = { $pull: {players: { _id: playerId } }   }  ;
+      const player = await PlayingTeamModel.findOneAndUpdate( filter, data);
+
+
+    // const player = await UserModel.updateOne({_id: playingTeamId}, {'$pullAll': { players: [{_id: playerId}] } });
+    if(!player) throw new Error();
+    
+    const result = await PlayingTeamModel.findById( playingTeamId );
+
+    if (!result) throw new Error();
+    console.log(result.players.length)
+    return new Success(200, result);
+  });
+});
 
 
 

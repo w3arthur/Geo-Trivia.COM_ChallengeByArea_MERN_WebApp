@@ -1,3 +1,4 @@
 //only for routers
 const logEvent = require('./logEvent');
-module.exports = { logEvent };
+const sendEmail = require('./sendEmail');
+module.exports = { logEvent, sendEmail };

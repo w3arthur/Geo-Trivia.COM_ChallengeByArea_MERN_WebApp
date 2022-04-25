@@ -1,17 +1,41 @@
+
+
+
 require("dotenv").config();
 
 const localhostPort = process.env.LOCALHOST_PORT;
 //if (process.env.NODE_ENV !== 'production'){  }
 
 //app.use( require('helmet')() );
+
+
+
+
 const express = require("express");
 const app = express();
-
-
+const http = require('http');
 const middlewares = require("./middlewares");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io1 = new Server(server, { cors: { origin: "*" }, allowedHeaders: ["my-custom-header"], credentials: true } );
+//origin: ["https://example.com", "https://dev.example.com"],
+
+io1.on('connection', (socket) => {
+    console.log('++ User Connected to the Socket');
+
+    socket.on('messageX', (message) =>  {
+        console.log('socket received message');
+        console.log(message);
+        io1.emit('messageY', `Socket!! Hi111` );   
+    });
+});
+
+
+
+
 const path = require("path");
 app.use(middlewares.accessAllowed);
-app.use(require("cors")(middlewares.corsOptions)); //
+app.use(require("cors")(middlewares.corsOptions)); 
 
 app.use(require("cookie-parser")());
 app.use(express.json({ extended: true }));
@@ -40,4 +64,6 @@ app.use("/api/playingTeam", routers.playingTeamRouter);
 app.route("*").all((req, res) => res.status(404) );
 app.use(middlewares.errorMainHandler); //errorHandler
 const port = process.env.PORT || localhostPort || 3500; //3500
-app.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => console.log(`Listening on port ${port}, Express + WS`));
+
+

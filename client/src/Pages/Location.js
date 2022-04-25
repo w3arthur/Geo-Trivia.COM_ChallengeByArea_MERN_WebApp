@@ -112,16 +112,12 @@ const getAllAreas = (geoDataRef, errorHandler) => {
 }
 
 const handleSetArea = (goTo, auth , setAuth, coordinates, setErrMsg) => {
-  //event.preventDefault();
-
   // language will send with the cookie
   const user = auth._id;
   const data =  { user , coordinates};
-alert(JSON.stringify(auth))
   new DatabaseRequest( () => Axios('PUT', '/api/user', data, {}) )
     .GoodResult( (result) => {
-      //setAuth(result);
-      if(result) goTo("/");
+      if(result) goTo("/Choose");
       } )
     .BadResult( (error) => { alert(error); } )
     .Build();  

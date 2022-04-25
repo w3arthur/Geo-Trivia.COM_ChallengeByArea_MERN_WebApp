@@ -1,7 +1,7 @@
 @hostname = http://localhost:3500
 
-@exampleLocation = 625aecd851ff4f0be43465fa
-@exampleLocationPost = "625aecd851ff4f0be43465fa"
+@exampleLocation = 6264206e7089c1bf06a8daac
+@exampleLocationPost = "6264206e7089c1bf06a8daac"
 @userId1 = "625be2a1be49dfb27b9d1583"
 @userId2 = "625be292be49dfb27b9d157e"
 @userId3 = "625be2babe49dfb27b9d1588"
@@ -43,10 +43,10 @@ post {{hostname}}/api/question/english
 Content-Type: application/json
 
 {
-    "location" = {{exampleLocationPost}}
-    , "question": "When Tel Aviv Established"
+    "location": {{exampleLocationPost}}
+    , "question": "When0 Tel Aviv Established"
     , "answers": ["Answer1", "Answer2", "Answer3", "Answer4"  ]
-    , "rightAnswer": 3
+    , "rightAnswer": 1
 }
 
 

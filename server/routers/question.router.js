@@ -43,7 +43,7 @@ questionRouter.route('/:language')   //  localhost:3500/api/question
   console.log(':: question router post');
   errorHandler(req, res, next)( async () => {
     const {language} = req.params;
-    const {} = req.query;
+    //const {} = req.query;
     const {location, question, answers, rightAnswer} = req.body;
 
     const areaFound = await AreaModel.findOne({_Id: location});
