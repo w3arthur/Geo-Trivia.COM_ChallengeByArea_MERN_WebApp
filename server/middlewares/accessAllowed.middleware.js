@@ -9,8 +9,6 @@ allowedOrigins = [
     , process.env.ACCESS_LOCALHOST_2
     , process.env.ACCESS_LOCALHOST_3
     , process.env.ACCESS_LOCALHOST_4
-    , process.env.ACCESS_LOCALHOST_5
-    , process.env.ACCESS_LOCALHOST_6
     , process.env.ACCESS_SITE_1
     , process.env.ACCESS_SITE_2
     , process.env.ACCESS_SITE_3

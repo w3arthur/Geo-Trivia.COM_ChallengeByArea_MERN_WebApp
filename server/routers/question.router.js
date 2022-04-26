@@ -6,7 +6,7 @@ const express = require("express");
 const questionRouter = express.Router();
 
 const {mongoose, mongoose1, schemaVersion} = require("../connection");
-const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
+const { errorHandler } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
 const { AreaModel, QuestionModel } = require('../models');

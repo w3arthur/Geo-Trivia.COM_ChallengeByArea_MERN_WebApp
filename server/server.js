@@ -17,21 +17,11 @@ const http = require('http');
 const middlewares = require("./middlewares");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io1 = new Server(server, { cors: { origin: "*" }, allowedHeaders: ["my-custom-header"], credentials: true } );
+const io = new Server(server, { cors: { origin: "*" }, allowedHeaders: ["my-custom-header"], credentials: true } );
 //origin: ["https://example.com", "https://dev.example.com"],
 
-io1.on('connection', (socket) => {
-    console.log('++ User Connected to the Socket');
 
-    socket.on('messageX', (message) =>  {
-        console.log('socket received message');
-        console.log(message);
-        io1.emit('messageY', `Socket!! Hi111` );   
-    });
-});
-
-
-
+io.on('connection', (socket) => { require('./sockets/socketio')(io, socket); });
 
 const path = require("path");
 app.use(middlewares.accessAllowed);
@@ -65,5 +55,4 @@ app.route("*").all((req, res) => res.status(404) );
 app.use(middlewares.errorMainHandler); //errorHandler
 const port = process.env.PORT || localhostPort || 3500; //3500
 server.listen(port, () => console.log(`Listening on port ${port}, Express + WS`));
-
 

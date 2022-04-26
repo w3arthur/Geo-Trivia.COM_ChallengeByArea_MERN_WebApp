@@ -5,12 +5,12 @@ import "./Styles/index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
-import { AuthProvider, PlayingTeam } from "./Context";
+import { AuthProvider, LoadingProvider ,PlayingTeamProvider } from "./Context";
 import Loading from './Components/Loading';
 ReactDOM.render(<React.StrictMode>
   <Suspense fallback={<div>Loading<Loading /></div>}>
-    <AuthProvider> <PlayingTeam>
+    <AuthProvider> <PlayingTeamProvider> <LoadingProvider>
       <BrowserRouter> <App /> </BrowserRouter>
-    </PlayingTeam> </AuthProvider>
+    </LoadingProvider> </PlayingTeamProvider> </AuthProvider>
   </Suspense>
 </React.StrictMode>, document.getElementById("root"));

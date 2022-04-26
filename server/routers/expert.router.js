@@ -1,7 +1,7 @@
 const express = require("express");
 const expertRouter = express.Router();
 
-const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
+const { errorHandler } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const  { ExpertModel }  = require('../models');
 

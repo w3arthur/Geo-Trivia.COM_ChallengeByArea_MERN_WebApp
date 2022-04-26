@@ -2,11 +2,13 @@ import React, {useRef, useEffect, useState} from "react";
 import { Grid, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
 
 import { PopUp, Map } from '../Components';
-import { Axios,  } from '../Api';
+
 import { DatabaseRequest } from '../Classes';
-import { useAuth } from '../Context';
+import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 import { monkeyLeft, monkeyRight, globe } from '../Images'
+
+import { Axios, useReceiver, receiver, transmitter  } from '../Api';
 
 
 //fake example for database error handler
@@ -14,9 +16,50 @@ const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Erro
 
 export default function Location() {
   const { t } = useTranslation();
-  
-  const goTo = useGoTo();
   const { auth , setAuth } = useAuth();
+  const {setLoading} = useLoading();
+
+  const { playingTeam, setPlayingTeam } = usePlayingTeam();
+
+  
+
+  useEffect(() => { 
+    
+receiver( playingTeam._id ,(x) => { 
+        if(x.error){ alert(`error ${x.message}`);
+        setLoading(false);
+        alert(x);
+
+        };  })
+        
+    console.log('a aaaa', auth._id, playingTeam._id)
+    if(auth && playingTeam && auth._id && playingTeam._id){
+
+      
+        const data = {player: auth, playingTeam: playingTeam}
+        new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {}) )
+        .GoodResult( (result) => {
+          setLoading(true);
+          transmitter('playingTeamAddUser', data)
+
+            alert ('patched')
+            
+        } )
+        .BadResult( (error) => {
+            alert(`no gaming team ${error}`); 
+        } )
+        .Build(/*setLoading*/);
+
+      
+
+         // setInvitedTeamId(x._id);
+
+    }
+   }, [])
+
+
+  const goTo = useGoTo();
+  
 
   const geoDataRef = useRef(geoData)
 

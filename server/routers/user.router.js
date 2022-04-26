@@ -5,8 +5,7 @@ const express = require("express");
 const userRouter = express.Router();
 const bcrypt = require("bcrypt");
 
-const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
-const validatorUser = require('../middlewares/validatorUser.middlewawre');
+const { errorHandler, validatorUser } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { UserModel } = require('../models');
 

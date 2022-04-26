@@ -1,8 +1,6 @@
 
 const {logEvents, dateTime} = require('../api').logEvent;
-
 const {NodeJSLoggingModel, NodeJSErrorModel} = require('../models/nodeJsLogging.model');
-
 const { ErrorHandler } = require('../classes')
     //Global variables:
     // error.status
@@ -19,7 +17,7 @@ const errorHandler = (req, res, next) => {
             if(typeof(success) === 'object'){
                 const {status, result} = success;
                 req.resultStatus = status;
-                if(result === undefined) return res.sendStatus(status)
+                if(result === undefined) return res.sendStatus(status);
                 try{ req.resultJson = JSON.parse(JSON.stringify(result)); }
                 catch(e){ req.resultMessage = result; return res.status(status).send(result); }     
                 return res.status(status).json(result);
@@ -32,7 +30,6 @@ const errorHandler = (req, res, next) => {
         } finally { if(!req.body.isError) {console.log('...logged'); return logger(req, res, next);} }
     }
 };
-
 
 
 const logger = async (req, res, next) => {

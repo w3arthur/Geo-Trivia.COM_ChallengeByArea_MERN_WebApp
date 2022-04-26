@@ -1,4 +1,8 @@
 //only for routers
 const logEvent = require('./logEvent');
 const sendEmail = require('./sendEmail');
-module.exports = { logEvent, sendEmail };
+const { ioTransmitter, receiver } = require('./socketio');
+module.exports = { 
+    logEvent, sendEmail
+    , ioTransmitter, receiver
+};

@@ -1,6 +1,6 @@
 //only for routers
 const {corsOptions, accessAllowed} = require('./accessAllowed.middleware');
-const { errorHandler, logger, errorMainHandler, globalErrorMainHandler } = require('./errorHandlerLogging.middleware');
+const { errorHandler, logger, errorMainHandler, globalErrorMainHandler } = require('./errorHandler.middleware');
 const verifyJWT = require('./verifyJWT.middleware');
 const validatorUser = require('./validatorUser.middlewawre');
 module.exports = {

@@ -1,27 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import { /*useHistory,*/ useParams } from 'react-router-dom';
-import Login from './Login';
-import { io } from "socket.io-client";
+import { useReceiver, receiver, transmitter } from '../Api'
 
-const socket = io('ws://localhost:3500');
+
+import { PopUp, Map } from '../Components';
+import { Axios,  } from '../Api';
+import { DatabaseRequest } from '../Classes';
+import { useAuth, usePlayingTeam } from '../Context';
+import { useGoTo, useTranslation } from '../Hooks';
+
+
 
 export default function AcceptInvitation(){;
     const { playingTeamId } = useParams();
 
-useEffect(() => {
-    socket.on('messageY', text => {
+    const {playingTeam, setPlayingTeam} = usePlayingTeam();
+    const goTo = useGoTo();
+        
+    useEffect(() => {
+        setPlayingTeam({});
 
-        
-        alert(text);
-        
-    });
-}, []);
+    new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+        .GoodResult( (result) => {
+            setPlayingTeam(result);
+            console.log('playingTeam', playingTeam);
+            goTo('/Login')
+        } )
+        .BadResult( (error) => {
+            alert(`no gaming team ${error}`); 
+        } )
+        .Build();
+
+
+    }, [])
+
+    const data = {playingTeamId: playingTeamId }
+
     return (<>
-    {/*<Login playingTeamId="playingTeamId"/> */}
+    {/* <Login playingTeamId="playingTeamId"/> */}
     
-    
-    <button onClick={ () => {
-            socket.emit('messageX', 'text');
-            } }>AAAAAaaa</button>
+    <button onClick={ () =>  transmitter('playingTeamAddUser', data)  }>AAAAAaaa</button>
     </>);
 }

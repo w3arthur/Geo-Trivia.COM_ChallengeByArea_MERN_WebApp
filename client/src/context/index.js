@@ -1,8 +1,10 @@
-import useAuth, {AuthProvider} from './AuthProvider.context';
-import usePlayingTeam, { PlayingTeam } from './PlayingTeam.context';
+import useAuth, {AuthProvider} from './Auth.context';
+import usePlayingTeam, { PlayingTeamProvider } from './PlayingTeam.context';
+import useLoading, { LoadingProvider } from './Loading.context';
+
 
 export {
     AuthProvider, useAuth
-    , PlayingTeam, usePlayingTeam
-
+    , useLoading, LoadingProvider
+    , PlayingTeamProvider, usePlayingTeam
 };

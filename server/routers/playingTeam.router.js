@@ -3,12 +3,10 @@ const radiosPointDiameter = process.env.POINT_DIAMETER;
 const requiredQuestionsQuantity = process.env.QUESTIONS_QUANTITY;
 
 
-
-
 const express = require("express");
 const playingTeamRouter = express.Router();
 
-const { errorHandler } = require('../middlewares/errorHandlerLogging.middleware');
+const { errorHandler } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
 const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../models');
@@ -72,10 +70,12 @@ playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
 
 playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
 .patch(async (req, res, next) => {
-  console.log(':: playing team router put a player');
+  console.log(':: playing team router patch a player acceptance');
   errorHandler(req, res, next)( async () => {
     //link from email
-      const {playingTeam: playingTeamId, player: playerId} = req.body;
+      const {playingTeam : playingTeamData , player : playerData} = req.body;
+      const {_id: playingTeamId} = playingTeamData;
+      const {_id: playerId} = playerData;
       const playingTeam = await PlayingTeamModel.findById(playingTeamId);
       if(!playingTeam) throw new Error(); //no team
       const player = await UserModel.findById(playerId);
@@ -86,6 +86,7 @@ playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
       const result = await PlayingTeamModel.findOneAndUpdate( filter, data );
       if (!result) throw new Error();
 
+      console.log('--------------1111');
       return new Success(200, result);
 
   });
@@ -165,11 +166,6 @@ playingTeamRouter.route('/')
     playerClone.accepted = false;
     playerClone.answers =  playingTeam.answersModel ;
 
-
-
-
-
-
     if(!playingTeam.players.some((x) =>  x.email?.toString() === playerEmail))
     {
     const playerCount = playingTeam.players.length + 1;
@@ -179,7 +175,6 @@ playingTeamRouter.route('/')
     await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
 
     await sendEmail(playingTeamId, playerEmail);
-
     }
 
     const result = await PlayingTeamModel.findById(playingTeamId);
@@ -191,22 +186,18 @@ playingTeamRouter.route('/')
 
 
 
-
-
 playingTeamRouter.route('/:playingTeamId') 
 .get(async (req, res, next) => {
   console.log(':: playing team router get a player');
   errorHandler(req, res, next)( async () => {
     //get all data for app
       const {playingTeamId} = req.params;
-      
       //1- add checker if user not connected more then X time and delete it
-
+      //2- check if the team is from the last 20min!
       const playingTeam = await PlayingTeamModel.findById( playingTeamId );
       if (!playingTeam) throw new Error();
 
       //if all the answers complete, set the boolean to true
-
       return new Success(200, playingTeam);
   });
 })
@@ -216,20 +207,15 @@ playingTeamRouter.route('/:playingTeamId')
     const { playingTeamId } = req.params;
     const { playerId } = req.query;
 
-
     const playingTeam = await PlayingTeamModel.findById(playingTeamId);
     if(!playingTeam || !playerId) throw new Error();
-
    // if( playingTeam.players?.filter((x) => x._id === playerId).length === 0) throw new Error();
-
       const filter = {_id: playingTeamId, };
       const data = { $pull: {players: { _id: playerId } }   }  ;
       const player = await PlayingTeamModel.findOneAndUpdate( filter, data);
-
-
     // const player = await UserModel.updateOne({_id: playingTeamId}, {'$pullAll': { players: [{_id: playerId}] } });
     if(!player) throw new Error();
-    
+
     const result = await PlayingTeamModel.findById( playingTeamId );
 
     if (!result) throw new Error();
