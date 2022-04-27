@@ -7,12 +7,15 @@ import { useReceiver, receiver, transmitter } from '../Api'
 import { PopUp, Map } from '../Components';
 import { Axios,  } from '../Api';
 import { DatabaseRequest } from '../Classes';
-import { useAuth, usePlayingTeam } from '../Context';
+import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 
 
 
 export default function AcceptInvitation(){;
+
+    const { setAxiosLoading } = useLoading();
+
     const { playingTeamId } = useParams();
 
     const {playingTeam, setPlayingTeam} = usePlayingTeam();
@@ -30,7 +33,7 @@ export default function AcceptInvitation(){;
         .BadResult( (error) => {
             alert(`no gaming team ${error}`); 
         } )
-        .Build();
+        .Build(setAxiosLoading);
 
 
     }, [])

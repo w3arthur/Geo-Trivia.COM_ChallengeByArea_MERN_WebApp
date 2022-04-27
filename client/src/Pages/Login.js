@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from "react";
 import { CssBaseline, Box, Button, Typography, TextField, Avatar, Grid, Container } from "@mui/material";
 import * as Icons from "@mui/icons-material/";  //Facebook, Google
 
-import { useAuth } from '../Context';
+import { useAuth, useLoading } from '../Context';
 import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
 import { DatabaseRequest } from '../Classes';
 import { useGoTo , useTranslation } from '../Hooks'
@@ -15,6 +15,8 @@ export default function Registration() {
   const { t } = useTranslation();
 
   const { auth, setAuth } = useAuth();
+  const { setAxiosLoading } = useLoading();
+
   const goTo = useGoTo();
 
   const emailRef = useRef( null );
@@ -27,7 +29,7 @@ export default function Registration() {
 
 
   useEffect(() => {
-    checkAccessToken(auth, setAuth, goTo, setErrMsg);
+    checkAccessToken(auth, setAuth, goTo, setAxiosLoading, setErrMsg);
     console.log('auth' ,auth);
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
@@ -45,7 +47,7 @@ export default function Registration() {
           <CssBaseline />
           <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'  }}> <Icons.LockOutlined /> </Avatar>
 
-          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth ) } noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth, setAxiosLoading ) } noValidate sx={{ mt: 1 }}>
             
             <TextField  autoFocus id="email" autoComplete="email" name="email" inputRef={emailRef}
               label={t("Email")} margin="normal" fullWidth required />
@@ -84,7 +86,7 @@ export default function Registration() {
     </>);
 }
 
-const handleSubmit = (event, setErrMsg, goTo, setAuth, auth) => {
+const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log( { email: data.get('email'), password: data.get('password'), } );
@@ -97,10 +99,10 @@ const handleSubmit = (event, setErrMsg, goTo, setAuth, auth) => {
       goTo("/Location");
       } )
     .BadResult( (error) => { setErrMsg(error); } )
-    .Build();  
+    .Build(setAxiosLoading);  
 };
 
-function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
+function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setErrMsg){
   // not available on POC version!
   // new DatabaseRequest( () => tokenRenewApi() )
   //   .GoodResult( (result) => {
@@ -110,26 +112,26 @@ function checkAccessToken(auth, setAuth, goFrom, setErrMsg){
   //     setAuth( resultClone );
   //     goFrom();
   //     } )
-  //   .Build();
+  //   .Build(setAxiosLoading);
 }
 
 
-const responseFacebook = (response) => {
+const responseFacebook = (response, setAxiosLoading) => {
   console.log(response);
   const data = { accessToken: response.accessToken, userID: response.userID };
   new DatabaseRequest(()=>{Axios('POST', 'http://localhost:3500/api/auth/facebook', data, {})})
   .BadResult((result)=>{  console.log("Facebook login success, client side", result); })
   .GoodResult((error)=>{})
-  .Build();
+  .Build(setAxiosLoading);
 };
 
-const responseSuccessGoogle = (response) => {
+const responseSuccessGoogle = (response, setAxiosLoading) => {
   console.log(response);
   const data = { tokenId: response.tokenId };
   new DatabaseRequest(()=>{Axios('POST', 'http://localhost:3500/api/auth/google', data, {})})
   .BadResult((result)=>{  console.log("Google login success", result); })
   .GoodResult((error)=>{})
-  .Build();
+  .Build(setAxiosLoading);
 };
 
 

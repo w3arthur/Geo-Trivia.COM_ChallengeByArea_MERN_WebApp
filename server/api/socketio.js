@@ -5,7 +5,7 @@ async function ioTransmitter(io, serverMessage, action){
         if(successData)io.emit(serverMessage, successData);
     }catch(message){
         io.emit(serverMessage, {error: true, message: message});
-        console.log(`-errored socket (${message})`);
+        console.log(`-errored socket (${serverMessage})`);
     }
 
 }

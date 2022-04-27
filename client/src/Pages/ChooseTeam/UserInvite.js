@@ -2,13 +2,14 @@ import React, { useState, useRef } from "react";
 import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { useAuth, usePlayingTeam } from '../../Context';
+import { useAuth, usePlayingTeam, useLoading} from '../../Context';
 import { profile } from '../../Images';
 import { Axios, deepCopy  } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
 
 export default function UserInvite ({userArray, setUserArray, playingTeam, setPlayingTeam}) {
     const emailRef = useRef( );
+    const { setAxiosLoading } = useLoading();
     const { auth, setAuth } = useAuth( );
 return(<>
 <Grid container sx={{mb: 1,pl: '3px',}}>
@@ -27,7 +28,7 @@ return(<>
         <IconButton onClick={()=>{ 
          
             
-            handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray)
+            handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading)
 
         }}>
             <Icons.Add sx={{ fontSize: '30pt'}} />
@@ -41,7 +42,7 @@ return(<>
 }
 
 
-const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setErrMsg, ) => {
+const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setErrMsg, ) => {
     //previous checker for array
     const email = emailRef.current.value;
     if(email.trim() === '' || email.trim() === auth.email || userArray.filter((x) => x.email === email.trim()).length !== 0  ) return;
@@ -56,5 +57,5 @@ const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, use
             emailRef.current.focus();
         } )
         .BadResult( (error) => { alert(error); } )
-        .Build();  
+        .Build(setAxiosLoading);  
     };

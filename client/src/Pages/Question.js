@@ -1,27 +1,69 @@
-import React, {} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {Box, Grid, Typography, Button,  Chip, Avatar } from "@mui/material";
 
+
+import { PopUp, } from '../Components';
+import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../Api';
+import { DatabaseRequest } from '../Classes';
+import { useAuth, usePlayingTeam, useLoading } from '../Context';
+import { useGoTo, useTranslation } from '../Hooks';
+
+
+
+
 export default function Question(){
+    const { auth } = useAuth();
+    const { setAxiosLoading } = useLoading();
+    const { playingTeam, setPlayingTeam } = usePlayingTeam();
+
+    const [question, setQuestion] = useState(-1);
+    const [answerSelected, setAnswerSelected] = useState(-1);
+    
+    useReceiver(playingTeam._id ,(x, error) => {
+        if(error) {alert('mistake ');
+        }else if(x.finish){
+            alert('finish')
+        }else if(x.follow){
+        }else if(x.boom){
+        }else if(x.getQuestion){
+            
+            setQuestion(x.currentQuestion);
+            //setAnswer(-1);
+            console.log('question', question);
+
+        }//end if
+    }, []);
+
+    useEffect(() => {
+        getQuestionTransmitter(playingTeam);
+        alert(question)
+        alert( JSON.stringify(playingTeam) )
+    }, [])
+
+    
+
+    //const goTo = useGoTo();
+    function currentQuestion(question){ //for development mode
+        if (question === -1) {return undefined;}
+        else if (!playingTeam.questions) {return undefined;}
+        return playingTeam.questions[question];
+    }
+
     return(<>
-        <QuestionValue>When Tel Aviv established?</QuestionValue>
-
+        <QuestionValue>{currentQuestion(question)?.question}</QuestionValue>
+        
         <Grid container>
-            
-                <Answer number="1" onClick={() => {}}>  1990 fg fdhdf hdhfh dfh df df hdhdfhdfhdfh dhdhdfhdhh </Answer>
-            
-                <Answer number="2" onClick={() => {}}>  1850 </Answer>
-            
-                <Answer number="3" onClick={() => {}}>   1750  </Answer>
-            
-                <Answer number="4" onClick={() => {}}>  1950 </Answer>
-            
+            {currentQuestion(question)?.answers.map((x, i) => (
+                <Answer number={ i + 1 } onClick={() => {
+                    const answer = i;
+                    setAnswerSelected(answer); 
+                    handlePostAnswer({auth, playingTeam, question: question, answer, setAxiosLoading, setAxiosLoading});
+                
+                }}> {x} </Answer>
+            ) ) }
         </Grid>
 
-        <Grid sx={{mt:5, textAlign: 'center', width: '100%'}}>
-            <Submit>Submit</Submit>
-        </Grid>
-
-        <Grid sx={{mt:5, textAlign: 'center', width: '100%'}}>
+        <Grid sx={{mt:7, textAlign: 'center', width: '100%'}}>
             <Helper onClick={() => {}}>50/50</Helper>
             <Helper onClick={() => {}}>Statistic</Helper>
             <Helper onClick={() => {}}>Follow</Helper>
@@ -29,15 +71,40 @@ export default function Question(){
     </>);
 }
 
-function Submit({key, children ,...props}){
-    return(
-        <Button key={key} {...props} variant="contained" sx={{minHeight: 50, fontSize: 25}}>{children}</Button>
-        );
+
+const handlePostAnswer = ({auth, playingTeam : playingTeamData, question : questionValue, answer: answerValue, loader, setAxiosLoading}) => {
+  // language will send with the cookie
+
+
+  const player = auth._id;
+  const playingTeam = playingTeamData._id;
+  const question = questionValue;
+  const answer = answerValue;
+  const data =  {  player,  playingTeam, question, answer };
+  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/answer', data, {}) )
+    .GoodResult( (result) => {
+        getQuestionTransmitter(playingTeamData);
+        alert('34343');
+      } )
+    .BadResult( (error) => { alert(error); } )
+    .Build(setAxiosLoading);  
+};
+
+
+function getQuestionTransmitter(playingTeam){
+    const data = {playingTeam: playingTeam};
+    transmitter('getQuestion', data);
 }
 
-function Helper({key, onClick, children, ...props}){
+// function Submit({key, children ,...props}){
+//     return(
+//         <Button key={key} {...props} variant="contained" sx={{minHeight: 50, fontSize: 25}}>{children}</Button>
+//         );
+// }
+
+function Helper({key, onClick, children, sx, ...props}){
     return(
-        <Button {...props} onClick={onClick} variant="outlined" sx={{m: 2, minHeight: 50, fontSize: 25}}>{children}</Button>
+        <Button {...props} onClick={onClick} variant="outlined" sx={{m: 2, minHeight: 50, fontSize: 25, ...sx}}>{children}</Button>
         );
 }
 
@@ -59,3 +126,5 @@ function Answer({ md, xs ,onClick, children, number ,...props}){
         </Grid>
         );
 }
+
+

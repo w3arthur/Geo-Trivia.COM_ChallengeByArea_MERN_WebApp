@@ -1,28 +1,43 @@
 /* eslint-disable array-callback-return */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { PopUp, Map } from '../../Components';
-import { Axios, deepCopy  } from '../../Api';
+import { PopUp, } from '../../Components';
+import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
-import { useAuth, usePlayingTeam } from '../../Context';
+import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { useGoTo, useTranslation } from '../../Hooks';
 import { profile } from '../../Images';
 
 import UserInvite from './UserInvite';
 import User from './User';
 
+
 export default function ChooseTeam(){
     const { t } = useTranslation();
     const { auth } = useAuth();
+    const { setAxiosLoading } = useLoading();
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
     const [openPopup, setOpenPopup] = useState(false);
-    const handleOpenPopup = () => {  handleCreateTeam(setOpenPopup, setPlayingTeam, auth); };
+    const handleOpenPopup = () => {  handleCreateTeam(setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  ); };
 
     const handleClose = () => {  setOpenPopup(false); };
 
     const [userArray, setUserArray] = useState([]);
+
+    const goTo = useGoTo();
+
+    useReceiver(playingTeam._id ,(x, error) => {
+        if(!openPopup) return;
+        if(error) {alert('mistake ');
+        } else if(x.userAccepted){
+            alert('userAccepted');
+            handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading)
+        } else if(x.playingTeamSet){
+            goTo('/Question');
+        }//end if
+    } , [openPopup]);
 
 return (<>
 <Typography variant="h1" sx={{ fontWeight: "bold" }}> Choose Team </Typography>
@@ -51,9 +66,13 @@ return (<>
 <PopUp open={openPopup} handleClose={handleClose} title="Your Team"  
     handleSubmit={ () => {
         const array = []; 
-        userArray.map( (x) => { x.accepted = true; array.push(x); } ); //delete
+        //basic check if all users approved
+        userArray.map( (x) => {console.log('x', x); x.accepted = true; array.push(x); } ); //delete
         setUserArray(array);
         if( userArray.filter((x) => x.accepted === false).length !== 0 ) return;
+        const data = {playingTeam: playingTeam};
+        transmitter('playingTeamSet', data);
+
     } } submitText="Set Team">
   <Box sx={{minHeight: '300px'}}>
 
@@ -67,7 +86,22 @@ return (<>
 }
 
 
-const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAuth, coordinates, setErrMsg) => {
+function handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading){
+        const playingTeamId = playingTeam._id;
+        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+        .GoodResult( (result) => {
+            const playersArray = result.players;
+            const array = playersArray.filter((x) => x._id !== auth._id)
+            setUserArray(array);
+            alert('handleGetPlayingTeam_renewData v')
+        } )
+        .BadResult( (error) => {
+            alert(`no gaming team ${error}`); 
+        } )
+        .Build(setAxiosLoading);
+}
+
+const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  setErrMsg) => {
   // language will send with the cookie
   const organizer = auth._id;
   const data =  { organizer };
@@ -77,7 +111,7 @@ const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAuth, coordinat
         setOpenPopup(true);
       } )
     .BadResult( (error) => { alert(error); } )
-    .Build();  
+    .Build(setAxiosLoading);  
 };
 
 function SelectionValue({onClick, children, sx ,...props}){

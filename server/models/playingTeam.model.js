@@ -16,10 +16,9 @@ const PlayingTeamSchema = new mongoose.Schema({
   , language: { type: String, index: true }
   , questions: { type: [Object], required: true, index: true }
   // _id: ObjectID, question: String, answers: [String], rightAnswer: Int
-  , currentQuestion: {type: Number, default: 0}   //! count
-  , playerCount: {type: Number, default: 1}
+  , currentQuestion: {type: Number, default: -1}   //! count
+  , playerCount: {type: Number, default: 1} //to delete or do -1 on delete
   , playerAcceptedCount: {type: Number, default: 1}   //! count
-
   //, playerAcceptedCount: { type: [Object], default: false, index: true }
   , allPlayersDone: { type: Boolean, default: false, index: true }
   , gameDone: {type: Boolean, default: false, index: true}

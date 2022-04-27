@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { useAuth, usePlayingTeam } from '../../Context';
+import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { profile } from '../../Images';
 import { Axios, deepCopy  } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
@@ -11,10 +11,12 @@ import { DatabaseRequest } from '../../Classes';
 
 
 export default function User({key, data, userArray, setUserArray}) {
-    const border =  data.accepted ? '3px solid  #187071' : null;
+    const border =  data.accepted ? '3px solid  #187071' : null;    //accepted user
     const {accepted} = data;
+
     const { auth, setAuth } = useAuth();
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
+    const { setAxiosLoading } = useLoading();
 return(<>
 <Grid key={key} container sx={{mb: 1,pl: '3px', border: border, borderRadius: '5px'}}>
     <Grid item xs='1'> 
@@ -34,7 +36,7 @@ return(<>
                 // const array = deepCopy(userArray).filter((x) => x.email !== data.email);
                 // setUserArray(array);
                 
-                handleUserDelete(playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray)
+                handleUserDelete(playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading)
         }} sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
             <Icons.Close sx={{fontSize: '30pt'}} />
         </IconButton>
@@ -46,7 +48,7 @@ return(<>
 }
 
 
-const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setErrMsg, ) => {
+const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading, setErrMsg, ) => {
 
     const playingTeamId = playingTeam._id;
     const playerIdData = playerId;
@@ -59,7 +61,7 @@ const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, 
             setUserArray(array); 
         } )
         .BadResult( (error) => { alert(error); } )
-        .Build();  
+        .Build(setAxiosLoading);  
     };
 
 

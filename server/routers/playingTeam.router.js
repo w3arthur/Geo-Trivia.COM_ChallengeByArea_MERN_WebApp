@@ -1,6 +1,6 @@
 require("dotenv").config();
-const radiosPointDiameter = process.env.POINT_DIAMETER;
-const requiredQuestionsQuantity = process.env.QUESTIONS_QUANTITY;
+const radiosPointDiameter = Number(process.env.POINT_DIAMETER);
+const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
 
 
 const express = require("express");
@@ -19,48 +19,57 @@ playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
   console.log(':: playing team router put a player');
   errorHandler(req, res, next)( async () => {
     //link from email
-    const {playingTeam: playingTeamId, player: playerId, question: questionId, answer: answerValue} = req.body;
+    const {playingTeam: playingTeamId, player: playerId, question: questionNumber, answer: answerValue} = req.body;
     const playingTeam = await PlayingTeamModel.findById(playingTeamId);
     if(!playingTeam) throw new Error(); //no team
     const player = await UserModel.findById(playerId);
     if(!player) throw new Error();  //no user
 
+
+    const questionId = playingTeam.questions[questionNumber]._id;
+    if (!questionId) throw new Error();
+    const currentQuestion = playingTeam.currentQuestion;
     //1- check if the question exist!
 
+    // //Boom
+    // const players = playingTeam.players;
+    // const currentPlayer = players.find( ({_id})=> _id ===  playerId);
+    // if(currentPlayer.currentQuestion === -1 ) return 
+
     const filter1 = {_id: playingTeamId};
-    const data1 = {$set: { "players.$[i].answers.$[j].answer": answerValue }};
+    const data1 = {$set: { "players.$[i].answers.$[j].answer": answerValue, "players.$[i].currentQuestion": currentQuestion}};
     const options1 = { arrayFilters: [{"i._id": playerId},{"j.question": questionId}] };
     const questionUpdate = await PlayingTeamModel.findOneAndUpdate( filter1, data1, options1 );
-    if (!questionUpdate) throw new Error();
+    if (!questionUpdate) throw new Error(); //fix for update errors
 
     const updatedPlayingTeam = await PlayingTeamModel.findById(playingTeamId);
 
     //counter players that answer this question
-    const playersAnswered = [];
-    updatedPlayingTeam.players.map((x) => {
-      x.answers.map((y) => {
-        if(y.question.toString() !== questionId && y.answer > -1 ) playersAnswered.push(x);
-      })
-    });
+    // const playersAnswered = [];
+    // updatedPlayingTeam.players.map((x) => {
+    //   x.answers.map((y) => {
+    //     if(y.question.toString() !== questionId && y.answer > -1 ) playersAnswered.push(x);
+    //   })
+    // });
 
-    console.log(playersAnswered.length)
-    console.log(updatedPlayingTeam.players.length)
-    if (playersAnswered.length === updatedPlayingTeam.players.length) {
-      const filter2 = filter1;
-      const data2 = { $inc: {currentQuestion: 1} }  ;
-      const playingTeam2 = await updatedPlayingTeam.findOneAndUpdate( filter2, data2 )
+    // console.log(playersAnswered.length)
+    // console.log(updatedPlayingTeam.players.length)
+    // if (playersAnswered.length === updatedPlayingTeam.players.length) {
+    //   const filter2 = filter1;
+    //   const data2 = { $inc: {currentQuestion: 1} }  ;
+    //   const playingTeam2 = await updatedPlayingTeam.findOneAndUpdate( filter2, data2 )
 
-      const requiredQuestions = Number(requiredQuestionsQuantity);
-      if(requiredQuestions === playingTeam2.currentQuestion + 1){
-        const filter3 = filter2;
-        const data3 = { $set: {gameDone: true} }  ;
-        const playingTeam3 = await updatedPlayingTeam.findOneAndUpdate( filter3, data3 )
+    //   const requiredQuestions = requiredQuestionsQuantity;
+    //   if(requiredQuestions === playingTeam2.currentQuestion + 1){
+    //     const filter3 = filter2;
+    //     const data3 = { $set: {gameDone: true} }  ;
+    //     const playingTeam3 = await updatedPlayingTeam.findOneAndUpdate( filter3, data3 )
 
-        //1- update Questions Statistic
+    //     //1- update Questions Statistic
+    //   }
+    // }
 
 
-      }
-    }
     return new Success(200, updatedPlayingTeam);
 
   });
@@ -83,10 +92,11 @@ playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
 
       const filter = {_id: playingTeamId, "players._id": playerId};
       const data = { $set: {"players.$.accepted" : true} }  ;
-      const result = await PlayingTeamModel.findOneAndUpdate( filter, data );
-      if (!result) throw new Error();
+      const result1 = await PlayingTeamModel.findOneAndUpdate( filter, data );
+      if (!result1) throw new Error();
 
-      console.log('--------------1111');
+      const result = await PlayingTeamModel.findById(playingTeamId);
+
       return new Success(200, result);
 
   });
@@ -113,8 +123,8 @@ playingTeamRouter.route('/')
       if(!coordinates || coordinates.length === 0) throw new Error();
       
       //set gaming questions by area
-      const radios = Number(radiosPointDiameter); //in KM
-      const requiredQuestions = Number(requiredQuestionsQuantity);
+      const radios = radiosPointDiameter; //in KM
+      const requiredQuestions = requiredQuestionsQuantity;
       const query = { language: organizer.language , location:{$geoWithin : { $centerSphere: [ coordinates, radios ] } } };
         //get areas id for coordinates
       const areasArray = await AreaModel.find( query, {_id: 1} );
@@ -133,16 +143,16 @@ playingTeamRouter.route('/')
       const answersModel = [];
       questions.map( (question) => {
           const answer = {
-            question: question._id.toString()
+            question: question._id.toString() //? the questions are numbered
             , answer: -1
           };
           answersModel.push(answer)
       } );
-
       const organizerClone = JSON.parse(JSON.stringify( organizer ));
-      organizerClone.accepted = true;
-      organizerClone.answers = answersModel;
-      const players = [ organizerClone ];
+      organizerClone.accepted = true; //!
+      organizerClone.currentQuestion = -1;  //!
+      organizerClone.answers = answersModel;  //!
+      const players = [ organizerClone ]; //! first player
       
       const data = {organizer, players, questions, location, language, answersModel};
       
@@ -174,7 +184,7 @@ playingTeamRouter.route('/')
     
     await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
 
-    await sendEmail(playingTeamId, playerEmail);
+    await sendEmail(playerEmail, playingTeamId);
     }
 
     const result = await PlayingTeamModel.findById(playingTeamId);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Typography, TextField, Button, Box, CssBaseline } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { useAuth } from '../Context';
+import { useAuth, useLoading } from '../Context';
 import { userRegisterApi } from '../Api';
 import { DatabaseRequest, User } from '../Classes';
 import { PopUp } from '../Components'
@@ -12,7 +12,7 @@ import { useTranslation } from '../Hooks'
 
 export default function ResterPopUp({open, handleClose}){
   const { t } = useTranslation()
-
+  const { setAxiosLoading } = useLoading();
   const [errMsg, setErrMsg] = useState('');
   const errRef = useRef(' ');
   const nameRef = useRef( null );
@@ -35,7 +35,7 @@ export default function ResterPopUp({open, handleClose}){
             <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'}}> <Icons.LockOutlined /> </Avatar>
             <Typography component="h1" variant="h5"> Sign up </Typography>
 
-            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose)} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose, setAxiosLoading)} sx={{ mt: 3 }}>
               <TextField label="Name" autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
               
               <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>
@@ -63,7 +63,7 @@ export default function ResterPopUp({open, handleClose}){
   );
 };
 
-const handleSubmit = (event, setErrMsg, setAuth, handleClose) => {
+const handleSubmit = (event, setErrMsg, setAuth, handleClose, setAxiosLoading) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });
@@ -84,7 +84,7 @@ const handleSubmit = (event, setErrMsg, setAuth, handleClose) => {
         //goFrom();
       } )
     .BadResult( (error) => { setErrMsg(error); } )
-    .Build();
+    .Build(setAxiosLoading);
 };
 
 

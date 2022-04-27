@@ -1,6 +1,10 @@
+require("dotenv").config();
+const emailAddressReferLink = process.env.EMAIL_REFER_TO;
+
+
 const nodemailer = require("nodemailer");
 
-async function sendEmail(toEmail, teamId ) {
+async function sendEmail( toEmail, teamId ) {
 
   let testAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
@@ -17,9 +21,9 @@ async function sendEmail(toEmail, teamId ) {
   let info = await transporter.sendMail({
     from: '"Geo Trivia Team" <geo.trivia.team@gmail.com>' // sender address
     , to: "w3arthur@gmail.com"//toEmail, // list of receivers
-    , subject: "Game Invitation ✔" // Subject line
-    , text: `Start Playing: ${teamId}` // plain text body
-    , html: `<b>Start Playing:<a href="http:localhost:3000/${teamId}">Trivia Game</a></b>` // html body
+    , subject: `Game Invitation ✔ ${teamId}` // Subject line
+    , text: `Start Playing: ${emailAddressReferLink}${teamId}` // plain text body
+    , html: `<b>Start Playing: <a href="${emailAddressReferLink}${teamId}">Trivia Game ${teamId}</a></b>` // html body
   });
 
   console.log("Message sent: %s", info.messageId);
