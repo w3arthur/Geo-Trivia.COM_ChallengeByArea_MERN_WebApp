@@ -1,17 +1,9 @@
 import { Outlet } from "react-router-dom"
 import {createTheme, ThemeProvider, colors, Container /*, Typography, ButtonGroup, Button, TextField, Grid, Box*/ } from '@mui/material';
 
-export default function Layout ({children}) { return (
-    <main className="App"> 
-        <MuiStyle>
-                
-                {children}
-                <Outlet /> 
-            
-        </MuiStyle>
-    </main>
-)}
-
+export default function Layout ({children}) { return ( <main>
+   <MuiStyle> {children} <Outlet />  </MuiStyle>
+</main>);}
 
 
 function MuiStyle({children}){
@@ -29,8 +21,12 @@ function MuiStyle({children}){
   const fontSizeBigger = '32pt';
   const fontSizeBiggest = '42pt';
   const fontSizeBiggest2 = '36pt';
-  const fontSizeSmall = '18pt';
-  const fontSizeSmaller = '14pt';
+  const fontSizeSmall1 = '21pt';
+  const fontSizeSmall2 = '18pt';
+  const fontSizeSmaller1 = '16pt';
+  const fontSizeSmaller2 = '14pt';
+
+
 
 
   const white = `#ffffff`;
@@ -66,8 +62,8 @@ function MuiStyle({children}){
       , h2: { fontSize:fontSizeBiggest , margin:'auto', textAlign: 'center', fontWeight: 'bold', textShadow: `-1px 1px ${shadow}`   }      
       , h3: { fontSize: fontSizeBigger , margin:'auto', textAlign: 'center', fontWeight: 'bold'}
       , h4: { fontSize: fontSize, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
-      , h5: { fontSize: fontSizeBig, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
-      , map: { fontSize: fontSizeSmaller,  }
+      , h5: { fontSize: fontSizeSmall2, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
+      , map: { fontSize: fontSizeSmaller2,  }
       , body2: { fontSize: fontSize,  color: colors.deepPurple[500] }
     }
     
@@ -155,7 +151,14 @@ function MuiStyle({children}){
           }
         }
       }
+      , MuiTypography:{
+                      styleOverrides: {
+          root: { 
+                      
+          }
+        }
 
+      }
       , MuiButton: {
         styleOverrides: {
           root: { 

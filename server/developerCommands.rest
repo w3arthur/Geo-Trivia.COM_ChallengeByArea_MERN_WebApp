@@ -11,6 +11,16 @@
 @lat = 35
 @long = 34
 
+
+### 
+POST {{hostname}}/api/question/x
+
+{
+
+}
+
+
+
 ### POST Area
 post {{hostname}}/api/area
 Content-Type: application/json

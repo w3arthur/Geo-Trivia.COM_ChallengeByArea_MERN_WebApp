@@ -13,35 +13,30 @@ import { useGoTo, useTranslation } from '../Hooks';
 
 export default function Question(){
     const { auth } = useAuth();
-    const { setAxiosLoading } = useLoading();
+    const { setAxiosLoading, setAlert } = useLoading();
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
 
     const [question, setQuestion] = useState(-1);
     const [answerSelected, setAnswerSelected] = useState(-1);
     
+    const goTo = useGoTo();
+
     useReceiver(playingTeam._id ,(x, error) => {
         if(error) {alert('mistake ');
-        }else if(x.finish){
-            alert('finish')
-        }else if(x.follow){
+        }else if(x.finish){ 
+            goTo('/Results')
+        }else if(x.follow){   
         }else if(x.boom){
-        }else if(x.getQuestion){
-            
+                        //setAnswer(-1);
+        }else if(x.getQuestion){ 
             setQuestion(x.currentQuestion);
-            //setAnswer(-1);
-            console.log('question', question);
-
         }//end if
     }, []);
 
     useEffect(() => {
         getQuestionTransmitter(playingTeam);
-        alert(question)
-        alert( JSON.stringify(playingTeam) )
     }, [])
-
     
-
     //const goTo = useGoTo();
     function currentQuestion(question){ //for development mode
         if (question === -1) {return undefined;}
@@ -49,16 +44,15 @@ export default function Question(){
         return playingTeam.questions[question];
     }
 
-    return(<>
-        <QuestionValue>{currentQuestion(question)?.question}</QuestionValue>
-        
+    return(<div>
+        <QuestionValue >{currentQuestion(question)?.question}</QuestionValue>
+        <div  ></div>
         <Grid container>
             {currentQuestion(question)?.answers.map((x, i) => (
-                <Answer number={ i + 1 } onClick={() => {
+                <Answer number={ i + 1 } onClick={(e) => {
                     const answer = i;
                     setAnswerSelected(answer); 
-                    handlePostAnswer({auth, playingTeam, question: question, answer, setAxiosLoading, setAxiosLoading});
-                
+                    handlePostAnswer({e, auth, playingTeam, setPlayingTeam, question: question, answer, setAxiosLoading, setAlert});
                 }}> {x} </Answer>
             ) ) }
         </Grid>
@@ -68,14 +62,12 @@ export default function Question(){
             <Helper onClick={() => {}}>Statistic</Helper>
             <Helper onClick={() => {}}>Follow</Helper>
         </Grid>
-    </>);
+    </div>);
 }
 
 
-const handlePostAnswer = ({auth, playingTeam : playingTeamData, question : questionValue, answer: answerValue, loader, setAxiosLoading}) => {
+const handlePostAnswer = ({e, auth, playingTeam : playingTeamData, setPlayingTeam, question : questionValue, answer: answerValue, loader, setAxiosLoading, setAlert}) => {
   // language will send with the cookie
-
-
   const player = auth._id;
   const playingTeam = playingTeamData._id;
   const question = questionValue;
@@ -83,10 +75,11 @@ const handlePostAnswer = ({auth, playingTeam : playingTeamData, question : quest
   const data =  {  player,  playingTeam, question, answer };
   new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/answer', data, {}) )
     .GoodResult( (result) => {
+        setPlayingTeam(result);
         getQuestionTransmitter(playingTeamData);
-        alert('34343');
+        setTimeout(() =>{e.target.parentNode.parentNode.blur();}, 500)
       } )
-    .BadResult( (error) => { alert(error); } )
+    .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
 
@@ -96,11 +89,6 @@ function getQuestionTransmitter(playingTeam){
     transmitter('getQuestion', data);
 }
 
-// function Submit({key, children ,...props}){
-//     return(
-//         <Button key={key} {...props} variant="contained" sx={{minHeight: 50, fontSize: 25}}>{children}</Button>
-//         );
-// }
 
 function Helper({key, onClick, children, sx, ...props}){
     return(
@@ -109,10 +97,11 @@ function Helper({key, onClick, children, sx, ...props}){
 }
 
 
-function QuestionValue({ children, ...props}){
+function QuestionValue({ children, ref, ...props}){
     return(
-        <Box style={{  minHeight:'20vh', width: '100%', display: 'flex'}}>
-            <Typography {...props} variant="h4" > {children} </Typography>
+        <Box  style={{  minHeight:'20vh', width: '100%', display: 'flex'}}>
+            <div ref={ref}></div>
+            <Typography  {...props} variant="h4" > {children} </Typography>
         </Box>
         );
 }
@@ -120,7 +109,7 @@ function QuestionValue({ children, ...props}){
 function Answer({ md, xs ,onClick, children, number ,...props}){
     return(
         <Grid item container md={6} xs={12} sx={{p: 2}}  >
-                <Chip {...props} sx={{}} className="answer" onClick={onClick} 
+                <Chip {...props} sx={{}} className="answer" onClick={onClick} component="div"
                     avatar={<Avatar sx={{ bottom: "50%", left: "top" }}><Typography component="div" className="answerNumber">{number}</Typography></Avatar>} 
                     label={<Typography variant="h5" component="div" className="answerValue" >{children}</Typography>} /> 
         </Grid>

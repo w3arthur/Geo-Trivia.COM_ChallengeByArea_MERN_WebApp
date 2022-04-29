@@ -13,6 +13,7 @@ const QuestionModel = mongoose1.model(
     , rightAnswer: { type: Number }
     , approved: { type: Boolean, default: false, index: true }
     , displayedCounter: { type: Number, default: 0 }
+    , statistic: { type: Array }
   })
 );
 

@@ -12,7 +12,7 @@ import { useTranslation } from '../Hooks'
 
 export default function ResterPopUp({open, handleClose}){
   const { t } = useTranslation()
-  const { setAxiosLoading } = useLoading();
+  const { setAxiosLoading, setAlert } = useLoading();
   const [errMsg, setErrMsg] = useState('');
   const errRef = useRef(' ');
   const nameRef = useRef( null );
@@ -35,7 +35,7 @@ export default function ResterPopUp({open, handleClose}){
             <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'}}> <Icons.LockOutlined /> </Avatar>
             <Typography component="h1" variant="h5"> Sign up </Typography>
 
-            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose, setAxiosLoading)} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose, setAxiosLoading, setAlert)} sx={{ mt: 3 }}>
               <TextField label="Name" autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
               
               <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>
@@ -63,7 +63,7 @@ export default function ResterPopUp({open, handleClose}){
   );
 };
 
-const handleSubmit = (event, setErrMsg, setAuth, handleClose, setAxiosLoading) => {
+const handleSubmit = (event, setErrMsg, setAuth, handleClose, setAxiosLoading, setAlert) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({ email: data.get('email'), password: data.get('password'), });
@@ -83,7 +83,7 @@ const handleSubmit = (event, setErrMsg, setAuth, handleClose, setAxiosLoading) =
         handleClose();
         //goFrom();
       } )
-    .BadResult( (error) => { setErrMsg(error); } )
+    .BadResult( (error) => { setErrMsg(error); setAlert(error); } )
     .Build(setAxiosLoading);
 };
 

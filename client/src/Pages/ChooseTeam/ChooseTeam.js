@@ -17,11 +17,11 @@ import User from './User';
 export default function ChooseTeam(){
     const { t } = useTranslation();
     const { auth } = useAuth();
-    const { setAxiosLoading } = useLoading();
+    const { setAxiosLoading, setAlert } = useLoading();
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
     const [openPopup, setOpenPopup] = useState(false);
-    const handleOpenPopup = () => {  handleCreateTeam(setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  ); };
 
+    const handleOpenPopup = () => {  handleCreateTeam(setOpenPopup, setPlayingTeam, auth, setAxiosLoading, setAlert ); };
     const handleClose = () => {  setOpenPopup(false); };
 
     const [userArray, setUserArray] = useState([]);
@@ -29,15 +29,15 @@ export default function ChooseTeam(){
     const goTo = useGoTo();
 
     useReceiver(playingTeam._id ,(x, error) => {
-        if(!openPopup) return;
-        if(error) {alert('mistake ');
-        } else if(x.userAccepted){
-            alert('userAccepted');
-            handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading)
+        if(error) {alert('mistake ');}
+        if(!openPopup){ return;
+        } else if( x.userAccepted){
+            handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading, setAlert);
         } else if(x.playingTeamSet){
             goTo('/Question');
         }//end if
     } , [openPopup]);
+
 
 return (<>
 <Typography variant="h1" sx={{ fontWeight: "bold" }}> Choose Team </Typography>
@@ -50,7 +50,7 @@ return (<>
         </SelectionValue>
     </Grid>
     <Grid item xs={12} sm={6} sx={{p:2}}>
-        <SelectionValue onClick={() => {}}>
+        <SelectionValue onClick={() => { handlePlaySingle(setPlayingTeam, auth, setAxiosLoading, goTo, setAlert ) }}>
         Play <br /> Single <br/>   
         <Box direction="row" sx={{ display:'flex', flexDirection: 'column', alignItems: 'center',}}>
             <Avatar src={profile} sx={{ backgroundColor: "#faae1c"
@@ -65,10 +65,6 @@ return (<>
 
 <PopUp open={openPopup} handleClose={handleClose} title="Your Team"  
     handleSubmit={ () => {
-        const array = []; 
-        //basic check if all users approved
-        userArray.map( (x) => {console.log('x', x); x.accepted = true; array.push(x); } ); //delete
-        setUserArray(array);
         if( userArray.filter((x) => x.accepted === false).length !== 0 ) return;
         const data = {playingTeam: playingTeam};
         transmitter('playingTeamSet', data);
@@ -86,22 +82,34 @@ return (<>
 }
 
 
-function handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading){
+function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert ){
+  const organizer = auth._id;
+  const data =  { organizer };
+  new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {}) )
+    .GoodResult( (result) => {
+        setPlayingTeam(result);
+        goTo('/Question');
+      } )
+    .BadResult( (error) => { setAlert(error); } )
+    .Build(setAxiosLoading);  
+
+}
+
+function handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading, setAlert){
         const playingTeamId = playingTeam._id;
         new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
         .GoodResult( (result) => {
             const playersArray = result.players;
             const array = playersArray.filter((x) => x._id !== auth._id)
             setUserArray(array);
-            alert('handleGetPlayingTeam_renewData v')
         } )
         .BadResult( (error) => {
-            alert(`no gaming team ${error}`); 
+            setAlert(`no gaming team ${error}`); 
         } )
         .Build(setAxiosLoading);
 }
 
-const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  setErrMsg) => {
+const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  setAlert) => {
   // language will send with the cookie
   const organizer = auth._id;
   const data =  { organizer };
@@ -110,7 +118,7 @@ const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  
         setPlayingTeam(result);
         setOpenPopup(true);
       } )
-    .BadResult( (error) => { alert(error); } )
+    .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
 

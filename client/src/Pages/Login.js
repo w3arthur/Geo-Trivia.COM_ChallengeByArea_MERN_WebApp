@@ -15,7 +15,7 @@ export default function Registration() {
   const { t } = useTranslation();
 
   const { auth, setAuth } = useAuth();
-  const { setAxiosLoading } = useLoading();
+  const { setAxiosLoading, setAlert } = useLoading();
 
   const goTo = useGoTo();
 
@@ -30,15 +30,15 @@ export default function Registration() {
 
   useEffect(() => {
     checkAccessToken(auth, setAuth, goTo, setAxiosLoading, setErrMsg);
-    console.log('auth' ,auth);
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     emailRef.current.focus(); 
     }, [handleClose] );
 
+
   return (<>
     
-    <Container >
+    <Container maxWidth="lg">
       <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Login with")} </Typography>
 
       <Grid container>
@@ -47,7 +47,7 @@ export default function Registration() {
           <CssBaseline />
           <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'  }}> <Icons.LockOutlined /> </Avatar>
 
-          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth, setAxiosLoading ) } noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth, setAxiosLoading, setAlert ) } noValidate sx={{ mt: 1 }}>
             
             <TextField  autoFocus id="email" autoComplete="email" name="email" inputRef={emailRef}
               label={t("Email")} margin="normal" fullWidth required />
@@ -77,7 +77,7 @@ export default function Registration() {
            */}
             <Button fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
 
-            <RegisterPopup open={openPopUp} handleClose={handleClose} aria-labelledby="customized-dialog-title" />
+            <RegisterPopup open={openPopUp} handleClose={handleClose}  />
             
           </Box>
         </Grid>
@@ -86,7 +86,7 @@ export default function Registration() {
     </>);
 }
 
-const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading) => {
+const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading, setAlert) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log( { email: data.get('email'), password: data.get('password'), } );
@@ -95,10 +95,9 @@ const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading) =>
       const resultClone = JSON.parse(JSON.stringify(result));
       delete resultClone.password;
       setAuth( resultClone ) //set roll
-      console.log('auth', auth);
       goTo("/Location");
       } )
-    .BadResult( (error) => { setErrMsg(error); } )
+    .BadResult( (error) => { setErrMsg(error); setAlert(error); } )
     .Build(setAxiosLoading);  
 };
 

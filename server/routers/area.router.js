@@ -24,7 +24,7 @@ areaRouter.route('/')   //  localhost:3500/api/area/
       data = {location, country, area };
       
       const result = await AreaModel( data ).save()
-      if(!result) throw new Error();  //to fix
+      if(!result) throw new ErrorHandler(400, 'fail to set the area!'); //fix 
 
       return new Success(200, result);
     });  //error handler 

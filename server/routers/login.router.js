@@ -12,7 +12,6 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-
 function generateAccessToken(user) { return jwt.sign( user, accessTokenSecret, { expiresIn: accessTokenTimeOut } ); }
 const cookieSettings = { httpOnly: true, sameSite: 'None', secure: true, maxAge: cookieTimeout }; 
 
@@ -26,11 +25,11 @@ const validateUser = require('../middlewares/validatorUser.middlewawre')
 
 loginRouter.route('/') //  /api/login
 .post( async (req, res, next) => {
-  // console.log(':: login router post');
+  console.log(':: login router post');
   errorHandler(req, res, next)( async () => {
-    console.log('fgdfgdfgdfgddgfdfg')
-    let email = req.body.email;
-    let user = await UserModel.findOne({ email: email });
+    const {email} = req.body;
+    if (email === '') throw new ErrorHandler(400, 'no email set!');
+    const user = await UserModel.findOne({ email: email });
     if (user === null) throw new ErrorHandler(400, 'user or password is not correct!');
     if(!await bcrypt.compare(req.body.password, user.password)) throw new ErrorHandler(400, 'user or password is not correct!');
     const accessToken = generateAccessToken({ user_id: user._id, email: user.email });
@@ -40,13 +39,11 @@ loginRouter.route('/') //  /api/login
     const data = JSON.parse(JSON.stringify(user));
     data.accessToken = accessToken;
     return new Success(200, data );
-
     });  //error handler
 })
 .patch( (req, res, next) => {
   console.log(':: login router patch');
   errorHandler(req, res, next)( async () => {
-  //console.log('token refresh');
   const refreshToken = ( req.cookies && req.cookies[cookieName]) || req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
   if(!refreshToken) throw new ErrorHandler(401, 'Refresh Token missing.');
     jwt.verify(refreshToken, refreshTokenSecret, (err, userTokenValue) => {

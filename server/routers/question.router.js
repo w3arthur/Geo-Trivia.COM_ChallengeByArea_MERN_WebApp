@@ -11,6 +11,7 @@ const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 
 const { AreaModel, QuestionModel } = require('../models');
 
+
 questionRouter.route('/:language')   //  localhost:3500/api/question
 .get(async (req, res, next) => {
   console.log(':: question router get');
@@ -27,14 +28,14 @@ questionRouter.route('/:language')   //  localhost:3500/api/question
     const areas = await AreaModel.find( query, {_id: 1} );
     const areasId = []; //create array of areas id
     areas.map( x => {areasId.push( x._id )} );
-    if(!areas || areasId.length === 0) throw new Error();
+    if(!areas || areasId.length === 0) throw new ErrorHandler(400, 'no areas for this radios!');
 
     const questions = await QuestionModel.aggregate([
       { $match : { location: { $in: areasId }, language } } //language added
       , { $sample: { size: requiredQuestions } } //random X questions
     ]);
     console.log(questions.length);  //to delete
-    if(!questions || questions.length < requiredQuestions) throw new Error();
+    if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'not enoughs question found for this erea !');
 
     return new Success(200, questions);
   });  //error handler 
@@ -47,11 +48,11 @@ questionRouter.route('/:language')   //  localhost:3500/api/question
     const {location, question, answers, rightAnswer} = req.body;
 
     const areaFound = await AreaModel.findOne({_Id: location});
-    if(!areaFound) throw new Error();
+    if(!areaFound) throw new ErrorHandler(400, 'area not found');
 
     const data = {location, question, answers, rightAnswer, language};
     let result = await new QuestionModel( data ).save();
-    if(!result) new Error();
+    if(!result) new ErrorHandler(400, 'cant save this question');
 
     return new Success(200, result);
   });  //error handler 

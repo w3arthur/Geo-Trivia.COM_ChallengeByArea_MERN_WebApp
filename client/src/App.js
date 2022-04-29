@@ -2,7 +2,7 @@ import React, { Routes, Route /*, useRoutes*/} from "react-router-dom"; // usePa
 
 import { Logo, Loading } from "./Components";
 import { useTranslation } from "./Hooks";
-import { AcceptInvitation ,Home, Login, Location, Question, ChooseTeam } from "./Pages";
+import { AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
 
 import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
@@ -26,6 +26,7 @@ return (<>
             <Route path="/Location" element={<Location />} />
             <Route path="/Question" element={<Question />} />
             {/* Arthur Development! */}
+            <Route path="/Results" element={<Results />} />
             <Route path="/Loading" element={<Loading />} />
             <Route path="/:playingTeamId" element={<AcceptInvitation />} />
           </Route>

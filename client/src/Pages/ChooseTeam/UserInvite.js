@@ -9,7 +9,7 @@ import { DatabaseRequest } from '../../Classes';
 
 export default function UserInvite ({userArray, setUserArray, playingTeam, setPlayingTeam}) {
     const emailRef = useRef( );
-    const { setAxiosLoading } = useLoading();
+    const { setAxiosLoading, setAlert } = useLoading();
     const { auth, setAuth } = useAuth( );
 return(<>
 <Grid container sx={{mb: 1,pl: '3px',}}>
@@ -28,7 +28,7 @@ return(<>
         <IconButton onClick={()=>{ 
          
             
-            handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading)
+            handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert)
 
         }}>
             <Icons.Add sx={{ fontSize: '30pt'}} />
@@ -42,10 +42,10 @@ return(<>
 }
 
 
-const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setErrMsg, ) => {
+const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert, ) => {
     //previous checker for array
     const email = emailRef.current.value;
-    if(email.trim() === '' || email.trim() === auth.email || userArray.filter((x) => x.email === email.trim()).length !== 0  ) return;
+    if(email.trim() === '' || email.trim() === auth.email || userArray.filter((x) => x.email === email.trim()).length !== 0  ) {setAlert('entered existed email address.');return;}
     const playingTeamId = playingTeam._id;
     const playerEmail = email;
     const data = {playingTeamId, playerEmail};
@@ -56,6 +56,6 @@ const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, use
             emailRef.current.value = '';
             emailRef.current.focus();
         } )
-        .BadResult( (error) => { alert(error); } )
+        .BadResult( (error) => { setAlert(error); } )
         .Build(setAxiosLoading);  
     };

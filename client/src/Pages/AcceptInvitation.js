@@ -14,28 +14,24 @@ import { useGoTo, useTranslation } from '../Hooks';
 
 export default function AcceptInvitation(){;
 
-    const { setAxiosLoading } = useLoading();
+    const { setAxiosLoading, setAlert } = useLoading();
 
     const { playingTeamId } = useParams();
 
-    const {playingTeam, setPlayingTeam} = usePlayingTeam();
+    const {invitedTeamId, setInvitedTeamId} = usePlayingTeam();
     const goTo = useGoTo();
         
     useEffect(() => {
-        setPlayingTeam({});
-
-    new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
-        .GoodResult( (result) => {
-            setPlayingTeam(result);
-            console.log('playingTeam', playingTeam);
-            goTo('/Login')
-        } )
-        .BadResult( (error) => {
-            alert(`no gaming team ${error}`); 
-        } )
-        .Build(setAxiosLoading);
-
-
+        setInvitedTeamId({});
+        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+            .GoodResult( (result) => {
+                setInvitedTeamId(result._id);
+                goTo('/Login')
+            } )
+            .BadResult( (error) => {
+                setAlert(`no gaming team ${error}`); 
+            } )
+            .Build(setAxiosLoading);
     }, [])
 
     const data = {playingTeamId: playingTeamId }
@@ -43,6 +39,5 @@ export default function AcceptInvitation(){;
     return (<>
     {/* <Login playingTeamId="playingTeamId"/> */}
     
-    <button onClick={ () =>  transmitter('playingTeamAddUser', data)  }>AAAAAaaa</button>
     </>);
 }
