@@ -10,7 +10,6 @@ import { monkeyLeft, monkeyRight, globe } from '../Images'
 
 import { Axios, useReceiver, receiver, transmitter  } from '../Api';
 
-
 //fake example for database error handler
 const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ];
 
@@ -19,7 +18,7 @@ export default function Location() {
   const { auth , setAuth } = useAuth();
   const {setLoading, setAxiosLoading, setAlert} = useLoading();
 
-  const { invitedTeamId, setInvitedTeamId } = usePlayingTeam();
+  const { invitedTeamId, setInvitedTeamId, setPlayingTeam} = usePlayingTeam();
 
   const goTo = useGoTo();
   
@@ -28,18 +27,18 @@ export default function Location() {
   useReceiver( invitedTeamId ,(x, error) => { 
     if(!invitedTeamId) return;
     const playingTeamId = invitedTeamId;
+    
     if(error){ alert(`error ${error.message}`) 
-    } else if(x.userAccepted === true){ //????
-     // setLoading(false);
-    } else if(x.playingTeamSet === true){
-      setLoading(false);
-      goTo('/Question');
+    } else if(x.userAccepted === true){
+        setLoading(true);
+    } else if(x.playingTeamSet === true){ //????
+        goTo('/Question');
     } //end if
   }, []);
 
   useEffect(() => {   //if set playingTeam !!!
     if(auth && auth._id && invitedTeamId){
-      handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert);
+      handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam);
     } else getAllAreas(geoDataRef, setAxiosLoading, setAlert);
    }, [])
 
@@ -118,10 +117,12 @@ function Selection(props){
 }
 
 
-function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert){
+function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam){
   const data = {player: auth._id, playingTeam: invitedTeamId}
   new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {}) )
   .GoodResult( (result) => {
+    setInvitedTeamId(undefined);
+    setPlayingTeam(result);
     setLoading(true);
     transmitter('playingTeamAddUser', data);
   } )

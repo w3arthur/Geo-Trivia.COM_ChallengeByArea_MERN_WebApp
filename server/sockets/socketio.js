@@ -24,16 +24,19 @@ receiver(socket, 'getQuestion', async (message) =>  {
             (x) => {
                 return x.currentQuestion >= currentQuestion
             }  ); //Fix equality 
+        
+        let stopLoader = false;
         if(currentQuestionFinished.length === players.length ) {    //update question current number
             if(currentQuestion  >= limitOfQuestions - 1 ){  //game end
                 if(!playingTeam.gameDone){ try{await statisticUpgrade(playingTeam)}catch(e){console.log('STATISTIC ERROR')}}
                 return {finish: true}
             }; //game end
             currentQuestion ++;
+            stopLoader = true;
             await PlayingTeamModel.findByIdAndUpdate( playingTeamId, { $set: { currentQuestion: currentQuestion }} );
         }
 
-        return ({getQuestion: true,currentQuestion: currentQuestion}); //start play to all!
+        return ({getQuestion: true,currentQuestion: currentQuestion, stopLoader: stopLoader}); //start play to all!
     });
 });
 
@@ -48,11 +51,8 @@ receiver(socket, 'playingTeamSet', async (message) =>  {
 });
 
 receiver(socket, 'playingTeamAddUser', async (message) =>  {
-    const {player, playingTeam} = message;
-    await transmitter(playingTeam._id, async()=>{
-
-        const playingTeamId = playingTeam._id;
-        const playerId = player._id;
+    const {player: playerId, playingTeam : playingTeamId} = message;
+    await transmitter(playingTeamId, async()=>{
 
         if(!playerId) throw 'no player id';
         if(!playingTeamId) throw 'no playing team id';

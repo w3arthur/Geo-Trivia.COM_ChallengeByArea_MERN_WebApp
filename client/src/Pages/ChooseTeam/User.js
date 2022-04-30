@@ -25,21 +25,18 @@ return(<>
     
     <Grid item xs='8' sm='9' sx={{pl: '3px'}}>
          {/* <Typography variant="h4" sx={{textAlign: 'left', m:3}}>Email</Typography>  */}
-        
         <TextField readOnly disabled value={data.email} fullWidth></TextField>
-
-        </Grid>
+    </Grid>
     <Grid item xs={!accepted ? '1' : '2'}  sx={{zIndex: 1}}>
-        <IconButton onClick={()=>{
+        { !data.accepted ?
+        (<IconButton onClick={()=>{
                 const email = data.email;
                 const playerId = data._id;
-                // const array = deepCopy(userArray).filter((x) => x.email !== data.email);
-                // setUserArray(array);
-                
                 handleUserDelete(playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading)
-        }} sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
+                }} sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
             <Icons.Close sx={{fontSize: '30pt'}} />
-        </IconButton>
+        </IconButton>)
+        : (<></>)}
     </Grid>
     <Grid item xs='1' sm='1' sx={{display: {xs: 'none', sm: 'block'}}}>{ !data.accepted ? (<CircularProgress sx={{mt: 3}} size={34} />) : (<></>) }
     </Grid>
@@ -49,7 +46,6 @@ return(<>
 
 
 const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading, setErrMsg, ) => {
-
     const playingTeamId = playingTeam._id;
     const playerIdData = playerId;
     new DatabaseRequest( () => Axios('DELETE', '/api/playingTeam/' +  playingTeamId + '?playerId=' + playerIdData , {}, {}) )

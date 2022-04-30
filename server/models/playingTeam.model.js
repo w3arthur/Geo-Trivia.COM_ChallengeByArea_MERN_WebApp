@@ -23,7 +23,7 @@ const PlayingTeamSchema = new mongoose.Schema({
   , allPlayersDone: { type: Boolean, default: false, index: true }
   , gameDone: {type: Boolean, default: false, index: true}
   , totalScores: { type: [Number], default: 0, index: true }   //! count
-  , answersModel: { type: Object, require: true }
+  , answersModel: { type: Object, require: true }//set inside playing team and coping to each player
 });
 PlayingTeamSchema.index({location: '2dsphere'});
 

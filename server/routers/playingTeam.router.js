@@ -14,9 +14,55 @@ const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../mo
 const  sendEmail  = require('../api/sendEmail');
 
 
+playingTeamRouter.route('/statistic')  //  localhost:3500/api/playingTeam/statistic
+.patch(async (req, res, next) => {
+  console.log(':: playing team router patch a player statistic helper');
+  errorHandler(req, res, next)( async () => {
+    const {playingTeam: playingTeamId, player: playerId} = req.body;
+    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+    if(!playingTeam) throw new ErrorHandler(400, 'cant find your playing team!'); //no team
+    const player = await UserModel.findById(playerId);
+    if(!player) throw new ErrorHandler(400, 'cant find your user!');  //no user
+
+    const filter0 = {_id: playingTeamId, "players._id": playerId};
+    const data0 = { $set: {"players.$.helpers.statistic" : false} }  ;
+    const result0 = await PlayingTeamModel.findOneAndUpdate( filter0, data0 );
+    if (!result0) throw new ErrorHandler(400, 'cant set your approvement inside playing team!');
+
+    const result = await PlayingTeamModel.findById(playingTeamId);
+
+    return new Success(200, result);
+  });
+});
+
+
+
+playingTeamRouter.route('/h5050')  //  localhost:3500/api/playingTeam/h5050
+.patch(async (req, res, next) => {
+  console.log(':: playing team router patch a player 50/50 helper');
+  errorHandler(req, res, next)( async () => {
+    const {playingTeam: playingTeamId, player: playerId, question: questionNumber} = req.body;
+    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+    if(!playingTeam) throw new ErrorHandler(400, 'cant find your playing team!'); //no team
+    const player = await UserModel.findById(playerId);
+    if(!player) throw new ErrorHandler(400, 'cant find your user!');  //no user
+
+    const filter0 = {_id: playingTeamId, "players._id": playerId};
+    const data0 = { $set: {"players.$.helpers.h5050" : false} }  ;
+    const result0 = await PlayingTeamModel.findOneAndUpdate( filter0, data0 );
+    if (!result0) throw new ErrorHandler(400, 'cant set your approvement inside playing team!');
+
+    const result = await PlayingTeamModel.findById(playingTeamId);
+
+    return new Success(200, result);
+  });
+});
+
+
+
 playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
 .patch(async (req, res, next) => {
-  console.log(':: playing team router put a player');
+  console.log(':: playing team router patch a player answer');
   errorHandler(req, res, next)( async () => {
     //link from email
     const {playingTeam: playingTeamId, player: playerId, question: questionNumber, answer: answerValue} = req.body;
@@ -69,12 +115,21 @@ playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
 });
 
 
+
+const playerAdditionalObject = (answersModel, accepted) => ({
+  accepted: accepted
+  , currentQuestion: -1
+  , answers: answersModel
+  , helpers: { h5050: true, statistic: true, follow: true }
+  , boom: false
+  , timeOut: false
+})
+
 playingTeamRouter.route('/') 
 .post( async (req, res, next) => {  //  localhost:3500/api/playingTeam/
   console.log(':: playing team router post');
   errorHandler(req, res, next)( async () => {
       const {organizer: organizerId} = req.body;
-      
       //get organizer and players data
       const organizer = await UserModel.findById( organizerId );
       if(!organizer || organizer.length === 0) throw new ErrorHandler(400, 'cant find your player!');
@@ -95,33 +150,23 @@ playingTeamRouter.route('/')
       areasArray.map( x => {areas.push( x._id )} ); 
         //get the required random questions from areas
       const questions = await QuestionModel.aggregate([
-          { $match : { location: { $in: areas }, language: language } }
+          { $match : { location: { $in: areas }, language: language, approved: false } }  //change to true!!!
           , { $sample: { size: requiredQuestions } } //random X questions
       ]);
       if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'cant set enough question from data for your area and lang !');
-      
-      //set players, include organizer
-      
 
       const answersModel = [];
       questions.map( (question) => {
-          const answer = {
-            question: question._id.toString() //? the questions are numbered
-            , answer: -1
-          };
+          const answer = { question: question._id.toString(), answer: -1}; //answer to future (patch) set it  id by player
           answersModel.push(answer)
       } );
       const organizerClone = JSON.parse(JSON.stringify( organizer ));
-      organizerClone.accepted = true; //!
-      organizerClone.currentQuestion = -1;  //!
-      organizerClone.answers = answersModel;  //!
-      const players = [ organizerClone ]; //! first player
-      
+      const thisPlayer = {...organizerClone, ...playerAdditionalObject(answersModel, true) };
+
+      const players = [ thisPlayer ]; //! first player
       const data = {organizer, players, questions, location, language, answersModel};
-      
       const result = await new PlayingTeamModel( data ).save();
       if (!result) throw new ErrorHandler(400, 'cant set the playing team');
-
       return new Success(200, result);
   });  //error handler 
 })
@@ -133,25 +178,20 @@ playingTeamRouter.route('/')
     const playingTeam = await PlayingTeamModel.findById(playingTeamId);
     if(!playingTeam) throw new ErrorHandler(400, 'cant find your team');
     const player = await UserModel.findOne({email: playerEmail});
+
     if(!player) throw new ErrorHandler(400, 'cant find the player, the email is wrong!');  //no such player
     const playerClone = JSON.parse(JSON.stringify( player ));
     playerClone.password = '';
-    playerClone.accepted = false;
-    playerClone.answers =  playingTeam.answersModel ;
+    const thisPlayer = { ...playerClone, ...playerAdditionalObject(playingTeam.answersModel, false) }
 
-    if(!playingTeam.players.some((x) =>  x.email?.toString() === playerEmail))
-    {
-    const playerCount = playingTeam.players.length + 1;
-
-    const data = {$push:{players: playerClone}, playerCount};
-    
-    await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
-
-    await sendEmail(playerEmail, playingTeamId);
+    if(!playingTeam.players.some((x) =>  x.email?.toString() === playerEmail)){
+      const playerCount = playingTeam.players.length + 1;
+      const data = {$push:{players: thisPlayer}, playerCount};
+      await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
+      await sendEmail(playerEmail, playingTeamId);
     }
 
     const result = await PlayingTeamModel.findById(playingTeamId);
-
     return new Success(200, result);
   });
 })

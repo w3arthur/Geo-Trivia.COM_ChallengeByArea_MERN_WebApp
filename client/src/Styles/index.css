@@ -8,5 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   
 }
+.recharts-wrapper { margin : 0 auto;} /*centralize the graph*/
 
 .mapboxgl-popup-close-button{ visibility: hidden; } /*fixing map, x hidden*/

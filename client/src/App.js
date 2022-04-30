@@ -1,6 +1,6 @@
 import React, { Routes, Route /*, useRoutes*/} from "react-router-dom"; // useParams,
 
-import { Logo, Loading } from "./Components";
+import { Logo, Loading, Chart } from "./Components";
 import { useTranslation } from "./Hooks";
 import { AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
@@ -28,6 +28,9 @@ return (<>
             {/* Arthur Development! */}
             <Route path="/Results" element={<Results />} />
             <Route path="/Loading" element={<Loading />} />
+
+            <Route path="/Chart" element={<Chart />} />
+
             <Route path="/:playingTeamId" element={<AcceptInvitation />} />
           </Route>
       </Route>

@@ -87,7 +87,7 @@ function MuiStyle({children}){
             , boxShadow: `1px 2px 0px 0px ${shadow}`  
             , "&:hover ":{
               backgroundColor: `${mainColorLighter} ! important`
-              , '.MuiAvatar-root': { backgroundColor: `${mainColorLighter}` }
+             // , '.MuiAvatar-root': { backgroundColor: `${mainColorLighter}` }
               }
             , '&:active': {
               boxShadow: 'none'

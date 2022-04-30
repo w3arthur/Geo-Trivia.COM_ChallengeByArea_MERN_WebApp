@@ -25,12 +25,7 @@ return(<>
     </Grid>
     <Grid item xs='1' sm='1' sx={{zIndex: 1}}>
     <Box sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
-        <IconButton onClick={()=>{ 
-         
-            
-            handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert)
-
-        }}>
+        <IconButton onClick={()=>{ handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert) }}>
             <Icons.Add sx={{ fontSize: '30pt'}} />
         </IconButton>
     </Box> 
@@ -45,7 +40,9 @@ return(<>
 const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert, ) => {
     //previous checker for array
     const email = emailRef.current.value;
-    if(email.trim() === '' || email.trim() === auth.email || userArray.filter((x) => x.email === email.trim()).length !== 0  ) {setAlert('entered existed email address.');return;}
+    if(email.trim() === ''){setAlert('entered empty email address.');return;}
+    if(email.trim() === auth.email){setAlert('entered your email address.');return;}
+    if(userArray.filter((x) => x.email === email.trim()).length !== 0){setAlert('entered existed email address.');return;}
     const playingTeamId = playingTeam._id;
     const playerEmail = email;
     const data = {playingTeamId, playerEmail};

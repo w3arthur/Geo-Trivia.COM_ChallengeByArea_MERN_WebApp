@@ -27,7 +27,6 @@ export default function ChooseTeam(){
     const [userArray, setUserArray] = useState([]);
 
     const goTo = useGoTo();
-
     useReceiver(playingTeam._id ,(x, error) => {
         if(error) {alert('mistake ');}
         if(!openPopup){ return;
@@ -37,7 +36,6 @@ export default function ChooseTeam(){
             goTo('/Question');
         }//end if
     } , [openPopup]);
-
 
 return (<>
 <Typography variant="h1" sx={{ fontWeight: "bold" }}> Choose Team </Typography>
@@ -62,20 +60,15 @@ return (<>
         </SelectionValue>
     </Grid>
 </Grid>
-
 <PopUp open={openPopup} handleClose={handleClose} title="Your Team"  
     handleSubmit={ () => {
-        if( userArray.filter((x) => x.accepted === false).length !== 0 ) return;
+        if( userArray.filter((x) => x.accepted === false).length !== 0 ){setAlert('Please wait until all the players will accept the invitation');return};
         const data = {playingTeam: playingTeam};
         transmitter('playingTeamSet', data);
-
     } } submitText="Set Team">
   <Box sx={{minHeight: '300px'}}>
-
     <UserInvite playingTeam={playingTeam} setPlayingTeam={setPlayingTeam} userArray={userArray} setUserArray={ setUserArray } />
-    
     { userArray.reverse().map((player)=>{ return (<User key={player._id} playingTeam={playingTeam} setPlayingTeam={setPlayingTeam} data={player} userArray={userArray} setUserArray={setUserArray}  />) }) }
-
   </Box>
 </PopUp>
 </>);
