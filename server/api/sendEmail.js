@@ -20,7 +20,7 @@ async function sendEmail( toEmail, teamId ) {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Geo Trivia Team" <geo.trivia.team@gmail.com>' // sender address
-    , to: "w3arthur@gmail.com"//toEmail, // list of receivers
+    , to: toEmail //toEmail, // list of receivers
     , subject: `Game Invitation ✔ ${teamId}` // Subject line
     , text: `Start Playing: ${emailAddressReferLink}${teamId}` // plain text body
     , html: `<b>Start Playing: <a href="${emailAddressReferLink}${teamId}">Trivia Game ${teamId}</a></b>` // html body

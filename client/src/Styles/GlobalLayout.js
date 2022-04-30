@@ -15,6 +15,7 @@ function MuiStyle({children}){
   const mainColorText2 = `#e0b002`;
   const mainColorText3 = `#8c6e00`;
   const purple = `#6c059c`;
+  const purple2 = colors.deepPurple[500];
 
   const fontSize = '24pt';
   const fontSizeBig = '29pt';
@@ -64,7 +65,8 @@ function MuiStyle({children}){
       , h4: { fontSize: fontSize, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
       , h5: { fontSize: fontSizeSmall2, margin:'auto', textAlign: 'center', fontWeight: 'bold' }
       , map: { fontSize: fontSizeSmaller2,  }
-      , body2: { fontSize: fontSize,  color: colors.deepPurple[500] }
+      , body1: { fontSize: fontSizeSmall2,  color: purple }
+      , body2: { fontSize: fontSize,  purple }
     }
     
 , components: {

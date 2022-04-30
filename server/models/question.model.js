@@ -14,6 +14,7 @@ const QuestionModel = mongoose1.model(
     , approved: { type: Boolean, default: false, index: true }
     , displayedCounter: { type: Number, default: 0 }
     , statistic: { type: Array }
+    , sender: { type: mongoose.ObjectId, index: true}
   })
 );
 

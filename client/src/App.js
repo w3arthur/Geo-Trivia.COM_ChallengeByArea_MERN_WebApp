@@ -1,8 +1,8 @@
 import React, { Routes, Route /*, useRoutes*/} from "react-router-dom"; // useParams,
 
-import { Logo, Loading, Chart } from "./Components";
+import { AddQuestion, Logo, Loading, Chart } from "./Components";
 import { useTranslation } from "./Hooks";
-import { AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results } from "./Pages";
+import {AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results, Community } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
 
 import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
@@ -25,7 +25,12 @@ return (<>
             <Route path="/Choose" element={<ChooseTeam />} />
             <Route path="/Location" element={<Location />} />
             <Route path="/Question" element={<Question />} />
+            
+            
+            
             {/* Arthur Development! */}
+            <Route path="/AddQuestion" element={<AddQuestion />} />
+            <Route path="/Community" element={<Community />} />
             <Route path="/Results" element={<Results />} />
             <Route path="/Loading" element={<Loading />} />
 

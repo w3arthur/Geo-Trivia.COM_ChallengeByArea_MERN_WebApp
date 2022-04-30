@@ -1,5 +1,6 @@
 import AcceptInvitation from "./AcceptInvitation";
 import ChooseTeam from "./ChooseTeam/ChooseTeam";
+import Community from "./Community";
 import Error from "./Error";
 import Home from "./Home";
 import Location from "./Location";
@@ -8,4 +9,4 @@ import Question from "./Question";
 import RegisterPopup from "./RegisterPopup";
 import Results from "./Results"
 
-export { AcceptInvitation, ChooseTeam, Error, Home, Location, Login, Question, RegisterPopup, Results };
+export { AcceptInvitation, ChooseTeam, Community, Error, Home, Location, Login, Question, RegisterPopup, Results };

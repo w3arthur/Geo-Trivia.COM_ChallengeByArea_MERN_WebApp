@@ -1,5 +1,15 @@
 require("dotenv").config();
-const radiosPointDiameter = Number(process.env.POINT_DIAMETER);
+const radiosPointDiameter = [
+  Number(process.env.POINT_DIAMETER1)
+  ,Number(process.env.POINT_DIAMETER2)
+  ,Number(process.env.POINT_DIAMETER3)
+  ,Number(process.env.POINT_DIAMETER4)
+  ,Number(process.env.POINT_DIAMETER5)
+  ,Number(process.env.POINT_DIAMETER6)
+  ,Number(process.env.POINT_DIAMETER7)
+  ,Number(process.env.POINT_DIAMETER8)
+  ,Number(process.env.POINT_DIAMETER9)
+];
 const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
 
 
@@ -115,7 +125,6 @@ playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
 });
 
 
-
 const playerAdditionalObject = (answersModel, accepted) => ({
   accepted: accepted
   , currentQuestion: -1
@@ -135,7 +144,7 @@ playingTeamRouter.route('/')
       if(!organizer || organizer.length === 0) throw new ErrorHandler(400, 'cant find your player!');
       organizer.password = '';
           //get gaming language and  location
-      const {language, location} = organizer;
+      const {language, location} = organizer; //language Updated with location inside the user (organizer!)
       if( !language ) throw new ErrorHandler(400, 'cant find your language data!');
       const {coordinates} = location;
       if(!coordinates || coordinates.length === 0) throw new ErrorHandler(400, 'cant find your coordinates data!');
@@ -143,17 +152,34 @@ playingTeamRouter.route('/')
       //set gaming questions by area
       const radios = radiosPointDiameter; //in KM
       const requiredQuestions = requiredQuestionsQuantity;
-      const query = { language: organizer.language , location:{$geoWithin : { $centerSphere: [ coordinates, radios ] } } };
-        //get areas id for coordinates
-      const areasArray = await AreaModel.find( query, {_id: 1} );
-      const areas = [];
-      areasArray.map( x => {areas.push( x._id )} ); 
-        //get the required random questions from areas
-      const questions = await QuestionModel.aggregate([
-          { $match : { location: { $in: areas }, language: language, approved: false } }  //change to true!!!
-          , { $sample: { size: requiredQuestions } } //random X questions
+
+    //find the questions
+    let i = 0;
+    let areas, questions;
+    const radiosArray = radiosPointDiameter;
+    while(i < radiosArray.length){  //find questions for founded areas
+      while(i < radiosArray.length){  //find areas for i radios
+        const query = { location:{$geoWithin : { $centerSphere: [ coordinates, radiosArray[i] ] } } };
+        areas = await AreaModel.find( query, {_id: 1} );    //find areas id in near radios
+        if(!areas || areas.length === 0) i++;
+        else break;
+        }
+      const areasId = []; //create array of areas id
+      areas.map( x => {areasId.push( x._id )} );
+      if(!areas || areasId.length === 0) throw new ErrorHandler(400, 'no areas for this radios!');
+
+      questions = await QuestionModel.aggregate([
+        { $match : { location: { $in: areasId }, language: language, approved: false } } //language added
+        , { $sample: { size: requiredQuestions } } //random X questions
       ]);
-      if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'cant set enough question from data for your area and lang !');
+      console.log(questions.length);
+      if(!questions || questions.length < requiredQuestions) i++;
+      else break;
+      }
+      
+    if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'not enoughs question found for this erea !');
+
+
 
       const answersModel = [];
       questions.map( (question) => {

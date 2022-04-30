@@ -83,7 +83,7 @@ return (<>
     ) : null}
 </ReactMapGL>
 
-<Box> Selected: { mapSelectedCountry? mapSelectedCountry?._id+' '+mapSelectedCountry?.area+' '+JSON.stringify(mapSelectedCountry?.location?.coordinates) : JSON.stringify(mapYourCoordinates) } </Box>
+<Box> { mapSelectedCountry? mapSelectedCountry?.area+' '+JSON.stringify(mapSelectedCountry?.location?.coordinates) : JSON.stringify(mapYourCoordinates) } </Box>
 
 </>);
 }

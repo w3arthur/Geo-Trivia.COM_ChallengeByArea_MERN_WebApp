@@ -9,6 +9,7 @@ const AreaSchema = new mongoose.Schema({
   , country: { type: String, trim: true, required: true, index: true }
   , area: { type: String, trim: true, required: true, index: true }
   , totalScore: { type: Number, default: 0, index: true }
+  , waitingToExpertApproveQuestions: { type: [mongoose.ObjectId], default: 0, index: true }
 });
 AreaSchema.index({location: '2dsphere'});
 

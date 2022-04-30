@@ -1,6 +1,6 @@
+const languageCookieName = 'i18next';
+
 require("dotenv").config();
-
-
 const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
 
 const radiosPointDiameter = [
@@ -21,47 +21,25 @@ const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { AreaModel, QuestionModel } = require('../models');
 
 
-questionRouter.route('/:language')   //  localhost:3500/api/question
+questionRouter.route('/:language')  //to delete  //  localhost:3500/api/question
 .get(async (req, res, next) => {
   console.log(':: question router get');
   errorHandler(req, res, next)( async () => {
-    const radiosArray = radiosPointDiameter; //in KM
-    const requiredQuestions = requiredQuestionsQuantity;
-    const {language} = req.params;
-    const {lat, long} = req.query;
-    const coordinates = [Number(lat), Number(long)];
-
-    let i = 0;
-    let areas, questions;
-    while(i < radiosArray.length){  //find questions for founded areas
-      while(i < radiosArray.length){  //find areas for i radios
-        const query = { location:{$geoWithin : { $centerSphere: [ coordinates, radiosArray[i] ] } } };
-        areas = await AreaModel.find( query, {_id: 1} );    //find areas id in near radios
-        if(!areas || areas.length === 0) i++;
-        else break;
-        }
-      const areasId = []; //create array of areas id
-      areas.map( x => {areasId.push( x._id )} );
-      if(!areas || areasId.length === 0) throw new ErrorHandler(400, 'no areas for this radios!');
-
-      questions = await QuestionModel.aggregate([
-        { $match : { location: { $in: areasId }, language } } //language added
-        , { $sample: { size: requiredQuestions } } //random X questions
-      ]);
-      console.log(questions.length);
-      if(!questions || questions.length < requiredQuestions) i++;
-      else break;
-      }
-      
-    if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'not enoughs question found for this erea !');
+ ///? to delete
     return new Success(200, questions);
   });  //error handler 
-})
+});
+
+questionRouter.route('/') 
 .post(async (req, res, next) => {
   console.log(':: question router post');
   errorHandler(req, res, next)( async () => {
-    const {language} = req.params;
-    //const {} = req.query;
+
+    const language = ( req.cookies && req.cookies[languageCookieName]) || req.body['language'] || req.query['language'] || req.params['language'];
+    console.log(language);
+
+    if(!language) throw new ErrorHandler(400, 'language not set'); //check if found this language
+
     const {location, question, answers, rightAnswer} = req.body;
 
     const areaFound = await AreaModel.findOne({_Id: location});
@@ -73,6 +51,9 @@ questionRouter.route('/:language')   //  localhost:3500/api/question
     const data = {location, question, answers, rightAnswer, language, statistic};
     let result = await new QuestionModel( data ).save();
     if(!result) new ErrorHandler(400, 'cant save this question');
+
+    const updateArea = await AreaModel.findByIdAndUpdate(location, {$addToSet: {waitingToExpertApproveQuestions: result._id}});
+    if(!updateArea) new ErrorHandler(400, 'cant update this question for experts');
 
     return new Success(200, result);
   });  //error handler 
