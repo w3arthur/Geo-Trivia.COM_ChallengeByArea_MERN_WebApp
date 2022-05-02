@@ -1,7 +1,7 @@
 import React from "react";
 
 import PropTypes from 'prop-types';
-import { Button, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { Box, Button, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import * as Icons from '@mui/icons-material';
 
@@ -10,8 +10,8 @@ export default function PopUp({open, handleClose, title, children, handleSubmit,
     <div>
       <BootstrapDialog  PaperProps = {{sx:  {minHeight : '300px'}}} fullWidth={true}  open={open} onClose={handleClose} aria-labelledby="customized-dialog-title" >
         <PopUpTitle    onClose={handleClose} > {title}<br /> </PopUpTitle> 
-        <DialogContent   dividers> {children} </DialogContent>
-        <DialogActions> <Button  sx={{height: '28px', mt: '8px', mb: '8px'}} autoFocus onClick={handleSubmit}> {submitText} </Button> </DialogActions>
+        <DialogContent dividers><Box sx={{minHeight: '300px'}}> {children} </Box></DialogContent>
+        <DialogActions> {submitText ? (<Button startIcon={<Icons.Check/>} sx={{height: '28px', mt: '8px', mb: '8px'}} autoFocus onClick={handleSubmit}> {submitText} </Button>) : (<></>)} </DialogActions>
       </BootstrapDialog>
     </div>
   );

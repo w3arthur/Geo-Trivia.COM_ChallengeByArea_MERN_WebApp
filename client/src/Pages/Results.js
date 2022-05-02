@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
 
-
 import React, { useState, useRef, useEffect } from "react";
 import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography, Container } from "@mui/material";
+import * as Icons from '@mui/icons-material';
 
 import { PopUp, } from '../Components';
 import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../Api';
@@ -47,7 +47,7 @@ return (<> <Grid container sx={{minHeight: 400}}>
                 return( <Result you={i === 0 ? true : false} email={player.email} score={counter} questionsAnswered = {counter} questionsTotal = {questionsTotal} /> );
                 })
             }
-            <Button variant="contained" onClick={() => {goTo('/Location')}} sx={{m:4}}>Back to Location Select</Button>
+            <Button startIcon={<Icons.ArrowBack/>} variant="contained" onClick={() => {goTo('/Location')}} sx={{m:4}}>Back to Location Select</Button>
         </Container>
     </Grid>
     <Grid item container xs={12} md={3}  sx={{verticalAlign:'middle', minHeight: '300px', backgroundColor:'lightGray',  borderRadius: '10px'}}>

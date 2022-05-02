@@ -54,7 +54,7 @@ export default function ResterPopUp({open, handleClose}){
 
               <Box sx={{ textAlign: 'center', width: '100%'}}>
                 <Typography variant="body2" color="primary" ref={errRef}>|{errMsg}|</Typography>
-                <Button ref={registerButtonRef} type="submit" variant="contained"> {t('Registration')} </Button>
+                <Button startIcon={<Icons.PersonAddAlt/>} ref={registerButtonRef} type="submit" variant="contained"> {t('Registration')} </Button>
               </Box>
           </Box>
         </Box>

@@ -54,15 +54,12 @@ const handleShowQuestions = () => {
    
 return (<>
     
-    <Box sx={{ textAlign: 'center', width: '100%'}}>
-    <Button onClick={handleClick_openFromMapPopup} variant="contained"> Add Your Question </Button>
-    </Box>
-
+    <Box sx={{ textAlign: 'center', width: '100%'}}> <Button startIcon={<Icons.NoteAdd/>} onClick={handleClick_openFromMapPopup} variant="contained"> Add Your Question </Button> </Box>
 
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <Tabs value={value} onChange={handleChange} sx={{backgroundColor: 'azure'}} centered>
-        <Tab label={<Typography variant='h5' color='primary'>Last Questions</Typography>} color='prime' sx={{width: '50%', fontSize: '20pt',}} />
-        <Tab label={<Typography variant='h5' color='primary'>Experts Area</Typography>} sx={{width: '50%', fontSize: '20pt'}} />
+        <Tab label={<Typography variant='h5' color='primary'><Icons.Extension /> Last Questions</Typography>} color='prime' sx={{width: '50%', fontSize: '20pt',}} />
+        <Tab label={<Typography variant='h5' color='primary'><Icons.Explore /> Experts Area</Typography>} sx={{width: '50%', fontSize: '20pt'}} />
       </Tabs>
 
         <TabPanel value={value} index={0}> Last Questions Here </TabPanel>
@@ -128,7 +125,7 @@ function VerticalTabs() {
 function QuestionExample({value}){
 
     return (<>
-        {value} <br/> <Button variant="contained" size="small">Accept</Button> <br />
+        {value} <br/> <Button startIcon={<Icons.CheckBox/>} variant="contained" size="small">Accept</Button> <br />
     </>);
 }
 

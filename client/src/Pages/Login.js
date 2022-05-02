@@ -59,7 +59,7 @@ export default function Registration() {
             
             <Typography variant="body2" color="primary" ref={errRef} >|{errMsg}|</Typography>
             
-            <Button  type="submit" fullWidth variant="contained" > Sign In </Button>
+            <Button startIcon={<Icons.Login/>}  type="submit" fullWidth variant="contained" > Sign In </Button>
 
           </Box>
           {/*<Link to="/Registration" onClick={() => loginHandler( form )}> {t("Login")} </Link>*/}
@@ -75,7 +75,7 @@ export default function Registration() {
             <GoogleLogin  clientId="602070662525-cg5up3456lcbdngu7nhji2j6inpi8t1b.apps.googleusercontent.com"
               buttonText="Google" onSuccess={responseSuccessGoogle} onFailure={responseErrorGoogle} cookiePolicy={"single_host_origin"} />
            */}
-            <Button fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
+            <Button startIcon={<Icons.SwitchAccount/>} fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
 
             <RegisterPopup open={openPopUp} handleClose={handleClose}  />
             

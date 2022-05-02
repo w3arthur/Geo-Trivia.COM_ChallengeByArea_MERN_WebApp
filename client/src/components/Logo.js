@@ -16,36 +16,9 @@ export default function Logo () {
 
  return(<>
 
-
-
-
-
-
-
-
-
-
   <div className="logo">
       <LanguageFlags />
- </div>
-
-<Outlet/>
- 
-
-<br /><br />
-
-<AppBar position="static">
-  <Toolbar variant="dense">
-    <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-      <Icons.Menu />
-    </IconButton>
-    <Typography variant="h6" color="inherit" component="div">
-      Geo-Trivia.com
-    </Typography>
-  </Toolbar>
-</AppBar>
-<br />
-<br />
+  </div>
 
 
  </>);}

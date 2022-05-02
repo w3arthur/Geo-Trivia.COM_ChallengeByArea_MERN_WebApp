@@ -1,5 +1,6 @@
 import React, {useRef, useEffect, useState} from "react";
 import { Grid, Card, Chip , Paper, Link, Box, Button, Typography, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import * as Icons from "@mui/icons-material/"; 
 import ReactMapGL, { Marker, Popup/*, flyto*/ } from "react-map-gl";
 import mapboxgl from 'mapbox-gl';
 
@@ -59,7 +60,7 @@ return (<>
                 </Select>
             </FormControl>)
         : show === 'yourLocation' ? (
-            <Button variant='contained' size= 'small' onClick={e => { e.preventDefault(); (async() => { const area = await getCoords(); setAreaYourCoords(area);  })() }}>
+            <Button startIcon={<Icons.Public/>} variant='contained' size= 'small' onClick={e => { e.preventDefault(); (async() => { const area = await getCoords(); setAreaYourCoords(area);  })() }}>
                 Your area
             </Button> )
         : (<></>) }

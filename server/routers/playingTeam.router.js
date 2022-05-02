@@ -24,6 +24,50 @@ const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../mo
 const  sendEmail  = require('../api/sendEmail');
 
 
+
+playingTeamRouter.route('/x')  //  localhost:3500/api/playingTeam/x
+.post(async (req, res, next) => {
+  console.log(':: playing team router patch a player follow helper');
+  errorHandler(req, res, next)( async () => {
+    const limitOfQuestions = 99;
+    const playingTeamId = '626c48f4adbdf0befa2ebc12';
+    const playerId = '6267487ecd562f04598649d1';
+
+    const filter0 = {_id: playingTeamId, "players._id": playerId};
+    const data0 = { $set: {"players.$.answers.$[].answer" : -1, "players.$.boom": true, "players.$.currentQuestion": limitOfQuestions - 1 } }  ;
+    const result0 = await PlayingTeamModel.findOneAndUpdate( filter0, data0 );
+
+
+    return new Success(200, result0);  //change to 'OK'
+  });
+});
+
+
+
+
+
+playingTeamRouter.route('/follow')  //  localhost:3500/api/playingTeam/follow
+.patch(async (req, res, next) => {
+  console.log(':: playing team router patch a player follow helper');
+  errorHandler(req, res, next)( async () => {
+    const {playingTeam: playingTeamId, player: playerId, question: questionNumber} = req.body;
+    const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+    if(!playingTeam) throw new ErrorHandler(400, 'cant find your playing team!'); //no team
+    const player = await UserModel.findById(playerId);
+    if(!player) throw new ErrorHandler(400, 'cant find your user!');  //no user //check also if player inside the playing team
+
+    const filter0 = {_id: playingTeamId, "players._id": playerId};
+    const data0 = { $set: {"players.$.helpers.follow" : false} }  ;
+    const result0 = await PlayingTeamModel.findOneAndUpdate( filter0, data0 );
+    if (!result0) throw new ErrorHandler(400, 'cant set your approvement inside playing team!');
+
+    const result = await PlayingTeamModel.findById(playingTeamId);  //change to 'OK' instead rechecking
+    return new Success(200, result);  //change to 'OK'
+  });
+});
+
+
+
 playingTeamRouter.route('/statistic')  //  localhost:3500/api/playingTeam/statistic
 .patch(async (req, res, next) => {
   console.log(':: playing team router patch a player statistic helper');
@@ -138,20 +182,19 @@ playingTeamRouter.route('/')
 .post( async (req, res, next) => {  //  localhost:3500/api/playingTeam/
   console.log(':: playing team router post');
   errorHandler(req, res, next)( async () => {
-      const {organizer: organizerId} = req.body;
-      //get organizer and players data
-      const organizer = await UserModel.findById( organizerId );
-      if(!organizer || organizer.length === 0) throw new ErrorHandler(400, 'cant find your player!');
-      organizer.password = '';
-          //get gaming language and  location
-      const {language, location} = organizer; //language Updated with location inside the user (organizer!)
-      if( !language ) throw new ErrorHandler(400, 'cant find your language data!');
-      const {coordinates} = location;
-      if(!coordinates || coordinates.length === 0) throw new ErrorHandler(400, 'cant find your coordinates data!');
-      
-      //set gaming questions by area
-      const radios = radiosPointDiameter; //in KM
-      const requiredQuestions = requiredQuestionsQuantity;
+    const {organizer: organizerId} = req.body;
+    //get organizer and players data
+    const organizer = await UserModel.findById( organizerId );
+    if(!organizer || organizer.length === 0) throw new ErrorHandler(400, 'cant find your player!');
+    organizer.password = '';
+        //get gaming language and  location
+    const {language, location} = organizer; //language Updated with location inside the user (organizer!)
+    if( !language ) throw new ErrorHandler(400, 'cant find your language data!');
+    const {coordinates} = location;
+    if(!coordinates || coordinates.length === 0) throw new ErrorHandler(400, 'cant find your coordinates data!');
+    //set gaming questions by area
+    const radios = radiosPointDiameter; //in KM
+    const requiredQuestions = requiredQuestionsQuantity;
 
     //find the questions
     let i = 0;
@@ -167,7 +210,6 @@ playingTeamRouter.route('/')
       const areasId = []; //create array of areas id
       areas.map( x => {areasId.push( x._id )} );
       if(!areas || areasId.length === 0) throw new ErrorHandler(400, 'no areas for this radios!');
-
       questions = await QuestionModel.aggregate([
         { $match : { location: { $in: areasId }, language: language, approved: false } } //language added
         , { $sample: { size: requiredQuestions } } //random X questions
@@ -177,9 +219,7 @@ playingTeamRouter.route('/')
       else break;
       }
       
-    if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'not enoughs question found for this erea !');
-
-
+      if(!questions || questions.length < requiredQuestions) throw new ErrorHandler(400, 'not enoughs question found for this erea !');
 
       const answersModel = [];
       questions.map( (question) => {
@@ -216,7 +256,6 @@ playingTeamRouter.route('/')
       await PlayingTeamModel.findOneAndUpdate( {_id: playingTeamId} , data );
       await sendEmail(playerEmail, playingTeamId);
     }
-
     const result = await PlayingTeamModel.findById(playingTeamId);
     return new Success(200, result);
   });

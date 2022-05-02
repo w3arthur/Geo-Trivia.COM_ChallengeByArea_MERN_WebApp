@@ -31,7 +31,7 @@ export default function ChooseTeam(){
         if(error) {alert('mistake ');}
         if(!openPopup){ return;
         } else if( x.userAccepted){
-            handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading, setAlert);
+            handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUserArray, setAxiosLoading, setAlert);
         } else if(x.playingTeamSet){
             goTo('/Question');
         }//end if
@@ -62,6 +62,7 @@ return (<>
 </Grid>
 <PopUp open={openPopup} handleClose={handleClose} title="Your Team"  
     handleSubmit={ () => {
+        if( userArray.length === 0 ){setAlert('No players added, you are in team mode');return};
         if( userArray.filter((x) => x.accepted === false).length !== 0 ){setAlert('Please wait until all the players will accept the invitation');return};
         const data = {playingTeam: playingTeam};
         transmitter('playingTeamSet', data);
@@ -88,12 +89,13 @@ function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert
 
 }
 
-function handleGetPlayingTeam_renewData(playingTeam, auth, setUserArray, setAxiosLoading, setAlert){
+function handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUserArray, setAxiosLoading, setAlert){
         const playingTeamId = playingTeam._id;
         new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
         .GoodResult( (result) => {
             const playersArray = result.players;
-            const array = playersArray.filter((x) => x._id !== auth._id)
+            const array = playersArray.filter((x) => x._id !== auth._id);
+            setPlayingTeam(result);
             setUserArray(array);
         } )
         .BadResult( (error) => {

@@ -1,6 +1,6 @@
-import React, { Routes, Route /*, useRoutes*/} from "react-router-dom"; // useParams,
+import React, { Routes, Route , Outlet /*, useRoutes*/} from "react-router-dom"; // useParams,
 
-import { AddQuestion, Logo, Loading, Chart } from "./Components";
+import { AddQuestion, Logo, NavBar, Loading, Chart, Follow, Boom } from "./Components";
 import { useTranslation } from "./Hooks";
 import {AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results, Community } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
@@ -18,26 +18,33 @@ const { t } = useTranslation();
 return (<>
     {/* <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}> */}
     <Routes>
-      <Route path="/" element={<Logo />}>
-          <Route path="/" element={<GlobalLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Choose" element={<ChooseTeam />} />
-            <Route path="/Location" element={<Location />} />
-            <Route path="/Question" element={<Question />} />
-            
-            
-            
-            {/* Arthur Development! */}
-            <Route path="/AddQuestion" element={<AddQuestion />} />
-            <Route path="/Community" element={<Community />} />
-            <Route path="/Results" element={<Results />} />
-            <Route path="/Loading" element={<Loading />} />
+      <Route path="/"  element={<>
+          {/* Global Page Structure */}
+          <Logo />
+          <GlobalLayout>
+            <Outlet/>   {/* <Outlet/> == all other components inside / */}
+            <NavBar/>
+          </GlobalLayout>
+        </>}>
+          <Route index element={<Home />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Choose" element={<ChooseTeam />} />
+          <Route path="/Location" element={<Location />} />
+          <Route path="/Question" element={<Question />} />
+          
+          
+          
+          {/* Arthur Development! */}
+          <Route path="/Follow" element={<Follow />} />
+          <Route path="/Boom" element={<Boom />} />
+          <Route path="/AddQuestion" element={<AddQuestion />} />
+          <Route path="/Community" element={<Community />} />
+          <Route path="/Results" element={<Results />} />
+          <Route path="/Loading" element={<Loading />} />
+          
+          <Route path="/Chart" element={<Chart />} />
 
-            <Route path="/Chart" element={<Chart />} />
-
-            <Route path="/:playingTeamId" element={<AcceptInvitation />} />
-          </Route>
+          <Route path="/:playingTeamId" element={<AcceptInvitation />} />
       </Route>
 
       {/* Arthur Development! */}

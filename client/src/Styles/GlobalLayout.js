@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import {createTheme, ThemeProvider, colors, Container /*, Typography, ButtonGroup, Button, TextField, Grid, Box*/ } from '@mui/material';
 
 export default function Layout ({children}) { return ( <main>
-   <MuiStyle> {children} <Outlet />  </MuiStyle>
+   <MuiStyle> {children} </MuiStyle>
 </main>);}
 
 

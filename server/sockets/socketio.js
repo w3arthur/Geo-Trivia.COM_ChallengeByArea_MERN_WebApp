@@ -11,6 +11,63 @@ function socketio(io, socket){
 const transmitter = async (message, action) => await ioTransmitter(io, message, action)
 
 
+receiver(socket, 'boomHandler', async (message) =>  {
+    const {follower: followerId, followed: followedId, playingTeam: playingTeamId} = message;
+    await transmitter(playingTeamId, async()=>{
+        const playingTeam = await PlayingTeamModel.findById( playingTeamId );   //{currentQuestion: 1, players: 1}
+        if(!playingTeam) throw 'no team';
+        const {currentQuestion, players} = playingTeam;
+        const playerId = followerId;
+
+        //followId  //check
+        //authId  //check
+
+        const filter0 = {_id: playingTeamId, "players._id": playerId};
+        const data0 = { $set: {"players.$.answers.$[].answer" : -1, "players.$.boom": true, "players.$.currentQuestion": limitOfQuestions - 1 } }  ;
+        const updateUserBoom = await PlayingTeamModel.findOneAndUpdate( filter0, data0 );
+
+        return {unFollowOriginalFollower: true, for: followedId, boomToFirstFollower: true }
+    });
+});
+
+
+
+receiver(socket, 'followAnswerReturn', async (message) =>  {
+    const {follower: followerId, followed: followedId, playingTeam: playingTeamId} = message;
+    await transmitter(playingTeamId, async()=>{
+        const playingTeam = await PlayingTeamModel.findById( playingTeamId );
+        if(!playingTeam) throw 'no team';
+        const {currentQuestion} = playingTeam;
+        const playerId = followedId;
+        const player = playingTeam.players.find((x) => x._id === playerId);
+        const followedAnswer = player.answers[currentQuestion].answer;// TO FIX!
+
+        //followId  //check
+        //authId  //check
+        return {followReturn: true,  for: followerId, followedAnswer: followedAnswer}
+    });
+});
+
+receiver(socket, 'followQuestion', async (message) =>  {
+    const {auth: authId, playingTeam : playingTeamId, followed: followId} = message;
+    await transmitter(playingTeamId, async()=>{
+        const playingTeam = await PlayingTeamModel.findById( playingTeamId );
+        if(!playingTeam) throw 'no team';
+        const {currentQuestion, players} = playingTeam;
+        //followId  //check
+        //authId  //check
+
+        // the followId answered this question (no need to follow him)
+        const currentPlayer = players.find( (x) => { return x._id === followId }  ); 
+        const currentAnswer = currentPlayer.answers[currentQuestion];
+
+
+        if( currentAnswer.answer !== -1 ) return {followReturn: true,  for: authId, followedAnswer: currentAnswer.answer}
+
+        return {follow: true,  followId: followId,  followerId: authId}
+    });
+});
+
 receiver(socket, 'getQuestion', async (message) =>  {
     const {playingTeam : playingTeamData} = message;
     await transmitter(playingTeamData._id, async()=>{
@@ -26,6 +83,7 @@ receiver(socket, 'getQuestion', async (message) =>  {
             }  ); //Fix equality 
         
         let stopLoader = false;
+        let stopFollowerCheck = false;
         if(currentQuestionFinished.length === players.length ) {    //update question current number
             if(currentQuestion  >= limitOfQuestions - 1 ){  //game end
                 if(!playingTeam.gameDone){ try{await statisticUpgrade(playingTeam)}catch(e){console.log('STATISTIC ERROR')}}
@@ -33,10 +91,11 @@ receiver(socket, 'getQuestion', async (message) =>  {
             }; //game end
             currentQuestion ++;
             stopLoader = true;
+            stopFollowerCheck = true; 
             await PlayingTeamModel.findByIdAndUpdate( playingTeamId, { $set: { currentQuestion: currentQuestion }} );
         }
 
-        return ({getQuestion: true,currentQuestion: currentQuestion, stopLoader: stopLoader}); //start play to all!
+        return ({getQuestion: true,currentQuestion: currentQuestion, stopLoader: stopLoader, stopFollowerCheck: stopFollowerCheck}); //start play to all!
     });
 });
 
@@ -71,10 +130,7 @@ receiver(socket, 'playingTeamAddUser', async (message) =>  {
 
 module.exports = socketio;
 
-
-
-
-async function statisticUpgrade(playingTeam){
+async function statisticUpgrade(playingTeam){   //final gaming action
   //Update Statistic data
     const {_id, players, questions} = playingTeam;
     console.log('team_id')
