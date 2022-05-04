@@ -82,8 +82,8 @@ function MuiStyle({children}){
             , height: 'auto'
             , width: 'auto'
             , '.answerValue' : { //set className!
-              whiteSpace: 'normal', width: '100%', minWidth: '42vw'
-              , '@media (max-width:900px)': {minWidth: '85vw'}
+              wordBreak: 'normal', whiteSpace: 'normal', width: '90%', minWidth: '42vw'
+              , '@media (max-width:900px)': {marginLeft: '-25px',minWidth: '75vw'}
               }
             ,borderWidth: 1
             , boxShadow: `1px 2px 0px 0px ${shadow}`  

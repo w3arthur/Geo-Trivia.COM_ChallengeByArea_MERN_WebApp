@@ -49,7 +49,8 @@ app.use("/api/login", routers.loginRouter);
 app.use("/api/area", routers.areaRouter);
 app.use("/api/question", routers.questionRouter);
 app.use("/api/playingTeam", routers.playingTeamRouter);
-
+app.use("/api/expert/", routers.expertQuestionsRouter);
+app.use("/api/expert/qualify/", routers.expertQualifyRouter);
 
 app.route("*").all((req, res) => res.status(404) );
 app.use(middlewares.errorMainHandler); //errorHandler

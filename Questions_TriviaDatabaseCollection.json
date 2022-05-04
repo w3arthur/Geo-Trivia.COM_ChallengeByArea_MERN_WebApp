@@ -1,0 +1,1825 @@
+[{
+  "_id": {
+    "$oid": "626ffee5b6d782d01c1ff764"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "איזו שכונה הייתה מזוהה היסטורית עם מועדון הכדורגל שמשון תל אביב?",
+  "answers": [
+    "קריית שלום",
+    "כרם התימנים",
+    "יד אליהו",
+    "כפר שלם"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fff03b6d782d01c1ff76d"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "מי שרה על המקום הכי נמוך בתל אביב?",
+  "answers": [
+    "סי היימן",
+    "אסתר שמיר",
+    "שרון ליפשיץ",
+    "נורית גלרון"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fff2ab6d782d01c1ff776"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "מי שרה על גגות תל אביב?",
+  "answers": [
+    "רונית שחר",
+    "אלונה דניאל",
+    "ענבל פרלמוטר",
+    "קורין אלאל"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fff4db6d782d01c1ff77f"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "איזו מחנויות הספרים הבאות לא נמצאת באלנבי?",
+  "answers": [
+    "הנסיך הקטן",
+    "קדמת עדן",
+    "לוטוס",
+    "הלפר ספרים"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fff66b6d782d01c1ff788"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "מה שם הבר המיתולוגי ששכן בסמטת בית השואבה עד קיץ 2008?",
+  "answers": [
+    "אפרודיטה",
+    "אוויטה",
+    "מינרווה",
+    "קארפה דיאם"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fff9db6d782d01c1ff791"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "hebrew",
+  "question": "איזה מבתי הקפה המיתולוגיים הבאים לא שכן ברחוב דיזנגוף?",
+  "answers": [
+    "קפה רוול",
+    "קפה כסית",
+    "קפה עטרה",
+    "קפה בתיה"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626fffe4b6d782d01c1ff79a"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "hebrew",
+  "question": "איפה אילת נמצאת?",
+  "answers": [
+    "במערב",
+    "בצפון",
+    "במזרח",
+    "בדרום"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700028b6d782d01c1ff7a3"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "hebrew",
+  "question": "איך קוראים למושב ששכן בעבר במקום שבו אילת נמצאת?",
+  "answers": [
+    "בום בום רק",
+    "אום אל רשרש",
+    "טמו בו לילי",
+    "רוב הברבור"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700053b6d782d01c1ff7ac"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "hebrew",
+  "question": "באיזה שנה אילת נוסדה כישוב אזרחי?",
+  "answers": [
+    "1789",
+    "2002",
+    "1952",
+    "1995"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270007ab6d782d01c1ff7b5"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "hebrew",
+  "question": "אילת קרובה ל ?",
+  "answers": [
+    "מצרים",
+    "ארצות הברית",
+    "אנגליה",
+    "ירדן"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627000ddb6d782d01c1ff7be"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "איזה שכונה גרנד קניון ?",
+  "answers": [
+    "נווה דוד",
+    "קריית אליעזר",
+    "כרמל",
+    "נווה שאנן"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270010eb6d782d01c1ff7c7"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "כמה תושבים יש בחיפה",
+  "answers": [
+    "5,012",
+    "600,000",
+    "240,000",
+    "672"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700141b6d782d01c1ff7d0"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "באיזו שכונה בית חולים רמבם ?",
+  "answers": [
+    "הדר",
+    "בת גלים",
+    "נווה שאנן",
+    "אחוזה"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270016eb6d782d01c1ff7d9"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "איזו עיר הכי גדולה ?",
+  "answers": [
+    "חיפה",
+    "באר שבע",
+    "חדרה",
+    "נתניה"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627001c1b6d782d01c1ff7e2"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "איזו עיר הכי גדולה ?",
+  "answers": [
+    "נתניה",
+    "נתניה",
+    "חיפה",
+    "נוף הגליל"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700224b6d782d01c1ff7eb"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "hebrew",
+  "question": "חיפה היא מרכז האמונה העולמי",
+  "answers": [
+    "הקלטית",
+    "הדרוזית",
+    "הסינטולוגית",
+    "הבהאית"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700253b6d782d01c1ff7f4"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "איזו עיר הכי גדולה ?",
+  "answers": [
+    "חולון",
+    "ירושליים",
+    "חיפה",
+    "תל אביב"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270027fb6d782d01c1ff7fd"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "באיזו שנה עברה ירושלים לידע שלטון המנדא הבריטי ?",
+  "answers": [
+    "1917",
+    "1948",
+    "1964",
+    "1867"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627002b9b6d782d01c1ff806"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "מה שמה של ירושלים בערבית ?",
+  "answers": [
+    "אום רשרש",
+    "אל אקצה",
+    "אל חייבה",
+    "אל קדס"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627002e0b6d782d01c1ff80f"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "איזה שער לא קיים בירושלים ?",
+  "answers": [
+    "האריות",
+    "הציפורים",
+    "האשפות",
+    "הרחמים"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270031eb6d782d01c1ff818"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "כיצד נקראה השכונה הראשוניה שנבנתה מחוץ לחומות ירושלים במאה ה 19 ?",
+  "answers": [
+    "תליות",
+    "מאה שערים",
+    "ארנונה",
+    "שכנות שאננים"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700357b6d782d01c1ff821"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "אחרי איזו מלחמה אוחדה ירושלים ?",
+  "answers": [
+    "מלחמת ששת הימים",
+    "מלחמת סיני",
+    "מלחמת העצמאות",
+    "מלחמת ההתשה"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62700389b6d782d01c1ff82a"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "איך נקרא גשר הרכבת הקלה בכניסה לירושלים ?",
+  "answers": [
+    "גשר ציון",
+    "גשר המיתרים",
+    "גשר דוד",
+    "גשר יהודית"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627003bfb6d782d01c1ff833"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "hebrew",
+  "question": "העיר ירושלים נקראת גם",
+  "answers": [
+    "אשל",
+    "הקדושה",
+    "מקור האמונה",
+    "ציון"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701293b6d782d01c1ff83c"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Which neighborhood was historically identified with the Shimshon Tel Aviv Football Club?",
+  "answers": [
+    "Kiryat Shalom",
+    "Kerem Ha Teimanim",
+    "Yad Eliyaho",
+    "Kfar Shalem"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 1
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627012e4b6d782d01c1ff845"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Who sang the \"lowest place in Tel Aviv\" ?",
+  "answers": [
+    "Si Himan",
+    "Ester Shamir",
+    "Sharon Lifshitz",
+    "Norith Galron"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701371b6d782d01c1ff84e"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Who sang \"on the roofs of Tel Aviv\" ?",
+  "answers": [
+    "Ronit Shahar",
+    "Alona Daniel",
+    "Inbal Perlmutter",
+    "Kurin Elel"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 1
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627013bdb6d782d01c1ff857"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Which of the following bookstores is not in Allenby ?",
+  "answers": [
+    "Hanasih Hakatan",
+    "Kedmat Eden",
+    "Lutus",
+    "Halper Sfarim"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 1
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701410b6d782d01c1ff860"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "What is the name of the legendary bar that was in Alley until the summer of 2008?",
+  "answers": [
+    "Afrodita",
+    "Avitta",
+    "Minerva",
+    "Karpa Diam"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 1
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701499b6d782d01c1ff869"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Which of the following legendary cafes is not located in Dizengoff Street ?",
+  "answers": [
+    "Caffe Rull",
+    "Caffe Ksit",
+    "Caffe Attara",
+    "Caffe Batya"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 1
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627014f6b6d782d01c1ff872"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "english",
+  "question": "Where is Eilat ?",
+  "answers": [
+    "In the West",
+    "In the north",
+    " In the East",
+    "In the south"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270156fb6d782d01c1ff87b"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "english",
+  "question": "What is the name of a place that used to be located in the place where Eilat is located ?",
+  "answers": [
+    "Bum Bum Rak",
+    "Um El Rashrash",
+    "Tamu Bu Lili",
+    "Rob Hababur"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270159ab6d782d01c1ff884"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "english",
+  "question": "In what year was Eilat founded as a civil settlement ?",
+  "answers": [
+    "1789",
+    "2002",
+    "1952",
+    "1995"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627015cbb6d782d01c1ff88d"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "language": "english",
+  "question": "Eilat is close to ?",
+  "answers": [
+    "Egypt",
+    "United States",
+    "England",
+    "Jordan"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270162cb6d782d01c1ff89f"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "Which neighborhood is Grand Canyon ?",
+  "answers": [
+    "Neve David",
+    "Kiryat Eliezer",
+    "Carmel",
+    "Neve Sha'anan"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701664b6d782d01c1ff8a8"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "How many citizens are there in Haifa ?",
+  "answers": [
+    "5,012",
+    "600,000",
+    "240,000",
+    "672"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270169db6d782d01c1ff8b1"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "Which neighborhood is Rambam Hospital ?",
+  "answers": [
+    "Hadar",
+    "Bat Galim",
+    "Neve Sha'anan",
+    "Ahoza"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627016d6b6d782d01c1ff8ba"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "Which is the largest city ?",
+  "answers": [
+    "Haifa",
+    "Beer Sheva",
+    "Hadera",
+    "Netanya"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701723b6d782d01c1ff8c3"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "Which is the largest city ?",
+  "answers": [
+    "Netanya",
+    "Netanya",
+    "Haifa",
+    "Nof hagalil"
+  ],
+  "rightAnswer": 2,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270178ab6d782d01c1ff8cc"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "language": "english",
+  "question": "Haifa known as religion center  for",
+  "answers": [
+    "Kaltit",
+    "Droze",
+    "Saintology",
+    "Habahaim"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701803b6d782d01c1ff8d5"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "Which is the largest city ?",
+  "answers": [
+    "Holon",
+    "Jerusalem",
+    "Haifa",
+    "Tel Aviv"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270185ab6d782d01c1ff8de"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "In what year did Jerusalem come under the rule of the British Mandate ?",
+  "answers": [
+    "1917",
+    "1948",
+    "1964",
+    "1867"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270190bb6d782d01c1ff8e7"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "What is the name of Jerusalem in Arabic ?",
+  "answers": [
+    "Umm Rashrash",
+    "El Aksa",
+    "Al Hayba",
+    "El Kadesh"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6270195bb6d782d01c1ff8f0"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "What gate does not exist in Jerusalem?",
+  "answers": [
+    "Arayut (Lionsz)",
+    "Zipporim (Birds)",
+    "Haashpot",
+    "Harahamim"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627019c9b6d782d01c1ff8f9"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "What was the name of the first neighborhood built outside the walls of Jerusalem in the 19th century ?",
+  "answers": [
+    "Talpiot",
+    "Mea Shearim",
+    "Arnona",
+    "Mishkenot Sha'ananim"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701a17b6d782d01c1ff902"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "After what war was Jerusalem united ?",
+  "answers": [
+    "Six days",
+    "Sinay",
+    "Azmaut",
+    "Hatasha"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701a60b6d782d01c1ff90b"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "What is the name of the light rail bridge at the entrance to Jerusalem ?",
+  "answers": [
+    "Zion",
+    "Meitarim",
+    "David",
+    "Yehudit"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62701aa4b6d782d01c1ff914"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "language": "english",
+  "question": "The city of Jerusalem is known as",
+  "answers": [
+    "Eshel",
+    "Hakdusha",
+    "Mekur Emuna",
+    "Zion"
+  ],
+  "rightAnswer": 3,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+}]

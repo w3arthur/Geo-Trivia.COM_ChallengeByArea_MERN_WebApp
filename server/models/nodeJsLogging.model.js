@@ -3,12 +3,20 @@ const {mongoose, mongooseLogging} = require("../connection");
 
 const NodeJSLoggingModel = mongooseLogging.model( 
     "NodeJs_Logging"  //nodejs_loggings
-    , basedLoggingSchema({ resultStatus: { type: Number, index: true }, resultMessage: { type: String, index: true } , resultJson: { type: Object, index: true } }) 
+    , basedLoggingSchema({ 
+        resultStatus: { type: Number, index: true }
+        , resultMessage: { type: String, index: true }
+        , resultJson: { type: Object, index: true } 
+    }) 
 );
 
 const NodeJSErrorModel = mongooseLogging.model( 
     "NodeJs_Error" //nodejs_errors
-    , basedLoggingSchema({ status: { type: Number, index: true }, errorName: { type: String, index: true } , errorMessage: { type: String, index: true } })
+    , basedLoggingSchema({ 
+        status: { type: Number, index: true }
+        , errorName: { type: String, index: true }
+        , errorMessage: { type: String, index: true }
+    })
 );
 
 module.exports = {NodeJSLoggingModel, NodeJSErrorModel};

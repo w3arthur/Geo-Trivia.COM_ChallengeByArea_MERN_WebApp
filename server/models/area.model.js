@@ -10,9 +10,9 @@ const AreaSchema = new mongoose.Schema({
   , area: { type: String, trim: true, required: true, index: true }
   , totalScore: { type: Number, default: 0, index: true }
   , waitingToExpertApproveQuestions: { type: [mongoose.ObjectId], default: 0, index: true }
-});
+  , experts: { type: [mongoose.ObjectId], default: [], index: true }
+}, { timestamps: true, });
 AreaSchema.index({location: '2dsphere'});
-
 
 //module and validator
 const AreaModel = mongoose1.model(
@@ -21,6 +21,4 @@ const AreaModel = mongoose1.model(
 );
 
 module.exports = AreaModel;
-
-
 

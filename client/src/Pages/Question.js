@@ -237,7 +237,7 @@ return(
 }
 
 
-function QuestionValue({ children, ref, sx, ...props}){
+export function QuestionValue({ children, ref, sx, ...props}){
 return(
     <Box  sx={{  minHeight:'20vh', width: '100%', display: 'flex', ...sx}}>
         <div ref={ref}></div>
@@ -246,15 +246,14 @@ return(
     );
 }
 
-function Answer({ isFollow , md, xs , numberBackgroundColor,onClick, children, number, sx ,...props}){
+export function Answer({ isFollow , md, xs , numberBackgroundColor,onClick, children, number, sx ,...props}){
     const chipStyle = isFollow ? {borderColor: '#FFA500', borderWidth: 2} : {};
     const avatarStyle = isFollow ? { borderWidth: 5} : {};
     return(
-        <Grid item container md={6} xs={12} sx={{p: 2, }}  >
+        <Grid item container md={6} xs={12} sx={{p: 2, }} >
                 <Chip {...props} sx={{...chipStyle ,...sx}} className="answer" onClick={onClick} component="div"
                     avatar={<Avatar sx={{...avatarStyle, bottom: "50%", left: "top",  backgroundColor: numberBackgroundColor}}><Typography sx={{}} component="div" className="answerNumber">{number}</Typography></Avatar>} 
-                    label={<Typography variant="h5" component="div" className="answerValue" >{children}</Typography>} /> 
-                    
+                    label={<Typography variant="h5" component="div" className="answerValue" >{children}</Typography>} />         
         </Grid>
         );
 }

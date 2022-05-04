@@ -1,9 +1,6 @@
 const {mongoose, mongoose1, schemaVersion} = require("../connection");
 
-//module and validator  
-const QuestionModel = mongoose1.model(
-  "Question"  //questions
-  , new mongoose.Schema({
+const QuestionSchema =  new mongoose.Schema({
     schemaVersion: schemaVersion
     , location: {type: mongoose.ObjectId, index: true}
     , language: { type: String, trim: true, index: true}
@@ -15,7 +12,12 @@ const QuestionModel = mongoose1.model(
     , displayedCounter: { type: Number, default: 0 }
     , statistic: { type: Array }
     , sender: { type: mongoose.ObjectId, index: true}
-  })
+  }, { timestamps: true, });
+
+//module and validator
+const QuestionModel = mongoose1.model(
+  "Question"  //questions
+  , QuestionSchema
 );
 
 module.exports = QuestionModel;

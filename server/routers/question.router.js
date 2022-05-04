@@ -21,12 +21,13 @@ const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { AreaModel, QuestionModel } = require('../models');
 
 
-questionRouter.route('/:language')  //to delete  //  localhost:3500/api/question
+questionRouter.route('/:page')  //to delete  //  localhost:3500/api/question/:page
 .get(async (req, res, next) => {
   console.log(':: question router get');
   errorHandler(req, res, next)( async () => {
- ///? to delete
-    return new Success(200, questions);
+    const questions = await QuestionModel.find({approved: true}).sort({_id:-1});
+    const result = {questions: questions}
+    return new Success(200, result);
   });  //error handler 
 });
 

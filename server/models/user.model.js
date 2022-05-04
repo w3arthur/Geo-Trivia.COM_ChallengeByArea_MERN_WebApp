@@ -17,7 +17,8 @@ const UserSchema =  new mongoose.Schema({
   }
   , answeredQuestions: { type: Number, default: 0, index: true }
   , totalScore: { type: Number, default: 0, index: true }
-})
+  , expertAreas: { type: [Object], default: [], index: true }
+}, { timestamps: true, })
 UserSchema.index({location: '2dsphere'});
 
 const UserModel = mongoose1.model(

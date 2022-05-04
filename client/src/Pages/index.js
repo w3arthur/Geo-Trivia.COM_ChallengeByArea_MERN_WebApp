@@ -6,7 +6,8 @@ import Home from "./Home";
 import Location from "./Location";
 import Login from "./Login";
 import Question from "./Question";
+import QuestionBeExpert from "./QuestionBeExpert";
 import RegisterPopup from "./RegisterPopup";
 import Results from "./Results"
 
-export { AcceptInvitation, ChooseTeam, Community, Error, Home, Location, Login, Question, RegisterPopup, Results };
+export { AcceptInvitation, ChooseTeam, Community, Error, Home, Location, Login, Question, QuestionBeExpert, RegisterPopup, Results };

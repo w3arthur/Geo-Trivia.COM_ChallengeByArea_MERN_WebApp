@@ -2,7 +2,7 @@ import React, { Routes, Route , Outlet /*, useRoutes*/} from "react-router-dom";
 
 import { AddQuestion, Logo, NavBar, Loading, Chart, Follow, Boom } from "./Components";
 import { useTranslation } from "./Hooks";
-import {AcceptInvitation ,Home, Login, Location, Question, ChooseTeam, Results, Community } from "./Pages";
+import {AcceptInvitation ,Home, Login, Location, Question, QuestionBeExpert, ChooseTeam, Results, Community } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
 
 import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
@@ -32,7 +32,7 @@ return (<>
           <Route path="/Location" element={<Location />} />
           <Route path="/Question" element={<Question />} />
           
-          
+           <Route path="/QuestionBeExpert" element={<><QuestionBeExpert /></>} />
           
           {/* Arthur Development! */}
           <Route path="/Follow" element={<Follow />} />

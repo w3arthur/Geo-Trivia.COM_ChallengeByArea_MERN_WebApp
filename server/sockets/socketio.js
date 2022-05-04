@@ -31,7 +31,6 @@ receiver(socket, 'boomHandler', async (message) =>  {
 });
 
 
-
 receiver(socket, 'followAnswerReturn', async (message) =>  {
     const {follower: followerId, followed: followedId, playingTeam: playingTeamId} = message;
     await transmitter(playingTeamId, async()=>{
