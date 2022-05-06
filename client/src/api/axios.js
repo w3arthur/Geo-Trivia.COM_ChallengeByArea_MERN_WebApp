@@ -1,8 +1,9 @@
 import axios from 'axios';
 import Logging from '../Classes/Logging.class';
+import {server} from '../Config';
 
 const axiosFunction = axios.create({
-    baseURL: 'http://localhost:3500'
+    baseURL: server.axiosBaseUrl    //'http://localhost:3500'
     //, timeout: 1000
     , headers: {'Content-Type': 'application/json',}
     , withCredentials: true
@@ -17,7 +18,6 @@ const loggingLog = (log) => axiosLogging ('title?', '/log/logging', log);
 const errorLog = (log) => axiosLogging ('title?', '/log/error', log);
 
 export default async function Axios(method, additionUrl, data, additionHeader){
- 
     try{
         let response = await axiosFunction({
             method: method
@@ -25,7 +25,6 @@ export default async function Axios(method, additionUrl, data, additionHeader){
             , data: JSON.stringify(data)
             , headers: additionHeader
         });
-        
         console.log(response);
         try{}
         catch(e){ console.log(':: axios log logging fail');  }

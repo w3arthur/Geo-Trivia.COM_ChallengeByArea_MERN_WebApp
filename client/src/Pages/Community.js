@@ -46,38 +46,31 @@ export default function Community(){
     const goTo = useGoTo();
 
   const [newestQuestions, setNewestQuestions] = useState();
-  const [newestQuestionsPage, setNewestQuestionsPage] = useState(0);
+  const [newestQuestionsPage, setNewestQuestionsPage] = useState(1);
+  const [newestQuestionsLastPage, setNewestQuestionsLastPage] = useState(false);
 
   useEffect(() => {   //if set playingTeam !!!
     getAllAreas(geoDataRef, setAxiosLoading, setAlert);
-    getNewestQuestions (newestQuestionsPage, setNewestQuestions, setAxiosLoading, setAlert);
+    getNewestQuestions (newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
   }, [])
 
 
   const [value, setValue] = useState(2);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleShowQuestions = () => {
-      setValue(0);
-    };
-  const handleAskBeExpert = () => {
-      setValue(3);
-    };
-    
-    const [verticalValue, setVerticalValue] = useState(0);
+  const handleChange = (event, newValue) => { setValue(newValue);};
+  const handleShowQuestions = () => { setValue(0); };
+  const handleAskBeExpert = () => { setValue(3);  };
+  const [verticalValue, setVerticalValue] = useState(0);
 
 return (<>
     
     <Box sx={{ textAlign: 'center', width: '100%', md: 1}}> 
     
-    <Button startIcon={<Icons.Architecture/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_BeExpert} variant="contained"> Ask be Expert </Button>
+      <Button startIcon={<Icons.Architecture/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_BeExpert} variant="contained"> Ask be Expert </Button>
 
-    <Button startIcon={<Icons.NoteAdd/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_AddQuestion} variant="contained"> Add Your Question </Button>
+      <Button startIcon={<Icons.NoteAdd/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_AddQuestion} variant="contained"> Add Your Question </Button>
 
-     </Box>
+    </Box>
 
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <Tabs value={value} onChange={handleChange} sx={{backgroundColor: 'azure'}} centered>
@@ -88,18 +81,33 @@ return (<>
       </Tabs>
       <TabPanel value={value} index={2}> 
       Last Questions:
-      <Divider></Divider>
 
-        <Box  sx={{wordBreak: 'break-word'}}> 
+      <Divider></Divider>
+      <Box sx={{direction: 'ltr'}}>
+          <Button startIcon={<Icons.ArrowBack />} onClick={() => {
+              const page = newestQuestionsPage - 1;
+              setNewestQuestionsPage(page);
+              setNewestQuestionsLastPage(false);
+              getNewestQuestions (page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
+          }} disabled={newestQuestionsPage === 1 ? true : false} sx={{m: 1,}} variant="contained"> Back </Button>
+          <Button endIcon={<Icons.ArrowForward />} onClick={() => {
+              const page = newestQuestionsPage + 1;
+              setNewestQuestionsPage(page);
+              getNewestQuestions (page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
+          }} disabled={newestQuestionsLastPage === true ? true : false} sx={{m: 1}} variant="contained"> Next </Button>
+      </Box>
+      <Divider></Divider>
+      <Box  sx={{wordBreak: 'break-word'}}> 
 
 {
-newestQuestions.map((question) => {
+newestQuestions?.map((question) => {
   return (<>
   <QuestionValue > {question.question} </QuestionValue>
   <Grid container>
       {question.answers.map((ans, i) => (
           <Answer isFollow={false} numberBackgroundColor={'#FFFFFFAA'} sx={question.rightAnswer === i ? {backgroundColor: 'azure'} : {}} number={ i + 1 } onClick={(e) => {
-              setTimeout(() =>{e.target.parentNode.parentNode.blur();}, 500)
+              e.target.parentNode.parentNode.blur();
+              e.target.preventDefault();
           }}> {ans} </Answer>
       ) ) }
   </Grid>
@@ -145,18 +153,30 @@ newestQuestions.map((question) => {
 
 
 function VerticalTabs({auth, verticalValue, setVerticalValue}) {
-    const {setLoading, setAxiosLoading, setAlert} = useLoading();
-    useEffect(()=>{
-      getExpertAreaQuestions(areas[verticalValue], 0, setQuestions, setAxiosLoading, setAlert, questions);
-    }, [])
-    const handleChange = (event, newValue) => { 
-      setVerticalValue(newValue)
-      getExpertAreaQuestions(areas[newValue], 0, setQuestions, setAxiosLoading, setAlert, questions);
-      
-      ; };
-    const areas = auth?.expertAreas
+    const {setAxiosLoading, setAlert} = useLoading();
+
+    const areas = auth?.expertAreas;
     const [questions, setQuestions] = useState();
-   
+    const [expertQuestionsPage, setExpertQuestionsPage] = useState(1);
+    const [expertQuestionsLastPage, setExpertQuestionsLastPage] = useState(false);
+
+
+
+    useEffect(()=>{
+      getExpertAreaQuestions(areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+    }, [])
+
+
+
+    const handleChange = (event, newValue) => { 
+      setVerticalValue(newValue);
+      setExpertQuestionsLastPage(false);
+      setExpertQuestionsPage(1);
+      getExpertAreaQuestions(areas[newValue], 1, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+       };
+
+
+
 return (
   <Box sx={{ m:0, p:0,flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}>
       <Tabs sx={{ m:0, p:0,borderRight: 1, borderColor: 'divider' }} orientation="vertical" variant="scrollable" value={verticalValue} onChange={handleChange} aria-label="Vertical tabs example" >
@@ -169,25 +189,85 @@ return (
         
           <>
           {/*Expert Area */}
-          <TabPanel  sx={{wordBreak: 'break-word'}} value={verticalValue} index={i}> {questions?.map((question) => (<>
+          <TabPanel  sx={{wordBreak: 'break-word'}} value={verticalValue} index={i}> 
+          
+          <Divider></Divider>
+          <Box sx={{direction: 'ltr'}}>
+              <Button startIcon={<Icons.ArrowBack />} onClick={() => {
+                  const page = expertQuestionsPage - 1;
+                  setExpertQuestionsPage(page);
+                  setExpertQuestionsLastPage(false);
+                  getExpertAreaQuestions(areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+              }} disabled={expertQuestionsPage === 1 ? true : false} sx={{m: 1,}} variant="contained"> Back </Button>
+              <Button endIcon={<Icons.ArrowForward />} onClick={() => {
+                  const page = expertQuestionsPage + 1;
+                  setExpertQuestionsPage(page);
+                  getExpertAreaQuestions(areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+              }} disabled={expertQuestionsLastPage === true ? true : false} sx={{m: 1}} variant="contained"> Next </Button>
+          </Box>
+
+          {questions?.map((question) => (<>
           <Divider></Divider>
             <Box sx={{backgroundColor:'azure'}}>
               <Typography variant="body1" component="div">{question.question}</Typography>
               <Divider></Divider>
             </Box>
+
+            <Box>
+            <Box sx={{ display: 'inline-block',  width: 'auto', textAlign: 'left'}}>
             {question.answers.map((answer, j) => (<Typography sx={question.rightAnswer === j ? ({fontWeight: 'bold'}) : ({})} variant="body1" component="div">{j + 1}) {answer}</Typography>) )}
-            <Button variant='contained'  sx={{m:1}}>Delete</Button> {/*size="small"*/}
-            <Button startIcon={<Icons.CheckBox/>} variant='contained' sx={{m:1}}>Accept</Button>
+            </Box>
+            </Box>
+            <Button onClick={() => { deleteQuestion(question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} variant='contained'  sx={{m:1}}>Delete</Button> {/*size="small"*/}
+            <Button onClick={() => { approveQuestion(question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} startIcon={<Icons.CheckBox/>} variant='contained' sx={{m:1}}>Accept</Button>
             <Divider sx={{mb: 1}}></Divider>
-          </>))}</TabPanel>
+          </>))}
+         
+          
+          
+          </TabPanel>
         </>)  ) }
   </Box>
 ); }
 
 
-const getNewestQuestions =  (page, setNewestQuestions, setAxiosLoading, setAlert) => {
+
+
+const approveQuestion =  (question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
+  const areaId= area._id;
+  const questionId = question._id;
+  setQuestions();
+  const data = {areaId: areaId};
+  new DatabaseRequest( () => Axios('PATCH', '/api/expert/' + questionId, data, {}) )
+  .GoodResult( (result) => {
+      getExpertAreaQuestions(area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
+      } )
+  .BadResult( (error) => {
+      setAlert(error); 
+      } )
+  .Build(setAxiosLoading);
+}
+
+
+const deleteQuestion =  (question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
+  const areaId= area._id;
+  const questionId = question._id;
+  setQuestions();
+  const data = `areaId=${areaId}`;
+  new DatabaseRequest( () => Axios('Delete', '/api/expert/' + questionId + '?' + data, {data}, {}) )
+  .GoodResult( (result) => {
+      getExpertAreaQuestions(area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
+      } )
+  .BadResult( (error) => {
+      setAlert(error); 
+      } )
+  .Build(setAxiosLoading);
+}
+
+const getNewestQuestions =  (page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => {
   new DatabaseRequest( () => Axios('GET', '/api/question/' + (page||0).toString() +'/', {}, {}) )
-  .GoodResult( async (result) => {
+  .GoodResult( (result) => {
+      if(result.lastPage) setNewestQuestionsLastPage(true);
       setNewestQuestions(result.questions);
       } )
   .BadResult( (error) => {
@@ -196,12 +276,13 @@ const getNewestQuestions =  (page, setNewestQuestions, setAxiosLoading, setAlert
   .Build(setAxiosLoading);
 }
 
-const getExpertAreaQuestions =  (area, page, setQuestions, setAxiosLoading, setAlert, questions) => {
+const getExpertAreaQuestions =  (area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   setQuestions();
   const data = 'page=' + page;
   new DatabaseRequest( () => Axios('GET', '/api/expert/' + areaId + '?' + data, {}, {}) )
-  .GoodResult( async (result) => {
+  .GoodResult( (result) => {
+      if(result.lastPage) setExpertQuestionsLastPage(true);
       setQuestions(result.questions);
       } )
   .BadResult( (error) => {

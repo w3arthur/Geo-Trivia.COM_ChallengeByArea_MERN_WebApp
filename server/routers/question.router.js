@@ -1,4 +1,4 @@
-const languageCookieName = 'i18next';
+const languageCookieName = 'i18next';   //  make it .env
 
 require("dotenv").config();
 const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
@@ -10,6 +10,8 @@ const radiosPointDiameter = [
   ,Number(process.env.POINT_DIAMETER4)
   ,Number(process.env.POINT_DIAMETER5)
 ];
+
+const itemsForEachPage = 2;   //  make it .env
 
 const express = require("express");
 const questionRouter = express.Router();
@@ -25,8 +27,12 @@ questionRouter.route('/:page')  //to delete  //  localhost:3500/api/question/:pa
 .get(async (req, res, next) => {
   console.log(':: question router get');
   errorHandler(req, res, next)( async () => {
-    const questions = await QuestionModel.find({approved: true}).sort({_id:-1});
+    const {page} = req.params;
+    const nPerPage = itemsForEachPage;
+    const pageNumber = page;
+    const questions = await QuestionModel.find({approved: true}).sort({_id:-1}).limit( nPerPage ).skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0);
     const result = {questions: questions}
+    if (questions.length < nPerPage) { result.lastPage = true;  }
     return new Success(200, result);
   });  //error handler 
 });
