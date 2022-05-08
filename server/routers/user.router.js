@@ -8,32 +8,11 @@ const bcrypt = require("bcrypt");
 const { errorHandler, validatorUser } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { UserModel } = require('../models');
+const middlewares = require('../middlewares');
 
 
-
-userRouter.route('/') //  localhost:3500/api/user
-.post( validatorUser,async (req, res, next) => {
-  console.log(':: user router post');
-  errorHandler(req, res, next)( async () => {
-
-    const language = ( req.cookies && req.cookies[languageCookieName]) || req.body['language'] || req.query['language'];
-    console.log(language);
-
-    const {name, age, email, password} = req.body;
-    const user = await UserModel.findOne({ email: email });
-    if (user !== null) throw new ErrorHandler(452, 'user already exist!');
-    const data = {name, age, email, password, passwordRegister: true};
-    if(language) data.language = language;
-    data.password = await bcrypt.hash(data.password, 10);
-    const result = await new UserModel(data).save();
-    
-    return new Success(200, result);
-    });  //error handler 
-})
-
-
-.put(async (req, res, next) => { //set area for an user
-  console.log(':: user router put');
+userRouter.route('/').put(async (req, res, next) => { //set area for an user
+  console.log(':: user router put');  //localhost:3500/api/area/user
   errorHandler(req, res, next)( async () => {
   const {user : userId, coordinates} = req.body;
 
@@ -82,4 +61,5 @@ userRouter.route('/find')
   })
   ;
 
+  
 module.exports = userRouter;

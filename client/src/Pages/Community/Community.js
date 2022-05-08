@@ -41,8 +41,8 @@ export default function Community(){
   const [newestQuestionsLastPage, setNewestQuestionsLastPage] = useState(false);
 
   useEffect(() => {   //if set playingTeam !!!
-    getAllAreas(geoDataRef, setAxiosLoading, setAlert);
-    getNewestQuestions (newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
+    getAllAreas(auth, geoDataRef, setAxiosLoading, setAlert);
+    getNewestQuestions (auth, newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -85,7 +85,7 @@ return (<>
     Expert is very responsible role <br/>
     You can achieve it by answer right 4/5 questions.  <br/>
     </Typography>
-    <img src={goodLuck} alt="x" style={{width:'150px',height:'auto'}} />  <br/>
+    <img src={goodLuck} alt="good luck!" style={{width:'150px',height:'auto'}} />  <br/>
   <Button variant="contained" onClick={() => {setAlternativeContent_BeExpert_WelcomePage(false);setAlternativeContent_BeExpert();}}>Start Trivia</Button>
   </>) : (<></>)}
   {alternativeContent_BeExpert? (<>{alternativeContent_BeExpert}</>) :(<>
@@ -113,8 +113,8 @@ return (<>
 </>);
 }
 
-const getAllAreas = (geoDataRef, setAxiosLoading, setAlert) => {
-  new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
+const getAllAreas = (auth, geoDataRef, setAxiosLoading, setAlert) => {
+  new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
       geoDataRef.current = result;
       } )
@@ -124,8 +124,8 @@ const getAllAreas = (geoDataRef, setAxiosLoading, setAlert) => {
   .Build(setAxiosLoading);
 }
 
-export const getNewestQuestions =  (page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => {
-  new DatabaseRequest( () => Axios('GET', '/api/question/' + (page||0).toString() +'/', {}, {}) )
+export const getNewestQuestions =  (auth, page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => {
+  new DatabaseRequest( () => Axios('GET', '/api/question/' + (page||0).toString() +'/', {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
       if(result.lastPage) setNewestQuestionsLastPage(true);
       setNewestQuestions(result.questions);

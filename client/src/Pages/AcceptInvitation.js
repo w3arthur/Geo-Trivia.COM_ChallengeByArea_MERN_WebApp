@@ -19,7 +19,7 @@ export default function AcceptInvitation(){;
         
     useEffect(() => {
         setInvitedTeamId({});
-        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+        new DatabaseRequest( () => Axios('GET', '/api/login/acceptTeam' + playingTeamId, {}, {}) )
             .GoodResult( (result) => {
                 setInvitedTeamId(result._id);
                 goTo('/Login')

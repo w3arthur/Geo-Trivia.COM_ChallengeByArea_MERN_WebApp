@@ -46,7 +46,7 @@ return(<>
 const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading, setErrMsg, ) => {
     const playingTeamId = playingTeam._id;
     const playerIdData = playerId;
-    new DatabaseRequest( () => Axios('DELETE', '/api/playingTeam/' +  playingTeamId + '?playerId=' + playerIdData , {}, {}) )
+    new DatabaseRequest( () => Axios('DELETE', '/api/playingTeam/' +  playingTeamId + '?playerId=' + playerIdData , {}, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             const array = (result.players).filter((x) => x.email !== auth.email);
             setUserArray(array); 

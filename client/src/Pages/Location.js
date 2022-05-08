@@ -39,7 +39,7 @@ export default function Location() {
   useEffect(() => {   //if set playingTeam !!!
     if(auth && auth._id && invitedTeamId){
       handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam);
-    } else getAllAreas(geoDataRef, setAxiosLoading, setAlert);
+    } else getAllAreas(geoDataRef, setAxiosLoading, setAlert, auth);
    }, [])
 
   const [coordinates, setCoordinates] = useState( [ ] ); //starting points
@@ -70,7 +70,7 @@ return (<>
   </PopUp>
 
   {/* Location From Map */}
-  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo ,auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
     <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
   </PopUp>
 
@@ -109,8 +109,8 @@ return(<>
 }
 
 function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam){
-  const data = {player: auth._id, playingTeam: invitedTeamId}
-  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {}) )
+  const data = {player: auth._id, playingTeam: invitedTeamId};
+  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
     setInvitedTeamId(undefined);
     setPlayingTeam(result);
@@ -123,8 +123,8 @@ function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, 
   .Build(setAxiosLoading);
 }
 
-const getAllAreas = (geoDataRef, setAxiosLoading, setAlert) => {
-    new DatabaseRequest( () => Axios('GET', '/api/area', {}, {}) )
+const getAllAreas = (geoDataRef, setAxiosLoading, setAlert, auth) => {
+    new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
     geoDataRef.current = result;
     } )
@@ -138,7 +138,7 @@ const handleSetArea = (goTo, auth , setAuth, coordinates, setAxiosLoading, setAl
   // language will send with the cookie
   const user = auth._id;
   const data =  { user , coordinates};
-  new DatabaseRequest( () => Axios('PUT', '/api/user', data, {}) )
+  new DatabaseRequest( () => Axios('PUT', '/api/user', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
       if(result) goTo("/Choose");
       } )

@@ -5,7 +5,6 @@ const { errorHandler } = require('../middlewares');
 const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const  { AreaModel }  = require('../models');
 
-
 areaRouter.route('/')   //  localhost:3500/api/area/
   .get(async (req, res, next) => {  // only for reference!
     console.log(':: area router get by area_name');

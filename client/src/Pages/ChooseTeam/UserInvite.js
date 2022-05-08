@@ -41,7 +41,7 @@ const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, use
     const playingTeamId = playingTeam._id;
     const playerEmail = email;
     const data = {playingTeamId, playerEmail};
-    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam', data, {}) )
+    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             const array = (result.players).filter((x) => x.email !== auth.email);
             setUserArray(array); 

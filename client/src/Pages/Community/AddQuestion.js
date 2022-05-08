@@ -16,7 +16,7 @@ export default function AddQuestionPopup({mapSelectedCountry, handleClose, /*ope
   const yourQuestionRef = useRef( null );
   const addQuestionButtonRef = useRef( null );
 
-  const { setAuth } = useAuth();
+  const { auth } = useAuth();
   const selectedAreaName = mapSelectedCountry?.area;
   const selectedAreaId = mapSelectedCountry?._id;
 
@@ -40,7 +40,7 @@ export default function AddQuestionPopup({mapSelectedCountry, handleClose, /*ope
 
     <Typography component="h1" variant="h5"> Add Question </Typography>
 
-    <Box component="form" ref={formRef} noValidate onSubmit={(e) => handleSubmit(e, Axios, selectedAreaId, setErrMsg, setAuth, handleClose, setAxiosLoading, setAlert, setAlternativeContent)} sx={{ mt: 3 }}>
+    <Box component="form" ref={formRef} noValidate onSubmit={(e) => handleSubmit(e, auth, Axios, selectedAreaId, setErrMsg, handleClose, setAxiosLoading, setAlert, setAlternativeContent)} sx={{ mt: 3 }}>
       
         <TextField label="The Question"  inputRef={yourQuestionRef} id="question" name="question" autoComplete={false} helperText="set your question" fullWidth />
         
@@ -78,7 +78,7 @@ function Answer({i ,selectedValue, handleChange}){
   </>)
 }
 
-const handleSubmit = (event, Axios, selectedAreaId, setErrMsg, setAuth, handleClose, setAxiosLoading, setAlert, setAlternativeContent) => {
+const handleSubmit = (event, auth, Axios, selectedAreaId, setErrMsg, handleClose, setAxiosLoading, setAlert, setAlternativeContent) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
 
@@ -109,7 +109,7 @@ const handleSubmit = (event, Axios, selectedAreaId, setErrMsg, setAuth, handleCl
   
 console.log('SendingQuestion', SendingQuestion)
 
-  new DatabaseRequest( () => Axios('POST', '/api/question', SendingQuestion, {}) )
+  new DatabaseRequest( () => Axios('POST', '/api/question', SendingQuestion, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
       setAlternativeContent(<>Thanks!<br /> Your Question is sent to area expert approval.</>);
       } )

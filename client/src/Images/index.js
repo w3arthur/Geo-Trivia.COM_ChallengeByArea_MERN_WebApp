@@ -1,4 +1,5 @@
 import boom from './boom.png';
+import congratulations from './congratulations.png'
 import globe from './globe.png';
 import goodLuck from './goodLuck.png';
 import logo from './logo.jpg';
@@ -7,4 +8,4 @@ import monkeyLeft from './monkeyLeft.png';
 import monkeyRight from './monkeyRight.png';
 import profile from './profile.png';
 
-export {boom, globe, goodLuck, logo, marker ,monkeyLeft, monkeyRight, profile};
+export {boom, congratulations, globe, goodLuck, logo, marker ,monkeyLeft, monkeyRight, profile};

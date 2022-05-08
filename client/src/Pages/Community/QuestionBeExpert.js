@@ -7,6 +7,7 @@ import { useAuth, useLoading } from '../../Context';
 
 import { QuestionValue, Answer } from '../Question';
 import { colors } from '../../Config';
+import { congratulations } from '../../Images'
 
 export default function QuestionBeExpert({mapSelectedCountry, openQuestion, setAlternativeContent}){
     const { auth, setAuth } = useAuth();
@@ -38,7 +39,7 @@ return(<div>
             const answer = i;
             answersClone[currentQuestion] = answer;
             if(playerData.questions.length === currentQuestion + 1){
-                handlePostExpertAnswers(setAuth, playerData, answersClone, setAxiosLoading, setAlert, setAlternativeContent); 
+                handlePostExpertAnswers(auth, setAuth, playerData, answersClone, setAxiosLoading, setAlert, setAlternativeContent); 
                 resetData();
                 return;
             }
@@ -54,11 +55,11 @@ function handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxios
     const player = auth._id;
     const data = `area=${areaId}`;
     //lang goes from cookie
-    new DatabaseRequest( () => Axios('GET', '/api/expert/qualify/' + player + '?' + data , {}, {}) )
+    new DatabaseRequest( () => Axios('GET', '/api/expert/qualify/' + player + '?' + data , {}, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
         if(result.expert){
             setAuth(result);
-            setAlternativeContent('You are now expert!, no questions for your area'); return;
+            setAlternativeContent(<>You are now expert!, no questions for your area.<br />  <img src={congratulations} alt="congratulations!" style={{width:'400px',height:'auto'}} />  <br/> </>); return;
         }
         setPlayerData(result);
     } )
@@ -70,15 +71,15 @@ function handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxios
 }
 
 
-const handlePostExpertAnswers = (setAuth, playerData, answers, setAxiosLoading, setAlert, setAlternativeContent) => {
+const handlePostExpertAnswers = (auth, setAuth, playerData, answers, setAxiosLoading, setAlert, setAlternativeContent) => {
     const triviaId = playerData._id;
     alert(answers)
     const data =  {  triviaId: triviaId, answers: answers };
-    new DatabaseRequest( () => Axios('POST', '/api/expert/qualify', data, {}) )
+    new DatabaseRequest( () => Axios('POST', '/api/expert/qualify', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
         if(result.expert){
             setAuth(result);
-            setAlternativeContent('You are now expert!');
+            setAlternativeContent(<> You are now expert!<br />  <img src={congratulations} alt="congratulations!" style={{width:'400px',height:'auto'}} /> <br /></>);
             return;
         }else {setAlternativeContent('Fail to get expert, answered less than 4/5 questions!');return;}
         } )

@@ -10,6 +10,8 @@ const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 const facebookClientId = process.env.FACEBOOK_CLIENT_ID;
 const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET;
 
+const languageCookieName = 'i18next';
+
 const express = require("express");
 const loginRouter = express.Router();
 const Joi = require("joi");
@@ -21,10 +23,58 @@ const cookieSettings = { httpOnly: true, sameSite: 'None', secure: true, maxAge:
 
 let refreshToken_List = [];  //set it to database
 
-const { errorHandler } = require('../middlewares');
+const { errorHandler, validatorUser } = require('../middlewares');
 const { Success, ErrorHandler, MiddlewareError } = require('../classes');
 
-const  {UserModel, UserFacebookModel, UserGoogleModel}  = require('../models');
+const  {UserModel, UserFacebookModel, UserGoogleModel, QuestionModel, AreaModel ,PlayingTeamModel}  = require('../models');
+
+
+loginRouter.route('/register') //  localhost:3500/api/login/register //register
+.post( validatorUser,async (req, res, next) => {
+  console.log(':: user router post');
+  errorHandler(req, res, next)( async () => {
+
+    const language = ( req.cookies && req.cookies[languageCookieName]) || req.body['language'] || req.query['language'];
+    console.log(language);
+
+    const {name, age, email, password} = req.body;
+    const user = await UserModel.findOne({ email: email });
+    if (user !== null) throw new ErrorHandler(452, 'user already exist!');
+    const data = {name, age, email, password, passwordRegister: true};
+    if(language) data.language = language;
+    data.password = await bcrypt.hash(data.password, 10);
+    const result = await new UserModel(data).save();
+    
+    return new Success(200, result);
+    });  //error handler 
+})
+
+
+
+// player accept invitation
+loginRouter.route('/acceptTeam')  //  localhost:3500/api/login/acceptTeam
+.patch(async (req, res, next) => {
+  console.log(':: login acceptTeam router patch a player acceptance');
+  errorHandler(req, res, next)( async () => {
+    //link from email
+      const {playingTeam : playingTeamId , player : playerId} = req.body;
+      const playingTeam = await PlayingTeamModel.findById(playingTeamId);
+      if(!playingTeam) throw new ErrorHandler(400, 'cant find your playing team!'); //no team
+      const player = await UserModel.findById(playerId);
+      if(!player) throw new ErrorHandler(400, 'cant find your player!');  //no user
+
+      const filter = {_id: playingTeamId, "players._id": playerId};
+      const data = { $set: {"players.$.accepted" : true} }  ;
+      const result1 = await PlayingTeamModel.findOneAndUpdate( filter, data );
+      if (!result1) throw new ErrorHandler(400, 'cant set your approvement inside playing team!');
+
+      const result = await PlayingTeamModel.findById(playingTeamId);
+      return new Success(200, result);
+  });
+});
+
+
+
 
 loginRouter.route('/') //  /api/login
 .post( async (req, res, next) => {
@@ -46,12 +96,20 @@ loginRouter.route('/') //  /api/login
   errorHandler(req, res, next)( async () => {
   const refreshToken = ( req.cookies && req.cookies[cookieName]) || req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
   if(!refreshToken) throw new ErrorHandler(401, 'Refresh Token missing.');
-    jwt.verify(refreshToken, refreshTokenSecret, (err, userTokenValue) => {
-        if(err) throw new ErrorHandler(403, 'Wrong Refresh Token supplied.');
-        if(!refreshToken_List.find(x => x.user_id === userTokenValue.user_id)) throw new ErrorHandler(403, 'Refresh Token not stored.');
-        const accessToken = generateAccessToken({ user_id: userTokenValue.user_id, email: userTokenValue.email });//(user)
-        return new Success(200, {email: userTokenValue.email, accessToken: accessToken}); //add type/role and name //fix get email/name from database
-    });
+
+  let userTokenValue = jwt.verify(refreshToken, refreshTokenSecret);
+  if (!userTokenValue) throw new ErrorHandler(403, 'Wrong Refresh Token supplied.');
+  if(!refreshToken_List.find(x => x.user_id === userTokenValue.user_id)) throw new ErrorHandler(403, 'Refresh Token not stored.');
+  const accessToken = generateAccessToken({ user_id: userTokenValue.user_id, email: userTokenValue.email });//(user)
+  const user = await UserModel.findById( userTokenValue.user_id );
+  const userClone = JSON.parse(JSON.stringify(user));
+  delete userClone.password;
+  userClone.accessToken = 'Bearer ' + accessToken;
+  const result = userClone;
+
+  if(!result) throw new Error();
+  return new Success(200, result);
+
   });  //error handler 
 })
 .delete( (req, res, next) => {
@@ -134,6 +192,6 @@ function loginUserSuccess(user, res){ //cookie + accessToken and auth data for l
     refreshToken_List.push({user_id: user._id.toHexString(), token: refreshToken});
     res.cookie(cookieName, refreshToken, cookieSettings); //change
     const data = JSON.parse(JSON.stringify(user));
-    data.accessToken = accessToken;
+    data.accessToken = 'Bearer ' + accessToken;
     return new Success(200, data);
 }

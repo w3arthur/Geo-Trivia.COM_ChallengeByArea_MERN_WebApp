@@ -19,14 +19,14 @@ export default function ExpertArea_VerticalTabs({auth, verticalValue, setVertica
   const [expertQuestionsLastPage, setExpertQuestionsLastPage] = useState(false);
 
   useEffect(()=>{
-    getExpertAreaQuestions(areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+    getExpertAreaQuestions(auth, areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
   }, [])
 
   const handleChange = (event, newValue) => { 
     setVerticalValue(newValue);
     setExpertQuestionsLastPage(false);
     setExpertQuestionsPage(1);
-    getExpertAreaQuestions(areas[newValue], 1, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+    getExpertAreaQuestions(auth, areas[newValue], 1, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
       };
 
 return (
@@ -44,12 +44,12 @@ return (
               const page = expertQuestionsPage - 1;
               setExpertQuestionsPage(page);
               setExpertQuestionsLastPage(false);
-              getExpertAreaQuestions(areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+              getExpertAreaQuestions(auth, areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
           }} disabled={expertQuestionsPage === 1 ? true : false} sx={{m: 1,}} variant="contained"> Back </Button>
           <Button endIcon={<Icons.ArrowForward />} onClick={() => {
               const page = expertQuestionsPage + 1;
               setExpertQuestionsPage(page);
-              getExpertAreaQuestions(areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
+              getExpertAreaQuestions(auth, areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
           }} disabled={expertQuestionsLastPage === true ? true : false} sx={{m: 1}} variant="contained"> Next </Button>
       </Box>
 
@@ -64,8 +64,8 @@ return (
         {question.answers.map((answer, j) => (<Typography sx={question.rightAnswer === j ? ({fontWeight: 'bold'}) : ({})} variant="body1" component="div">{j + 1}) {answer}</Typography>) )}
         </Box>
         </Box>
-        <Button onClick={() => { deleteQuestion(question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} variant='contained'  sx={{m:1}}>Delete</Button> {/*size="small"*/}
-        <Button onClick={() => { approveQuestion(question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} startIcon={<Icons.CheckBox/>} variant='contained' sx={{m:1}}>Accept</Button>
+        <Button onClick={() => { deleteQuestion(auth, question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} variant='contained'  sx={{m:1}}>Delete</Button> {/*size="small"*/}
+        <Button onClick={() => { approveQuestion(auth, question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} startIcon={<Icons.CheckBox/>} variant='contained' sx={{m:1}}>Accept</Button>
         <Divider sx={{mb: 1}}></Divider>
         </>))} 
     </TabPanel>
@@ -74,14 +74,14 @@ return (
 ); }
 
 
-const approveQuestion =  (question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
+const approveQuestion =  (auth, question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   const questionId = question._id;
   setQuestions();
   const data = {areaId: areaId};
-  new DatabaseRequest( () => Axios('PATCH', '/api/expert/' + questionId, data, {}) )
+  new DatabaseRequest( () => Axios('PATCH', '/api/expert/' + questionId, data, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
-      getExpertAreaQuestions(area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
+      getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
       } )
   .BadResult( (error) => {
       setAlert(error); 
@@ -90,14 +90,14 @@ const approveQuestion =  (question, area, page, setExpertQuestionsLastPage, setQ
 }
 
 
-const deleteQuestion =  (question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
+const deleteQuestion =  (auth, question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   const questionId = question._id;
   setQuestions();
   const data = `areaId=${areaId}`;
-  new DatabaseRequest( () => Axios('Delete', '/api/expert/' + questionId + '?' + data, {data}, {}) )
+  new DatabaseRequest( () => Axios('Delete', '/api/expert/' + questionId + '?' + data, {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
-      getExpertAreaQuestions(area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
+      getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
       } )
   .BadResult( (error) => {
       setAlert(error); 
@@ -106,11 +106,11 @@ const deleteQuestion =  (question, area, page, setExpertQuestionsLastPage, setQu
 }
 
 
-const getExpertAreaQuestions =  (area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
+const getExpertAreaQuestions =  (auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   setQuestions();
   const data = 'page=' + page;
-  new DatabaseRequest( () => Axios('GET', '/api/expert/' + areaId + '?' + data, {}, {}) )
+  new DatabaseRequest( () => Axios('GET', '/api/expert/' + areaId + '?' + data, {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
       if(result.lastPage) setExpertQuestionsLastPage(true);
       setQuestions(result.questions);

@@ -9,8 +9,7 @@ const { MiddlewareError } = require('../classes');
 module.exports = function (req, res, next) {
   try{  console.log(':: token middleware');
     const authHeader = req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
-    const token = authHeader && authHeader?.split(' ');
-    console.log('the token ', authHeader?.toString());
+    const token = authHeader && authHeader?.split(' '); ///get out the Token from Bearer Token
     if (!token || token[0] !== 'Bearer' || !token[1]) return next( new MiddlewareError(401, 'token middleware error, no token for request', 'No Token Supplied, Access denied.') )
     jwt.verify(token[1], process.env.ACCESS_TOKEN_SECRET
       , async(err, userTokenValues) => {

@@ -23,6 +23,8 @@ const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../mo
 
 const  sendEmail  = require('../api/sendEmail');
 
+
+
 //post an answer by a player
 playingTeamRouter.route('/answer')  //  localhost:3500/api/playingTeam/accept
 .patch(async (req, res, next) => {
@@ -150,30 +152,6 @@ playingTeamRouter.route('/')
     return new Success(200, result);
   });
 })
-
-
-
-// player accept invitation
-playingTeamRouter.route('/accept')  //  localhost:3500/api/playingTeam/accept
-.patch(async (req, res, next) => {
-  console.log(':: playing team router patch a player acceptance');
-  errorHandler(req, res, next)( async () => {
-    //link from email
-      const {playingTeam : playingTeamId , player : playerId} = req.body;
-      const playingTeam = await PlayingTeamModel.findById(playingTeamId);
-      if(!playingTeam) throw new ErrorHandler(400, 'cant find your playing team!'); //no team
-      const player = await UserModel.findById(playerId);
-      if(!player) throw new ErrorHandler(400, 'cant find your player!');  //no user
-
-      const filter = {_id: playingTeamId, "players._id": playerId};
-      const data = { $set: {"players.$.accepted" : true} }  ;
-      const result1 = await PlayingTeamModel.findOneAndUpdate( filter, data );
-      if (!result1) throw new ErrorHandler(400, 'cant set your approvement inside playing team!');
-
-      const result = await PlayingTeamModel.findById(playingTeamId);
-      return new Success(200, result);
-  });
-});
 
 
 //get playingTeam with all answers & delete a player from playingTeam

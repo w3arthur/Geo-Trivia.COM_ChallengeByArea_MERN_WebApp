@@ -79,7 +79,7 @@ return (<>
 function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert ){
   const organizer = auth._id;
   const data =  { organizer };
-  new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {}) )
+  new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
         setPlayingTeam(result);
         goTo('/Question');
@@ -91,7 +91,7 @@ function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert
 
 function handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUserArray, setAxiosLoading, setAlert){
         const playingTeamId = playingTeam._id;
-        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             const playersArray = result.players;
             const array = playersArray.filter((x) => x._id !== auth._id);
@@ -108,7 +108,7 @@ const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  
   // language will send with the cookie
   const organizer = auth._id;
   const data =  { organizer };
-  new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {}) )
+  new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
         setPlayingTeam(result);
         setOpenPopup(true);

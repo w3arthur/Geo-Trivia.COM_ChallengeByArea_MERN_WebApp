@@ -19,7 +19,7 @@ export const LoadingProvider = ({ children }) => {
   //const [auth, setAuth] = React.useState({});   //more context
   return ( <><LoadingContext.Provider value={{ setAlert, setAxiosLoading, setLoading, loading, axiosloading }}>
       <div style={{display: loading ? 'block': 'none'}}><Loading/></div>
-      <div style={{backgrounColor: 'black',display: axiosloading ? 'block': 'none'}}><Loading/></div>
+      <div style={{backgroundColor: 'black',display: axiosloading ? 'block': 'none'}}><Loading/></div>
       {children}
       <Snackbar open={alertMessage === '' ? false : true} autoHideDuration={6000} onClose={handleClose}>
       <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>

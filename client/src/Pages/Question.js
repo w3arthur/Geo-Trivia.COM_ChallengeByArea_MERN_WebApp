@@ -53,7 +53,7 @@ export default function Question(){
             //getQuestionTransmitter(playingTeam);
         }else if(x.finish){ 
             setLoading(false);
-            handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, setAxiosLoading, setAlert);
+            handleGetPlayingTeam_renewData(auth, playingTeam, setPlayingTeam, setAxiosLoading, setAlert);
             goTo('/Results');
         }else if(x.getQuestion){ 
             //  if(x.currentQuestion !== playingTeam.currentQuestion) {}
@@ -136,7 +136,7 @@ const handleFollow = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading,
         return;
     }
 
-    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/follow', data, {}) )
+    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/follow', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             const transmitterData = {
                 auth: authId
@@ -151,9 +151,9 @@ const handleFollow = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading,
 }
 
 
-function handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, setAxiosLoading, setAlert){
+function handleGetPlayingTeam_renewData(auth, playingTeam, setPlayingTeam, setAxiosLoading, setAlert){
         const playingTeamId = playingTeam._id;
-        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {}) )
+        new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             setPlayingTeam(result);
         } )
@@ -170,7 +170,7 @@ const handle5050 = ({auth, playingTeam : playingTeamData, setPlayingTeam, questi
   const playingTeam = playingTeamData._id;
   const question = questionNumber;
   const data =  {  player,  playingTeam, question };
-  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/h5050', data, {}) )
+  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/h5050', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {
         //keep only 2 questions from all the page
         const playingTeamClone = JSON.parse(JSON.stringify(result));
@@ -194,7 +194,7 @@ const handleStatistic = ({auth, playingTeam : playingTeamData, setPlayingTeam, q
     const playingTeam = playingTeamData._id;
     const question = questionNumber;
     const data =  {  player,  playingTeam, question };
-    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/statistic', data, {}) )
+    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/statistic', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             setStatisticShow(true);
             } )
@@ -211,7 +211,7 @@ const handlePostAnswer = ({e, auth, playingTeam : playingTeamData, setPlayingTea
     const question = questionValue;
     const answer = answerValue;
     const data =  {  player,  playingTeam, question, answer };
-    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/answer', data, {}) )
+    new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/answer', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             setPlayingTeam(result);
             getQuestionTransmitter(playingTeamData);

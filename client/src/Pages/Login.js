@@ -3,14 +3,16 @@ import { CssBaseline, Box, Button, Typography, TextField, Avatar, Grid, Containe
 import * as Icons from "@mui/icons-material/";  //Facebook, Google
 
 import { useAuth, useLoading } from '../Context';
-import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
+import { Axios, loginApi, tokenRenewApi } from '../Api';
 import { DatabaseRequest } from '../Classes';
-import { useGoTo , useTranslation } from '../Hooks';
+import { useGoTo, useGoFrom , useGoToFrom, useTranslation } from '../Hooks';
 import { tokens } from '../Config';
 
 import RegisterPopup from "./RegisterPopup";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const googleClientID = tokens.googleClientID;
 const facebookClientId = tokens.facebookClientId;
@@ -22,7 +24,14 @@ export default function Registration() {
   const { setAxiosLoading, setAlert } = useLoading();
 
   const goTo = useGoTo();
+  //const goFrom = useGoToFrom();
+  /* *
+  const from = useGoFrom()
+  function goFrom(){ goTo(from)  }
+/* */
+  const goFrom = useGoToFrom();
 
+  
   const emailRef = useRef( null );
   const passwordRef = useRef( null );
   const errRef = useRef( null );
@@ -33,12 +42,17 @@ export default function Registration() {
 
 
   useEffect(() => {
-    checkAccessToken(auth, setAuth, goTo, setAxiosLoading, setErrMsg);
+    checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setAlert, setAlert, setErrMsg);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [] ); //? 
+
+
+  useEffect(() => {
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     emailRef.current.focus(); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [handleClose] );
+    }, [handleClose] ); //?  //[]
 
 
   return (<>
@@ -104,17 +118,17 @@ const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading, se
     .Build(setAxiosLoading);  
 };
 
-function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setErrMsg){
-  // not available on POC version!
-  // new DatabaseRequest( () => tokenRenewApi() )
-  //   .GoodResult( (result) => {
-  //     if(!result.email || !result.accessToken) return;  //prevent endless loop because of login try if no email
-  //     const resultClone = JSON.parse(JSON.stringify(result));
-  //     delete resultClone.password;
-  //     setAuth( resultClone );
-  //     goFrom();
-  //     } )
-  //   .Build(setAxiosLoading);
+function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setAlert, setErrMsg){
+  new DatabaseRequest( () => tokenRenewApi() )
+    .GoodResult( (result) => {
+
+
+      if(!result._id || !result.accessToken) return;  //prevent endless loop because of login try if no email
+      setAuth( result );
+      alert('v');
+      goFrom();
+      } )
+    .Build(setAxiosLoading);
 }
 
 
@@ -124,7 +138,7 @@ const responseFacebook = (response, setAuth, goTo, setAxiosLoading, setAlert) =>
     .GoodResult( (result) => {
       const resultClone = JSON.parse(JSON.stringify(result));
       delete resultClone.password;
-      setAuth( resultClone ) //set rolls
+      setAuth( resultClone ); //set rolls
       goTo("/Location");
       } )
     .BadResult( (error) => { setAlert(error); } )

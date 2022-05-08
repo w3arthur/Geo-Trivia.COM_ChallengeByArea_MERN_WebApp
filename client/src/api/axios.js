@@ -9,7 +9,7 @@ const axiosFunction = axios.create({
     , withCredentials: true
 });
 
-export const userRegisterApi = (user) => Axios('POST', '/api/user', user, {});
+export const userRegisterApi = (user) => Axios('POST', '/api/login/register', user, {});
 export const loginApi = (user) => Axios('POST', '/api/login', user, {});
 export const tokenRenewApi = () => Axios('PATCH', '/api/login', {}, {});    //require cookie
 export const tokenDestroyApi = () => Axios('DELETE', '/api/login', {}, {});    //require cookie
