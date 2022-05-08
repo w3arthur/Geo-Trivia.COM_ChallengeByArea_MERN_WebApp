@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip , Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -12,31 +12,17 @@ import classNames from 'classnames';
 
 export default function LanguageFlags() {
 
-       const languages = [
-        {
-          code: 'english',
-          country_code: 'us',
-          name: 'English'
-        },        
-        {
-          code: 'hebrew',
-          country_code: 'il',
-          name: 'עברית',
-          dir: 'rtl'
-        },  
-        {
-          code: 'russian',
-          country_code: 'ru',
-          name: 'Русский'
-        },        
-      ]
-
+const languages = [
+    { code: 'english', country_code: 'us', name: 'English' }        
+    , { code: 'hebrew', country_code: 'il', name: 'עברית', dir: 'rtl' } 
+    , { code: 'russian', country_code: 'ru', name: 'Русский' },        
+  ]
     const { t } = useTranslation();
 
-    const currentLanguageCode = cookies.get('i18next') || 'en'
+    const currentLanguageCode = cookies.get('i18next') || 'english'
     const currentLanguage = languages.find(l => l.code === currentLanguageCode)
     
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (e) => {setAnchorEl(e.currentTarget);};
     const handleClose = () => {setAnchorEl(null);};
@@ -52,38 +38,20 @@ return (
     <LanguageIcon style={{width:'32px', height:'32px'}}/>
   </IconButton>
 </Tooltip>
-<Menu 
-  anchorEl={anchorEl}
-  open={open}
-  onClose={handleClose}
-  onClick={handleClose}
-  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+<Menu  anchorEl={anchorEl} open={open} onClose={handleClose} onClick={handleClose}
+  transformOrigin={{ horizontal: 'right', vertical: 'top' }} anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   disableScrollLock={true}
   PaperProps={{
     elevation: 0,
     sx: {
       overflow: 'visible',
       filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-      mt: 1.5,
-      bgcolor: '#F8F8F8',
-      '& .MuiAvatar-root': {
-        width: 32,
-        height: 32,
-        ml: -0.5,
-        mr: 1,
-      },
+      mt: 1.5, bgcolor: '#F8F8F8',
+      '& .MuiAvatar-root': { width: 32, height: 32, ml: -0.5, mr: 1, },
       '&:before': {
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        top: 0,
-        right: 14,
-        width: 10,
-        height: 10,
-        bgcolor: '#F8F8F8',
-        transform: 'translateY(-50%) rotate(45deg)',
-        zIndex: 0,        
+        bgcolor: '#F8F8F8', transform: 'translateY(-50%) rotate(45deg)'
+        , position: 'absolute', top: 0, right: 14, content: '""',  zIndex: 0 
+        , display: 'block', width: 10, height: 10
       },
     },
   }}
@@ -94,16 +62,9 @@ return (
         backgroundColor: currentLanguageCode === code ? '#D8D8D8' : '#F8F8F8',      
         border: currentLanguageCode === code ? '1px solid #989898' : '#F8F8F8'             
       }}>
-      <IconButton 
-        className={classNames('dropdown-item')}
-        onClick={() => {
-          i18next.changeLanguage(code);          
-      }}>
+      <IconButton className={classNames('dropdown-item')} onClick={() => { i18next.changeLanguage(code); }}>
       <Box style={{height:10, fontSize:'small'  }} >
-        <img width="20" 
-          src={`https://flagcdn.com/w20/${country_code}.png`}
-          srcSet={`https://flagcdn.com/w40/${country_code}.png 2x`}
-          alt="" />{name}
+        <img width="20" src={`https://flagcdn.com/w20/${country_code}.png`} srcSet={`https://flagcdn.com/w40/${country_code}.png 2x`} alt="" />{name}
       </Box>
      
       </IconButton>  

@@ -1,15 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import { /*useHistory,*/ useParams } from 'react-router-dom';
-import { useReceiver, receiver, transmitter } from '../Api'
 
-
-import { PopUp, Map } from '../Components';
-import { Axios,  } from '../Api';
+import { Axios } from '../Api';
 import { DatabaseRequest } from '../Classes';
-import { useAuth, usePlayingTeam, useLoading } from '../Context';
-import { useGoTo, useTranslation } from '../Hooks';
-
+import { usePlayingTeam, useLoading } from '../Context';
+import { useGoTo } from '../Hooks';
 
 
 export default function AcceptInvitation(){;

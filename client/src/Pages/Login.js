@@ -5,11 +5,15 @@ import * as Icons from "@mui/icons-material/";  //Facebook, Google
 import { useAuth, useLoading } from '../Context';
 import { Axios, loginApi/*, tokenRenewApi*/ } from '../Api';
 import { DatabaseRequest } from '../Classes';
-import { useGoTo , useTranslation } from '../Hooks'
+import { useGoTo , useTranslation } from '../Hooks';
+import { tokens } from '../Config';
 
 import RegisterPopup from "./RegisterPopup";
-//import GoogleLogin from "react-google-login";
-//import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+
+const googleClientID = tokens.googleClientID;
+const facebookClientId = tokens.facebookClientId;
 
 export default function Registration() {
   const { t } = useTranslation();
@@ -33,6 +37,7 @@ export default function Registration() {
     emailRef.current.value = auth.email || '';
     passwordRef.current.value = auth.password || '';
     emailRef.current.focus(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [handleClose] );
 
 
@@ -69,12 +74,10 @@ export default function Registration() {
           <Grid item xs={12} md={6} sx={{mt: 20, mb: {xs: 5, md: 30}, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Box component="div" sx={{width: '90%'}}>
               {/*edit button under box*/}
-              {/*
-            <FacebookLogin appId="691605551987315" autoLoad={false} callback={responseFacebook} />
+              
+            <Box component='div' className="googleButton" sx={{mb: 1}}> <GoogleLogin buttonText="Google Login" clientId={googleClientID} onSuccess={(response) => responseSuccessGoogle(response, setAuth, goTo, setAxiosLoading, setAlert)} onFailure={()=>{setAlert('fail to login with google account')}} cookiePolicy={'single_host_origin'} /> </Box>
+            <Box component='div' className="facebookButton" sx={{mb: 1}}> <FacebookLogin textButton={<span>Facebook Login</span>} icon="fa-facebook" appId={facebookClientId} autoLoad={false} callback={(response) => responseFacebook(response, setAuth, goTo, setAxiosLoading, setAlert) } onFailure={()=>{setAlert('fail to login with facebook')}} /> </Box>
 
-            <GoogleLogin  clientId="602070662525-cg5up3456lcbdngu7nhji2j6inpi8t1b.apps.googleusercontent.com"
-              buttonText="Google" onSuccess={responseSuccessGoogle} onFailure={responseErrorGoogle} cookiePolicy={"single_host_origin"} />
-           */}
             <Button startIcon={<Icons.SwitchAccount/>} fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
 
             <RegisterPopup open={openPopUp} handleClose={handleClose}  />
@@ -94,7 +97,7 @@ const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading, se
     .GoodResult( (result) => {
       const resultClone = JSON.parse(JSON.stringify(result));
       delete resultClone.password;
-      setAuth( resultClone ) //set roll
+      setAuth( resultClone ) //set rolls
       goTo("/Location");
       } )
     .BadResult( (error) => { setErrMsg(error); setAlert(error); } )
@@ -115,25 +118,31 @@ function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setErrMsg){
 }
 
 
-const responseFacebook = (response, setAxiosLoading) => {
-  console.log(response);
-  const data = { accessToken: response.accessToken, userID: response.userID };
-  new DatabaseRequest(()=>{Axios('POST', 'http://localhost:3500/api/auth/facebook', data, {})})
-  .BadResult((result)=>{  console.log("Facebook login success, client side", result); })
-  .GoodResult((error)=>{})
-  .Build(setAxiosLoading);
+const responseFacebook = (response, setAuth, goTo, setAxiosLoading, setAlert) => {
+  const data = { token: response.accessToken, userId: response.id };
+  new DatabaseRequest( () => Axios('POST', '/api/login/facebook', data, {}) )
+    .GoodResult( (result) => {
+      const resultClone = JSON.parse(JSON.stringify(result));
+      delete resultClone.password;
+      setAuth( resultClone ) //set rolls
+      goTo("/Location");
+      } )
+    .BadResult( (error) => { setAlert(error); } )
+    .Build(setAxiosLoading);  
 };
 
-const responseSuccessGoogle = (response, setAxiosLoading) => {
-  console.log(response);
-  const data = { tokenId: response.tokenId };
-  new DatabaseRequest(()=>{Axios('POST', 'http://localhost:3500/api/auth/google', data, {})})
-  .BadResult((result)=>{  console.log("Google login success", result); })
-  .GoodResult((error)=>{})
-  .Build(setAxiosLoading);
+const responseSuccessGoogle = (response, setAuth, goTo, setAxiosLoading, setAlert) => {
+  const data =  { token: response.tokenId };
+  new DatabaseRequest( () => Axios('POST', '/api/login/google', data, {}) )
+    .GoodResult( (result) => {
+      const resultClone = JSON.parse(JSON.stringify(result));
+      delete resultClone.password;
+      setAuth( resultClone ) //set rolls
+      goTo("/Location");
+      } )
+    .BadResult( (error) => { setAlert(error); } )
+    .Build(setAxiosLoading);  
 };
 
-
-const responseErrorGoogle = (response) => {  };
 
 

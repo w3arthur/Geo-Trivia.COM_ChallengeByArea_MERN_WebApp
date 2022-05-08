@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
-import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
+import React, { /*useState, */useRef } from "react";
+import { IconButton, Avatar, Grid, TextField, Box } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { useAuth, usePlayingTeam, useLoading} from '../../Context';
+import { useAuth, useLoading} from '../../Context';
 import { profile } from '../../Images';
-import { Axios, deepCopy  } from '../../Api';
+import { Axios } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
 
 export default function UserInvite ({userArray, setUserArray, playingTeam, setPlayingTeam}) {
@@ -16,12 +16,10 @@ return(<>
     <Grid item xs='1' sm='1'> 
         <Avatar src={profile} sx={{ backgroundColor: "#faae1c", mt: {xs: 0, sm: 3} , ml: {xs: '-3px', sm: 0} , width:  '32px ! important' , height: '32px ! important' }} />
     </Grid>
-    
     <Grid item xs='9' sm='10' sx={{pl: '3px'}}>
          {/* <Typography variant="h4" sx={{textAlign: 'left', m:3}}>Email</Typography>  */}
 
         <TextField inputRef = {emailRef} autoFocus autoComplete="email" label="Set Member Email" margin="normal" fullWidth />
-
     </Grid>
     <Grid item xs='1' sm='1' sx={{zIndex: 1}}>
     <Box sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
@@ -29,13 +27,10 @@ return(<>
             <Icons.Add sx={{ fontSize: '30pt'}} />
         </IconButton>
     </Box> 
-    
     </Grid>
-
 </Grid>
 </>);
 }
-
 
 const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert, ) => {
     //previous checker for array

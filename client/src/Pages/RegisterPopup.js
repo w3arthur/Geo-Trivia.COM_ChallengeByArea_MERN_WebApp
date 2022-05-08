@@ -39,19 +39,14 @@ export default function ResterPopUp({open, handleClose}){
               <TextField label="Name" autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
               
               <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>
-              
+            
               <Box sx={{ alignItems: 'left', width: '100%'}}>
                 <TextField label={t('Age')} type="number" id="age" name="age" sx={{width: '40%'}} />
               </Box>
 
               <TextField label={t('Password')} id="password" name="password" type="password" autoComplete="new-password" helperText="minimum 6 symbols" fullWidth />
-
-                {/*
-              <TextField label={t('Confirm password')} name="passwordConfirm" type="password" fullWidth />
-                */}
-                
               
-
+                {/* <TextField label={t('Confirm password')} name="passwordConfirm" type="password" fullWidth /> */}
               <Box sx={{ textAlign: 'center', width: '100%'}}>
                 <Typography variant="body2" color="primary" ref={errRef}>|{errMsg}|</Typography>
                 <Button startIcon={<Icons.PersonAddAlt/>} ref={registerButtonRef} type="submit" variant="contained"> {t('Registration')} </Button>

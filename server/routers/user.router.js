@@ -22,7 +22,7 @@ userRouter.route('/') //  localhost:3500/api/user
     const {name, age, email, password} = req.body;
     const user = await UserModel.findOne({ email: email });
     if (user !== null) throw new ErrorHandler(452, 'user already exist!');
-    const data = {name, age, email, password};
+    const data = {name, age, email, password, passwordRegister: true};
     if(language) data.language = language;
     data.password = await bcrypt.hash(data.password, 10);
     const result = await new UserModel(data).save();

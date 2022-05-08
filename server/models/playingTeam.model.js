@@ -9,10 +9,7 @@ const PlayingTeamSchema = new mongoose.Schema({
   // answers = [Int]
   //helpers = { follow:{patch} false, followQuestion: undefined, _50_50: false, statistic: false };
   // score: Int
-  , location: {
-    type: { type: String , enum: ['Point'] , default: 'Point' }
-    , coordinates: { type: [Number] ,required: true }
-  } //Copy From User!
+  , location: { type: { type: String , enum: ['Point'] , default: 'Point' }, coordinates: { type: [Number] ,required: true } } //Copy From User!
   , language: { type: String, index: true }
   , questions: { type: [Object], required: true, index: true }
   // _id: ObjectID, question: String, answers: [String], rightAnswer: Int

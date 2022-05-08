@@ -13,7 +13,6 @@ const errorHandler = (req, res, next) => {
     return async (externalFunction) => {
         try{ 
             const success = await externalFunction();
-
             if(typeof(success) === 'object'){
                 const {status, result} = success;
                 req.resultStatus = status;
@@ -22,7 +21,7 @@ const errorHandler = (req, res, next) => {
                 catch(e){ req.resultMessage = result; return res.status(status).send(result); }     
                 return res.status(status).json(result);
             }
-            throw new ErrorHandler(500, 'Success message failed!');
+            throw new ErrorHandler(400, 'Success message failed (no return / throw set inside errorHandler for the CRUD operation!) !');
         } catch(err){
             console.log('...errored');
             req.body.isError = true;

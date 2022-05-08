@@ -4,6 +4,8 @@ import { profile } from '../Images';
 
 import { useAuth, usePlayingTeam } from '../Context';
 
+import { sizes } from '../Config'
+
 export default function Follow({handleFollow}){
     const { auth } = useAuth();
     const { playingTeam } = usePlayingTeam();
@@ -20,7 +22,7 @@ function UserToFollow({key, sx, alt, src, onClick, children, ...props}){
 return(<>
     <Box sx={{p: 1}} >
         <Button  {...props} onClick={onClick} variant="outlined" startIcon={<Avatar alt={alt} src={src} sx={{ backgroundColor: "#faae1c", m: '2px', ...sx}}/>} fullWidth>
-            <Typography key={key} sx={{width: '100%', fontSize: {xs: 17, sm:22, md:28}, textTransform: 'capitalize'}}>{children}</Typography>
+            <Typography key={key} sx={{width: '100%', fontSize: sizes.followPopUpEmail , textTransform: 'capitalize'}}>{children}</Typography>
         </Button>
     </Box>
 </>)

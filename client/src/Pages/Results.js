@@ -1,17 +1,12 @@
 /* eslint-disable array-callback-return */
 
-import React, { useState, useRef, useEffect } from "react";
-import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography, Container } from "@mui/material";
+import React/*, { useState, useRef, useEffect }*/ from "react";
+import { Avatar, Grid,  Box, Button, Typography, Container } from "@mui/material";
 import * as Icons from '@mui/icons-material';
 
-import { PopUp, } from '../Components';
-import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../Api';
-import { DatabaseRequest } from '../Classes';
-import { useAuth, usePlayingTeam, useLoading } from '../Context';
+import { useAuth, usePlayingTeam } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 import { profile } from '../Images';
-import { BreakfastDiningOutlined } from "@mui/icons-material";
-
 
 export default function Results(){
     const { t } = useTranslation();
@@ -58,7 +53,7 @@ return (<> <Grid container sx={{minHeight: 400}}>
 
 function Result({email, score, questionsAnswered, questionsTotal, you}){
     const addSize = you ? 3 :0;
-    return (<><Box ml={you? -1: 0} >
+return (<><Box ml={you? -1: 0} >
 <Typography variant="h5" className="aaa" component="div" color="secondary" sx={{  fontSize: {xs: '14pt', sm: '16pt', md: '18pt', lg: '20pt'}, fontWeight: you ? "900 !" : "500"}}>
     <Grid item container xs={12}  m={{xs:0, sm:2}} mt={{xs:1, sm:2}} >
         <Grid item xs={2} lg="1" >

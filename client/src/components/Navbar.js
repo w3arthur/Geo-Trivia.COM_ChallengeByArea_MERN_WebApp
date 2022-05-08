@@ -1,12 +1,8 @@
 import React from "react";
 
-
-import {Box, Toolbar, AppBar,  Button, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { Toolbar, AppBar,  Button, Typography } from "@mui/material";
 import * as Icons from '@mui/icons-material';
-
-
-import { useGoTo, useGoFrom, useTranslation } from '../Hooks';
+import { useGoTo, useTranslation } from '../Hooks';
 
 export default function NavBar () {
 

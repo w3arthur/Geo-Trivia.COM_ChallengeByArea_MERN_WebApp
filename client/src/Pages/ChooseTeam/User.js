@@ -1,14 +1,12 @@
 
-import React, { useState, useRef } from "react";
-import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
+import React/*, { useState, useRef }*/ from "react";
+import { IconButton, Avatar, CircularProgress, Grid, TextField } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
 import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { profile } from '../../Images';
-import { Axios, deepCopy  } from '../../Api';
+import { Axios } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
-
-
 
 export default function User({key, data, userArray, setUserArray}) {
     const border =  data.accepted ? '3px solid  #187071' : null;    //accepted user

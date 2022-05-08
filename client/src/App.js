@@ -1,11 +1,12 @@
 import React, { Routes, Route , Outlet /*, useRoutes*/} from "react-router-dom"; // useParams,
 
-import { AddQuestion, Logo, NavBar, Loading, Chart, Follow, Boom } from "./Components";
+import {  Logo, NavBar, Loading, StatisticChart, Follow, Boom } from "./Components";
 import { useTranslation } from "./Hooks";
 import {AcceptInvitation ,Home, Login, Location, Question, QuestionBeExpert, ChooseTeam, Results, Community } from "./Pages";
 import GlobalLayout from "./Styles/GlobalLayout"
+import AddQuestion from './Pages/Community/AddQuestion';  //to delete
 
-import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
+//import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
 import DataGridExample from "./z_development/DataGridExample";
 import GeoLocation from "./z_development/GeoLocation/GeoLocation";
 
@@ -42,8 +43,7 @@ return (<>
           <Route path="/Results" element={<Results />} />
           <Route path="/Loading" element={<Loading />} />
           
-          <Route path="/Chart" element={<Chart />} />
-
+          <Route path="/Chart" element={<StatisticChart />} />
           <Route path="/:playingTeamId" element={<AcceptInvitation />} />
       </Route>
 

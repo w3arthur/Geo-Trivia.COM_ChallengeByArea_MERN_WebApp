@@ -1,10 +1,10 @@
 /* eslint-disable array-callback-return */
-import React, { useState, useRef, useEffect } from "react";
-import { IconButton, Avatar, CircularProgress, Stack, Grid, TextField, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
+import React, { useState/*, useRef, useEffect*/ } from "react";
+import { Avatar, Grid , Paper, Box, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
 import { PopUp, } from '../../Components';
-import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../../Api';
+import { Axios, useReceiver, transmitter  } from '../../Api';
 import { DatabaseRequest } from '../../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { useGoTo, useTranslation } from '../../Hooks';

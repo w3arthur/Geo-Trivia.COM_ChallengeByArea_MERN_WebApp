@@ -1,17 +1,17 @@
 import React, {useRef, useEffect, useState} from "react";
-import { Grid, Card, Chip , Paper, Link, Box, Button, Typography } from "@mui/material";
-
-import { PopUp, Map } from '../Components';
+import { Grid, Paper, Typography } from "@mui/material";
 
 import { DatabaseRequest } from '../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 import { monkeyLeft, monkeyRight, globe } from '../Images'
+import { Axios, useReceiver, transmitter  } from '../Api';
 
-import { Axios, useReceiver, receiver, transmitter  } from '../Api';
+import { PopUp, Map } from '../Components';
 
-//fake example for database error handler
-const geoData =  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ];
+import { map } from '../Config'
+
+const geoData =  map.geoDataErrorExamplePoints; //  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ]
 
 export default function Location() {
   const { t } = useTranslation();
@@ -57,32 +57,27 @@ export default function Location() {
   const handleClose = () => { setOpenFromListPopup(false); setOpenFromMapPopup(false); setOpenYourLocationPopup(false); };
 
 return (<>
-<Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location")} </Typography>
-<Grid container>
+  <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location")} </Typography>
+  <Grid container>
+    <Selection onClick={handleClick_openFromListPopup} leftMonkey>Choose Location <br /> from list</Selection>
+    <Selection onClick={handleClick_openFromMapPopup} rightMonkey>Choose Location <br /> from map</Selection>
+    <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>Your <br /> Location</Selection>
+  </Grid>
 
-  <Selection onClick={handleClick_openFromListPopup} leftMonkey>Choose Location <br /> from list</Selection>
+  {/* Location From List */}
+  <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+    <Map geoData={geoDataRef.current} show='list' settings={settings} height='55vh' minHeight='200px' />
+  </PopUp>
 
-  <Selection onClick={handleClick_openFromMapPopup} rightMonkey>Choose Location <br /> from map</Selection>
+  {/* Location From Map */}
+  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo ,auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+    <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
+  </PopUp>
 
-  <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>Your <br /> Location</Selection>
-
-</Grid>
-
-{/* Location From List */}
-<PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} show='list' settings={settings} height='55vh' minHeight='200px' />
-</PopUp>
-
-{/* Location From Map */}
-<PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo ,auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
-</PopUp>
-
-    {/* Your Location GPS */}
-<PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
-  <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
-</PopUp>
-
+  {/* Your Location GPS */}
+  <PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+    <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
+  </PopUp>
 </>);
 }
 
@@ -93,29 +88,25 @@ function Selection(props){
     : leftBottomMonkey? ({marginLeft: 'auto', marginTop: '20vh'})
     : null;
   const styleImage = {display: 'block', width: '75%', maxHeight: '75%', maxWidth: '75%', ...additionStyle};
+return(<>
+  <Grid item sm={4} sx={{p:2, display: { xs: 'none', sm: 'block' }}}>
+      <SelectionValue onClick={props.onClick}>{props.children}</SelectionValue>
+  </Grid>
+  {leftMonkey || leftBottomMonkey  ? 
+  <SelectionMonkeyImageGrid onClick={props.onClick}>
+    <img alt="monkeyLeft" src={monkeyLeft} style={styleImage}/>
+  </SelectionMonkeyImageGrid> : null}
 
-  return(<>
-      <Grid item sm={4} sx={{p:2, display: { xs: 'none', sm: 'block' }}}>
-          <SelectionValue onClick={props.onClick}>{props.children}</SelectionValue>
-      </Grid>
-
-      {leftMonkey || leftBottomMonkey  ? 
-      <SelectionMonkeyImageGrid onClick={props.onClick}>
-        <img alt="monkeyLeft" src={monkeyLeft} style={styleImage}/>
-      </SelectionMonkeyImageGrid> : null}
-
-      <Grid item xs={8} sx={{p:1 ,height: '100%' ,display: { xs: 'block', sm: 'none' }}}>
-        <SelectionValue onClick={props.onClick}>{props.children}</SelectionValue>
-      </Grid>
-
-      {rightMonkey ? (
-        <SelectionMonkeyImageGrid onClick={props.onClick}>
-            <img alt="monkeyRight" src={monkeyRight} style={styleImage} />
-        </SelectionMonkeyImageGrid>
-      ) : (<></>)}
-  </>);
+  <Grid item xs={8} sx={{p:1 ,height: '100%' ,display: { xs: 'block', sm: 'none' }}}>
+    <SelectionValue onClick={props.onClick}>{props.children}</SelectionValue>
+  </Grid>
+  {rightMonkey ? (
+    <SelectionMonkeyImageGrid onClick={props.onClick}>
+        <img alt="monkeyRight" src={monkeyRight} style={styleImage} />
+    </SelectionMonkeyImageGrid>
+  ) : (<></>)}
+</>);
 }
-
 
 function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam){
   const data = {player: auth._id, playingTeam: invitedTeamId}

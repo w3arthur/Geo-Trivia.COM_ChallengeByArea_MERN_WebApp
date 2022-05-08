@@ -1,9 +1,10 @@
 import React from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell/*, Tooltip, Legend*/ } from "recharts";
+import { colors, statisticChart } from '../Config';
 
-const dataFail = [{ answer: 99, counter: 10 },{ answer: 34, counter: 10 }];
+const dataFail = statisticChart.errorExampleData;	//	[{ answer: 99, counter: 10 },{ answer: 34, counter: 10 }]
 
-const COLORS = ['#0088FEFF', '#00C49FFF', '#FFBB28FF', '#FF8042FF', '#FFBB28FF', '#00C49FFF'];
+const COLORS = colors.statisticChart.piColors;	//	['#0088FEFF', '#00C49FFF', '#FFBB28FF', '#FF8042FF', '#FFBB28FF', '#00C49FFF']
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = (data) => ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, }) => {
@@ -18,7 +19,7 @@ const renderCustomizedLabel = (data) => ({ cx, cy, midAngle, innerRadius, outerR
 	);
 };
 
-export default function Chart({data}) {
+export default function StatisticChart({data}) {
     const setData = data ? data : dataFail;
 		return (
 			<PieChart width={200} height={200} >
