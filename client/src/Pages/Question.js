@@ -3,14 +3,15 @@ import React, {useRef, useState, useEffect} from 'react';
 import {Box, Grid, Typography, Button,  Chip, Avatar } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
-import { PopUp, Chart, Boom, Follow } from '../Components';
-import { Axios, deepCopy, useReceiver, receiver, transmitter  } from '../Api';
+import { PopUp, StatisticChart, Boom, Follow } from '../Components';
+import { Axios, useReceiver, transmitter  } from '../Api';
 import { DatabaseRequest } from '../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../Context';
-import { useGoTo, useTranslation } from '../Hooks';
+import { useGoTo } from '../Hooks';
+import { colors } from '../Config'
 
-const COLORS = ['#0088FEAA', '#00C49FAA', '#FFBB28AA', '#FF8042AA', '#FFBB28AA', '#00C49FAA'];
-const REGULAR_COLOR = '#FFFFFFAA';
+const COLORS = colors.question.statisticNumbersColors;  //  ['#0088FEAA', '#00C49FAA', '#FFBB28AA', '#FF8042AA', '#FFBB28AA', '#00C49FAA']
+const REGULAR_COLOR = colors.question.numberBackgroundColor;    //  '#FFFFFFAA'
 
 export default function Question(){
     const { auth } = useAuth();
@@ -87,7 +88,7 @@ export default function Question(){
             ) ) }
         </Grid>
         <Grid container sx={{width: '100%', display:  statisticShow ? 'flex' : 'none'}}>
-            <Box sx={{ width: '100%'}}> <Chart data={statisticData(question, playingTeam)} /> </Box>
+            <Box sx={{ width: '100%'}}> <StatisticChart data={statisticData(question, playingTeam)} /> </Box>
         </Grid>
         <Grid sx={{mt:7, textAlign: 'center', width: '100%'}}>
             <Helper startIcon={<Icons.Battery50/>} onClick={() => {handle5050({auth, playingTeam, setPlayingTeam, question, setAxiosLoading, setAlert})}} sx={{display: helpers?.h5050? 'inline-block': 'none'}}>50/50</Helper>
@@ -115,9 +116,7 @@ function statisticData(question, playingTeam){
 }
 
 //({auth, playingTeam : playingTeamData, setPlayingTeam, question : questionNumber, setAxiosLoading, setAlert})
-const handleFollow 
-        = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading, handleOpenBoomPopup, followerId) =>
-        (followAuthId) => {
+const handleFollow = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading, handleOpenBoomPopup, followerId) => (followAuthId) => {
     const authId = auth._id;
     const followId = followAuthId;
     const playingTeamId = playingTeam._id;
@@ -191,7 +190,6 @@ const handle5050 = ({auth, playingTeam : playingTeamData, setPlayingTeam, questi
 };
 
 const handleStatistic = ({auth, playingTeam : playingTeamData, setPlayingTeam, question : questionNumber, setAxiosLoading, setAlert, setStatisticShow}) => {
-   // if(statisticData(question, playingTeam) === []){setAlert('No statistic for this question'); return;}
     const player = auth._id;
     const playingTeam = playingTeamData._id;
     const question = questionNumber;
@@ -220,7 +218,7 @@ const handlePostAnswer = ({e, auth, playingTeam : playingTeamData, setPlayingTea
             setTimeout(() =>{e.target.parentNode.parentNode.blur();}, 500)
             } )
         .BadResult( (error) => { setAlert(error); } )
-        .Build(setAxiosLoading);  
+        .Build(setAxiosLoading);
 };
 
 
