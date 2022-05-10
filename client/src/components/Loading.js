@@ -1,16 +1,15 @@
-import { colors } from '../Config'
 import { CircularProgress, Box } from "@mui/material";
+import { useTranslation } from '../Hooks';
+import { colors } from '../Config';
 export default function Loading(){
-    return (<>
-    <div style={{position:'fixed', zIndex: 1301, left: '50%', top: '50%', textAlign: 'center'}} >
-        <CircularProgress size={100} />
-        <br/>
-        <div style={{backgroundColor: '#ffffff', borderRadios: 20 }}>Loading...</div>
-    </div>
-    <Box component="div" style={{position:'fixed', zIndex: 1303, left: '50%', top: '50%', textAlign: 'center'}} >
-        <CircularProgress size={100} />
-        <br/>
-        <Box style={{backgroundColor: colors.loadingBackgroundColor, borderRadius: 20}}>Loading...</Box>
-    </Box>
-    </>);
+    const { t } = useTranslation();
+return (<>
+{/* Cover Screen Area */}
+<Box sx={{backgroundColor: colors.loading.screenBackground, position:'fixed', width: '100vw', height: '100vh', zIndex: 1303}}></Box>
+<Box component="div" sx={{position:'fixed', zIndex: 1303, left: '50%', top: '50%', textAlign: 'center'}} >
+    <CircularProgress size={100} />
+    <br/>
+    <Box style={{backgroundColor: colors.loading.textBackGround, borderRadius: 20}}>{t("Loading...")}</Box>
+</Box>
+</>);
 }

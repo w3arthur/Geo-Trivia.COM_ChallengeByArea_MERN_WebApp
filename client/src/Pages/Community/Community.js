@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import { Box, Tabs, Tab,  Button, Typography } from "@mui/material";
 import * as Icons from '@mui/icons-material';
@@ -8,7 +9,7 @@ import { useAuth, useLoading } from '../../Context';
 import { useTranslation } from '../../Hooks';
 import { Axios } from '../../Api';
 import QuestionBeExpert from "./QuestionBeExpert";
-import { map, colors } from '../../Config'
+import { map, colors, sizes } from '../../Config'
 import { goodLuck } from '../../Images'
 
 import AddQuestion from './AddQuestion';
@@ -19,7 +20,7 @@ const geoData = map.geoDataErrorExamplePoints;  //[ { _id:"0", location:{ coordi
 
 export default function Community(){
   const { t } = useTranslation();
-  const { auth  } = useAuth();
+  const { auth } = useAuth();
   const { setAxiosLoading, setAlert } = useLoading();
   const geoDataRef = useRef(geoData);
 
@@ -40,11 +41,10 @@ export default function Community(){
   const [newestQuestionsPage, setNewestQuestionsPage] = useState(1);
   const [newestQuestionsLastPage, setNewestQuestionsLastPage] = useState(false);
 
-  useEffect(() => {   //if set playingTeam !!!
+  useEffect(() => {
     getAllAreas(auth, geoDataRef, setAxiosLoading, setAlert);
     getNewestQuestions (auth, newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    }, [])
 
   const [value, setValue] = useState(2);  //begin from tab 2, newest_questions
 
@@ -62,18 +62,18 @@ export default function Community(){
   const [alternativeContent_BeExpert_WelcomePage, setAlternativeContent_BeExpert_WelcomePage]= useState(true);
 return (<>
 <Box sx={{ textAlign: 'center', width: '100%', md: 1}}> 
-  <Button startIcon={<Icons.Architecture/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_BeExpert} variant="contained"> Ask be Expert </Button>
-  <Button startIcon={<Icons.NoteAdd/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_AddQuestion} variant="contained"> Add Your Question </Button>
+  <Button startIcon={<Icons.Architecture/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_BeExpert} variant="contained"> {t("Ask be Expert")} </Button>
+  <Button startIcon={<Icons.NoteAdd/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_AddQuestion} variant="contained"> {t("Add Your Question")} </Button>
 </Box>
 <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
   <Tabs value={value} onChange={handleChange} sx={{backgroundColor: colors.community.globalTabsLineBackgroundColor }} centered>
     <Tab sx={{display: 'none'}}></Tab>
-    <Tab label={<Typography variant='h5' color='primary'><Icons.Explore /> Experts Area</Typography>} sx={{width: '50%', fontSize: '20pt'}} />
-    <Tab label={<Typography variant='h5' color='primary'><Icons.Extension /> Latest Questions</Typography>} color='prime' sx={{width: '50%', fontSize: '20pt',}} />
+    <Tab label={<Typography variant='h5' color='primary'><Icons.Explore /> {t("Experts Area")}</Typography>} sx={{width: '50%', fontSize: sizes.community.tabTextSize }} />
+    <Tab label={<Typography variant='h5' color='primary'><Icons.Extension /> {t("Latest Questions")}</Typography>} color='prime' sx={{width: '50%', fontSize: sizes.community.tabTextSize }} />
     <Tab sx={{display: 'none'}}></Tab>
   </Tabs>
   <TabPanel value={value} index={2}> 
-    Latest Questions:
+    {t("Latest Questions:")}
     <NewestQuestions dataNewestQuestions={{newestQuestionsPage, setNewestQuestionsPage, newestQuestions, setNewestQuestions, newestQuestionsLastPage, setNewestQuestionsLastPage}}/>
   </TabPanel>
   <TabPanel value={value} index={1}> <ExpertAreaVerticalTabs auth={auth} verticalValue={verticalValue} setVerticalValue={setVerticalValue} /></TabPanel>  
@@ -81,61 +81,51 @@ return (<>
   <TabPanel value={value} index={3}> 
   {alternativeContent_BeExpert_WelcomePage? (<> 
   <Typography>
-    Welcome to expert request for <Typography component='span' sx={{fontWeight: 'bold'}}>{mapSelectedCountry?.area}</Typography> <br/>
-    Expert is very responsible role <br/>
-    You can achieve it by answer right 4/5 questions.  <br/>
+    {t("Welcome to expert request for")} <Typography component='span' sx={{fontWeight: 'bold'}}>{t(mapSelectedCountry?.area)}</Typography> <br/>
+    {t("Expert is very responsible role")}<br/>
+    {t("You can achieve it by answer right 4/5 questions.")}  <br/>
     </Typography>
     <img src={goodLuck} alt="good luck!" style={{width:'150px',height:'auto'}} />  <br/>
-  <Button variant="contained" onClick={() => {setAlternativeContent_BeExpert_WelcomePage(false);setAlternativeContent_BeExpert();}}>Start Trivia</Button>
+  <Button variant="contained" onClick={() => {setAlternativeContent_BeExpert_WelcomePage(false);setAlternativeContent_BeExpert();}}>{t("Start Trivia")}</Button>
   </>) : (<></>)}
   {alternativeContent_BeExpert? (<>{alternativeContent_BeExpert}</>) :(<>
-    Be Expert for: {mapSelectedCountry?.area} <br/>
+    {t("Be Expert for:")} {t(mapSelectedCountry?.area)} <br/>
     <QuestionBeExpert mapSelectedCountry={mapSelectedCountry}  setAlternativeContent={setAlternativeContent_BeExpert} />
     </>)} 
   </TabPanel>
 </Box>
 {/*Choose Area for AddQuestion */}
-<PopUp open={openFromMapPopup_AddQuestion} handleClose={handleCloseMapPopup_AddQuestion} title="Choose Location from map" 
+<PopUp open={openFromMapPopup_AddQuestion} handleClose={handleCloseMapPopup_AddQuestion} title={t("Choose Location from map")}
     handleSubmit={()=>{ 
-        if(!mapSelectedCountry || !mapSelectedCountry?.area){setAlert('no selected area');return;}
+        if(!mapSelectedCountry || !mapSelectedCountry?.area){ setAlert(t("no selected area")); return; }
               handleCloseMapPopup_AddQuestion();
               handleShowQuestions();
-        }} submitText="Set Area">  <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
+        }} submitText={t("Set Area")}>  <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
 </PopUp>
 {/*Choose Area for BeExpert */}
-<PopUp open={openFromMapPopup_BeExpert} handleClose={handleCloseMapPopup_BeExpert} title="Choose Area for Expert" 
+<PopUp open={openFromMapPopup_BeExpert} handleClose={handleCloseMapPopup_BeExpert} title={t("Choose Area for Expert")}
     handleSubmit={()=>{ 
-        if(!mapSelectedCountry || !mapSelectedCountry?.area){setAlert('no selected area');return;}
+        if(!mapSelectedCountry || !mapSelectedCountry?.area){ setAlert('no selected area'); return; }
             handleCloseMapPopup_BeExpert();
             handleAskBeExpert();
-        }} submitText="Start Trivia">  <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
+        }} submitText={t("Start Trivia")}> <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
 </PopUp>
 </>);
 }
 
 const getAllAreas = (auth, geoDataRef, setAxiosLoading, setAlert) => {
   new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-      geoDataRef.current = result;
-      } )
-  .BadResult( (error) => {
-      setAlert(error); 
-      } )
+  .GoodResult( (result) => { geoDataRef.current = result; } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
 
-export const getNewestQuestions =  (auth, page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => {
+export const getNewestQuestions =  (auth, page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => { //this item exported to Newest Questions too
   new DatabaseRequest( () => Axios('GET', '/api/question/' + (page||0).toString() +'/', {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-      if(result.lastPage) setNewestQuestionsLastPage(true);
-      setNewestQuestions(result.questions);
-      } )
-  .BadResult( (error) => {
-      setAlert(error); 
-      } )
+  .GoodResult( (result) => { if(result.lastPage) setNewestQuestionsLastPage(true); setNewestQuestions(result.questions); } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
-
 
 export const TabPanel = ({ children, value, index, sx, ...other }) => (
   <div style={{ width: '100%', ...sx}} role="tabpanel" hidden={value !== index} id={`vertical-tabpanel-${index}`} aria-labelledby={`vertical-tab-${index}`} {...other}>

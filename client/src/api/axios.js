@@ -4,9 +4,9 @@ import {server} from '../Config';
 
 const axiosFunction = axios.create({
     baseURL: server.axiosBaseUrl    //'http://localhost:3500'
-    //, timeout: 1000
     , headers: {'Content-Type': 'application/json',}
     , withCredentials: true
+    //, timeout: 1000
 });
 
 export const userRegisterApi = (user) => Axios('POST', '/api/login/register', user, {});

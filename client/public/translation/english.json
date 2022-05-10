@@ -1,0 +1,114 @@
+{   "Language": "English"
+    , "language": "language"
+
+, "NavBar" : {}
+    , "Geo-Trivia.com": "Geo-Trivia.com"
+    , "Community": "Community"
+    , "Go Home Page": "Home"
+    , "Logout": "Logout"
+, "Home" : {}
+    , "Trivia Challenging Application": "Trivia Challenging Application"
+    , "Welcome to Geo Trivia Game": "Playing a game of geography trivia not only lets you show off your knowledge of random tidbits about the world, it's also a great way to learn. Even if you don't know the answer, it's a lot of fun to see what everybody guesses. You'll end up knowing a little bit more about geography by the end"
+    , "Start to Play": "Start to Play"
+, "Login" : {}
+    , "Game Login": "Login with"
+    , "Password": "Password"
+    , "Remember me": "Remember me"
+    , "Sign In": "Sign In"
+    , "Google Login": "Google Login"
+    , "Facebook Login": "Facebook Login"
+    , "Registration": "Registration"
+, "RegisterPopUp" : {}
+    , "Register": "Register"
+    , "Name": "Name"
+    , "Email*": "^"
+    , "Age": "Age"
+    , "Password*": "^"
+    , "Confirm password": "Confirm password"
+    , "Registration*": "^"
+, "Results" : {}
+    , "Game Results": "Results"
+    , "Back to Location Screen": "Back to Location Select"
+    , "Advertisement": "Advertisement"
+    , "Score": "Score"
+    , "pt": "pt"
+    , "Right answers": "Right answers"
+    , "Questions Answered": "Questions"
+, "Question" : {}
+    , "50/50": "50/50"
+    , "Statistic": "Statistic"
+    , "Follow": "Follow"
+    , "Choose to Follow": "Choose to Follow"
+    , "Boom Message": "Boom!, you crashed with another follower, your score 0"
+    , "Boom Exit The Game": "Finish The Game"
+, "Location": {}
+    , "Location Set": "Location"
+    , "Choose Location.": "Choose Location"
+    , ".from list": "from list"
+    , "Choose Location_": "Choose Location"
+    , "_from map": "from map"
+    , "Your_": "Your"
+    , "_Location": "Location"
+    , "Set Area Submit": "Set Area"
+, "ChooseTeam": {}
+    , "Choose Team": "Choose Team"
+    , "Invite": "Invite"
+    , "Team": "Team"
+    , "Play": "Play"
+    , "Single": "Single"
+    , "No players added, you are in team mode": "No players added, you are in team mode"
+    , "Please wait until all the players will accept the invitation": "Please wait until all the players will accept the invitation"
+    , "Set Team": "Set Team"
+    , "Set Member Email": "Set Member Email"
+    , "entered empty email address.": "entered empty email address."
+    , "entered your email address.": "entered your email address."
+    , "entered existed email address.": "entered existed email address."
+, "AddQuestion": {}
+    , "The Question": "The Question"
+    , "set your question": "set your question"
+    , "Add Question": "Add Question"
+    , "Your Location:": "Your Location:"
+    , "No Area!": "No Area!"
+    , "Your Language:": "Your Language:"
+    , "+ Add Question": "+ Add Question"
+    , "Answer": "Answer"
+    , "no question set": "no question set"
+    , "answer number": "answer"
+    , "is empty": "is empty"
+    , "Thanks For Sending a Question!": "Thanks!"
+    , "Your Question is sent to area expert approval.": "Your Question is sent to area expert approval."
+, "Community ": {}
+    , "Ask be Expert": "Ask be Expert"
+    , "Add Your Question": "Add Your Question"
+    , "Latest Questions:": "Latest Questions:"
+    , "Experts Area": "Experts Area"
+    , "Latest Questions": "Latest Questions"
+    , "Welcome to expert request for": "Welcome to expert request for"
+    , "Expert is very responsible role": "Expert is very responsible role"
+    , "You can achieve it by answer right 4/5 questions.": "You can achieve it by answer right 4/5 questions."
+    , "Start Trivia": "Start Trivia"
+    , "Be Expert for:": "Be Expert for:"
+    , "Choose Location from map": "Choose Location from map"
+    , "no selected area": "no selected area"
+    , "Set Area": "Set Area"
+    , "Choose Area for Expert": "Choose Area for Expert"
+, "QuestionBeExpert": {}
+    , "You are now expert!, no questions for your area.": "You are now expert!, no questions for your area."
+    , "You are now expert!": "You are now expert!"
+    , "Fail to get expert": "Fail to get expert answered less than 4/5 questions!"
+, "NewestQuestions+ExpertArea": {}
+    , "Back": "Back"
+    , "Next": "Next"
+, "Loading": {}
+    , "Loading...": "Loading..."
+
+, "Map" : {}
+    , "SelectArea": "SelectArea"
+    , "Area Selector": "Area Selector"
+    , "Set your area": "Set your area (approve location using)"
+
+, "Areas Translate" : {}
+
+
+, "Error" : {}
+}

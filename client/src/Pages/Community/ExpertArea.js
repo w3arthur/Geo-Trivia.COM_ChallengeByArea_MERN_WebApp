@@ -6,13 +6,13 @@ import * as Icons from '@mui/icons-material';
 import { DatabaseRequest } from '../../Classes';
 import { useLoading } from '../../Context';
 import { Axios } from '../../Api';
+import { useTranslation } from '../../Hooks';
 import { colors } from '../../Config';
 import { TabPanel } from './Community';
 
-
 export default function ExpertArea_VerticalTabs({auth, verticalValue, setVerticalValue}) {
+  const { t } = useTranslation();
   const {setAxiosLoading, setAlert} = useLoading();
-
   const areas = auth?.expertAreas;
   const [questions, setQuestions] = useState();
   const [expertQuestionsPage, setExpertQuestionsPage] = useState(1);
@@ -45,24 +45,21 @@ return (
               setExpertQuestionsPage(page);
               setExpertQuestionsLastPage(false);
               getExpertAreaQuestions(auth, areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
-          }} disabled={expertQuestionsPage === 1 ? true : false} sx={{m: 1,}} variant="contained"> Back </Button>
+          }} disabled={expertQuestionsPage === 1 ? true : false} sx={{m: 1,}} variant="contained"> {t("Back")} </Button>
           <Button endIcon={<Icons.ArrowForward />} onClick={() => {
               const page = expertQuestionsPage + 1;
               setExpertQuestionsPage(page);
               getExpertAreaQuestions(auth, areas[verticalValue], page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert, questions);
-          }} disabled={expertQuestionsLastPage === true ? true : false} sx={{m: 1}} variant="contained"> Next </Button>
+          }} disabled={expertQuestionsLastPage === true ? true : false} sx={{m: 1}} variant="contained"> {t("Next")} </Button>
       </Box>
-
       {questions?.map((question) => (<>
         <Divider></Divider>
         <Box sx={{backgroundColor: colors.expertToApproveQuestions.questionTitle }}>
           <Typography variant="body1" component="div">{question.question}</Typography>
           <Divider></Divider>
         </Box>
-        <Box>
         <Box sx={{ display: 'inline-block',  width: 'auto', textAlign: 'left'}}>
-        {question.answers.map((answer, j) => (<Typography sx={question.rightAnswer === j ? ({fontWeight: 'bold'}) : ({})} variant="body1" component="div">{j + 1}) {answer}</Typography>) )}
-        </Box>
+          {question.answers.map((answer, j) => (<Typography sx={question.rightAnswer === j ? ({fontWeight: 'bold'}) : ({})} variant="body1" component="div">{j + 1}) {answer}</Typography>) )}
         </Box>
         <Button onClick={() => { deleteQuestion(auth, question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} variant='contained'  sx={{m:1}}>Delete</Button> {/*size="small"*/}
         <Button onClick={() => { approveQuestion(auth, question , areas[verticalValue], expertQuestionsPage, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); }} startIcon={<Icons.CheckBox/>} variant='contained' sx={{m:1}}>Accept</Button>
@@ -73,22 +70,16 @@ return (
 </Box>
 ); }
 
-
 const approveQuestion =  (auth, question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   const questionId = question._id;
   setQuestions();
   const data = {areaId: areaId};
   new DatabaseRequest( () => Axios('PATCH', '/api/expert/' + questionId, data, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-      getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
-      } )
-  .BadResult( (error) => {
-      setAlert(error); 
-      } )
+  .GoodResult( (result) => { getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
-
 
 const deleteQuestion =  (auth, question, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
@@ -96,30 +87,19 @@ const deleteQuestion =  (auth, question, area, page, setExpertQuestionsLastPage,
   setQuestions();
   const data = `areaId=${areaId}`;
   new DatabaseRequest( () => Axios('Delete', '/api/expert/' + questionId + '?' + data, {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-      getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert);
-      } )
-  .BadResult( (error) => {
-      setAlert(error); 
-      } )
+  .GoodResult( (result) => { getExpertAreaQuestions(auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert); } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
-
 
 const getExpertAreaQuestions =  (auth, area, page, setExpertQuestionsLastPage, setQuestions, setAxiosLoading, setAlert) => {
   const areaId= area._id;
   setQuestions();
   const data = 'page=' + page;
   new DatabaseRequest( () => Axios('GET', '/api/expert/' + areaId + '?' + data, {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-      if(result.lastPage) setExpertQuestionsLastPage(true);
-      setQuestions(result.questions);
-      } )
-  .BadResult( (error) => {
-      setAlert(error); 
-      } )
+  .GoodResult( (result) => { if(result.lastPage) setExpertQuestionsLastPage(true); setQuestions(result.questions); } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
-
 
 const a11yProps = (index) => ({id: `vertical-tab-${index}`, 'aria-controls': `vertical-tabpanel-${index}`,});

@@ -1,61 +1,62 @@
 import React, { Routes, Route , Outlet, useNavigate /*, useRoutes*/} from "react-router-dom"; // useParams,
 
 import {  Logo, NavBar, Loading, StatisticChart, Follow, Boom } from "./Components";
-import { useTranslation } from "./Hooks";
+//import { useTranslation } from "./Hooks";
 import {AcceptInvitation ,Home, Login, Location, Question, QuestionBeExpert, ChooseTeam, Results, Community } from "./Pages";
-import GlobalLayout from "./Styles/GlobalLayout"
-import AddQuestion from './Pages/Community/AddQuestion';  //to delete
+import { GlobalLayout, colors, fonts } from "./Config"
+import { AuthProvider, LoadingProvider ,PlayingTeamProvider } from "./Context";
 
+import AddQuestion from './Pages/Community/AddQuestion';  //to delete
 //import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
 import DataGridExample from "./z_development/DataGridExample";
-import GeoLocation from "./z_development/GeoLocation/GeoLocation";
 
 import RequireAuth from "./Auth/RequireAuth";
-const { User, Editor, Admin  } = { User: 1000, Admin: 2000, Editor: 3000, };
 
+const { User/*, Editor, Admin*/  } = { User: 1000, Admin: 2000, Editor: 3000, };
+const globalMainStyle = { textAlign: 'center', color: colors.bodyTextColor, fontFamily: fonts.bodyFonts };
 
 export default function App() {
-const { t } = useTranslation();
+  //const { t } = useTranslation();
 return (<>
     {/* <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}> */}
     <Routes>
       <Route path="/"  element={<>
+        <AuthProvider> <PlayingTeamProvider> <LoadingProvider>
           <Logo />
-          <GlobalLayout> <Outlet/> <NavBar/> </GlobalLayout>
+          <GlobalLayout sx={{...globalMainStyle}}>
+            <Outlet/> 
+            <NavBar/>
+          </GlobalLayout>
+        </LoadingProvider> </PlayingTeamProvider> </AuthProvider>
         </>}>
-          <Route index element={<Home />} />
-          <Route path="/Login" element={<Login />} />
 
-          <Route element={<RequireAuth allowedRoles={[User]}/>}>
-              <Route path="/Choose" element={<ChooseTeam />} />
-              <Route path="/Location" element={<Location />} />
-              <Route path="/Question" element={<Question />} />
-              
-              <Route path="/QuestionBeExpert" element={<><QuestionBeExpert /></>} />
-          </Route> 
-          {/* Arthur Development! */}
-              <Route path="/Follow" element={<Follow />} />
-              <Route path="/Boom" element={<Boom />} />
-              <Route path="/AddQuestion" element={<AddQuestion />} />
-              <Route path="/Community" element={<Community />} />
-              <Route path="/Results" element={<Results />} />
-              <Route path="/Loading" element={<Loading />} />
-              
-              <Route path="/Chart" element={<StatisticChart />} />
-              <Route path="/:playingTeamId" element={<AcceptInvitation />} />
+        <Route index element={<Home />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/playingTeam/:playingTeamId" element={<AcceptInvitation />} />
+
+        <Route element={<RequireAuth allowedRoles={[User]}/>}>
+            <Route path="/Choose" element={<ChooseTeam />} />
+            <Route path="/Location" element={<Location />} />
+            <Route path="/Question" element={<Question />} />
+            <Route path="/QuestionBeExpert" element={<><QuestionBeExpert /></>} />
+            <Route path="/AddQuestion" element={<AddQuestion />} />
+            <Route path="/Community" element={<Community />} />
+            <Route path="/Results" element={<Results />} />
+        </Route>  {/* User Permission Auth */}
+
+        <Route path="/Loading" element={<Loading />} />
+        <Route path="/Follow" element={<Follow />} />
+        <Route path="/Boom" element={<Boom />} />
+        <Route path="/Chart" element={<StatisticChart />} />
+
+        <Route path="/DataGridExample" element={<DataGridExample />} />
+
+        <Route path="unauthorized/*" element={<>[-PageError403-] (Error 403 Unauthorized) <BackwardLink /></>} />
+        <Route path="/*" element={<>[-PageError404-] (Error 404 Not Found) <BackwardLink /> </>} />
       </Route>
-
-      {/* Arthur Development! */}
-            <Route path="/DataGridExample" element={<DataGridExample />} />
-            <Route path="/GeoLocation" element={<GeoLocation />} />
-      <Route path="unauthorized/*" element={<>[-PageError403-] (Error 403 Unauthorized) <BackwardLink /></>} />
-      <Route path="/*" element={<>[-PageError404-] (Error 404 Not Found) <BackwardLink /> </>} />
     </Routes>
-
 </>);
 }
-
-
 
 const BackwardLink = () => {
   const navigate = useNavigate();

@@ -6,12 +6,16 @@ import mapboxgl from 'mapbox-gl';
 import { marker } from '../Images';
 import { getCoords } from '../Api';
 import { tokens, map } from '../Config';
+import { useTranslation } from '../Hooks';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = tokens.mapboxgl; //pk.eyJ1Ij.....4YSpN5Dg
 const zoom = map.zoom;  //6
 const transferDuration = map.transferDuration;
 
 export default function Map({geoData, show, height, minHeight, settings}){
+    const { t } = useTranslation();
     const  { coordinates, setCoordinates , mapSelectedCountry, setMapSelectedCountry , mapYourCoordinates, setMapYourCoordinates }
         = settings;
     function setAreaYourCoords(area){ setMapYourCoordinates(null); setMapYourCoordinates(area); setCoordinates( area ); setMapSelectedCountry(null); moveTo(area); }
@@ -34,24 +38,22 @@ export default function Map({geoData, show, height, minHeight, settings}){
         const point = geoData?.find((x) => x._id === event.target.value);
         setAreaSelectedCountry(point); 
         };
-
 return (<>
-
 {/* The List /: button set by your area (getCoords) */}
 <Box sx={{textAlign: 'center'}} >
     {show === 'list' ? (
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel>Select Area</InputLabel>
-                <Select value={select} onChange={handleSelect} label="SelectArea" >
-                    <MenuItem value=""> <em>Area Selector</em> </MenuItem>
-                    {geoData?.map((data) => (<MenuItem key={data?._id} value={data?._id}  >{data?.area}</MenuItem>) )}
-                </Select>
-            </FormControl>)
-        : show === 'yourLocation' ? (
-            <Button startIcon={<Icons.Public/>} variant='contained' size= 'small' onClick={e => { e.preventDefault(); (async() => { const area = await getCoords(); setAreaYourCoords(area);  })() }}>
-                Your area
-            </Button> )
-        : (<></>) }
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel>Select Area</InputLabel>
+            <Select value={select} onChange={handleSelect} label={t("SelectArea")} >
+                <MenuItem value=""> <em>{t("Area Selector")}</em> </MenuItem>
+                {geoData?.map((data) => (<MenuItem key={data?._id} value={data?._id}  >{t(data?.area)}</MenuItem>) )}
+            </Select>
+        </FormControl>)
+    : show === 'yourLocation' ? (
+        <Button startIcon={<Icons.Public/>} variant='contained' size= 'small' onClick={e => { e.preventDefault(); (async() => { const area = await getCoords(); setAreaYourCoords(area);  })() }}>
+            {t("Set your area")}
+        </Button> )
+    : (<></>) }
 </Box>
 
 {/* The Map with markers */}
@@ -63,7 +65,7 @@ return (<>
 
     {mapSelectedCountry  ? (
         <Popup closeButton= {false}  latitude={mapSelectedCountry.location?.coordinates[1]} longitude={mapSelectedCountry.location?.coordinates[0]} onClose={(e) => {   }}>
-            <Typography variant="map" > {mapSelectedCountry.area} </Typography>
+            <Typography variant="map" > {t(mapSelectedCountry.area)} </Typography>
         </Popup>
     ) : null }
 
@@ -73,9 +75,7 @@ return (<>
         </Popup>
     ) : null}
 </ReactMapGL>
-
 {/* Coordinates result */}
-<Box> { mapSelectedCountry? mapSelectedCountry?.area+' '+JSON.stringify(mapSelectedCountry?.location?.coordinates) : JSON.stringify(mapYourCoordinates) } </Box>
-
+<Box> { mapSelectedCountry? t(mapSelectedCountry?.area)+' '+JSON.stringify(mapSelectedCountry?.location?.coordinates) : JSON.stringify(mapYourCoordinates) } </Box>
 </>);
 }

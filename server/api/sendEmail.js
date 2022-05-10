@@ -1,6 +1,8 @@
 require("dotenv").config();
-const emailAddressReferLink = process.env.EMAIL_REFER_TO;
-
+let emailAddressReferLink = process.env.EMAIL_REFER_TO;
+if (process.env.NODE_ENV !== 'production'){ 
+  emailAddressReferLink = process.env.EMAIL_REFER_TO_DEV;
+}
 
 const nodemailer = require("nodemailer");
 

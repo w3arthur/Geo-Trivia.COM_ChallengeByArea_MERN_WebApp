@@ -1,16 +1,12 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import "./Components/multilanguage/i18next";
-import "./Styles/index.css";
+import './Api/i18next'
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
-import { AuthProvider, LoadingProvider ,PlayingTeamProvider } from "./Context";
 import Loading from './Components/Loading';
-ReactDOM.render(<React.StrictMode>
-  <Suspense fallback={<div>Loading<Loading /></div>}>
-    <AuthProvider> <PlayingTeamProvider> <LoadingProvider>
-      <BrowserRouter> <App /> </BrowserRouter>
-    </LoadingProvider> </PlayingTeamProvider> </AuthProvider>
-  </Suspense>
-</React.StrictMode>, document.getElementById("root"));
+ReactDOM.render(<React.StrictMode><Suspense fallback={<Loading />}>
+     <BrowserRouter>
+      <App /> 
+    </BrowserRouter>
+</Suspense></React.StrictMode>, document.getElementById("root"));

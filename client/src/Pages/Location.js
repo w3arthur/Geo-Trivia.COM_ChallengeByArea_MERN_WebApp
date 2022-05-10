@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useRef, useEffect, useState} from "react";
 import { Grid, Paper, Typography } from "@mui/material";
 
@@ -6,9 +7,7 @@ import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 import { monkeyLeft, monkeyRight, globe } from '../Images'
 import { Axios, useReceiver, transmitter  } from '../Api';
-
 import { PopUp, Map } from '../Components';
-
 import { map } from '../Config'
 
 const geoData =  map.geoDataErrorExamplePoints; //  [ { _id:"0", location:{ coordinates: [35, 32] }, country: "Error", area:  "Error Point" } ]
@@ -16,32 +15,28 @@ const geoData =  map.geoDataErrorExamplePoints; //  [ { _id:"0", location:{ coor
 export default function Location() {
   const { t } = useTranslation();
   const { auth , setAuth } = useAuth();
-  const {setLoading, setAxiosLoading, setAlert} = useLoading();
-
   const { invitedTeamId, setInvitedTeamId, setPlayingTeam} = usePlayingTeam();
-
+  const {setLoading, setAxiosLoading, setAlert} = useLoading();
   const goTo = useGoTo();
-  
-  const geoDataRef = useRef(geoData);
 
   useReceiver( invitedTeamId ,(x, error) => { 
     if(!invitedTeamId) return;
-    const playingTeamId = invitedTeamId;
-    
+    //const playingTeamId = invitedTeamId;
     if(error){ alert(`error ${error.message}`) 
     } else if(x.userAccepted === true){
         setLoading(true);
-    } else if(x.playingTeamSet === true){ //????
+    } else if(x.playingTeamSet === true){
         goTo('/Question');
     } //end if
   }, []);
 
+  const geoDataRef = useRef(geoData);
   useEffect(() => {   //if set playingTeam !!!
     if(auth && auth._id && invitedTeamId){
       handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam);
     } else getAllAreas(geoDataRef, setAxiosLoading, setAlert, auth);
    }, [])
-
+ 
   const [coordinates, setCoordinates] = useState( [ ] ); //starting points
   const [mapSelectedCountry, setMapSelectedCountry] = useState( null );
   const [mapYourCoordinates, setMapYourCoordinates] = useState( null );
@@ -57,25 +52,24 @@ export default function Location() {
   const handleClose = () => { setOpenFromListPopup(false); setOpenFromMapPopup(false); setOpenYourLocationPopup(false); };
 
 return (<>
-  <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location")} </Typography>
+  <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location Set")} </Typography>
   <Grid container>
-    <Selection onClick={handleClick_openFromListPopup} leftMonkey>Choose Location <br /> from list</Selection>
-    <Selection onClick={handleClick_openFromMapPopup} rightMonkey>Choose Location <br /> from map</Selection>
-    <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>Your <br /> Location</Selection>
+    <Selection onClick={handleClick_openFromListPopup} leftMonkey>{t("Choose Location.")} <br /> {t(".from list")}</Selection>
+    <Selection onClick={handleClick_openFromMapPopup} rightMonkey>{t("Choose Location_")} <br /> {t("_from map")}</Selection>
+    <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>{t("Your_")} <br /> {t("_Location")}</Selection>
   </Grid>
-
   {/* Location From List */}
-  <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+  <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} show='list' settings={settings} height='55vh' minHeight='200px' />
   </PopUp>
 
   {/* Location From Map */}
-  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
   </PopUp>
 
   {/* Your Location GPS */}
-  <PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText="Set Area">
+  <PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
   </PopUp>
 </>);
@@ -116,21 +110,15 @@ function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, 
     setPlayingTeam(result);
     setLoading(true);
     transmitter('playingTeamAddUser', data);
-  } )
-  .BadResult( (error) => {
-      setAlert(`no gaming team  ${error}`); 
-  } )
+    } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
 
 const getAllAreas = (geoDataRef, setAxiosLoading, setAlert, auth) => {
     new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-    geoDataRef.current = result;
-    } )
-  .BadResult( (error) => {
-      setAlert(error); 
-    } )
+  .GoodResult( (result) => { geoDataRef.current = result; } )
+  .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
 
@@ -139,28 +127,18 @@ const handleSetArea = (goTo, auth , setAuth, coordinates, setAxiosLoading, setAl
   const user = auth._id;
   const data =  { user , coordinates};
   new DatabaseRequest( () => Axios('PUT', '/api/user', data, {'authorization':  auth.accessToken}) )
-    .GoodResult( (result) => {
-      if(result) goTo("/Choose");
-      } )
+    .GoodResult( (result) => { if(result) goTo("/Choose"); } )
     .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
 
-
-
 function SelectionValue({onClick, children, sx ,...props}){
-  return(<>
-      <Paper {...props} className="select"  onClick={ onClick } sx={{height: '50vh', minHeight: {sm:'250px', md: '300px'} , 
-      backgroundImage: `url(${globe})`,backgroundRepeat: 'no-repeat', backgroundPosition: '20% 44%', backgroundSize: '140% 140%',  ...sx}} elevation={3}>
-        <Typography variant="h2" color="secondary" sx={{mt: 8,fontSize:{xs:'24pt', md: '38pt'}}}>{children}</Typography>
-      </Paper>
-  </>);
+return(<>
+    <Paper {...props} className="select"  onClick={ onClick } sx={{height: '50vh', minHeight: {sm:'250px', md: '300px'} , 
+    backgroundImage: `url(${globe})`,backgroundRepeat: 'no-repeat', backgroundPosition: '20% 44%', backgroundSize: '140% 140%',  ...sx}} elevation={3}>
+      <Typography variant="h2" color="secondary" sx={{mt: 8,fontSize:{xs:'24pt', md: '38pt'}}}>{children}</Typography>
+    </Paper>
+</>);
 }
 
-function SelectionMonkeyImageGrid(props){
-  return(<>
-    <Grid item onClick={props.onClick} xs={4} sx={{height: '100%',display: { xs: 'block', sm: 'none' }}}>
-      {props.children}
-    </Grid>
-  </>);
-}
+function SelectionMonkeyImageGrid(props){ return(<> <Grid item onClick={props.onClick} xs={4} sx={{height: '100%',display: { xs: 'block', sm: 'none' }}}> {props.children} </Grid> </>); }

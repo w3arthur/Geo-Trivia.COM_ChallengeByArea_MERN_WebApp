@@ -1,9 +1,9 @@
 import React from "react";
-import { useGoFrom } from "../Hooks"
+import { useGotFrom } from "../Hooks"
 import { Link } from "../Components"
 
 export default function Error(message){
-    const from = useGoFrom();
+    const from = useGotFrom();
 
     //set function to return to previous page
     return (<>

@@ -16,7 +16,7 @@ const errorHandler = (req, res, next) => {
             if(typeof(success) === 'object'){
                 const {status, result} = success;
                 req.resultStatus = status;
-                if(result === undefined) return res.sendStatus(status);
+                if(!result) return res.sendStatus(status);
                 try{ req.resultJson = JSON.parse(JSON.stringify(result)); }
                 catch(e){ req.resultMessage = result; return res.status(status).send(result); }     
                 return res.status(status).json(result);

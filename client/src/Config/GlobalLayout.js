@@ -1,11 +1,10 @@
-import { Outlet } from "react-router-dom"
-import {createTheme, ThemeProvider, colors as MuiColors, Container /*, Typography, ButtonGroup, Button, TextField, Grid, Box*/ } from '@mui/material';
-import { colors, sizes } from '../Config'
-import { purple } from "@mui/material/colors";
+import {createTheme, ThemeProvider, Box } from '@mui/material';
+import { colors, sizes } from '.'
 
-export default function Layout ({children}) { return ( <main>
+
+export default function GlobalLayout ({children, sx}) { return ( <Box component="main" sx={{...sx}}>
    <MuiStyle> {children} </MuiStyle>
-</main>);}
+</Box>);}
 
 
 function MuiStyle({children}){
@@ -15,11 +14,11 @@ const {
   , mainColorLight
   , mainColorLighter
   , mainColorDark
-  , mainColorText1
-  , mainColorText2
+ // , mainColorText1
+ // , mainColorText2
   , mainColorText3
   , purple
-  , purple2
+ // , purple2
   , white
   , shadow
   , shadowLight
@@ -27,13 +26,13 @@ const {
 
 const {
         fontSize
-        , fontSizeBig
+       // , fontSizeBig
         , fontSizeBigger
         , fontSizeBiggest
-        , fontSizeBiggest2
-        , fontSizeSmall1
+       // , fontSizeBiggest2
+       // , fontSizeSmall1
         , fontSizeSmall2
-        , fontSizeSmaller1
+       // , fontSizeSmaller1
         , fontSizeSmaller2
 } = sizes.globalLayout;
 
@@ -62,7 +61,7 @@ palette: {
   , body1: { fontSize: fontSizeSmall2,  color: purple }
   , body2: { fontSize: fontSize,  purple }
 }
-  
+
 , components: {
   MuiChip: {
     defaultProps:{ variant: 'outlined', }
@@ -119,7 +118,6 @@ palette: {
         , input: { color: `${mainColorText3}` , fontSize: sizes.globalLayout.inputTextField }
         , marginTop: 14 , marginBottom: 14
       } }  //decide if change the text inside the field
-    , map : { }
       }
   , MuiCheckbox: {
     defaultProps:{ color: colors.globalLayout.checkbox, }

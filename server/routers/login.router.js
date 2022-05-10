@@ -33,10 +33,8 @@ loginRouter.route('/register') //  localhost:3500/api/login/register //register
 .post( validatorUser,async (req, res, next) => {
   console.log(':: user router post');
   errorHandler(req, res, next)( async () => {
-
     const language = ( req.cookies && req.cookies[languageCookieName]) || req.body['language'] || req.query['language'];
     console.log(language);
-
     const {name, age, email, password} = req.body;
     const user = await UserModel.findOne({ email: email });
     if (user !== null) throw new ErrorHandler(452, 'user already exist!');
@@ -44,7 +42,6 @@ loginRouter.route('/register') //  localhost:3500/api/login/register //register
     if(language) data.language = language;
     data.password = await bcrypt.hash(data.password, 10);
     const result = await new UserModel(data).save();
-    
     return new Success(200, result);
     });  //error handler 
 })
@@ -72,8 +69,6 @@ loginRouter.route('/acceptTeam')  //  localhost:3500/api/login/acceptTeam
       return new Success(200, result);
   });
 });
-
-
 
 
 loginRouter.route('/') //  /api/login
@@ -116,12 +111,12 @@ loginRouter.route('/') //  /api/login
   console.log(':: login router delete');
   errorHandler(req, res, next)( async () => {
     const refreshToken = ( req.cookies && req.cookies[cookieName]) || req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
-    if(!refreshToken) return new Success(204, undefined);
+    if(!refreshToken) return new Success(200);
     if( req.cookies && req.cookies[cookieName] ) res.clearCookie(cookieName ,cookieSettings);
     jwt.verify(refreshToken, refreshTokenSecret, (err, userTokenValue) => {
       if(!err) refreshToken_List = refreshToken_List.filter(x => x.user_id !== userTokenValue.user_id);
     });
-    return new Success(204, undefined);
+    return new Success(200);
   });  //error handler
 })
 ;
@@ -192,6 +187,7 @@ function loginUserSuccess(user, res){ //cookie + accessToken and auth data for l
     refreshToken_List.push({user_id: user._id.toHexString(), token: refreshToken});
     res.cookie(cookieName, refreshToken, cookieSettings); //change
     const data = JSON.parse(JSON.stringify(user));
+    delete data.password;
     data.accessToken = 'Bearer ' + accessToken;
     return new Success(200, data);
 }
