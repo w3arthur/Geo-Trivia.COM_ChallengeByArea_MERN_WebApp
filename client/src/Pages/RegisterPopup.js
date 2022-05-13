@@ -26,11 +26,11 @@ export default function ResterPopUp({open, handleClose}){
   );
 
 return (<>
-<PopUp open={open} handleClose={handleClose} title="Register" handleSubmit={()=>{ registerButtonRef.current.click()}} submitText={t("Register")} >
+<PopUp open={open} handleClose={handleClose} title={t("Register")} handleSubmit={()=>{ registerButtonRef.current.click()}} submitText={t("Register")} >
   <CssBaseline />
   <Box sx={{ marginTop: 1, display: 'flex', flexDirection: 'column', alignItems: 'center'}} >
       <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'}}> <Icons.LockOutlined /> </Avatar>
-      <Typography component="h1" variant="h5"> Sign up </Typography>
+      <Typography component="h1" variant="h5"> {t("Sign up")} </Typography>
       <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, setErrMsg, setAuth, handleClose, setAxiosLoading, setAlert)} sx={{ mt: 3 }}>
         <TextField label={t('Name')} autoFocus autoComplete="name" inputRef={nameRef} id="name" name="name" fullWidth />
         <TextField label={t('Email')} autoComplete="email" id="email" name="email" fullWidth/>

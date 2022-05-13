@@ -77,6 +77,7 @@ palette: {
   }
   , MuiAvatar:{
     styleOverrides: { root:{
+
         width: '44px  !important' , height: '44px !important'
         , zIndex: 1, backgroundColor: white
         , border: `5px solid ${mainColor}`
@@ -109,6 +110,7 @@ palette: {
     styleOverrides: { root: { 
         "&:hover.MuiButton-containedPrimary":{ backgroundColor: mainColorDark }
         , marginBottom: 8 , fontSize: sizes.globalLayout.buttonFont
+        , direction: 'ltr'
       } }
       , defaultProps:{ size:  sizes.globalLayout.buttonSize }
     }

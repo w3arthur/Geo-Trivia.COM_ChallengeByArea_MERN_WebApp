@@ -5,8 +5,8 @@ const server =
         , webSocketUrl : 'ws://localhost:3500'
     }
     : { //production
-        axiosBaseUrl: 'https://:80'
-        , webSocketUrl : 'ws://:80'
+        axiosBaseUrl: 'http://geo-trivia.com:3500'  //change to https
+        , webSocketUrl : 'ws://geo-trivia.com:3500'
     }
 ;
 

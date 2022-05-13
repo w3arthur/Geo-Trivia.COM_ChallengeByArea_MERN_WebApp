@@ -53,7 +53,7 @@ export default function Location() {
 
 return (<>
   <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location Set")} </Typography>
-  <Grid container>
+  <Grid container sx={{direction: 'ltr'}}>
     <Selection onClick={handleClick_openFromListPopup} leftMonkey>{t("Choose Location.")} <br /> {t(".from list")}</Selection>
     <Selection onClick={handleClick_openFromMapPopup} rightMonkey>{t("Choose Location_")} <br /> {t("_from map")}</Selection>
     <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>{t("Your_")} <br /> {t("_Location")}</Selection>

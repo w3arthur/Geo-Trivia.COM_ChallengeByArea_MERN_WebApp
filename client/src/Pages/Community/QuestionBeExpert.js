@@ -62,7 +62,6 @@ function handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxios
 
 const handlePostExpertAnswers = (auth, setAuth, playerData, answers, setAxiosLoading, setAlert, setAlternativeContent, t) => {
     const triviaId = playerData._id;
-    alert(answers)
     const data =  {  triviaId: triviaId, answers: answers };
     new DatabaseRequest( () => Axios('POST', '/api/expert/qualify', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => {

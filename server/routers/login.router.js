@@ -18,7 +18,7 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-function generateAccessToken(user) { return jwt.sign( user, accessTokenSecret, { expiresIn: accessTokenTimeOut } ); }
+
 const cookieSettings = { httpOnly: true, sameSite: 'None', secure: true, maxAge: cookieTimeout }; 
 
 let refreshToken_List = [];  //set it to database
@@ -191,3 +191,5 @@ function loginUserSuccess(user, res){ //cookie + accessToken and auth data for l
     data.accessToken = 'Bearer ' + accessToken;
     return new Success(200, data);
 }
+
+function generateAccessToken(user) { return jwt.sign( user, accessTokenSecret, { expiresIn: accessTokenTimeOut } ); }

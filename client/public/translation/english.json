@@ -1,15 +1,14 @@
 {   "Language": "English"
     , "language": "language"
-
+, "Home" : {}
+    , "Trivia Challenging Application": "Trivia Challenging Application"
+    , "Welcome to Geo Trivia Game": "Playing a game of geography trivia not only lets you show off your knowledge of random tidbits about the world, it's also a great way to learn. Even if you don't know the answer, it's a lot of fun to see what everybody guesses. You'll end up knowing a little bit more about geography by the end"
+    , "Start to Play": "Start to Play"
 , "NavBar" : {}
     , "Geo-Trivia.com": "Geo-Trivia.com"
     , "Community": "Community"
     , "Go Home Page": "Home"
     , "Logout": "Logout"
-, "Home" : {}
-    , "Trivia Challenging Application": "Trivia Challenging Application"
-    , "Welcome to Geo Trivia Game": "Playing a game of geography trivia not only lets you show off your knowledge of random tidbits about the world, it's also a great way to learn. Even if you don't know the answer, it's a lot of fun to see what everybody guesses. You'll end up knowing a little bit more about geography by the end"
-    , "Start to Play": "Start to Play"
 , "Login" : {}
     , "Game Login": "Login with"
     , "Password": "Password"
@@ -20,8 +19,9 @@
     , "Registration": "Registration"
 , "RegisterPopUp" : {}
     , "Register": "Register"
+    , "Sign up":  "Sign up"
     , "Name": "Name"
-    , "Email*": "^"
+    , "Email": "Email"
     , "Age": "Age"
     , "Password*": "^"
     , "Confirm password": "Confirm password"
@@ -67,11 +67,15 @@
     , "The Question": "The Question"
     , "set your question": "set your question"
     , "Add Question": "Add Question"
-    , "Your Location:": "Your Location:"
+    , "Question Area:": "Question Area:"
     , "No Area!": "No Area!"
-    , "Your Language:": "Your Language:"
+    , "Question Language:": "Question Language:"
     , "+ Add Question": "+ Add Question"
     , "Answer": "Answer"
+    , "The right Answer is:": "The right Answer is:"
+    , "Answer Number": "Answer"
+    , "No Answer": "No Answer (Please select one)"
+    , "please select the right answer value": "please select the right answer value"
     , "no question set": "no question set"
     , "answer number": "answer"
     , "is empty": "is empty"
@@ -105,7 +109,7 @@
 , "Map" : {}
     , "SelectArea": "SelectArea"
     , "Area Selector": "Area Selector"
-    , "Set your area": "Set your area (approve location using)"
+    , "Set your area": "Set your area"
 
 , "Areas Translate" : {}
 

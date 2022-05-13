@@ -1,12 +1,8 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
+import React, {  } from "react";
+import { createRoot } from 'react-dom/client';
 import './Api/i18next'
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
 
-import Loading from './Components/Loading';
-ReactDOM.render(<React.StrictMode><Suspense fallback={<Loading />}>
-     <BrowserRouter>
-      <App /> 
-    </BrowserRouter>
-</Suspense></React.StrictMode>, document.getElementById("root"));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<React.StrictMode>  <App /> </React.StrictMode>);

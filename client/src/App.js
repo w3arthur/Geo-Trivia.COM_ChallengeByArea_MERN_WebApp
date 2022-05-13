@@ -1,4 +1,5 @@
-import React, { Routes, Route , Outlet, useNavigate /*, useRoutes*/} from "react-router-dom"; // useParams,
+import React, {Suspense} from 'react';
+import {  BrowserRouter, Routes, Route , Outlet, useNavigate /*, useRoutes*/} from "react-router-dom"; // useParams,
 
 import {  Logo, NavBar, Loading, StatisticChart, Follow, Boom } from "./Components";
 //import { useTranslation } from "./Hooks";
@@ -17,7 +18,7 @@ const globalMainStyle = { textAlign: 'center', color: colors.bodyTextColor, font
 
 export default function App() {
   //const { t } = useTranslation();
-return (<>
+return (<><Suspense fallback={<Loading />}><BrowserRouter>
     {/* <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}> */}
     <Routes>
       <Route path="/"  element={<>
@@ -55,7 +56,7 @@ return (<>
         <Route path="/*" element={<>[-PageError404-] (Error 404 Not Found) <BackwardLink /> </>} />
       </Route>
     </Routes>
-</>);
+</BrowserRouter></Suspense></>);
 }
 
 const BackwardLink = () => {

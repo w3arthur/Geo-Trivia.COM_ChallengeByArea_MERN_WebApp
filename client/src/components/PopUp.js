@@ -9,7 +9,7 @@ export default function PopUp({open, handleClose, title, children, handleSubmit,
 return (
   <div>
     <BootstrapDialog  PaperProps = {{sx:  {minHeight : '300px'}}} fullWidth={true}  open={open} onClose={handleClose} aria-labelledby="customized-dialog-title" >
-      <PopUpTitle onClose={handleClose} > {title}<br /> </PopUpTitle> 
+      <PopUpTitle onClose={handleClose} sx={{direction: 'ltr'}}> {title || <br />} </PopUpTitle> 
       <DialogContent dividers><Box sx={{minHeight: '300px'}}> {children} </Box></DialogContent>
       <DialogActions> {submitText ? (<Button startIcon={<Icons.Check/>} sx={{height: '28px', mt: '8px', mb: '8px'}} autoFocus onClick={handleSubmit}> {submitText} </Button>) : (<></>)} </DialogActions>
     </BootstrapDialog>
