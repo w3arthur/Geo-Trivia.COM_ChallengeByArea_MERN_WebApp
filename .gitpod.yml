@@ -4,4 +4,4 @@ Build NodeJS App:
      - npm install
    artifacts:
      paths:
-       - /home/gitlab-runner/
+       - /home/arthur/
