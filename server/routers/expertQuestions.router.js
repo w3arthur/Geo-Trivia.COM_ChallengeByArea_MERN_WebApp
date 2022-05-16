@@ -1,7 +1,7 @@
 
-const languageCookieName = 'i18next';
-
-const itemsForEachPage = 2;   //  make it .env
+const { questions ,language } = require('../config');
+const languageCookieName = language.COOKIE_NAME;
+const itemsForEachPage = questions.ITEMS_PER_PAGE;  //2
 
 const express = require("express");
 const expertQuestionsRouter = express.Router();

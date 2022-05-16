@@ -1,5 +1,5 @@
-//if (process.env.NODE_ENV !== 'production') 
-require('dotenv').config();
+const { auth } = require('../config');
+const accessTokenSecret = auth.ACCESS_TOKEN_SECRET;
 
 const jwt = require("jsonwebtoken");
 
@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
     const authHeader = req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
     const token = authHeader && authHeader?.split(' '); ///get out the Token from Bearer Token
     if (!token || token[0] !== 'Bearer' || !token[1]) return next( new MiddlewareError(401, 'token middleware error, no token for request', 'No Token Supplied, Access denied.') )
-    jwt.verify(token[1], process.env.ACCESS_TOKEN_SECRET
+    jwt.verify(token[1], accessTokenSecret
       , async(err, userTokenValues) => {
         if (err) { return next( new MiddlewareError(403, 'token middleware error, wrong token', 'Token Error, No Access.') ); }
         //req.user = userValue; //return req.user to next level

@@ -1,8 +1,7 @@
-require("dotenv").config();
-const { devLog } = require('./api')
-
-const localhostPort = process.env.LOCALHOST_PORT;
-//if (process.env.NODE_ENV !== 'production'){  }
+const { ports } = require('./config');
+const serverPort = ports.SERVER_PORT;
+let developerPort = undefined;
+if (process.env.NODE_ENV !== 'production'){ developerPort = ports.SERVER_DEVELOPER_PORT; }
 
 const express = require("express");
 const app = express();
@@ -36,8 +35,7 @@ app.route("/") .get(async (req, res) => res.status(200).sendFile(path.join(__dir
 app.use("/log", routers.logRouter);
 app.use("/api/login", routers.loginRouter); //verifyJWT set inside for not registration part!
 
-if (process.env.NODE_ENV === 'production')  //only on production
-    app.use(middlewares.verifyJWT); //403 //Token require middleware
+if (process.env.NODE_ENV === 'production') app.use(middlewares.verifyJWT); //403 //Token require middleware
 app.use("/api/user", routers.userRouter);
 app.use("/api/playingTeam", routers.playingTeamRouter); //verifyJWT set inside for not invitation part!
 app.use("/api/area", routers.areaRouter);
@@ -48,6 +46,9 @@ app.use("/api/expert/qualify/", routers.expertQualifyRouter);
 
 app.route("*").all((req, res) => res.status(404) );
 app.use(middlewares.errorMainHandler); //errorHandler
-const port = process.env.PORT || localhostPort || 3500; //3500
-server.listen(port, () => /*Developer*/devLog(`Listening on port ${port}, Express + WS`));
-/*Developer*/ devLog('Non Production Mode');
+const port = developerPort || serverPort || 3500;
+server.listen(port, () => console.log(`Listening on port ${port}, Express + WS`));
+
+
+
+

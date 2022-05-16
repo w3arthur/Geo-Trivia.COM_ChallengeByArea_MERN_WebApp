@@ -1,4 +1,7 @@
-const languageArray = ['english', 'hebrew', 'russian'];
+
+
+const {language} = require('../config')
+const languageArray = [ ...language.USER_LANGUAGES ];
 
 const {mongoose, mongoose1, schemaVersion} = require("../connection");
 

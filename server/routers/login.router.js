@@ -1,16 +1,16 @@
-require('dotenv').config();
-const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
-const accessTokenTimeOut = process.env.ACCESS_TOKEN_TIMEOUT;
-const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
-const refreshTokenTimeOut = process.env.REFRESH_TOKEN_TIMEOUT;
-const cookieName= process.env.REFRESH_TOKEN_COOKIE_NAME;
-const cookieTimeout = Number( process.env.REFRESH_TOKEN_COOKIE_TIMEOUT );
-const googleClientID = process.env.GOOGLE_CLIENT_ID;
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-const facebookClientId = process.env.FACEBOOK_CLIENT_ID;
-const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET;
+const { auth, tokens, language } = require('../config');
+const accessTokenSecret = auth.ACCESS_TOKEN_SECRET;
+const accessTokenTimeOut = auth.ACCESS_TOKEN_TIMEOUT;
+const refreshTokenSecret = auth.REFRESH_TOKEN_SECRET;
+const refreshTokenTimeOut = auth.REFRESH_TOKEN_TIMEOUT;
+const cookieName= auth.REFRESH_TOKEN_COOKIE_NAME;
+const cookieTimeout = auth.REFRESH_TOKEN_COOKIE_TIMEOUT;
+const googleClientID = tokens.GOOGLE_CLIENT_ID;
+const googleClientSecret = tokens.GOOGLE_CLIENT_SECRET;
+const facebookClientId = tokens.FACEBOOK_CLIENT_ID;
+const facebookClientSecret = tokens.FACEBOOK_CLIENT_SECRET;
 
-const languageCookieName = 'i18next';
+const languageCookieName = language.COOKIE_NAME;
 
 const express = require("express");
 const loginRouter = express.Router();

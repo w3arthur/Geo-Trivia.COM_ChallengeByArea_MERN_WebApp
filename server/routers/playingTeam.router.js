@@ -1,17 +1,6 @@
-require("dotenv").config();
-const radiosPointDiameter = [
-  Number(process.env.POINT_DIAMETER1)
-  ,Number(process.env.POINT_DIAMETER2)
-  ,Number(process.env.POINT_DIAMETER3)
-  ,Number(process.env.POINT_DIAMETER4)
-  ,Number(process.env.POINT_DIAMETER5)
-  ,Number(process.env.POINT_DIAMETER6)
-  ,Number(process.env.POINT_DIAMETER7)
-  ,Number(process.env.POINT_DIAMETER8)
-  ,Number(process.env.POINT_DIAMETER9)
-];
-const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
-
+const {questions} = require('../config');
+const radiosPointDiameter = [ ...questions.POINTS_DIAMETER ];
+const requiredQuestionsQuantity = questions.QUESTIONS_QUANTITY;
 
 const express = require("express");
 const playingTeamRouter = express.Router();
@@ -22,7 +11,6 @@ const { Success, MiddlewareError, ErrorHandler } = require('../classes');
 const { UserModel, QuestionModel, AreaModel ,PlayingTeamModel } = require('../models');
 
 const  sendEmail  = require('../api/sendEmail');
-
 
 
 //post an answer by a player

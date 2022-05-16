@@ -1,14 +1,8 @@
-const languageCookieName = 'i18next';
-
-require("dotenv").config();
-const radiosPointDiameter = [
-  Number(process.env.POINT_DIAMETER1)
-  ,Number(process.env.POINT_DIAMETER2)
-];
-
-const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
-
-const requireAnswersForExpert = Number(process.env.EXPERT_REQUIRED_LEVEL);
+const {questions, language} = require('../config');
+const languageCookieName = language.COOKIE_NAME;
+const radiosPointDiameter = [ ...questions.POINTS_CLOSER_AREA_DIAMETER ];
+const requiredQuestionsQuantity = questions.QUESTIONS_QUANTITY;
+const requireAnswersForExpert = questions.EXPERT_REQUIRED_LEVEL;
 
 const express = require("express");
 const expertQualifyRouter = express.Router();

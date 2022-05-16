@@ -1,5 +1,6 @@
 
-const languageCookieName = 'i18next';
+const { language } = require('../config');
+const languageCookieName = language.COOKIE_NAME;
 
 const express = require("express");
 const userRouter = express.Router();

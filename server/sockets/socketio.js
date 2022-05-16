@@ -1,6 +1,5 @@
-require("dotenv").config();
-
-const limitOfQuestions = Number(process.env.QUESTIONS_QUANTITY);
+const {questions} = require('../config');
+const limitOfQuestions = questions.QUESTIONS_QUANTITY;
 
 const { ioTransmitter, receiver } = require("../api");
 

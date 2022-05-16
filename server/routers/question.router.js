@@ -1,17 +1,6 @@
-const languageCookieName = 'i18next';   //  make it .env
-
-require("dotenv").config();
-const requiredQuestionsQuantity = Number(process.env.QUESTIONS_QUANTITY);
-
-const radiosPointDiameter = [
-  Number(process.env.POINT_DIAMETER1)
-  ,Number(process.env.POINT_DIAMETER2)
-  ,Number(process.env.POINT_DIAMETER3)
-  ,Number(process.env.POINT_DIAMETER4)
-  ,Number(process.env.POINT_DIAMETER5)
-];
-
-const itemsForEachPage = 2;   //  make it .env
+const {questions, language} = require('../config');
+const languageCookieName = language.COOKIE_NAME;
+const itemsForEachPage = questions.ITEMS_PER_PAGE;  //2
 
 const express = require("express");
 const questionRouter = express.Router();
