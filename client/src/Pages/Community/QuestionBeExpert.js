@@ -20,13 +20,12 @@ export default function QuestionBeExpert({mapSelectedCountry, openQuestion, setA
     const [answers, setAnswers] = useState([]);
 
     useEffect(() => {
-        const areaId = mapSelectedCountry?._id;
         resetData();
-        handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxiosLoading, setAlert, setAlternativeContent, t);
+        handleGetExpertQuestions();
     }, [])
 
     function resetData(){ setPlayerData(); setCurrentQuestion(0); setAnswers([]); }
-return(<div>
+const render = () =>(<div>
 <QuestionValue > {playerData?.questions[currentQuestion].question} </QuestionValue>
 <Grid container>
     {playerData?.questions[currentQuestion].answers.map((ans, i) => (
@@ -35,7 +34,7 @@ return(<div>
             const answersClone = JSON.parse(JSON.stringify(answers));
             const answer = i; answersClone[currentQuestion] = answer;
             if(playerData.questions.length === currentQuestion + 1){
-                handlePostExpertAnswers(auth, setAuth, playerData, answersClone, setAxiosLoading, setAlert, setAlternativeContent, t); 
+                handlePostExpertAnswers(); 
                 resetData(); return;
                 }
             setCurrentQuestion(currentQuestion + 1);
@@ -44,9 +43,10 @@ return(<div>
     ) ) }
 </Grid>
 </div>);
-}
 
-function handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxiosLoading, setAlert, setAlternativeContent, t){
+
+function handleGetExpertQuestions(){
+    const areaId = mapSelectedCountry?._id;
     const player = auth._id;
     const data = `area=${areaId}`;
     //lang goes from cookie
@@ -60,7 +60,7 @@ function handleGetExpertQuestions(auth, setAuth, setPlayerData, areaId, setAxios
     //handle add as expert if no questions
 }
 
-const handlePostExpertAnswers = (auth, setAuth, playerData, answers, setAxiosLoading, setAlert, setAlternativeContent, t) => {
+const handlePostExpertAnswers = () => {
     const triviaId = playerData._id;
     const data =  {  triviaId: triviaId, answers: answers };
     new DatabaseRequest( () => Axios('POST', '/api/expert/qualify', data, {'authorization':  auth.accessToken}) )
@@ -72,3 +72,6 @@ const handlePostExpertAnswers = (auth, setAuth, playerData, answers, setAxiosLoa
     .Build(setAxiosLoading);
     //handle add as expert if answered more then 70% of the questions
 };
+
+
+return render();}

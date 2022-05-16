@@ -33,8 +33,8 @@ export default function Location() {
   const geoDataRef = useRef(geoData);
   useEffect(() => {   //if set playingTeam !!!
     if(auth && auth._id && invitedTeamId){
-      handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam);
-    } else getAllAreas(geoDataRef, setAxiosLoading, setAlert, auth);
+      handleUserInvitation();
+    } else getAllAreas();
    }, [])
  
   const [coordinates, setCoordinates] = useState( [ ] ); //starting points
@@ -51,7 +51,7 @@ export default function Location() {
   const handleClick_yourLocationPopup = () => { setOpenYourLocationPopup(true); };
   const handleClose = () => { setOpenFromListPopup(false); setOpenFromMapPopup(false); setOpenYourLocationPopup(false); };
 
-return (<>
+const render = () => (<>
   <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Location Set")} </Typography>
   <Grid container sx={{direction: 'ltr'}}>
     <Selection onClick={handleClick_openFromListPopup} leftMonkey>{t("Choose Location.")} <br /> {t(".from list")}</Selection>
@@ -59,21 +59,53 @@ return (<>
     <Selection onClick={handleClick_yourLocationPopup} leftBottomMonkey>{t("Your_")} <br /> {t("_Location")}</Selection>
   </Grid>
   {/* Location From List */}
-  <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
+  <PopUp open={openFromListPopup} handleClose={handleClose} title="Choose Location from list" handleSubmit={ handleSetArea} submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} show='list' settings={settings} height='55vh' minHeight='200px' />
   </PopUp>
 
   {/* Location From Map */}
-  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
+  <PopUp open={openFromMapPopup} handleClose={handleClose} title="Choose Location from map" handleSubmit={ handleSetArea } submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
   </PopUp>
 
   {/* Your Location GPS */}
-  <PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={()=>{ handleSetArea(goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) }} submitText={t("Set Area Submit")}>
+  <PopUp open={openYourLocationPopup} handleClose={handleClose} title="Your Location"  handleSubmit={ handleSetArea } submitText={t("Set Area Submit")}>
     <Map geoData={geoDataRef.current} show='yourLocation' settings={settings} height='55vh' minHeight='300px' />
   </PopUp>
 </>);
+
+
+function handleUserInvitation(){
+  const data = {player: auth._id, playingTeam: invitedTeamId};
+  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {'authorization':  auth.accessToken}) )
+  .GoodResult( (result) => {
+    setInvitedTeamId(undefined);
+    setPlayingTeam(result);
+    setLoading(true);
+    transmitter('playingTeamAddUser', data);
+    } )
+  .BadResult( (error) => { setAlert(error); } )
+  .Build(setAxiosLoading);
 }
+
+const getAllAreas = () => {
+    new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
+  .GoodResult( (result) => { geoDataRef.current = result; } )
+  .BadResult( (error) => { setAlert(error); } )
+  .Build(setAxiosLoading);
+}
+
+const handleSetArea = () => {
+  // language will send with the cookie
+  const user = auth._id;
+  const data =  { user , coordinates};
+  new DatabaseRequest( () => Axios('PUT', '/api/user', data, {'authorization':  auth.accessToken}) )
+    .GoodResult( (result) => { if(result) goTo("/Choose"); } )
+    .BadResult( (error) => { setAlert(error); } )
+    .Build(setAxiosLoading);  
+};
+
+return render();}
 
 function Selection(props){
   const {leftMonkey, leftBottomMonkey, rightMonkey} = props;
@@ -101,36 +133,6 @@ return(<>
   ) : (<></>)}
 </>);
 }
-
-function handleUserInvitation(auth, invitedTeamId, setLoading, setAxiosLoading, setAlert, setInvitedTeamId, setPlayingTeam){
-  const data = {player: auth._id, playingTeam: invitedTeamId};
-  new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/accept', data, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => {
-    setInvitedTeamId(undefined);
-    setPlayingTeam(result);
-    setLoading(true);
-    transmitter('playingTeamAddUser', data);
-    } )
-  .BadResult( (error) => { setAlert(error); } )
-  .Build(setAxiosLoading);
-}
-
-const getAllAreas = (geoDataRef, setAxiosLoading, setAlert, auth) => {
-    new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => { geoDataRef.current = result; } )
-  .BadResult( (error) => { setAlert(error); } )
-  .Build(setAxiosLoading);
-}
-
-const handleSetArea = (goTo, auth , setAuth, coordinates, setAxiosLoading, setAlert) => {
-  // language will send with the cookie
-  const user = auth._id;
-  const data =  { user , coordinates};
-  new DatabaseRequest( () => Axios('PUT', '/api/user', data, {'authorization':  auth.accessToken}) )
-    .GoodResult( (result) => { if(result) goTo("/Choose"); } )
-    .BadResult( (error) => { setAlert(error); } )
-    .Build(setAxiosLoading);  
-};
 
 function SelectionValue({onClick, children, sx ,...props}){
 return(<>

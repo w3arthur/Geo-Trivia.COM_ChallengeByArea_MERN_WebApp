@@ -24,7 +24,7 @@ export default function LanguageFlags({sx}) {
   useEffect(() => {
     document.body.dir = currentLanguage.dir || 'ltr'     
   },[currentLanguage])
-return (
+const render = () => (
 <Box sx={{ ...sx }} >
 <Tooltip title={t('language')} arrow>
   <IconButton color="inherit" onClick={handleClick} size={sizes.languageTranslationIcon.buttonSize} sx={{ ml: 2 }}> <LanguageIcon style={{width: sizes.languageTranslationIcon.iconSize, height: sizes.languageTranslationIcon.iconSize}}/> </IconButton>
@@ -51,4 +51,7 @@ return (
   ))}
   
 </Menu></Box>
-)}
+)
+
+
+return render();}

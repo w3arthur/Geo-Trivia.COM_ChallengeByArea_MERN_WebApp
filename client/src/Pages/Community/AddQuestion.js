@@ -23,12 +23,12 @@ export default function AddQuestionPopup({mapSelectedCountry, handleClose, /*ope
   const handleChange = (event) => { setSelectedValue(Number(event.target.value)); };
   const formRef = useRef();
 
-return (<>
+const render = () => (<>
 {/*<PopUp open={openPopup} handleClose={handleCloseAddQuestionPopup, t} title="Add Question" handleSubmit={ () => { addQuestionButtonRef.current.click(); } } submitText="+Add Question">*/}
 <CssBaseline />
 <Box sx={{minHeight: '300px', marginTop: 1, display: 'flex', flexDirection: 'column', alignItems: 'center'}} >
   <Typography component="h1" variant="h5"> {t("Add Question")} </Typography>
-  <Box component="form" ref={formRef} noValidate onSubmit={(e) => handleSubmit(e, auth, Axios, selectedAreaId, setErrMsg, handleClose, setAxiosLoading, setAlert, setAlternativeContent, t)} sx={{ mt: 3 }}>
+  <Box component="form" ref={formRef} noValidate onSubmit={(event) => handleSubmit(event)} sx={{ mt: 3 }}>
       <TextField label={t("The Question")} inputRef={yourQuestionRef} id="question" name="question" autoComplete={false} helperText={t("set your question")} fullWidth />
       <Typography component="h5" variant="body"> {t("Question Area:")} {" "} {selectedAreaName || t("No Area!")} </Typography>
       <Grid container>
@@ -47,25 +47,9 @@ return (<>
 </Box>
 {/*</PopUp>*/}
 </>);
-};
 
-function TheRightAnswer({i ,selectedValue, handleChange}){
-  const { t } = useTranslation();
-return (<>
-  <Grid item > <Typography>
-    <Radio sx={{paddingX: 5}} checked={selectedValue === i} onChange={handleChange} value={i} name="rightAnswer" inputProps={{ 'aria-label': i }}/>
-  
-  {t("The right Answer is:")} {selectedValue !== -1 ? `${t("Answer Number")} ${selectedValue + 1}`: t("No Answer") }</Typography>
-  </Grid>
-</>); }
-function Answer({i ,selectedValue, handleChange}){
-  const { t } = useTranslation();
-return (<>
-  <Grid item container xs={1}> <Radio sx={{paddingX:{xs: 1, sm:2, md: 4}}} checked={selectedValue === i} onChange={handleChange} value={i} name="rightAnswer" inputProps={{ 'aria-label': i }}/> </Grid>
-  <Grid item xs={11} pl={1}> <TextField label={`${t("Answer")}${i+1}`} id={`answer${i+1}`} name={`answer[${i}]`} autoComplete={false} fullWidth /> </Grid>
-</>); }
 
-const handleSubmit = (event, auth, Axios, selectedAreaId, setErrMsg, handleClose, setAxiosLoading, setAlert, setAlternativeContent, t) => {
+const handleSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const area = selectedAreaId;
@@ -81,10 +65,7 @@ const handleSubmit = (event, auth, Axios, selectedAreaId, setErrMsg, handleClose
     answers.push( answer );
     i++; }
   if(answers.length === 0) return;
-
- 
   const SendingQuestion = { question: question, answers: answers, location: area , rightAnswer: rightAnswer };
-
   new DatabaseRequest( () => Axios('POST', '/api/question', SendingQuestion, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => {
     setAlternativeContent(<>{t("Thanks For Sending a Question!")}<br /> {t("Your Question is sent to area expert approval.")}</>);
@@ -92,3 +73,25 @@ const handleSubmit = (event, auth, Axios, selectedAreaId, setErrMsg, handleClose
   .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 };
+
+
+return render();};
+
+
+
+function TheRightAnswer({i ,selectedValue, handleChange}){
+  const { t } = useTranslation();
+return (<>
+  <Grid item > <Typography>
+    <Radio sx={{paddingX: 5}} checked={selectedValue === i} onChange={handleChange} value={i} name="rightAnswer" inputProps={{ 'aria-label': i }}/>
+  
+  {t("The right Answer is:")} {selectedValue !== -1 ? `${t("Answer Number")} ${selectedValue + 1}`: t("No Answer") }</Typography>
+  </Grid>
+</>); }
+
+function Answer({i ,selectedValue, handleChange}){
+  const { t } = useTranslation();
+return (<>
+  <Grid item container xs={1}> <Radio sx={{paddingX:{xs: 1, sm:2, md: 4}}} checked={selectedValue === i} onChange={handleChange} value={i} name="rightAnswer" inputProps={{ 'aria-label': i }}/> </Grid>
+  <Grid item xs={11} pl={1}> <TextField label={`${t("Answer")}${i+1}`} id={`answer${i+1}`} name={`answer[${i}]`} autoComplete={false} fullWidth /> </Grid>
+</>); }

@@ -14,7 +14,7 @@ export default function UserInvite ({userArray, setUserArray, playingTeam, setPl
     const emailRef = useRef( );
     const { setAxiosLoading, setAlert } = useLoading();
     const { auth, setAuth } = useAuth( );
-return(<>
+const render = () => (<>
 <Grid container sx={{mb: 1,pl: '3px',}}>
     <Grid item xs='1' sm='1'> 
         <Avatar src={profile} sx={{ backgroundColor: colors.chooseTeam_AddTeamMember.avatarBackgroundColor, mt: {xs: 0, sm: 3} , ml: {xs: '-3px', sm: 0} , width: sizes.chooseTeam_AddTeamMember.memberAvatarSize , height: sizes.chooseTeam_AddTeamMember.memberAvatarSize }} />
@@ -26,16 +26,16 @@ return(<>
     </Grid>
     <Grid item xs='1' sm='1' sx={{zIndex: 1}}>
     <Box sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
-        <IconButton onClick={()=>{ handleUserAdd(playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert, t) }}>
+        <IconButton onClick={ handleUserAdd }>
             <Icons.Add sx={{ fontSize: sizes.chooseTeam_AddTeamMember.iconAddInvitePlayerSize}} />
         </IconButton>
     </Box> 
     </Grid>
 </Grid>
 </>);
-}
 
-const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, userArray, setUserArray, setAxiosLoading, setAlert, t) => {
+
+const handleUserAdd = () => {
     //previous checker for array
     const email = emailRef.current.value;
     if(email.trim() === ''){setAlert(t("entered empty email address."));return;}
@@ -54,3 +54,6 @@ const handleUserAdd = (playingTeam, setPlayingTeam, auth, setAuth, emailRef, use
     .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
+
+return render();}
+

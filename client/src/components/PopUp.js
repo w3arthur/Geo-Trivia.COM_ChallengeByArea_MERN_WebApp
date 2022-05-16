@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import * as Icons from '@mui/icons-material';
 
 export default function PopUp({open, handleClose, title, children, handleSubmit, submitText}) {
-return (
+const render = () => (
   <div>
     <BootstrapDialog  PaperProps = {{sx:  {minHeight : '300px'}}} fullWidth={true}  open={open} onClose={handleClose} aria-labelledby="customized-dialog-title" >
       <PopUpTitle onClose={handleClose} sx={{direction: 'ltr'}}> {title || <br />} </PopUpTitle> 
@@ -14,7 +14,10 @@ return (
       <DialogActions> {submitText ? (<Button startIcon={<Icons.Check/>} sx={{height: '28px', mt: '8px', mb: '8px'}} autoFocus onClick={handleSubmit}> {submitText} </Button>) : (<></>)} </DialogActions>
     </BootstrapDialog>
   </div>
-); }
+); 
+
+
+return render();}
 
 const PopUpTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -25,9 +28,7 @@ const PopUpTitle = (props) => {
     </DialogTitle>
   );
 };
+
 PopUpTitle.propTypes = { children: PropTypes.node, onClose: PropTypes.func.isRequired, };
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': { padding: theme.spacing(2), },
-  '& .MuiDialogActions-root': { padding: theme.spacing(1), },
-}));
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({ '& .MuiDialogContent-root': { padding: theme.spacing(2), }, '& .MuiDialogActions-root': { padding: theme.spacing(1), } }));

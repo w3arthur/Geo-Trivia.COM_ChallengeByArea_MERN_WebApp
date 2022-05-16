@@ -9,11 +9,8 @@ import { useGoTo } from '../Hooks';
 
 
 export default function AcceptInvitation(){;
-
     const { setAxiosLoading, setAlert } = useLoading();
-
     const { playingTeamId } = useParams();
-
     const {invitedTeamId, setInvitedTeamId} = usePlayingTeam();
     const goTo = useGoTo();
         
@@ -32,8 +29,8 @@ export default function AcceptInvitation(){;
 
     const data = {playingTeamId: playingTeamId }
 
-    return (<>
+    const render = () => (<>
     {/* <Login playingTeamId="playingTeamId"/> */}
     
     </>);
-}
+return render();}

@@ -17,8 +17,11 @@ export default function Logo () {
     , backgroundPosition: {xs: '48% 50%',sm:'center center'}
     , borderRadius: '5px'
     , margin: '4px 4px' }
- return(<>
+ const render = () => (<>
   <Box sx={{ ...logoStyle}} >
       <LanguageBar sx={{position: 'absolute', right: '0', paddingRight: '10px', paddingTop: '10px', color: colors.languageIconColor}} />
   </Box>
- </>);}
+ </>);
+ 
+
+return render();}

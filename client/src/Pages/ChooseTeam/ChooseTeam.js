@@ -21,7 +21,7 @@ export default function ChooseTeam(){
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
     const [openPopup, setOpenPopup] = useState(false);
 
-    const handleOpenPopup = () => {  handleCreateTeam(setOpenPopup, setPlayingTeam, auth, setAxiosLoading, setAlert ); };
+    const handleOpenPopup = () => {  handleCreateTeam(); };
     const handleClose = () => {  setOpenPopup(false); };
 
     const [userArray, setUserArray] = useState([]);
@@ -31,13 +31,13 @@ export default function ChooseTeam(){
         if(error) {alert('mistake ');}
         if(!openPopup){ return;
         } else if( x.userAccepted){
-            handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUserArray, setAxiosLoading, setAlert);
+            handleGetPlayingTeam_renewData();
         } else if(x.playingTeamSet){
             goTo('/Question');
         }//end if
     } , [openPopup]);
 
-return (<>
+const render = () => (<>
 <Typography variant="h1" sx={{ fontWeight: "bold" }}> {t("Choose Team")} </Typography>
 {/* Yor Area is: ... */}
 <Grid container>
@@ -48,7 +48,7 @@ return (<>
         </SelectionValue>
     </Grid>
     <Grid item xs={12} sm={6} sx={{p:2}}>
-        <SelectionValue onClick={() => { handlePlaySingle(setPlayingTeam, auth, setAxiosLoading, goTo, setAlert ) }}>
+        <SelectionValue onClick={ handlePlaySingle } >
         {t("Play")} <br /> {t("Single")} <br/>   
         <Box direction="row" sx={{ display:'flex', flexDirection: 'column', alignItems: 'center',}}>
             <Avatar src={profile} sx={{ backgroundColor: colors.chooseTeam_AddTeamMember.avatarBackgroundColor, mt: {xs:5 , sm: 8} , mb: 4 , width: sizes.chooseTeam_AddTeamMember.avatarSize, height: sizes.chooseTeam_AddTeamMember.avatarSize }} />
@@ -69,9 +69,12 @@ return (<>
   </Box>
 </PopUp>
 </>);
-}
 
-function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert ){
+
+
+
+
+function handlePlaySingle(){
   const organizer = auth._id;
   const data =  { organizer };
   new DatabaseRequest( () => Axios('POST', '/api/playingTeam', data, {'authorization':  auth.accessToken}) )
@@ -84,7 +87,7 @@ function handlePlaySingle( setPlayingTeam, auth, setAxiosLoading, goTo, setAlert
 
 }
 
-function handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUserArray, setAxiosLoading, setAlert){
+function handleGetPlayingTeam_renewData(){
         const playingTeamId = playingTeam._id;
         new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
@@ -99,7 +102,7 @@ function handleGetPlayingTeam_renewData(playingTeam, setPlayingTeam, auth, setUs
         .Build(setAxiosLoading);
 }
 
-const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  setAlert) => {
+const handleCreateTeam = () => {
   // language will send with the cookie
   const organizer = auth._id;
   const data =  { organizer };
@@ -111,6 +114,9 @@ const handleCreateTeam = (setOpenPopup, setPlayingTeam, auth, setAxiosLoading,  
     .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
+
+
+return render();}
 
 function SelectionValue({onClick, children, sx ,...props}){
     return(<>

@@ -25,7 +25,7 @@ export default function Results(){
         return allPlayers;  //yourPlayer is the first returned!
     }
 const questionsTotal = playingTeam?.questions?.length;
-return (<> <Grid container sx={{minHeight: 400}}>
+const render = () => (<> <Grid container sx={{minHeight: 400}}>
     <Grid item xs={12} md={9} ><Typography variant="h1" color="secondary" sx={{ fontWeight: "bold" }}> {t('Game Results')} </Typography></Grid>
     <Grid item container xs={12} md={3} ></Grid>
     <Grid item xs={12} md={9}>
@@ -33,7 +33,7 @@ return (<> <Grid container sx={{minHeight: 400}}>
             {getResults()?.map( (player, i) => {
                 let counter = 0;
                 player.answers.map( (x, i) => { if(x.answer === playingTeam.questions[i].rightAnswer) counter ++;});
-                return( <Result you={i === 0 ? true : false} email={player.email} score={counter} questionsAnswered = {counter} questionsTotal = {questionsTotal} /> );
+                return( <Result isYou={i === 0 ? true : false} email={player.email} score={counter} questionsAnswered = {counter} questionsTotal = {questionsTotal} /> );
                 }   )   }
             <Button startIcon={<Icons.ArrowBack/>} variant="contained" onClick={() => {goTo('/Location')}} sx={{m:4}}> {t('Back to Location Screen')} </Button>
         </Container>
@@ -42,13 +42,14 @@ return (<> <Grid container sx={{minHeight: 400}}>
         <Box  sx={{ margin: 'auto' }} color={colors.advertisement.textColor}> {t('Advertisement')} </Box>
     </Grid>
 </Grid></>)
-}
+return render();}
 
-function Result({email, score, questionsAnswered, questionsTotal, you}){
+
+function Result({email, score, questionsAnswered, questionsTotal, isYou}){
     const { t } = useTranslation();
-    const addSize = you ? 3 :0; //add size for your player
-return (<><Box ml={you? -1: 0} >
-<Typography variant="h5" component="div" color="secondary" sx={{ fontSize: sizes.resultsScreen , fontWeight: you ? "900 !" : "500"}}>
+    const addSize = isYou ? 3 :0; //add size for your player
+return (<><Box ml={isYou? -1: 0} >
+<Typography variant="h5" component="div" color="secondary" sx={{ fontSize: sizes.resultsScreen , fontWeight: isYou ? "900 !" : "500"}}>
     <Grid item container xs={12}  m={{xs:0, sm:2}} mt={{xs:1, sm:2}} >
         <Grid item xs={2} lg="1" >
             <Avatar src={profile} sx={{ backgroundColor: "#faae1c"
@@ -64,5 +65,5 @@ return (<><Box ml={you? -1: 0} >
         </Grid>
     </Grid>
 </Typography>
-</Box></>)
+</Box></>);
 }

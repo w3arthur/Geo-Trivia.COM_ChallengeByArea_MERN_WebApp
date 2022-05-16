@@ -49,10 +49,10 @@ export default function Question(){
             setLoading(false);
             handleCloseFollowPopup();
             setFollowerButtonShow(false);
-            //getQuestionTransmitter(playingTeam);
+            //getQuestionTransmitter();
         }else if(x.finish){ 
             setLoading(false);
-            handleGetPlayingTeam_renewData(auth, playingTeam, setPlayingTeam, setAxiosLoading, setAlert);
+            handleGetPlayingTeam_renewData();
             goTo('/Results');
         }else if(x.getQuestion){ 
             //  if(x.currentQuestion !== playingTeam.currentQuestion) {}
@@ -67,59 +67,59 @@ export default function Question(){
         }//end if
     }, []);
 
-    useEffect(() => { getQuestionTransmitter(playingTeam); }, [])
+    useEffect(() => { getQuestionTransmitter(); }, [])
     
     const allPlayers = playingTeam.players;
     const yourPlayerData = allPlayers?.filter((player) =>  player._id === auth._id)
     const yourPlayer = yourPlayerData && yourPlayerData[0];
     const helpers = yourPlayer?.helpers;
 
-    return(<div>
-        <QuestionValue > {currentQuestion(question, playingTeam)?.question}</QuestionValue>
-        <Grid container>
-            {currentQuestion(question, playingTeam)?.answers.map((ans, i) => (
-                <Answer isFollow={i===followerAnswer.current} numberBackgroundColor={statisticShow ? COLORS[i] : REGULAR_COLOR} sx={playingTeam.hideAnswers?.includes(i) ? {visibility: 'hidden', display: {xs: 'none', md: 'flex'} } : {visibility: 'visible', display: 'flex' }} number={ i + 1 } onClick={(e) => {
-                    const answer = i; handlePostAnswer({e, auth, playingTeam, setPlayingTeam, question: question, answer, setAxiosLoading, setAlert, setStatisticShow, setLoading});
-                }}> {ans} </Answer>
-            ) ) }
-        </Grid>
-        <Grid container sx={{width: '100%', display:statisticShow ? 'flex' : 'none'}}> <Box sx={{ width: '100%', '& .recharts-wrapper': { margin : '0 auto'}}}> <StatisticChart data={statisticData(question, playingTeam)} /> </Box> </Grid>
-        <Grid sx={{mt:7, textAlign: 'center', width: '100%'}}>
-            <Helper startIcon={<Icons.Battery50/>} onClick={() => {handle5050({auth, playingTeam, setPlayingTeam, question, setAxiosLoading, setAlert})}} sx={{display: helpers?.h5050? 'inline-block': 'none'}}>{t("50/50")}</Helper>
-            <Helper startIcon={<Icons.InsertChart/>} onClick={() => {handleStatistic({auth, playingTeam, setPlayingTeam, question, setAxiosLoading, setAlert, setStatisticShow})}} 
-                sx={{display: !statisticShow && helpers?.statistic  ? 'inline-block': 'none'}}>{t("Statistic")}</Helper>
-            {allPlayers?.length > 1 && helpers?.follow && followerButtonShow && !followerAnswer.current ? (<Helper startIcon={<Icons.ImageSearch/>} onClick={() => { handleOpenFollowPopup() }} sx={{display: helpers?.follow? 'inline-block': 'none'}}>{t("Follow")}</Helper>) : (<></>)}
-        </Grid>
-        <PopUp open={openFollowPopup} handleClose={handleCloseFollowPopup} title={t("Choose to Follow")}><Follow handleFollow={handleFollow(auth, playingTeam,  setAxiosLoading, setAlert, setLoading, handleOpenBoomPopup, followerId.current)} /></PopUp>
-        <PopUp open={openBoomPopup} handleClose={handleCloseBoomPopup} title={t("Boom Message")}  handleSubmit={handleCloseBoomPopup} submitText={t("Boom Exit The Game")}><Boom/></PopUp>
-    </div>);
-}
+const render = () => (<div>
+    <QuestionValue > {currentQuestion()?.question}</QuestionValue>
+    <Grid container>
+        {currentQuestion()?.answers.map((ans, i) => (
+            <Answer isFollow={i===followerAnswer.current} numberBackgroundColor={statisticShow ? COLORS[i] : REGULAR_COLOR} sx={playingTeam.hideAnswers?.includes(i) ? {visibility: 'hidden', display: {xs: 'none', md: 'flex'} } : {visibility: 'visible', display: 'flex' }} number={ i + 1 } onClick={(event) => {
+                const answer = i; handlePostAnswer(event, answer);
+            }}> {ans} </Answer>
+        ) ) }
+    </Grid>
+    <Grid container sx={{width: '100%', display:statisticShow ? 'flex' : 'none'}}> <Box sx={{ width: '100%', '& .recharts-wrapper': { margin : '0 auto'}}}> <StatisticChart data={statisticData()} /> </Box> </Grid>
+    <Grid sx={{mt:7, textAlign: 'center', width: '100%'}}>
+        <Helper startIcon={<Icons.Battery50/>} onClick={ handle5050 } sx={{display: helpers?.h5050? 'inline-block': 'none'}}>{t("50/50")}</Helper>
+        <Helper startIcon={<Icons.InsertChart/>} onClick={ handleStatistic } 
+            sx={{display: !statisticShow && helpers?.statistic  ? 'inline-block': 'none'}}>{t("Statistic")}</Helper>
+        {allPlayers?.length > 1 && helpers?.follow && followerButtonShow && !followerAnswer.current ? (<Helper startIcon={<Icons.ImageSearch/>} onClick={() => { handleOpenFollowPopup() }} sx={{display: helpers?.follow? 'inline-block': 'none'}}>{t("Follow")}</Helper>) : (<></>)}
+    </Grid>
+    <PopUp open={openFollowPopup} handleClose={handleCloseFollowPopup} title={t("Choose to Follow")}><Follow handleFollow={handleFollow} /></PopUp>
+    <PopUp open={openBoomPopup} handleClose={handleCloseBoomPopup} title={t("Boom Message")}  handleSubmit={handleCloseBoomPopup} submitText={t("Boom Exit The Game")}><Boom/></PopUp>
+</div>);
 
-function currentQuestion(question, playingTeam){ //for development mode
+
+
+
+function currentQuestion(){ //for development mode
     if (question === -1) {return undefined;}else if (!playingTeam.questions) {return undefined;} return playingTeam.questions[question];
 }
 
-function statisticData(question, playingTeam){
-    const q = currentQuestion(question, playingTeam)?.statistic.filter((x) => x.answer !== -1);
+function statisticData(){
+    const q = currentQuestion()?.statistic.filter((x) => x.answer !== -1);
     function compare( a, b ) {  if ( a.answer < b.answer ) return -1; if ( a.answer > b.answer ) return 1; return 0; }    //check how sorting works if one answer is missing
     return q?.sort( compare ) || q;
 }
 
 //({auth, playingTeam : playingTeamData, setPlayingTeam, question : questionNumber, setAxiosLoading, setAlert})
-const handleFollow = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading, handleOpenBoomPopup, followerId) => (followAuthId) => {
+const handleFollow =  (followAuthId) => {
     const authId = auth._id;
     const followId = followAuthId;
     const playingTeamId = playingTeam._id;
     const data =  { player: authId, playingTeam: playingTeamId };
-
-    if(followerId === followAuthId){ 
+    if(followerId.current === followAuthId){ 
         const transmitterData = { playingTeam: playingTeamId, follower: authId, followed: followId /*this user will un boom*/ }
         transmitter('boomHandler', transmitterData);
         setLoading(false);
         handleOpenBoomPopup();
         return;
     }
-
     new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/follow', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
             const transmitterData = { auth: authId, followed: followId, playingTeam: playingTeamId }
@@ -131,7 +131,7 @@ const handleFollow = (auth, playingTeam,  setAxiosLoading, setAlert, setLoading,
 }
 
 
-function handleGetPlayingTeam_renewData(auth, playingTeam, setPlayingTeam, setAxiosLoading, setAlert){
+function handleGetPlayingTeam_renewData(){
         const playingTeamId = playingTeam._id;
         new DatabaseRequest( () => Axios('GET', '/api/playingTeam/' + playingTeamId, {}, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => { setPlayingTeam(result); } )
@@ -140,10 +140,10 @@ function handleGetPlayingTeam_renewData(auth, playingTeam, setPlayingTeam, setAx
 }
 
 
-const handle5050 = ({auth, playingTeam : playingTeamData, setPlayingTeam, question : questionNumber, setAxiosLoading, setAlert}) => {
+const handle5050 = () => {
   // language will send with the cookie
-  const question = questionNumber;
-  const data =  {  player: auth._id,  playingTeam: playingTeamData._id, question: questionNumber };
+  const playingTeamData = playingTeam;
+  const data =  {  player: auth._id,  playingTeam: playingTeamData._id, question: question };
   new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/h5050', data, {'authorization':  auth.accessToken}) )
     .GoodResult( (result) => { //keep only 2 questions from all the page
         const playingTeamClone = JSON.parse(JSON.stringify(result));
@@ -161,32 +161,39 @@ const handle5050 = ({auth, playingTeam : playingTeamData, setPlayingTeam, questi
     .Build(setAxiosLoading);  
 };
 
-const handleStatistic = ({auth, playingTeam : playingTeamData, setPlayingTeam, question : questionNumber, setAxiosLoading, setAlert, setStatisticShow}) => {
-    const data =  {  player: auth._id,  playingTeam: playingTeamData._id, question: questionNumber };
+const handleStatistic = () => {
+    const playingTeamData = playingTeam;
+    const data =  {  player: auth._id,  playingTeam: playingTeamData._id, question: question };
     new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/statistic', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => { setStatisticShow(true); } )
         .BadResult( (error) => { setAlert(error); } )
         .Build(setAxiosLoading);  
 };
 
-const handlePostAnswer = ({e, auth, playingTeam : playingTeamData, setPlayingTeam, question : questionValue, answer: answerValue, setAxiosLoading, setAlert, setStatisticShow, setLoading}) => {
+const handlePostAnswer = (event , answerValue) => {
     setStatisticShow(false); // set statistic to false (cancel it on the next question)
     setLoading(true);
     // language will send with the cookie
-    const data =  { player: auth._id, playingTeam: playingTeamData._id, question: questionValue, answer: answerValue };
+    const playingTeamData = playingTeam;
+    const data =  { player: auth._id, playingTeam: playingTeamData._id, question: question, answer: answerValue };
     new DatabaseRequest( () => Axios('PATCH', '/api/playingTeam/answer', data, {'authorization':  auth.accessToken}) )
         .GoodResult( (result) => {
-            setPlayingTeam(result); getQuestionTransmitter(playingTeamData);
-            setTimeout(() =>{e.target.parentNode.parentNode.blur();}, 500)
+            setPlayingTeam(result); getQuestionTransmitter();
+            setTimeout(() =>{event.target.parentNode.parentNode.blur();}, 500)
             } )
         .BadResult( (error) => { setAlert(error); } )
         .Build(setAxiosLoading);
 };
 
-function getQuestionTransmitter(playingTeam){
+function getQuestionTransmitter(){
     const data = {playingTeam: playingTeam};
     transmitter('getQuestion', data);
 }
+
+
+return render();}
+
+
 
 function Helper({key, onClick, children, sx, ...props}){ return(<Button {...props} onClick={onClick} variant="outlined" sx={{m: 2, minHeight: 50, fontSize: 25, ...sx}}>{children}</Button>); }
 

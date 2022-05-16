@@ -15,10 +15,11 @@ return (<> {anotherPlayers?.map((x) => (<UserToFollow key={x._id} alt={x.email} 
 }
 
 function UserToFollow({key, sx, alt, src, onClick, children, ...props}){
-return(<>
+const render = () =>(<>
 <Box sx={{p: 1}} >
     <Button  {...props} onClick={onClick} variant="outlined" startIcon={<Avatar alt={alt} src={src} sx={{ backgroundColor: colors.followBackgroundColor, m: '2px', ...sx}}/>} fullWidth>
         <Typography key={key} sx={{width: '100%', fontSize: sizes.followPopUpEmail , textTransform: 'capitalize'}}>{children}</Typography>
     </Button>
 </Box>
-</>)    }
+</>)    
+return render();}

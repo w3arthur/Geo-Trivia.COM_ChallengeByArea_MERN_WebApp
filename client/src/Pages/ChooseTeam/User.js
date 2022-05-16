@@ -15,7 +15,7 @@ export default function User({key, data, userArray, setUserArray}) {
     const { auth, setAuth } = useAuth();
     const { playingTeam, setPlayingTeam } = usePlayingTeam();
     const { setAxiosLoading } = useLoading();
-return(<>
+const render = () =>(<>
 <Grid key={key} container sx={{mb: 1,pl: '3px', border: border, borderRadius: '5px'}}>
     <Grid item xs='1'> 
         <Avatar src={profile} sx={{ backgroundColor: colors.chooseTeam_AddTeamMember.avatarBackgroundColor , mt: {xs: 0, sm: 3} , ml: {xs: '-3px', sm: 0}, width: sizes.chooseTeam_AddTeamMember.memberAvatarSize , height: sizes.chooseTeam_AddTeamMember.memberAvatarSize }} />
@@ -27,7 +27,7 @@ return(<>
     <Grid item xs={!accepted ? '1' : '2'}  sx={{zIndex: 1}}>
         { !data.accepted ?
         (<IconButton onClick={()=>{ const playerId = data._id; /*const email = data.email;*/
-                handleUserDelete(playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading)
+                handleUserDelete(playerId)
             }} sx={{mt: {xs: 5, sm: 3 }, ml: {xs: -2, sm: 0 }}}>
         <Icons.Close sx={{fontSize: '30pt'}} />
         </IconButton>)
@@ -37,9 +37,9 @@ return(<>
     </Grid>
 </Grid>
 </>);
-}
 
-const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, setUserArray, setAxiosLoading, setErrMsg, ) => {
+
+const handleUserDelete = ( playerId ) => {
     const playingTeamId = playingTeam._id;
     const playerIdData = playerId;
     new DatabaseRequest( () => Axios('DELETE', '/api/playingTeam/' +  playingTeamId + '?playerId=' + playerIdData , {}, {'authorization':  auth.accessToken}) )
@@ -47,3 +47,7 @@ const handleUserDelete = (playingTeam, setPlayingTeam, auth, setAuth, playerId, 
     .BadResult( (error) => { alert(error); } )
     .Build(setAxiosLoading);  
 };
+
+
+return render();}
+

@@ -42,17 +42,17 @@ export default function Registration() {
     emailRef.current.focus(); 
     }, [handleClose] );
 
-  useEffect(() => { checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setAlert, setAlert, setErrMsg); }, [] );
+  useEffect(() => { checkAccessToken(); }, [] );
   const facebookButtonStyle = { '& button':  {height: '48px',  display: 'inline-flex',  borderRadius: '4px ! important', boxShadow: `1px 1px ${colors.facebookButton.boxShadowColor}`, textShadow: `1px 1px ${colors.facebookButton.textShadowColor}`, width: '100%' }, '& button i': {marginLeft: '-10px', marginTop: '-6px',  fontSize: sizes.facebookFontSize}, '& button span': {width: '100%', fontSize: sizes.facebookFontSize, textAlign: 'center', marginTop: '-4px'  } };
   const googleButtonStyle =  { '& button': { width: '100%' },'& button span':  { width: '75%,', fontSize: sizes.googleFontSize, textAlign: 'center' } };
-return (<>
+const render = () => (<>
 <Container maxWidth="lg">
   <Typography variant="h1"> {t("Game Login")} </Typography>
   <Grid container>
     <Grid item xs={12} md={6} sx={{ mt: 8, display:'flex', flexDirection: 'column', alignItems: 'center', }}>
       <CssBaseline />
       <Avatar sx={{ m: 1, bgcolor: 'primary.main', width: '70px ! important', height: '70px ! important'  }}> <Icons.LockOutlined /> </Avatar>
-      <Box component="form" onSubmit={(e) => handleSubmit(e, setErrMsg, goTo, setAuth, auth, setAxiosLoading, setAlert ) } noValidate sx={{ mt: 1 }}>
+      <Box component="form" onSubmit={(event) => handleSubmit(event) } noValidate sx={{ mt: 1 }}>
         <TextField label={t("Email")} autoFocus id="email" autoComplete="email" name="email" inputRef={emailRef} margin="normal" fullWidth required />
         <TextField label={t("Password")} name="password" id="password" type="password" inputRef={passwordRef} autoComplete="current-password" margin="normal" fullWidth required />
         {/*<FormControlLabel label={t("Remember me")}  control={<Checkbox value="remember" color="primary" />} /> */}  
@@ -62,8 +62,8 @@ return (<>
     </Grid>
     <Grid item xs={12} md={6} sx={{mt: 20, mb: {xs: 5, md: 30}, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
       <Box component="div" sx={{width: '90%'}}> {/*little bit smaller area*/}
-        <Box component='div' className="googleButton" sx={{mb: 1, ...googleButtonStyle}}> <GoogleLogin buttonText={t("Google Login")} clientId={googleClientID} onSuccess={(response) => responseSuccessGoogle(response, setAuth, goTo, setAxiosLoading, setAlert)} onFailure={()=>{setAlert('fail to login with google account')}} cookiePolicy={'single_host_origin'} /> </Box>
-        <Box component='div' className="facebookButton" sx={{mb: 1, ...facebookButtonStyle}}> <FacebookLogin textButton={<span>{t("Facebook Login")}</span>} icon="fa-facebook" appId={facebookClientId} autoLoad={false} callback={(response) => responseFacebook(response, setAuth, goTo, setAxiosLoading, setAlert) } onFailure={()=>{setAlert('fail to login with facebook')}} /> </Box>
+        <Box component='div' className="googleButton" sx={{mb: 1, ...googleButtonStyle}}> <GoogleLogin buttonText={t("Google Login")} clientId={googleClientID} onSuccess={(response) => responseSuccessGoogle(response)} onFailure={()=>{setAlert('fail to login with google account')}} cookiePolicy={'single_host_origin'} /> </Box>
+        <Box component='div' className="facebookButton" sx={{mb: 1, ...facebookButtonStyle}}> <FacebookLogin textButton={<span>{t("Facebook Login")}</span>} icon="fa-facebook" appId={facebookClientId} autoLoad={false} callback={(response) => responseFacebook(response) } onFailure={()=>{setAlert('fail to login with facebook')}} /> </Box>
         <Button startIcon={<Icons.SwitchAccount/>} fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
       </Box>
     </Grid>
@@ -71,9 +71,9 @@ return (<>
   <RegisterPopup open={openPopUp} handleClose={handleClose} />
 </Container>
 </>);
-}
 
-const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading, setAlert) => {
+
+const handleSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   new DatabaseRequest( () => loginApi( {email: data.get('email'), password: data.get('password')} ) )
@@ -82,7 +82,7 @@ const handleSubmit = (event, setErrMsg, goTo, setAuth, auth, setAxiosLoading, se
     .Build(setAxiosLoading);  
 };
 
-function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setAlert, setErrMsg){
+function checkAccessToken(){
   new DatabaseRequest( () => tokenRenewApi() )
     .GoodResult( (result) => {
       if(!result._id || !result.accessToken) return;
@@ -91,7 +91,7 @@ function checkAccessToken(auth, setAuth, goFrom, setAxiosLoading, setAlert, setE
     .Build(setAxiosLoading);
 }
 
-const responseFacebook = (response, setAuth, goTo, setAxiosLoading, setAlert) => {
+const responseFacebook = (response) => {
   const data = { token: response.accessToken, userId: response.id };
   new DatabaseRequest( () => Axios('POST', '/api/login/facebook', data, {}) )
     .GoodResult( (result) => { setAuth( result ); goTo("/Location"); } )
@@ -99,13 +99,16 @@ const responseFacebook = (response, setAuth, goTo, setAxiosLoading, setAlert) =>
     .Build(setAxiosLoading);  
 };
 
-const responseSuccessGoogle = (response, setAuth, goTo, setAxiosLoading, setAlert) => {
+const responseSuccessGoogle = (response) => {
   const data =  { token: response.tokenId };
   new DatabaseRequest( () => Axios('POST', '/api/login/google', data, {}) )
     .GoodResult( (result) => { setAuth( result ); goTo("/Location"); } )
     .BadResult( (error) => { setAlert(error); } )
     .Build(setAxiosLoading);  
 };
+
+
+return render();}
 
 
 
