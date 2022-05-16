@@ -42,8 +42,8 @@ export default function Community(){
   const [newestQuestionsLastPage, setNewestQuestionsLastPage] = useState(false);
 
   useEffect(() => {
-    getAllAreas(auth, geoDataRef, setAxiosLoading, setAlert);
-    getNewestQuestions (auth, newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
+    getAllAreas();
+   // getNewestQuestions (auth, newestQuestionsPage, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert);
     }, [])
 
   const [value, setValue] = useState(2);  //begin from tab 2, newest_questions
@@ -60,7 +60,7 @@ export default function Community(){
   const [alternativeContent_AddQuestion, setAlternativeContent_AddQuestion]= useState();
   const [alternativeContent_BeExpert, setAlternativeContent_BeExpert]= useState();
   const [alternativeContent_BeExpert_WelcomePage, setAlternativeContent_BeExpert_WelcomePage]= useState(true);
-return (<>
+const render = () => (<>
 <Box sx={{ textAlign: 'center', width: '100%', md: 1}}> 
   <Button startIcon={<Icons.Architecture/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_BeExpert} variant="contained"> {t("Ask be Expert")} </Button>
   <Button startIcon={<Icons.NoteAdd/>} sx={{m: 1}} onClick={handleClick_openFromMapPopup_AddQuestion} variant="contained"> {t("Add Your Question")} </Button>
@@ -111,21 +111,18 @@ return (<>
         }} submitText={t("Start Trivia")}> <Map geoData={geoDataRef.current} settings={settings} height='60vh' minHeight='400px'/>
 </PopUp>
 </>);
-}
 
-const getAllAreas = (auth, geoDataRef, setAxiosLoading, setAlert) => {
+
+const getAllAreas = () => {
   new DatabaseRequest( () => Axios('GET', '/api/area', {}, {'authorization':  auth.accessToken}) )
   .GoodResult( (result) => { geoDataRef.current = result; } )
   .BadResult( (error) => { setAlert(error); } )
   .Build(setAxiosLoading);
 }
 
-export const getNewestQuestions =  (auth, page, setNewestQuestionsLastPage, setNewestQuestions, setAxiosLoading, setAlert) => { //this item exported to Newest Questions too
-  new DatabaseRequest( () => Axios('GET', '/api/question/' + (page||0).toString() +'/', {}, {'authorization':  auth.accessToken}) )
-  .GoodResult( (result) => { if(result.lastPage) setNewestQuestionsLastPage(true); setNewestQuestions(result.questions); } )
-  .BadResult( (error) => { setAlert(error); } )
-  .Build(setAxiosLoading);
-}
+
+return render();}
+
 
 export const TabPanel = ({ children, value, index, sx, ...other }) => (
   <div style={{ width: '100%', ...sx}} role="tabpanel" hidden={value !== index} id={`vertical-tabpanel-${index}`} aria-labelledby={`vertical-tab-${index}`} {...other}>
