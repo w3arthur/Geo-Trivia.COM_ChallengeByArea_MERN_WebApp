@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React /*, {Suspense}*/ from 'react';
 import {  BrowserRouter, Routes, Route , Outlet, useNavigate /*, useRoutes*/} from "react-router-dom"; // useParams,
 
 import {  Logo, NavBar, Loading, StatisticChart, Follow, Boom } from "./Components";
@@ -8,8 +8,7 @@ import { GlobalLayout, colors, fonts } from "./Config"
 import { AuthProvider, LoadingProvider ,PlayingTeamProvider } from "./Context";
 
 import AddQuestion from './Pages/Community/AddQuestion';  //to delete
-//import LocationReduxExample from "./z_development/LocationReduxExample/LocationReduxExample";
-import DataGridExample from "./z_development/DataGridExample";
+
 
 import RequireAuth from "./Auth/RequireAuth";
 
@@ -18,7 +17,7 @@ const globalMainStyle = { textAlign: 'center', color: colors.bodyTextColor, font
 
 export default function App() {
   //const { t } = useTranslation();
-return (<><Suspense fallback={<Loading />}><BrowserRouter>
+return (<><BrowserRouter>
     {/* <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}> */}
     <Routes>
       <Route path="/"  element={<>
@@ -50,13 +49,11 @@ return (<><Suspense fallback={<Loading />}><BrowserRouter>
         <Route path="/Boom" element={<Boom />} />
         <Route path="/Chart" element={<StatisticChart />} />
 
-        <Route path="/DataGridExample" element={<DataGridExample />} />
-
         <Route path="unauthorized/*" element={<>[-PageError403-] (Error 403 Unauthorized) <BackwardLink /></>} />
         <Route path="/*" element={<>[-PageError404-] (Error 404 Not Found) <BackwardLink /> </>} />
       </Route>
     </Routes>
-</BrowserRouter></Suspense></>);
+</BrowserRouter></>);
 }
 
 const BackwardLink = () => {

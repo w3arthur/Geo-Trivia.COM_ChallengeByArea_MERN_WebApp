@@ -15,7 +15,7 @@
     "כפר שלם"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -53,7 +53,7 @@
     "נורית גלרון"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -91,7 +91,7 @@
     "קורין אלאל"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -129,7 +129,7 @@
     "הלפר ספרים"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -167,7 +167,7 @@
     "קארפה דיאם"
   ],
   "rightAnswer": 2,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -205,7 +205,7 @@
     "קפה בתיה"
   ],
   "rightAnswer": 2,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -243,7 +243,7 @@
     "בדרום"
   ],
   "rightAnswer": 3,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -281,7 +281,7 @@
     "רוב הברבור"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -319,7 +319,7 @@
     "1995"
   ],
   "rightAnswer": 2,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -357,7 +357,7 @@
     "ירדן"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -395,8 +395,8 @@
     "נווה שאנן"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -408,14 +408,17 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-12T06:17:40.050Z"
+  }
 },{
   "_id": {
     "$oid": "6270010eb6d782d01c1ff7c7"
@@ -433,8 +436,8 @@
     "672"
   ],
   "rightAnswer": 2,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -450,10 +453,13 @@
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-12T06:17:40.056Z"
+  }
 },{
   "_id": {
     "$oid": "62700141b6d782d01c1ff7d0"
@@ -471,8 +477,8 @@
     "אחוזה"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -480,7 +486,7 @@
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
@@ -491,7 +497,10 @@
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-12T06:17:40.058Z"
+  }
 },{
   "_id": {
     "$oid": "6270016eb6d782d01c1ff7d9"
@@ -509,7 +518,7 @@
     "נתניה"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -547,8 +556,8 @@
     "נוף הגליל"
   ],
   "rightAnswer": 2,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -560,14 +569,17 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-12T06:17:40.059Z"
+  }
 },{
   "_id": {
     "$oid": "62700224b6d782d01c1ff7eb"
@@ -585,12 +597,12 @@
     "הבהאית"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 1,
@@ -605,7 +617,10 @@
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-12T06:17:40.057Z"
+  }
 },{
   "_id": {
     "$oid": "62700253b6d782d01c1ff7f4"
@@ -623,7 +638,7 @@
     "תל אביב"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -661,7 +676,7 @@
     "1867"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -699,7 +714,7 @@
     "אל קדס"
   ],
   "rightAnswer": 3,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -737,7 +752,7 @@
     "הרחמים"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -775,7 +790,7 @@
     "שכנות שאננים"
   ],
   "rightAnswer": 3,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -813,7 +828,7 @@
     "מלחמת ההתשה"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -851,7 +866,7 @@
     "גשר יהודית"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -889,7 +904,7 @@
     "ציון"
   ],
   "rightAnswer": 3,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -927,27 +942,30 @@
     "Kfar Shalem"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 1,
+  "approved": true,
+  "displayedCounter": 10,
   "statistic": [
     {
       "answer": 0,
-      "counter": 1
+      "counter": 4
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 4
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T12:36:50.962Z"
+  }
 },{
   "_id": {
     "$oid": "627012e4b6d782d01c1ff845"
@@ -965,27 +983,30 @@
     "Norith Galron"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 9,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 4
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T12:36:50.967Z"
+  }
 },{
   "_id": {
     "$oid": "62701371b6d782d01c1ff84e"
@@ -1003,27 +1024,30 @@
     "Kurin Elel"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 1,
+  "approved": true,
+  "displayedCounter": 11,
   "statistic": [
     {
       "answer": 0,
-      "counter": 1
+      "counter": 6
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T12:36:50.970Z"
+  }
 },{
   "_id": {
     "$oid": "627013bdb6d782d01c1ff857"
@@ -1041,27 +1065,30 @@
     "Halper Sfarim"
   ],
   "rightAnswer": 0,
-  "approved": false,
-  "displayedCounter": 1,
+  "approved": true,
+  "displayedCounter": 10,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 2
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
-      "counter": 1
+      "counter": 4
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T12:36:50.965Z"
+  }
 },{
   "_id": {
     "$oid": "62701410b6d782d01c1ff860"
@@ -1079,12 +1106,12 @@
     "Karpa Diam"
   ],
   "rightAnswer": 2,
-  "approved": false,
-  "displayedCounter": 1,
+  "approved": true,
+  "displayedCounter": 10,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 1,
@@ -1092,14 +1119,17 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 3
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T12:36:50.968Z"
+  }
 },{
   "_id": {
     "$oid": "62701499b6d782d01c1ff869"
@@ -1117,7 +1147,7 @@
     "Caffe Batya"
   ],
   "rightAnswer": 2,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 1,
   "statistic": [
     {
@@ -1155,7 +1185,7 @@
     "In the south"
   ],
   "rightAnswer": 3,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1193,7 +1223,7 @@
     "Rob Hababur"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1231,7 +1261,7 @@
     "1995"
   ],
   "rightAnswer": 2,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1269,7 +1299,7 @@
     "Jordan"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1307,8 +1337,8 @@
     "Neve Sha'anan"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 4,
   "statistic": [
     {
       "answer": 0,
@@ -1320,14 +1350,17 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 3
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.980Z"
+  }
 },{
   "_id": {
     "$oid": "62701664b6d782d01c1ff8a8"
@@ -1345,8 +1378,8 @@
     "672"
   ],
   "rightAnswer": 2,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 2,
   "statistic": [
     {
       "answer": 0,
@@ -1354,18 +1387,21 @@
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.989Z"
+  }
 },{
   "_id": {
     "$oid": "6270169db6d782d01c1ff8b1"
@@ -1383,27 +1419,30 @@
     "Ahoza"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 4,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 2
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
       "counter": 0
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.987Z"
+  }
 },{
   "_id": {
     "$oid": "627016d6b6d782d01c1ff8ba"
@@ -1421,16 +1460,16 @@
     "Netanya"
   ],
   "rightAnswer": 0,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 4,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 2
     },
     {
       "answer": 2,
@@ -1438,10 +1477,13 @@
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.984Z"
+  }
 },{
   "_id": {
     "$oid": "62701723b6d782d01c1ff8c3"
@@ -1459,8 +1501,8 @@
     "Nof hagalil"
   ],
   "rightAnswer": 2,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 3,
   "statistic": [
     {
       "answer": 0,
@@ -1472,14 +1514,17 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 2
     }
   ],
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.983Z"
+  }
 },{
   "_id": {
     "$oid": "6270178ab6d782d01c1ff8cc"
@@ -1497,20 +1542,20 @@
     "Habahaim"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 3,
   "statistic": [
     {
       "answer": 0,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
@@ -1535,8 +1580,8 @@
     "Tel Aviv"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -1544,7 +1589,7 @@
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
@@ -1573,8 +1618,8 @@
     "1867"
   ],
   "rightAnswer": 0,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -1586,7 +1631,7 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
@@ -1611,8 +1656,8 @@
     "El Kadesh"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -1628,7 +1673,7 @@
     },
     {
       "answer": 3,
-      "counter": 0
+      "counter": 1
     }
   ],
   "__v": 0
@@ -1649,7 +1694,7 @@
     "Harahamim"
   ],
   "rightAnswer": 1,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1687,8 +1732,8 @@
     "Mishkenot Sha'ananim"
   ],
   "rightAnswer": 3,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -1700,7 +1745,7 @@
     },
     {
       "answer": 2,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 3,
@@ -1725,7 +1770,7 @@
     "Hatasha"
   ],
   "rightAnswer": 0,
-  "approved": false,
+  "approved": true,
   "displayedCounter": 0,
   "statistic": [
     {
@@ -1763,8 +1808,8 @@
     "Yehudit"
   ],
   "rightAnswer": 1,
-  "approved": false,
-  "displayedCounter": 0,
+  "approved": true,
+  "displayedCounter": 1,
   "statistic": [
     {
       "answer": 0,
@@ -1772,7 +1817,7 @@
     },
     {
       "answer": 1,
-      "counter": 0
+      "counter": 1
     },
     {
       "answer": 2,
@@ -1801,6 +1846,44 @@
     "Zion"
   ],
   "rightAnswer": 3,
+  "approved": true,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4ae08731ef51d30adc3"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000001",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
   "approved": false,
   "displayedCounter": 0,
   "statistic": [
@@ -1821,5 +1904,768 @@
       "counter": 0
     }
   ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4b608731ef51d30add7"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000003",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4b908731ef51d30ade1"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000004",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4bb08731ef51d30adeb"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000005",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4bd08731ef51d30adf5"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000006",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4bf08731ef51d30adff"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000007",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4c108731ef51d30ae09"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000008",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 1
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4c308731ef51d30ae13"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000009",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4c608731ef51d30ae1d"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000010",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4c808731ef51d30ae27"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000011",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4ca08731ef51d30ae31"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000012",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4cc08731ef51d30ae3b"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000013",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 1
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4ce08731ef51d30ae45"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000014",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 1
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4cf08731ef51d30ae4f"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000015",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4d108731ef51d30ae59"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000016",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4d208731ef51d30ae63"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000017",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4d508731ef51d30ae6d"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000018",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 1,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 1
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4d708731ef51d30ae77"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000019",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4da08731ef51d30ae81"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000020",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6272d4dd08731ef51d30ae8b"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "language": "english",
+  "question": "Nisityon TelAviv Question 000021",
+  "answers": [
+    "Nisityon TelAviv Answer00001",
+    "Nisityon TelAviv Answer00002",
+    "Nisityon TelAviv Answer00003",
+    "Nisityon TelAviv Answer00004"
+  ],
+  "rightAnswer": 0,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628249804eb5b35b90e8051b"
+  },
+  "schemaVersion": 1,
+  "location": {
+    "$oid": "6264206e7089c1bf06a8daac"
+  },
+  "language": "english",
+  "question": "rurturtutr",
+  "answers": [
+    "trurtu",
+    "trurt",
+    "urtutr",
+    "urturtur"
+  ],
+  "rightAnswer": 1,
+  "approved": false,
+  "displayedCounter": 0,
+  "statistic": [
+    {
+      "answer": 0,
+      "counter": 0
+    },
+    {
+      "answer": 1,
+      "counter": 0
+    },
+    {
+      "answer": 2,
+      "counter": 0
+    },
+    {
+      "answer": 3,
+      "counter": 0
+    }
+  ],
+  "updatedAt": {
+    "$date": "2022-05-16T12:54:24.472Z"
+  },
   "__v": 0
 }]

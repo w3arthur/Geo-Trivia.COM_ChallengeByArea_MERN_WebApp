@@ -31,7 +31,7 @@ export default async function Axios(method, additionUrl, data, additionHeader){
         loggingLog( new Logging({}, data, response ).SentDetails(method, additionUrl, additionHeader) );
 
         console.log(':: axios success');
-        return await response.data;
+        return response.data;
     }catch(error){
         console.log(':: axios error');
         // console.log('data', error.response?.data);  //{result: 'user already exist!'}

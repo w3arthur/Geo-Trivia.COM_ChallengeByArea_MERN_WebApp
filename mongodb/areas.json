@@ -1,0 +1,196 @@
+[{
+  "_id": {
+    "$oid": "6264206e7089c1bf06a8daac"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      35.3248,
+      32.7115
+    ]
+  },
+  "country": "Israel",
+  "area": "Nof Hagalil",
+  "totalScore": 0,
+  "__v": 0,
+  "waitingToExpertApproveQuestions": [
+    {
+      "$oid": "628249804eb5b35b90e8051b"
+    }
+  ],
+  "experts": [
+    {
+      "$oid": "6264478758553a409a2e0ed1"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2022-05-16T12:54:24.474Z"
+  }
+},{
+  "_id": {
+    "$oid": "626420dd7089c1bf06a8dac2"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      34.9896,
+      32.794
+    ]
+  },
+  "country": "Israel",
+  "area": "Haifa",
+  "totalScore": 0,
+  "__v": 0,
+  "waitingToExpertApproveQuestions": [
+    {
+      "$oid": "626daa29f3b645e8e7eb5131"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "626421557089c1bf06a8dacd"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      34.7818,
+      32.0853
+    ]
+  },
+  "country": "Israel",
+  "area": "Tel Aviv",
+  "totalScore": 0,
+  "__v": 0,
+  "waitingToExpertApproveQuestions": [
+    {
+      "$oid": "6272d4ae08731ef51d30adc3"
+    },
+    {
+      "$oid": "6272d4b608731ef51d30add7"
+    },
+    {
+      "$oid": "6272d4b908731ef51d30ade1"
+    },
+    {
+      "$oid": "6272d4bb08731ef51d30adeb"
+    },
+    {
+      "$oid": "6272d4bd08731ef51d30adf5"
+    },
+    {
+      "$oid": "6272d4bf08731ef51d30adff"
+    },
+    {
+      "$oid": "6272d4c108731ef51d30ae09"
+    },
+    {
+      "$oid": "6272d4c308731ef51d30ae13"
+    },
+    {
+      "$oid": "6272d4c608731ef51d30ae1d"
+    },
+    {
+      "$oid": "6272d4c808731ef51d30ae27"
+    },
+    {
+      "$oid": "6272d4ca08731ef51d30ae31"
+    },
+    {
+      "$oid": "6272d4cc08731ef51d30ae3b"
+    },
+    {
+      "$oid": "6272d4ce08731ef51d30ae45"
+    },
+    {
+      "$oid": "6272d4cf08731ef51d30ae4f"
+    },
+    {
+      "$oid": "6272d4d108731ef51d30ae59"
+    },
+    {
+      "$oid": "6272d4d208731ef51d30ae63"
+    },
+    {
+      "$oid": "6272d4d508731ef51d30ae6d"
+    },
+    {
+      "$oid": "6272d4d708731ef51d30ae77"
+    },
+    {
+      "$oid": "6272d4da08731ef51d30ae81"
+    },
+    {
+      "$oid": "6272d4dd08731ef51d30ae8b"
+    }
+  ],
+  "experts": [
+    {
+      "$oid": "626421557089c1bf06a8dacd"
+    },
+    {
+      "$oid": "6264478758553a409a2e0ed1"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2022-05-16T12:53:08Z"
+  }
+},{
+  "_id": {
+    "$oid": "6264219b7089c1bf06a8dad1"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      34.9519,
+      29.5577
+    ]
+  },
+  "country": "Israel",
+  "area": "Eilat",
+  "totalScore": 0,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626421c77089c1bf06a8dad5"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      35.2137,
+      31.7683
+    ]
+  },
+  "country": "Israel",
+  "area": "Jerusalem",
+  "totalScore": 0,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "626422067089c1bf06a8dae0"
+  },
+  "schema_version": 1,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      34.7915,
+      31.253
+    ]
+  },
+  "country": "Israel",
+  "area": "Be'er Sheva",
+  "totalScore": 0,
+  "__v": 0,
+  "experts": [
+    {
+      "$oid": "6264478758553a409a2e0ed1"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2022-05-07T19:26:12.376Z"
+  }
+}]

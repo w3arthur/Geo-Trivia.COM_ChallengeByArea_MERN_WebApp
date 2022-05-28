@@ -1,0 +1,327 @@
+[{
+  "_id": {
+    "$oid": "62615d137c310949aa5a2f9f"
+  },
+  "schemaVersion": 1,
+  "name": "arthur",
+  "email": "w31arthur@gmail.com",
+  "password": "$2b$10$mTLVfE735H/orucWGIbv9.YH3JrKjP4bntvCDiBVm2CPnj/PhejgS",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "62617c7e3927694bf0fb8868"
+  },
+  "schemaVersion": 1,
+  "name": "aaaa",
+  "email": "bbbb@gmail.com",
+  "password": "$2b$10$XNg0F1RHGOOLhVKwycv0XuD4rxVKFX/FmWFUSo.c67Y9QPriw2zXC",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "626403f7ebe49df2856a6874"
+  },
+  "schemaVersion": 1,
+  "name": "assd",
+  "email": "",
+  "password": "$2b$10$xTi.AZjtcD5YhZFwmDwEveDbBbc0OOpJReKpANVPRXHuSz0/.DDSm",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "62640410ebe49df2856a688a"
+  },
+  "schemaVersion": 1,
+  "name": "fdgdf",
+  "email": "legopart452343@gmail.com",
+  "password": "$2b$10$LWi44q6jdvo9i1fvent0oeAs7hI6OSGqoYx3rDEuTpRbEjJ1vNTfi",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "6264478758553a409a2e0ed1"
+  },
+  "schemaVersion": 1,
+  "name": "Arthur",
+  "email": "legopart@gmail.com",
+  "password": "$2b$10$JN.TTxOinist7hBkokRmMOZ58qyJDSlRMf0d/URjXzG.ZlSeB.Dnq",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      35.3248,
+      32.7115
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "answeredQuestions": 21,
+  "totalScore": 21,
+  "expertAreas": [
+    {
+      "_id": {
+        "$oid": "626421557089c1bf06a8dacd"
+      },
+      "country": "Israel",
+      "area": "Tel Aviv"
+    },
+    {
+      "_id": {
+        "$oid": "6264206e7089c1bf06a8daac"
+      },
+      "country": "Israel",
+      "area": "Nof Hagalil"
+    },
+    {
+      "_id": {
+        "$oid": "626422067089c1bf06a8dae0"
+      },
+      "country": "Israel",
+      "area": "Be'er Sheva"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2022-05-16T14:45:38.967Z"
+  },
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "6264487d58553a409a2e0eed"
+  },
+  "schemaVersion": 1,
+  "name": "aaaa",
+  "email": "aa333a@gmail.com",
+  "password": "$2b$10$UzCsqu8yhlVM7gALQmE/suwIkBNQWpZ2.ebJHZUWx7xvTZdOTC5Qe",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "6264495458553a409a2e0f3b"
+  },
+  "schemaVersion": 1,
+  "name": "gfdg",
+  "email": "aa343a@gmail.com",
+  "password": "$2b$10$LTOeMrwbKiT9c5AqWslY3uMMRhek.8pA22A.GA.Uc0bpgLkxA48Am",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "626449f758553a409a2e0f50"
+  },
+  "schemaVersion": 1,
+  "name": "ASDASFD",
+  "email": "w3423@w324.com",
+  "password": "$2b$10$acRmA.e0rmqeICvWnIbTbuZj25HpMmBc7vf0U/TsthcnLCEGOv7we",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "62644ca358553a409a2e0fce"
+  },
+  "schemaVersion": 1,
+  "name": "SADAS",
+  "email": "SDF@WALLA.COM",
+  "password": "$2b$10$WmSi9cFbhx/4jpVT/KxERuTDjQwQ9qNRuw71jLBC2ZEm4fFxf9gwq",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "62644e4a58553a409a2e1061"
+  },
+  "schemaVersion": 1,
+  "name": "abbbb",
+  "email": "abbb@gmail.com",
+  "password": "$2b$10$CvJDdoU6Is8NkfDmVl2DceBrceYItNHQNFbpju8m39Zx/qfrbr30i",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "6267487ecd562f04598649d1"
+  },
+  "schemaVersion": 1,
+  "name": "aaaa",
+  "email": "legopart2@gmail.com",
+  "password": "$2b$10$29bWHcBecRafB1l2U5CJVOZzCZ77P/GuTTQHdJ0Xkp98hlCZaYqXa",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      35.3248,
+      32.7115
+    ]
+  },
+  "currentQuestion": -1,
+  "__v": 0,
+  "answeredQuestions": 0,
+  "totalScore": 0,
+  "facebook": false,
+  "google": false,
+  "passwordRegister": true
+},{
+  "_id": {
+    "$oid": "6275d9ebc05094dc2c901cf1"
+  },
+  "schemaVersion": 1,
+  "name": "Arthur",
+  "email": "w3arthur@gmail.com",
+  "image": "https://lh3.googleusercontent.com/a-/AOh14GiuJFpxTZQeQn69jC18xCrEiE5JFZNmtV5lOYMv=s96-c",
+  "role": [
+    1000
+  ],
+  "language": "english",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      35.3248,
+      32.7115
+    ]
+  },
+  "answeredQuestions": 0,
+  "totalScore": 0,
+  "expertAreas": [],
+  "facebook": true,
+  "google": true,
+  "createdAt": {
+    "$date": "2022-05-07T02:31:07.048Z"
+  },
+  "updatedAt": {
+    "$date": "2022-05-07T18:29:03.303Z"
+  },
+  "__v": 0,
+  "passwordRegister": false
+}]

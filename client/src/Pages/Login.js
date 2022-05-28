@@ -11,7 +11,7 @@ import { tokens, sizes, colors } from '../Config';
 
 import RegisterPopup from "./RegisterPopup";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+//import FacebookLogin from "react-facebook-login";
 
 const googleClientID = tokens.googleClientID;
 const facebookClientId = tokens.facebookClientId;
@@ -43,6 +43,7 @@ export default function Registration() {
     }, [handleClose] );
 
   useEffect(() => { checkAccessToken(); }, [] );
+  
   const facebookButtonStyle = { '& button':  {height: '48px',  display: 'inline-flex',  borderRadius: '4px ! important', boxShadow: `1px 1px ${colors.facebookButton.boxShadowColor}`, textShadow: `1px 1px ${colors.facebookButton.textShadowColor}`, width: '100%' }, '& button i': {marginLeft: '-10px', marginTop: '-6px',  fontSize: sizes.facebookFontSize}, '& button span': {width: '100%', fontSize: sizes.facebookFontSize, textAlign: 'center', marginTop: '-4px'  } };
   const googleButtonStyle =  { '& button': { width: '100%' },'& button span':  { width: '75%,', fontSize: sizes.googleFontSize, textAlign: 'center' } };
 const render = () => (<>
@@ -63,7 +64,7 @@ const render = () => (<>
     <Grid item xs={12} md={6} sx={{mt: 20, mb: {xs: 5, md: 30}, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
       <Box component="div" sx={{width: '90%'}}> {/*little bit smaller area*/}
         <Box component='div' className="googleButton" sx={{mb: 1, ...googleButtonStyle}}> <GoogleLogin buttonText={t("Google Login")} clientId={googleClientID} onSuccess={(response) => responseSuccessGoogle(response)} onFailure={()=>{setAlert('fail to login with google account')}} cookiePolicy={'single_host_origin'} /> </Box>
-        <Box component='div' className="facebookButton" sx={{mb: 1, ...facebookButtonStyle}}> <FacebookLogin textButton={<span>{t("Facebook Login")}</span>} icon="fa-facebook" appId={facebookClientId} autoLoad={false} callback={(response) => responseFacebook(response) } onFailure={()=>{setAlert('fail to login with facebook')}} /> </Box>
+       {/* <Box component='div' className="facebookButton" sx={{mb: 1, ...facebookButtonStyle}}> <FacebookLogin textButton={<span>{t("Facebook Login")}</span>} icon="fa-facebook" appId={facebookClientId} autoLoad={false} callback={(response) => responseFacebook(response) } onFailure={()=>{setAlert('fail to login with facebook')}} /> </Box>*/}
         <Button startIcon={<Icons.SwitchAccount/>} fullWidth variant="contained" onClick={handleClickOpen} > {t("Registration")} </Button>
       </Box>
     </Grid>
