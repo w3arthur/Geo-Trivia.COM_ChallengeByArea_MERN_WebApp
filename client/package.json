@@ -1,38 +1,16 @@
 {
-  "name": "geo-trivia-client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.0",
-    "@mui/material": "^5.6.4",
-    "@mui/styled-engine-sc": "^5.5.2",
-    "@mui/styles": "^5.6.0",
-    "@mui/x-data-grid": "^5.11.1",
-    "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.26.1",
-    "classnames": "^2.3.1",
-    "i18next": "^21.6.15",
-    "i18next-browser-languagedetector": "^6.1.4",
-    "i18next-http-backend": "^1.4.0",
-    "js-cookie": "^3.0.1",
-    "mapbox-gl": "^2.8.1",
-    "maplibre-gl": "^2.1.9",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "react-google-login": "^5.2.2",
-    "react-i18next": "^11.16.7",
-    "react-map-gl": "^7.0.10",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.0",
-    "recharts": "^2.1.9",
-    "redux": "^4.1.2",
-    "socket.io-client": "^4.5.0"
+    "axios": "^0.27.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -57,8 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^7.1.0"
   }
 }
