@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -17,10 +17,17 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-      npm i
+        npm cache clean --force
+        npm i
         cd server
+        npm cache clean --force
         npm i
         cd ..
         cd client
+        npm cache clean --force
         npm i
-        npm run build
+        cd ..
+        pm2 stop geoserver
+        pm2 start geoserver
+        pm2 save
+        sudo service nginx restart 
