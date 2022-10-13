@@ -8,7 +8,7 @@ import { QuestionValue, Answer } from '../Question';
 import { useTranslation } from '../../Hooks';
 import { colors } from '../../Config'
 import { DatabaseRequest } from '../../Classes';
-import { Axios } from '../../api';
+import { Axios } from '../../api1';
 
 export default function NewestQuestions({dataNewestQuestions}){
     const { t } = useTranslation();
