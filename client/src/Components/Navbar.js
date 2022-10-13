@@ -5,7 +5,7 @@ import * as Icons from '@mui/icons-material';
 import { DatabaseRequest } from '../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
-import { Axios } from '../api1';
+import { Axios } from '../api';
 
 export default function NavBar () {
     const { t } = useTranslation();

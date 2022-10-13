@@ -4,7 +4,7 @@ import { Avatar, Grid , Paper, Box, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
 import { PopUp, } from '../../Components';
-import { Axios, useReceiver, transmitter  } from '../../api1';
+import { Axios, useReceiver, transmitter  } from '../../api';
 import { DatabaseRequest } from '../../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { useGoTo, useTranslation } from '../../Hooks';

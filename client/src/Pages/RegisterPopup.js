@@ -3,7 +3,7 @@ import { Avatar, Typography, TextField, Button, Box, CssBaseline } from "@mui/ma
 import * as Icons from "@mui/icons-material/"; 
 
 import { useAuth, useLoading } from '../Context';
-import { userRegisterApi } from '../api1';
+import { userRegisterApi } from '../api';
 import { DatabaseRequest, User } from '../Classes';
 import { PopUp } from '../Components'
 import { useTranslation } from '../Hooks'

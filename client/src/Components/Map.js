@@ -5,7 +5,7 @@ import * as Icons from "@mui/icons-material/";
 import ReactMapGL, { Marker, Popup/*, flyto*/ } from "react-map-gl";
 import mapboxgl from 'mapbox-gl';
 import { marker } from '../Images';
-import { getCoords } from '../api1';
+import { getCoords } from '../api';
 import { tokens, map } from '../Config';
 import { useTranslation } from '../Hooks';
 
