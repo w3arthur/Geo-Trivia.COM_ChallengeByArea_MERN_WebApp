@@ -1,5 +1,5 @@
 {
-  "name": "clienttry2",
+  "name": "geo-trivia-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,7 +9,7 @@
     "@mui/material": "^5.6.4",
     "@mui/styled-engine-sc": "^5.5.2",
     "@mui/styles": "^5.6.0",
-    "@mui/x-data-grid": "^5.11.1",
+    "@mui/x-data-grid": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
@@ -57,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0"
   }
 }
