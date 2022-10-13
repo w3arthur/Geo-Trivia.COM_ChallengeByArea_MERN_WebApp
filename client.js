@@ -5,6 +5,9 @@ const path = require('path');
 
 //client server run
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build/*')));
+app.use(express.static(path.join(__dirname, 'client/build/*/*')));
+
 
 app.use(cors()); 
 app.get('/request/', (req, res) => {
