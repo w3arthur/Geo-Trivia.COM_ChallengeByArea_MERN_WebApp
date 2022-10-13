@@ -5,7 +5,7 @@ import * as Icons from '@mui/icons-material';
 
 import { DatabaseRequest } from '../../Classes';
 import { useLoading } from '../../Context';
-import { Axios } from '../../Api';
+import { Axios } from '../../api';
 import { useTranslation } from '../../Hooks';
 import { colors } from '../../Config';
 import { TabPanel } from './Community';

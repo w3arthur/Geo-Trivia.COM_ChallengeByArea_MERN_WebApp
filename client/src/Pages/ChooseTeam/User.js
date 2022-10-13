@@ -4,7 +4,7 @@ import * as Icons from "@mui/icons-material/";
 
 import { useAuth, usePlayingTeam, useLoading } from '../../Context';
 import { profile } from '../../Images';
-import { Axios } from '../../Api';
+import { Axios } from '../../api';
 import { DatabaseRequest } from '../../Classes';
 import { colors, sizes } from '../../Config';
 

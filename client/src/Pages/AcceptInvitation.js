@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import { /*useHistory,*/ useParams } from 'react-router-dom';
 
-import { Axios } from '../Api';
+import { Axios } from '../api';
 import { DatabaseRequest } from '../Classes';
 import { usePlayingTeam, useLoading } from '../Context';
 import { useGoTo } from '../Hooks';

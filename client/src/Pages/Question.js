@@ -5,7 +5,7 @@ import {Box, Grid, Typography, Button,  Chip, Avatar } from "@mui/material";
 import * as Icons from "@mui/icons-material/"; 
 
 import { PopUp, StatisticChart, Boom, Follow } from '../Components';
-import { Axios, useReceiver, transmitter  } from '../Api';
+import { Axios, useReceiver, transmitter  } from '../api';
 import { DatabaseRequest } from '../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';

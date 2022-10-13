@@ -6,7 +6,7 @@ import { DatabaseRequest } from '../Classes';
 import { useAuth, usePlayingTeam, useLoading } from '../Context';
 import { useGoTo, useTranslation } from '../Hooks';
 import { monkeyLeft, monkeyRight, globe } from '../Images'
-import { Axios, useReceiver, transmitter  } from '../Api';
+import { Axios, useReceiver, transmitter  } from '../api';
 import { PopUp, Map } from '../Components';
 import { map } from '../Config'
 
