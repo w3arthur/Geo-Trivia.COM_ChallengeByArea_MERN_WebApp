@@ -25,7 +25,7 @@ jobs:
         cd ..
         cd client
         npm cache clean --force
-        npm i
+        npm i --force
         cd ..
         pm2 stop geoserver
         pm2 start geoserver
