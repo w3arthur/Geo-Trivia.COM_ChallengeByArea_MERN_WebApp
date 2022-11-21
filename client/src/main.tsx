@@ -1,15 +1,19 @@
-import React, {  } from "react";
+import React, { } from 'react'
+import ReactDOM, { createRoot } from 'react-dom/client'
 import './Api/i18next'
 import App from "./App";
 
-// import ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
+
 
 const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(<React.StrictMode>  <App /> </React.StrictMode>);
+const root = createRoot(container as HTMLElement);
+root.render(<> <App /> </>);
 
 
+
+
+// react 17
+// import ReactDOM from 'react-dom';
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App />
