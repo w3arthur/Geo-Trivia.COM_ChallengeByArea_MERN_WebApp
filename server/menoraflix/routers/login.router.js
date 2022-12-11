@@ -39,7 +39,7 @@ loginRouter.route('/') //  /api/login
   .post(async (req, res, next) => {
     console.log(':: login router post');
     errorHandler(req, res, next)(async () => {
-      return new Success(200, data);
+      return new Success(200, {});
 
       //to fix
       const { name } = req.body;
