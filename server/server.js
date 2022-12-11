@@ -32,15 +32,15 @@ const routers = require("./routers");
 // menora flix app
 const menora_flix_folder = 'menoraflix'
 const public_folder_menora = 'public_folder';
-const menora_middlewares = require(`./${menora_flix_folder}/middlewares`);
-const menora_routers = require(`./${menora_flix_folder}/routers`);
+const menora_middlewares = require(`./menoraflix/middlewares`);
+const menora_routers = require(`./menoraflix/routers`);
 
 app.use(menora_middlewares.globalErrorMainHandler);
 app.use("/menoraflix/", express.static(path.join(__dirname, menora_flix_folder, public_folder_menora)));  //global folder
 
 app.route("/menoraflix/").get(async (req, res) => res.status(200).sendFile(path.join(__dirname, menora_flix_folder, public_folder_menora, "index.html")));
 app.use("/menoraflix/api/login", menora_routers.loginRouter); //verifyJWT set inside for not registration part!
-app.use("/menoraflix/*", menora_middlewares.verifyJWT);
+//app.use("/menoraflix/api/*", menora_middlewares.verifyJWT);
 app.use("/menoraflix/api/movie", menora_routers.movieRouter);
 app.use("/menoraflix/api/favorites", menora_routers.favoritesRouter);
 app.use("/menoraflix/*", menora_middlewares.errorMainHandler);
