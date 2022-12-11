@@ -28,6 +28,24 @@ app.use((req, res, next) => { req.globalUrl = req.url; next(); }); //fix global 
 
 const routers = require("./routers");
 
+
+// menora flix app
+const menora_flix_folder = 'menoraflix'
+const public_folder_menora = 'public_folder';
+const menora_middlewares = require(`./${menora_flix_folder}/middlewares`);
+const menora_routers = require(`./${menora_flix_folder}/routers`);
+
+app.use(menora_middlewares.globalErrorMainHandler);
+app.use("/menoraflix/", express.static(path.join(__dirname, menora_flix_folder, public_folder_menora)));  //global folder
+
+app.route("/menoraflix/").get(async (req, res) => res.status(200).sendFile(path.join(__dirname, menora_flix_folder, public_folder_menora, "index.html")));
+app.use("/menoraflix/api/login", menora_routers.loginRouter); //verifyJWT set inside for not registration part!
+app.use("/menoraflix/*", menora_middlewares.verifyJWT);
+app.use("/menoraflix/api/movie", menora_routers.movieRouter);
+app.use("/menoraflix/api/favorites", menora_routers.favoritesRouter);
+app.use("/menoraflix/*", menora_middlewares.errorMainHandler);
+
+
 const public_folder = 'public_folder';
 app.use("/api/", express.static(path.join(__dirname, public_folder)));  //global folder
 app.route("/api/").get(async (req, res) => res.status(200).sendFile(path.join(__dirname, public_folder, "index.html")));
@@ -37,7 +55,7 @@ app.use("api/log", routers.logRouter);
 app.use("/api/login", routers.loginRouter); //verifyJWT set inside for not registration part!
 
 
-app.use("/api/", middlewares.verifyJWT); //403 //Token require middleware
+app.use("/api/*", middlewares.verifyJWT); //403 //Token require middleware
 app.use("/api/user", routers.userRouter);
 app.use("/api/playingTeam", routers.playingTeamRouter); //verifyJWT set inside for not invitation part!
 app.use("/api/area", routers.areaRouter);
@@ -55,6 +73,6 @@ app.use('/*/*', react_path)
 
 
 app.route("*").all((req, res) => res.status(404));
-app.use(middlewares.errorMainHandler); //errorHandler
+app.use("/api/*", middlewares.errorMainHandler); //errorHandler
 const port = serverPort || 3444;
 server.listen(port, () => console.log(`Listening on port ${port}, Express + WS`));
