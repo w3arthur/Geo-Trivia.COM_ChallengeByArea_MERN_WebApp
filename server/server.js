@@ -74,5 +74,5 @@ app.use('/*/*', react_path)
 
 app.route("*").all((req, res) => res.status(404));
 app.use("/api/*", middlewares.errorMainHandler); //errorHandler
-const port = serverPort || 3444;
+const port = process.env.PORT || 80 || serverPort || 3444;
 server.listen(port, () => console.log(`Listening on port ${port}, Express + WS`));
