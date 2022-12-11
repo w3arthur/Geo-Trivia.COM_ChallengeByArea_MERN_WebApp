@@ -1,0 +1,29 @@
+@hostname = http://geo-trivia.com
+#@ContentType = Content-Type: application/json
+
+### Login
+post {{hostname}}/menoraflix/api/login
+Content-Type: application/json
+
+{
+    "name": "abc"
+    , "password": "123"
+}
+
+### Register
+
+post {{hostname}}/menoraflix/api/login/register
+Content-Type: application/json
+
+{
+    "name": "abc"
+    , "password": "123"
+}
+
+### get Users
+get {{hostname}}/api/user
+Content-Type: application/json
+
+{
+
+}
