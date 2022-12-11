@@ -1,4 +1,5 @@
 @hostname = http://localhost
+#geo-trivia.com
 #@ContentType = Content-Type: application/json
 
 ### Login

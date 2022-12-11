@@ -39,7 +39,7 @@ loginRouter.route('/') //  /api/login
   .post(async (req, res, next) => {
     console.log(':: login router post');
     errorHandler(req, res, next)(async () => {
-      return new Success(200, {});
+      return new Success(200, req.body);
 
       //to fix
       const { name } = req.body;
@@ -54,6 +54,9 @@ loginRouter.route('/') //  /api/login
   .patch((req, res, next) => { //restore token
     console.log(':: login router patch');
     errorHandler(req, res, next)(async () => {
+      return new Success(200, req.body);
+
+      //to fix
       const refreshToken = (req.cookies && req.cookies[cookieName]) || req.headers['authorization'] || req.header['x-auth-token'] || req.body['token'] || req.query['token'];
       if (!refreshToken) throw new ErrorHandler(401, 'Refresh Token missing.');
 
@@ -82,6 +85,9 @@ loginRouter.route('/') //  /api/login
     });  //error handler 
   })
   .delete((req, res, next) => {
+    return new Success(200);
+
+    //to fix
     console.log(':: login router delete');
     errorHandler(req, res, next)(async () => {
       try {
