@@ -6,7 +6,7 @@ import App from "./App";
 
 
 const container = document.getElementById('root');
-const root = createRoot(container as HTMLElement);
+const root = createRoot(container as HTMLElement); //ts
 root.render(<> <App /> </>);
 
 

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: w3arthur_nginx:v1
+    container_name: w3arthur_nginx
+    # image: nginx:alpine   *instead of build + image
+    volumes:
+      - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf
+      #- ./nginx/demo.html:/www/index.html
+    ports:
+      - 83:8080
+    restart: unless-stopped
